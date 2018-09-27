@@ -1,0 +1,4 @@
+RewriteEngine on
+RewriteBase    /gofooder/
+RewriteCond $1 !^(index\.php|images|files|css|js|fonts|robots\.txt)
+RewriteRule ^(.*)$ /gofooder/index.php/$1 [L]
