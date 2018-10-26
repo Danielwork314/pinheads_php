@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>Store">
-				<i class="fa fa-user-secret"></i> Store</a>
+				<i class="fa fa-archive"></i> Store</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>Store/details/<?= $store['store_id'] ?>">

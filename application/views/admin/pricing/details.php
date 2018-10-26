@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>pricing">
-				<i class="fa fa-user-secret"></i> Pricing</a>
+				<i class="fa fa-money-bill-alt"></i> Pricing</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>pricing/details/<?= $pricing['pricing_id'] ?>">

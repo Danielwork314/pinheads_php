@@ -3,7 +3,7 @@
 		Ingredient
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="<?= base_url() ?>ingredient"><i class="fa fa-archive"></i> Ingredient</a></li>
+		<li><a href="<?= base_url() ?>ingredient"><i class="fa fa-clipboard-list"></i> Ingredient</a></li>
 	</ol>
 </section>
 <br>

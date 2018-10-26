@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>ingredient">
-				<i class="fa fa-user-secret"></i> Ingredient</a>
+				<i class="fa fa-clipboard-list"></i> Ingredient</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>ingredient/edit/<?= $ingredient['ingredient_id'] ?>"> Edit ingredient</a>

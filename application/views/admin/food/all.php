@@ -3,7 +3,7 @@
 		Food
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="<?= base_url() ?>food"><i class="fa fa-archive"></i> Food</a></li>
+		<li><a href="<?= base_url() ?>food"><i class="fa fa-utensils"></i> Food</a></li>
 	</ol>
 </section>
 <br>
@@ -105,7 +105,7 @@
                         <th>Food Discount</th>
                         <th>Created Date</th>
                         <th>Created By</th>
-                        <th></th>
+                         <th></th>
 						</tr>
 					</tfoot>
 				</table>

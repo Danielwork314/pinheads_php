@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>gourmet_type">
-				<i class="fa fa-user-secret"></i> Food</a>
+				<i class="fa fa-mortar-pestle"></i> Food</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>Food/details/<?= $gourmet_type['gourmet_type_id'] ?>">

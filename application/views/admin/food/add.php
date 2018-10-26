@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>Food">
-				<i class="fa fa-user-secret"></i> Food</a>
+				<i class="fa fa-utensils"></i> Food</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>Admin/add"> Add food</a>

@@ -3,7 +3,7 @@
 		Pricing
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="<?= base_url() ?>pricing"><i class="fa fa-archive"></i> Pricing</a></li>
+		<li><a href="<?= base_url() ?>pricing"><i class="fa fa-money-bill-alt"></i> Pricing</a></li>
 	</ol>
 </section>
 <br>

@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>ingredient">
-				<i class="fa fa-user-secret"></i> Pricing</a>
+				<i class="fa fa-clipboard-list"></i> Pricing</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>ingredient/add"> Add Ingredient Title</a>

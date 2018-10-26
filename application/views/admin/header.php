@@ -147,7 +147,7 @@
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'food') echo 'active'; ?> ">
 							<a href="<?=base_url();?>food">
-								<i class="fa fa-list-ul"></i>
+								<i class="fa fa-utensils"></i>
 								<span>Food</span>
 							</a>
 						</li>
@@ -157,7 +157,7 @@
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'gourmet_type') echo 'active'; ?> ">
 							<a href="<?=base_url();?>gourmet_type">
-								<i class="fa fa-list-ul"></i>
+								<i class="fa fa-mortar-pestle"></i>
 								<span>Gourmet Type</span>
 							</a>
 						</li>
@@ -167,7 +167,7 @@
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'pricing') echo 'active'; ?> ">
 							<a href="<?=base_url();?>pricing">
-								<i class="fa fa-list-ul"></i>
+								<i class="fa fa-money-bill-alt"></i>
 								<span>Pricing</span>
 							</a>
 						</li>
@@ -177,7 +177,7 @@
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'ingredient') echo 'active'; ?> ">
 							<a href="<?=base_url();?>ingredient">
-								<i class="fa fa-list-ul"></i>
+								<i class="fa fa-clipboard-list"></i>
 								<span>Ingredient</span>
 							</a>
 						</li>

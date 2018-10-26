@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>Gourmet">
-				<i class="fa fa-user-secret"></i> Gourmet Type</a>
+				<i class="fa fa-mortar-pestle"></i> Gourmet Type</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>Gourmet/add"> Add Gourmet Type</a>
