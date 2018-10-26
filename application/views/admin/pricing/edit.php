@@ -1,6 +1,6 @@
 <section class="content-header">
 	<h1>
-		Edit pricing title
+		Edit Pricing
 	</h1>
 	<ol class="breadcrumb">
 		<li>
@@ -8,7 +8,7 @@
 				<i class="fa fa-user-secret"></i> Pricing</a>
 		</li>
 		<li>
-			<a href="<?= base_url() ?>pricing/edit/<?= $pricing['pricing_id'] ?>"> Edit Pricing title</a>
+			<a href="<?= base_url() ?>pricing/edit/<?= $pricing['pricing_id'] ?>"> Edit pricing</a>
 		</li>
 	</ol>
 </section>

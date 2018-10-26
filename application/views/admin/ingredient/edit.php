@@ -1,6 +1,6 @@
 <section class="content-header">
 	<h1>
-		Edit ingredient title
+		Edit Ingredient
 	</h1>
 	<ol class="breadcrumb">
 		<li>
@@ -8,7 +8,7 @@
 				<i class="fa fa-user-secret"></i> Ingredient</a>
 		</li>
 		<li>
-			<a href="<?= base_url() ?>ingredient/edit/<?= $ingredient['ingredient_id'] ?>"> Edit food</a>
+			<a href="<?= base_url() ?>ingredient/edit/<?= $ingredient['ingredient_id'] ?>"> Edit ingredient</a>
 		</li>
 	</ol>
 </section>

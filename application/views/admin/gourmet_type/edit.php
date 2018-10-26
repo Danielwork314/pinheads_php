@@ -1,6 +1,6 @@
 <section class="content-header">
 	<h1>
-		Edit gourmet type
+		Edit Gourmet Type
 	</h1>
 	<ol class="breadcrumb">
 		<li>
@@ -8,7 +8,7 @@
 				<i class="fa fa-user-secret"></i> Food</a>
 		</li>
 		<li>
-			<a href="<?= base_url() ?>gourmet_type/edit/<?= $gourmet_type['gourmet_type_id'] ?>"> Edit Gourmet Type</a>
+			<a href="<?= base_url() ?>gourmet_type/edit/<?= $gourmet_type['gourmet_type_id'] ?>"> Edit gourmet type</a>
 		</li>
 	</ol>
 </section>
