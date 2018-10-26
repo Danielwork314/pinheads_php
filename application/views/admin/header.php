@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Mobile POS</title>
+	<title>Gofooder</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<!-- Bootstrap 3.3.7 -->
@@ -71,11 +71,11 @@
 			<a class="logo">
 				<!-- mini logo for sidebar mini 50x50 pixels -->
 				<span class="logo-mini">
-					<b>M</b>P
+					<b>G</b>f
 				</span>
 				<!-- logo for regular state and mobile devices -->
 				<span class="logo-lg">
-					<b>Mobile</b> POS</span>
+					<b>Go</b>fooder</span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">
@@ -133,22 +133,52 @@
 						</li>
 						<?php
 					}
-					if($this->session->userdata('role_access')['product_category']['read_control'] == 1){
+					if($this->session->userdata('role_access')['store']['read_control'] == 1){
 						?>
-						<li class=" <?php if ($this->router->fetch_class() == 'product_category') echo 'active'; ?> ">
-							<a href="<?=base_url();?>product_category">
-								<i class="fa fa-list-ul"></i>
-								<span>Product Category</span>
+						<li class=" <?php if ($this->router->fetch_class() == 'store') echo 'active'; ?> ">
+							<a href="<?=base_url();?>store">
+								<i class="fa fa-archive"></i>
+								<span>Store</span>
 							</a>
 						</li>
 						<?php
 					}
-					if($this->session->userdata('role_access')['product']['read_control'] == 1){
+					if($this->session->userdata('role_access')['food']['read_control'] == 1){
 						?>
-						<li class=" <?php if ($this->router->fetch_class() == 'product') echo 'active'; ?> ">
-							<a href="<?=base_url();?>product">
-								<i class="fa fa-archive"></i>
-								<span>Product</span>
+						<li class=" <?php if ($this->router->fetch_class() == 'food') echo 'active'; ?> ">
+							<a href="<?=base_url();?>food">
+								<i class="fa fa-list-ul"></i>
+								<span>Food</span>
+							</a>
+						</li>
+						<?php
+					}
+					if($this->session->userdata('role_access')['gourmet_type']['read_control'] == 1){
+						?>
+						<li class=" <?php if ($this->router->fetch_class() == 'gourmet_type') echo 'active'; ?> ">
+							<a href="<?=base_url();?>gourmet_type">
+								<i class="fa fa-list-ul"></i>
+								<span>Gourmet Type</span>
+							</a>
+						</li>
+						<?php
+					}
+					if($this->session->userdata('role_access')['pricing']['read_control'] == 1){
+						?>
+						<li class=" <?php if ($this->router->fetch_class() == 'pricing') echo 'active'; ?> ">
+							<a href="<?=base_url();?>pricing">
+								<i class="fa fa-list-ul"></i>
+								<span>Pricing</span>
+							</a>
+						</li>
+						<?php
+					}
+					if($this->session->userdata('role_access')['ingredient']['read_control'] == 1){
+						?>
+						<li class=" <?php if ($this->router->fetch_class() == 'ingredient') echo 'active'; ?> ">
+							<a href="<?=base_url();?>ingredient">
+								<i class="fa fa-list-ul"></i>
+								<span>Ingredient</span>
 							</a>
 						</li>
 						<?php
