@@ -19,30 +19,30 @@ class Base_Controller extends CI_Controller
         $this->session->set_userdata("role_access", $role_access);
 
         //view control checking. if cannot view entire module is restricted
-        if (strtolower($this->uri->segment(1)) != "" and !empty($this->session->userdata("role_access")[strtolower($this->uri->segment(1))]) and $this->session->userdata("role_access")[strtolower($this->uri->segment(1))]["read_control"] == 0) {
-            show_404();
-            //if module is not restricted, check for add, update, delete controls
-        } else {
-            $key = "";
-            switch (strtolower($this->uri->segment(2))) {
-                case "add":
-                    $key = "create_control";
-                    break;
-                case "edit":
-                    $key = "update_control";
-                    break;
-                case "delete":
-                    $key = "delete_control";
-                    break;
-                default:
-                    $key = "";
-                    break;
-            }
+        // if (strtolower($this->uri->segment(1)) != "" and !empty($this->session->userdata("role_access")[strtolower($this->uri->segment(1))]) and $this->session->userdata("role_access")[strtolower($this->uri->segment(1))]["read_control"] == 0) {
+        //     show_404();
+        //     //if module is not restricted, check for add, update, delete controls
+        // } else {
+        //     $key = "";
+        //     switch (strtolower($this->uri->segment(2))) {
+        //         case "add":
+        //             $key = "create_control";
+        //             break;
+        //         case "edit":
+        //             $key = "update_control";
+        //             break;
+        //         case "delete":
+        //             $key = "delete_control";
+        //             break;
+        //         default:
+        //             $key = "";
+        //             break;
+        //     }
 
-            if ($key != "" and $this->session->userdata("role_access")[strtolower($this->uri->segment(1))][$key] == 0) {
-                show_404();
-            }
-        }
+        //     if ($key != "" and $this->session->userdata("role_access")[strtolower($this->uri->segment(1))][$key] == 0) {
+        //         show_404();
+        //     }
+        // }
 
         // $this->debug($this->session->userdata("role_access"));
 

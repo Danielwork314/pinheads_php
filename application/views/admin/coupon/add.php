@@ -1,14 +1,14 @@
 <section class="content-header">
 	<h1>
-		Add Food
+		Add Coupon
 	</h1>
 	<ol class="breadcrumb">
 		<li>
-			<a href="<?= base_url() ?>Food">
-				<i class="fa fa-utensils"></i> Food</a>
+			<a href="<?= base_url() ?>coupon">
+				<i class="fa fa-gift"></i> Coupon</a>
 		</li>
 		<li>
-			<a href="<?= base_url() ?>food/add"> Add food</a>
+			<a href="<?= base_url() ?>coupon/add"> Add coupon</a>
 		</li>
 	</ol>
 </section>
@@ -16,11 +16,11 @@
 <section class="content">
 	<div class="box box-primary">
 		<div class="box-header with-border">
-			<h3 class="box-title">Food</h3>
+			<h3 class="box-title">Coupon</h3>
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
-		<form role="form" class="input_form" method="POST" action="<?= base_url()?>food/add" enctype="multipart/form-data">
+		<form role="form" class="input_form" method="POST" action="<?= base_url()?>coupon/add" enctype="multipart/form-data">
 			<div class="box-body">
 				<?php 
 				if (isset($error)) { 
@@ -33,26 +33,26 @@
 				?>
 
 				<div class="form-group">
-					<label>Food Image</label>
-					<input type="file" class="form-control" name="file" required>
-				</div>
-				<div class="form-group">
-					<label>Food Title</label>
-					<input type="text" class="form-control" name="food_title" required placeholder="Food title">
+					<label>Coupon Title</label>
+					<input type="text" class="form-control" name="notificaiton_title" required placeholder="Coupon title">
 				</div>
                 <div class="form-group">
-					<label>Food Description</label>
-					<input type="text" class="form-control" name="food_description" required placeholder="Food description">
+					<label>Coupon Description</label>
+					<input type="text" class="form-control" name="coupon_description" required placeholder="Coupon description">
 				</div>
 				<div class="form-group">
-					<label>Food Price</label>
-					<input type="text" class="form-control" name="food_price" required placeholder="Food Price">
+					<label>Valid Date</label>
+					<input type="date" class="form-control" name="valid_date" required placeholder="Valid date">
 				</div>
-				<div class="form-group">
-					<label>Food Discount</label>
-					<input type="text" class="form-control" name="food_discount" required placeholder="Food discount">
+                <div class="form-group">
+					<label>Partner Coupon</label>
+					<input type="text" class="form-control" name="valid_date" required placeholder="Valid date">
 				</div>
-				<div class="form-group">
+                <div class="form-group">
+					<label>Used</label>
+					<input type="text" class="form-control" name="used" required placeholder="Used">
+				</div>
+                <div class="form-group">
 					<label>Store</label>
 					<select class="form-control" required name="store_id" id="form_store_id">
                         <option value="none">None</option>

@@ -59,9 +59,9 @@
 					<label>Store</label>
                     <select class="form-control" required name="store_id" id="form_store_id">
                         <option value="none">None</option>
-                            <?php foreach ($store as $row) { ?>
-                                <option value="<?= $row['store_id'] ?>"><?= $row['store_title'] ?></option>
-                            <?php } ?>
+                        <?php foreach ($store as $row) { ?>
+                            <option value="<?= $row['store_id'] ?>" <?php if($row['store_id'] == $food['store_id']){ ?> selected <?php } ?>><?= $row['store_title'] ?></option>
+                        <?php } ?>
                     </select>
 				</div>
 			</div>
