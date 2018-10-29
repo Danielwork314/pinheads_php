@@ -8,5 +8,17 @@ class Food_model extends Base_model{
         $this->table_name = "food";
     }
 
+    public function get_all(){
+
+        $this->db->select('*');
+        $this->db->from('food');
+        $this->db->join('store', 'store.store_id = food.store_id', 'left');
+        $this->db->where('food.deleted', 0);
+        
+        $query = $this->db->get();
+        return $query->result_array();
+
+    }
+
     
 }

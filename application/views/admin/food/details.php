@@ -1,6 +1,6 @@
 <section class="content-header">
 	<h1>
-		<?= $food['food_title'] ?>
+		<?= $food['food'] ?>
 	</h1>
 	<ol class="breadcrumb">
 		<li>
@@ -9,7 +9,7 @@
 		</li>
 		<li>
 			<a href="<?= base_url() ?>Food/details/<?= $food['food_id'] ?>">
-				<?= $food['food_title'] ?>
+				<?= $food['food'] ?>
 			</a>
 		</li>
 	</ol>
@@ -20,7 +20,7 @@
 		<div class="box box-primary">
 			<div class="box-header with-border">
 				<h3 class="box-title">
-					<?= $food['food_title'] ?>'s Info
+					<?= $food['food'] ?>'s Info
 				</h3>
 				<a href="<?php echo site_url('food/edit') . '/' . $food['food_id'] ?>" class='btn btn-default pull-right'>
 					<i class='fa fa-edit'></i> Edit</a>
@@ -32,31 +32,31 @@
 					<tr>
 						<th>Food Image</th>
 						<td>:
-							<?= $food["food_image"] ?>
+							<?= $food["image"] ?>
 						</td>
 					</tr>
 					<tr>
 						<th>Food Title</th>
 						<td>:
-							<?= $food["food_title"] ?>
+							<?= $food["food"] ?>
 						</td>
 					</tr>
 					<tr>
 						<th>Food Description</th>
 						<td>:
-							<?= $food["food_description"] ?>
+							<?= $food["description"] ?>
 						</td>
                     </tr>
                     <tr>
 						<th>Food_Price</th>
 						<td>:
-							<?= $food["food_price"] ?>
+							<?= $food["price"] ?>
 						</td>
                     </tr>
                     <tr>
 						<th>Food Discount</th>
 						<td>:
-							<?= $food["food_discount"] ?>
+							<?= $food["discount"] ?>
 						</td>
                     </tr>
                     <tr>

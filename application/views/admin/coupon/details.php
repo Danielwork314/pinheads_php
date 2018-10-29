@@ -1,6 +1,6 @@
 <section class="content-header">
 	<h1>
-		<?= $coupon['coupon_title'] ?>
+		<?= $coupon['coupon'] ?>
 	</h1>
 	<ol class="breadcrumb">
 		<li>
@@ -36,15 +36,15 @@
 						</td>
 					</tr>
 					<tr>
-						<th>Coupon Title</th>
+						<th>Coupon</th>
 						<td>:
-							<?= $coupon["coupon_title"] ?>
+							<?= $coupon["coupon"] ?>
 						</td>
 					</tr>
 					<tr>
 						<th>Coupon Description</th>
 						<td>:
-							<?= $coupon["coupon_description"] ?>
+							<?= $coupon["description"] ?>
 						</td>
                     </tr>
                     <tr>

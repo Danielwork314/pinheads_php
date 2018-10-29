@@ -33,7 +33,7 @@
                 ?>
                 
                 <div class="form-group">
-                    <img class="img-thumbnail" src="<?= base_url() . $food['food_image'] ?>">
+                    <img class="img-thumbnail" src="<?= base_url() . $food['image'] ?>">
 				</div>
 				<div class="form-group">
 					<label>Food Image</label>
@@ -41,26 +41,26 @@
 				</div>
 				<div class="form-group">
 					<label>Food Title</label>
-					<input type="text" class="form-control" name="food_title" required value="<?= $food['food_title'] ?>">
+					<input type="text" class="form-control" name="food" required value="<?= $food['food'] ?>">
 				</div>
                 <div class="form-group">
 					<label>Food Description</label>
-					<input type="text" class="form-control" name="food_description" required value="<?= $food['food_description'] ?>">
+					<input type="text" class="form-control" name="description" required value="<?= $food['description'] ?>">
 				</div>
 				<div class="form-group">
 					<label>Food Price</label>
-					<input type="text" class="form-control" name="food_price" required value="<?= $food['food_discount'] ?>">
+					<input type="text" class="form-control" name="price" required value="<?= $food['price'] ?>">
 				</div>
 				<div class="form-group">
 					<label>Food Discount</label>
-					<input type="text" class="form-control" name="food_discount" required value="<?= $food['food_discount'] ?>">
+					<input type="text" class="form-control" name="discount" required value="<?= $food['discount'] ?>">
 				</div>
 				<div class="form-group">
 					<label>Store</label>
                     <select class="form-control" required name="store_id" id="form_store_id">
                         <option value="none">None</option>
                         <?php foreach ($store as $row) { ?>
-                            <option value="<?= $row['store_id'] ?>" <?php if($row['store_id'] == $food['store_id']){ ?> selected <?php } ?>><?= $row['store_title'] ?></option>
+                            <option value="<?= $row['store_id'] ?>" <?php if($row['store_id'] == $food['store_id']){ ?> selected <?php } ?>><?= $row['store'] ?></option>
                         <?php } ?>
                     </select>
 				</div>

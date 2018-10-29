@@ -33,12 +33,12 @@
                 ?>
                 
 				<div class="form-group">
-					<label>Coupon Title</label>
-					<input type="text" class="form-control" name="coupon_title" required value="<?= $coupon['coupon_title'] ?>">
+					<label>Coupon</label>
+					<input type="text" class="form-control" name="coupon" required value="<?= $coupon['coupon'] ?>">
 				</div>
                 <div class="form-group">
 					<label>Coupon Description</label>
-					<input type="text" class="form-control" name="coupon_description" required value="<?= $coupon['coupon_description'] ?>">
+					<input type="text" class="form-control" name="coupon_description" required value="<?= $coupon['description'] ?>">
 				</div>
 				<div class="form-group">
 					<label>Valid Date</label>
@@ -48,7 +48,7 @@
 					<label>Store</label>
                     <select class="form-control" required name="store_id" id="form_store_id">
                         <?php foreach ($store as $row) { ?>
-                            <option value="<?= $row['store_id'] ?>" <?php if($row['store_id'] == $coupon['store_id']){ ?> selected <?php } ?>><?= $row['store_title'] ?></option>
+                            <option value="<?= $row['store_id'] ?>" <?php if($row['store_id'] == $coupon['store_id']){ ?> selected <?php } ?>><?= $row['store'] ?></option>
                         <?php } ?>
                     </select>
 				</div>

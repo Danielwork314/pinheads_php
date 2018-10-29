@@ -47,32 +47,32 @@
                             </td>
                             <td>
                                 <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
-									<?= $row['store_id'] ?>
+									<?= $row['store'] ?>
                                 </a>
                             </td>
                             <td>
                                 <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
-									<img src="<?= base_url() . $row['food_image'] ?>" class="xs_thumbnail">
+									<img src="<?= base_url() . $row['image'] ?>" class="xs_thumbnail">
                                 </a>
                             </td>
 							<td>
                                 <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
-									<?= $row['food_title'] ?>
+									<?= $row['food'] ?>
                                 </a>
                             </td>
                             <td>
                                 <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
-									<?= $row['food_description'] ?>
+									<?= $row['description'] ?>
                                 </a>
                             </td>
                             <td>
                                 <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
-									<?= $row['food_price'] ?>
+									<?= $row['price'] ?>
                                 </a>
                             </td>
                             <td>
                                 <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
-									<?= $row['food_discount'] ?>
+									<?= $row['discount'] ?>
                                 </a>
                             </td>
                             <td>

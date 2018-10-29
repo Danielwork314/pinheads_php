@@ -50,12 +50,12 @@
                             </td>
 							<td>
                                 <a href="<?= base_url() ?>notification/details/<?= $row['notification_id']?>">
-									<?= $row['notification_title'] ?>
+									<?= $row['notification'] ?>
                                 </a>
                             </td>
                             <td>
                                 <a href="<?= base_url() ?>notification/details/<?= $row['notification_id']?>">
-									<?= $row['notification_description'] ?>
+									<?= $row['description'] ?>
                                 </a>
                             </td>
                             <td>

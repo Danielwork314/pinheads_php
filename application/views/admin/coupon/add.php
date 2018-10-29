@@ -33,12 +33,12 @@
 				?>
 
 				<div class="form-group">
-					<label>Coupon Title</label>
-					<input type="text" class="form-control" name="notificaiton_title" required placeholder="Coupon title">
+					<label>Coupon</label>
+					<input type="text" class="form-control" name="coupon" required placeholder="Coupon title">
 				</div>
                 <div class="form-group">
 					<label>Coupon Description</label>
-					<input type="text" class="form-control" name="coupon_description" required placeholder="Coupon description">
+					<input type="text" class="form-control" name="description" required placeholder="Coupon description">
 				</div>
 				<div class="form-group">
 					<label>Valid Date</label>
@@ -57,7 +57,7 @@
 					<select class="form-control" required name="store_id" id="form_store_id">
                         <option value="none">None</option>
                             <?php foreach ($store as $row) { ?>
-                                <option value="<?= $row['store_id'] ?>"><?= $row['store_title'] ?></option>
+                                <option value="<?= $row['store_id'] ?>"><?= $row['store'] ?></option>
                             <?php } ?>
                     </select>
 				</div>

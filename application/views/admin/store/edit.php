@@ -33,23 +33,23 @@
                 ?>
                 
                 <div class="form-group">
-                    <img class="img-thumbnail" src="<?= base_url() . $store['store_thumbnail'] ?>">
+                    <img class="img-thumbnail" src="<?= base_url() . $store['thumbnail'] ?>">
 				</div>
 				<div class="form-group">
 					<label>Store Thumbnail</label>
 					<input type="file" class="form-control" name="file" required>
 				</div>
 				<div class="form-group">
-					<label>Store Title</label>
-					<input type="text" class="form-control" name="store_title" required value="<?= $store['store_title'] ?>">
+					<label>Store</label>
+					<input type="text" class="form-control" name="store" required value="<?= $store['store'] ?>">
 				</div>
 				<div class="form-group">
 					<label>Store Address</label>
-					<input type="text" class="form-control" name="store_address" required value="<?= $store['store_address'] ?>">
+					<input type="text" class="form-control" name="address" required value="<?= $store['address'] ?>">
 				</div>
 				<div class="form-group">
 					<label>Phone</label>
-					<input type="text" class="form-control" name="store_phone" required value="<?= $store['store_phone'] ?>">
+					<input type="text" class="form-control" name="phone" required value="<?= $store['phone'] ?>">
 				</div>
 				<div class="form-group">
 					<label>Latitude</label>

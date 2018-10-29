@@ -37,27 +37,27 @@
 					<input type="file" class="form-control" name="file" required>
 				</div>
 				<div class="form-group">
-					<label>Food Title</label>
-					<input type="text" class="form-control" name="food_title" required placeholder="Food title">
+					<label>Food</label>
+					<input type="text" class="form-control" name="food" required placeholder="Food title">
 				</div>
                 <div class="form-group">
 					<label>Food Description</label>
-					<input type="text" class="form-control" name="food_description" required placeholder="Food description">
+					<input type="text" class="form-control" name="description" required placeholder="Food description">
 				</div>
 				<div class="form-group">
 					<label>Food Price</label>
-					<input type="text" class="form-control" name="food_price" required placeholder="Food Price">
+					<input type="text" class="form-control" name="price" required placeholder="Food Price">
 				</div>
 				<div class="form-group">
 					<label>Food Discount</label>
-					<input type="text" class="form-control" name="food_discount" required placeholder="Food discount">
+					<input type="text" class="form-control" name="discount" required placeholder="Food discount">
 				</div>
 				<div class="form-group">
 					<label>Store</label>
 					<select class="form-control" required name="store_id" id="form_store_id">
                         <option value="none">None</option>
                             <?php foreach ($store as $row) { ?>
-                                <option value="<?= $row['store_id'] ?>"><?= $row['store_title'] ?></option>
+                                <option value="<?= $row['store_id'] ?>"><?= $row['store'] ?></option>
                             <?php } ?>
                     </select>
 				</div>

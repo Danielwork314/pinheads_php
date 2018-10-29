@@ -41,12 +41,12 @@
                             </td>
 							<td>
                                 <a href="<?= base_url() ?>store/details/<?= $row['store_id']?>">
-									<img src="<?= base_url() . $row['store_thumbnail'] ?>" class="xs_thumbnail">
+									<img src="<?= base_url() . $row['thumbnail'] ?>" class="xs_thumbnail">
                                 </a>
                             </td>
 							<td>
                                 <a href="<?= base_url() ?>store/details/<?= $row['store_id']?>">
-									<?= $row['store_title'] ?>
+									<?= $row['store'] ?>
                                 </a>
                             </td>
 							<td>

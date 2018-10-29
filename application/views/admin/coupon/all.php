@@ -58,12 +58,12 @@
                             </td>
 							<td>
                                 <a href="<?= base_url() ?>coupon/details/<?= $row['coupon_id']?>">
-									<?= $row['coupon_title'] ?>
+									<?= $row['coupon'] ?>
                                 </a>
                             </td>
                             <td>
                                 <a href="<?= base_url() ?>coupon/details/<?= $row['coupon_id']?>">
-									<?= $row['coupon_description'] ?>
+									<?= $row['description'] ?>
                                 </a>
                             </td>
                             <td>

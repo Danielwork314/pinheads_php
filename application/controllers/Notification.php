@@ -33,8 +33,8 @@ class Notification extends Base_Controller
             $error = false;
 
             $data = array(
-                'notification_title' => $input['notification_title'],
-                'notification_description' => $input['notification_description'],
+                'notification' => $input['notification'],
+                'description' => $input['description'],
                 'end_date' => $input['end_date'],
                 'created_by' => $this->session->userdata('login_id'),
                 'user_id' => $input['user_id'],
@@ -75,7 +75,7 @@ class Notification extends Base_Controller
             'notification_id' => $notification_id
         );
 
-        $notification_id = $this->Notification_model->get_where($where);
+        $notification = $this->Notification_model->get_where($where);
         
         if ($_POST) {
             $input = $this->input->post();
@@ -87,8 +87,8 @@ class Notification extends Base_Controller
 
             $data = array(
 
-                'notification_title' => $input['notification_title'],
-                'notification_description' => $input['notification_description'],
+                'notification' => $input['notification'],
+                'description' => $input['description'],
                 'end_date' => $input['end_date'],
                 'modified_date' => $date->format("Y-m-d h:i:s"),
                 'modified_by' => $this->session->userdata('login_id'),

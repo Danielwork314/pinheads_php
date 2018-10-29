@@ -1,6 +1,6 @@
 <section class="content-header">
 	<h1>
-		<?= $store['store_title'] ?>
+		<?= $store['store'] ?>
 	</h1>
 	<ol class="breadcrumb">
 		<li>
@@ -9,7 +9,7 @@
 		</li>
 		<li>
 			<a href="<?= base_url() ?>Store/details/<?= $store['store_id'] ?>">
-				<?= $store['store_title'] ?>
+				<?= $store['store'] ?>
 			</a>
 		</li>
 	</ol>
@@ -20,7 +20,7 @@
 		<div class="box box-primary">
 			<div class="box-header with-border">
 				<h3 class="box-title">
-					<?= $store['store_title'] ?>'s Info
+					<?= $store['store'] ?>'s Info
 				</h3>
 				<a href="<?php echo site_url('store/edit') . '/' . $store['store_id'] ?>" class='btn btn-default pull-right'>
 					<i class='fa fa-edit'></i> Edit</a>
@@ -30,21 +30,21 @@
 			<div class="box-body">
 				<table class="formTable">
 					<tr>
-						<th>Title</th>
+						<th>Store</th>
 						<td>:
-							<?= $store["store_title"] ?>
+							<?= $store["store"] ?>
 						</td>
 					</tr>
 					<tr>
 						<th>Address</th>
 						<td>:
-							<?= $store["store_address"] ?>
+							<?= $store["address"] ?>
 						</td>
 					</tr>
 					<tr>
 						<th>Phone</th>
 						<td>:
-							<?= $store["store_phone"] ?>
+							<?= $store["phone"] ?>
 						</td>
                     </tr>
                     <tr>
@@ -120,4 +120,79 @@
 			<!-- /.box-body -->
 		</div>
 	</div>
+	<div class="col-md-12 col-xs-12">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+					<h3 class="box-title">
+						<?=$store['store']?>'s Menu Lists
+					</h3>
+					<a href="<?php echo site_url('menu/add') . '/' . $store['store_id'] ?>" class='btn btn-default pull-right'>
+						<i class='fa fa-plus'></i> Add</a>
+			</div>
+				
+				<br>
+				<div class='box-body no-padding'>
+					<div id="refreshBox">
+						<table id="data-table" class="table table-bordered table-hover data-table">
+							<thead>
+							<tr>
+									<th>No.</th>
+									<th>Menu Image</th>
+									<th>Menu Title</th>
+									<th>Menu Description</th>
+									<th>Menu Price</th>
+									<th>Menu Discount</th>
+									<th>Created Date</th>
+									<th>Created By</th>
+									<th></th>
+								</tr>
+								<?php
+							$i = 1;
+							foreach($menu as $row){
+								?>
+								<tr>
+									<td>
+										<?= $i ?>
+									</td>
+									
+									<td>
+										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
+											<img src="<?= base_url() . $row['image'] ?>" class="xs_thumbnail">
+                                		</a>
+									</td>
+									<td>
+										<?= $row['menu'] ?>
+									</td>
+									<td>
+										<?= $row['description'] ?>
+									</td>
+									<td>
+										<?= $row['price'] ?>
+									</td>
+									<td>
+										<?= $row['discount'] ?>
+									</td>
+									<td>
+										<?= $row['created_date'] ?>
+									</td>
+									<td>
+										<?= $row['created_by'] ?>
+									</td>
+									<td>
+                                		<a href="<?= base_url() ?>menu/delete/<?= $row['menu_id']?>" class="btn btn-danger delete-button">Delete</a>
+                            		</td>
+								</tr>
+								<?php
+								$i++;
+							}
+							?>
+						</table>
+					</div>
+				</div>
+			
+			</div>
+	</div>
 </section>
+
+
+

@@ -183,12 +183,42 @@
 						</li>
 						<?php
 					}
+					if($this->session->userdata('role_access')['billing_address']['read_control'] == 1){
+						?>
+						<li class=" <?php if ($this->router->fetch_class() == 'billing_address') echo 'active'; ?> ">
+							<a href="<?=base_url();?>billing_address">
+								<i class="fa fa-clipboard-list"></i>
+								<span>Billing Address</span>
+							</a>
+						</li>
+						<?php
+					}
 					if($this->session->userdata('role_access')['notification']['read_control'] == 1){
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'notification') echo 'active'; ?> ">
 							<a href="<?=base_url();?>notification">
-								<i class="fa fa-clipboard-list"></i>
+								<i class="fa fa-bell"></i>
 								<span>Notification</span>
+							</a>
+						</li>
+						<?php
+					}
+					if($this->session->userdata('role_access')['feedback']['read_control'] == 1){
+						?>
+						<li class=" <?php if ($this->router->fetch_class() == 'feedback') echo 'active'; ?> ">
+							<a href="<?=base_url();?>feedback">
+								<i class="fa fa-clipboard-list"></i>
+								<span>Feedback</span>
+							</a>
+						</li>
+						<?php
+					}
+					if($this->session->userdata('role_access')['coupon']['read_control'] == 1){
+						?>
+						<li class=" <?php if ($this->router->fetch_class() == 'coupon') echo 'active'; ?> ">
+							<a href="<?=base_url();?>coupon">
+								<i class="fa fa-clipboard-list"></i>
+								<span>Coupon</span>
 							</a>
 						</li>
 						<?php
@@ -210,4 +240,4 @@
 		</aside>
 
 		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper">
+		<div class="content-wrapper" style="min-height: 2000px;">

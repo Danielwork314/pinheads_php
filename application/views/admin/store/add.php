@@ -38,15 +38,15 @@
 				</div>
 				<div class="form-group">
 					<label>Store Title</label>
-					<input type="text" class="form-control" name="store_title" required placeholder="Store title">
+					<input type="text" class="form-control" name="store" required placeholder="Store">
 				</div>
 				<div class="form-group">
 					<label>Store Address</label>
-					<input type="text" class="form-control" name="store_address" required placeholder="Store Address">
+					<input type="text" class="form-control" name="address" required placeholder="Store Address">
 				</div>
 				<div class="form-group">
 					<label>Phone</label>
-					<input type="text" class="form-control" name="store_phone" required placeholder="Phone number">
+					<input type="text" class="form-control" name="phone" required placeholder="Phone number">
 				</div>
 				<div class="form-group">
 					<label>Latitude</label>

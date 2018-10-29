@@ -34,11 +34,11 @@
                 
 				<div class="form-group">
 					<label>Notification Title</label>
-					<input type="text" class="form-control" name="notification_title" required value="<?= $notification['notification_title'] ?>">
+					<input type="text" class="form-control" name="notification" required value="<?= $notification['notification'] ?>">
 				</div>
                 <div class="form-group">
 					<label>Notification Description</label>
-					<input type="text" class="form-control" name="notification_description" required value="<?= $notification['notification_description'] ?>">
+					<input type="text" class="form-control" name="description" required value="<?= $notification['description'] ?>">
 				</div>
                 <div class="form-group">
 					<label>End Date</label>

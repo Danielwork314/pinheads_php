@@ -42,7 +42,7 @@ class Food extends Base_Controller
                 $this->load->library("upload", $config);
 
                 if ($this->upload->do_upload("file")) {
-                    $food_image = $config['path'] . $this->upload->data()['file_name'];
+                    $image = $config['path'] . $this->upload->data()['file_name'];
                 } else {
                     die(json_encode(array(
                         "status" => false,
@@ -52,11 +52,11 @@ class Food extends Base_Controller
             }
 
             $data = array(
-                'food_image' => $food_image,
-                'food_title' => $input['food_title'],
-                'food_description' => $input['food_description'],
-                'food_price' => $input['food_price'],
-                'food_discount' => $input['food_discount'],
+                'image' => $image,
+                'food' => $input['food'],
+                'description' => $input['description'],
+                'price' => $input['price'],
+                'discount' => $input['discount'],
                 'created_by' => $this->session->userdata('login_id'),
                 'store_id' => $input['store_id'],
             );
@@ -113,7 +113,7 @@ class Food extends Base_Controller
                 $this->load->library("upload", $config);
 
                 if ($this->upload->do_upload("file")) {
-                    $food_image = $config['path'] . $this->upload->data()['file_name'];
+                    $image = $config['path'] . $this->upload->data()['file_name'];
                 } else {
                     die(json_encode(array(
                         "status" => false,
@@ -124,11 +124,11 @@ class Food extends Base_Controller
             $date = new DateTime(null, new DateTimeZone('Asia/Kuala_Lumpur'));
 
             $data = array(
-                'food_image' => $food_image,
-                'food_title' => $input['food_title'],
-                'food_description' => $input['food_description'],
-                'food_price' => $input['food_price'],
-                'food_discount' => $input['food_discount'],
+                'image' => $image,
+                'food' => $input['food'],
+                'description' => $input['description'],
+                'price' => $input['price'],
+                'discount' => $input['discount'],
                 'modified_date' => $date->format("Y-m-d h:i:s"),
                 'store_id' => $input['store_id'],
                 'modified_by' => $this->session->userdata('login_id')

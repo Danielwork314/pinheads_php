@@ -14,6 +14,7 @@ class Store extends Base_Controller
         $this->load->model("Store_model");
         $this->load->model("Gourmet_type_model");
         $this->load->model("Pricing_model");
+        $this->load->model("Menu_model");
     }
 
     public function index()
@@ -52,6 +53,7 @@ class Store extends Base_Controller
                 }
             }
 
+
             if($input['take_away']){
                 $take_away = 1;
             } else {
@@ -84,10 +86,10 @@ class Store extends Base_Controller
 
 
             $data = array(
-                'store_thumbnail' => $store_thumbnail,
-                'store_title' => $input['store_title'],
-                'store_address' => $input['store_address'],
-                'store_phone' => $input['store_phone'],
+                'thumbnail' => $thumbnail,
+                'title' => $input['title'],
+                'address' => $input['address'],
+                'phone' => $input['phone'],
                 'latitude' => $input['latitude'],
                 'longitude' => $input['longitude'],
                 'business_hour' => $input['business_hour'],
@@ -102,8 +104,9 @@ class Store extends Base_Controller
             );
 
             $this->Store_model->insert($data);
-
-            redirect("store", "refresh");
+            
+                redirect("store", "refresh");
+                
         }
 
         $this->page_data['type'] = $this->Gourmet_type_model->get_all();
@@ -122,8 +125,10 @@ class Store extends Base_Controller
         );
 
         $store = $this->Store_model->get_where($where);
+        $menu = $this->Menu_model->get_where($where);
 
         $this->page_data["store"] = $store[0];
+        $this->page_data["menu"] = $menu;
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/store/details");
@@ -224,6 +229,11 @@ class Store extends Base_Controller
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/store/edit");
         $this->load->view("admin/footer");
+    }
+
+    function delete($store_id){
+        $this->Store_model->soft_delete($store_id);
+        redirect("store", "refresh");
     }
 
 }

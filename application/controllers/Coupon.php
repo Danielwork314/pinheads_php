@@ -34,8 +34,8 @@ class Coupon extends Base_Controller
             $error = false;
 
             $data = array(
-                'coupon_title' => $input['coupon_title'],
-                'coupon_description' => $input['coupon_description'],
+                'coupon' => $input['coupon'],
+                'description' => $input['description'],
                 'valid_date' => $input['valid_date'],
                 'created_by' => $this->session->userdata('login_id'),
                 'store_id' => $input['store_id'],
@@ -89,8 +89,8 @@ class Coupon extends Base_Controller
 
             $data = array(
 
-                'coupon_title' => $input['coupon_title'],
-                'coupon_description' => $input['coupon_description'],
+                'coupon' => $input['coupon'],
+                'description' => $input['description'],
                 'valid_date' => $input['valid_date'],
                 'partner_coupon' => $input['partner_coupon'],
                 'used' => $input['used'],

@@ -33,12 +33,12 @@
 				?>
 
 				<div class="form-group">
-					<label>Notification Title</label>
-					<input type="text" class="form-control" name="notificaiton_title" required placeholder="Notification title">
+					<label>Notification</label>
+					<input type="text" class="form-control" name="notificaiton" required placeholder="Notification">
 				</div>
                 <div class="form-group">
 					<label>Notification Description</label>
-					<input type="text" class="form-control" name="notification_description" required placeholder="Notification description">
+					<input type="text" class="form-control" name="description" required placeholder="Notification description">
 				</div>
 				<div class="form-group">
 					<label>End Date</label>
