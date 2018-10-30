@@ -161,22 +161,34 @@
                                 		</a>
 									</td>
 									<td>
-										<?= $row['menu'] ?>
+										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
+											<?= $row['menu'] ?>
+										</a>
 									</td>
 									<td>
-										<?= $row['description'] ?>
+										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
+											<?= $row['description'] ?>
+										</a>
 									</td>
 									<td>
-										<?= $row['price'] ?>
+										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
+											<?= $row['price'] ?>
+										</a>
 									</td>
 									<td>
-										<?= $row['discount'] ?>
+										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
+											<?= $row['discount'] ?>
+										</a>
 									</td>
 									<td>
-										<?= $row['created_date'] ?>
+										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
+											<?= $row['created_date'] ?>
+										</a>
 									</td>
 									<td>
-										<?= $row['created_by'] ?>
+										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
+											<?= $row['created_by'] ?>
+										</a>
 									</td>
 									<td>
                                 		<a href="<?= base_url() ?>menu/delete/<?= $row['menu_id']?>" class="btn btn-danger delete-button">Delete</a>

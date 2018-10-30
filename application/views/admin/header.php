@@ -240,4 +240,4 @@
 		</aside>
 
 		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper" style="min-height: 2000px;">
+		<div class="content-wrapper">

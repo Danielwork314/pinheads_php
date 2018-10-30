@@ -14,39 +14,122 @@
 </section>
 <br>
 <section class="content">
-	<div class="box box-primary">
-		<div class="box-header with-border">
-			<h3 class="box-title">Menu</h3>
-		</div>
-		<!-- /.box-header -->
-		<!-- form start -->
-		<form role="form" class="input_form" method="POST" action="<?= base_url()?>menu/add/<?= $store_id ?>" enctype="multipart/form-data">
-			<div class="box-body">
-				<?php 
-				if (isset($error)) { 
-					?>
-					<div class="alert alert-danger alert-dismissable">
-						<?= $error; ?>						
-					</div>
-					<?php 
-				}
-				?>
+    <div class="col-md-6 col-xs-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Menu</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" class="input_form" method="POST" action="<?= base_url()?>menu/add/<?= $store_id ?>" enctype="multipart/form-data">
+                <div class="box-body">
+                    <?php 
+                    if (isset($error)) { 
+                        ?>
+                        <div class="alert alert-danger alert-dismissable">
+                            <?= $error; ?>						
+                        </div>
+                        <?php 
+                    }
+                    ?>
 
-				<div class="form-group">
-					<label>Menu Image</label>
-					<input type="file" class="form-control" name="file" required>
-				</div>
-				<?= $input_fields['menu'] ?>
-				<?= $input_fields['description'] ?>
-				<?= $input_fields['price'] ?>
-				<?= $input_fields['discount'] ?>
-				
-			</div>
-			<!-- /.box-body -->
+                    <div class="form-group">
+                        <label>Menu Image</label>
+                        <input type="file" class="form-control" name="file" required>
+                    </div>
+                    <?= $input_fields['menu'] ?>
+                    <?= $input_fields['description'] ?>
+                    <?= $input_fields['price'] ?>
+                    <?= $input_fields['discount'] ?>
 
-			<div class="box-footer">
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</div>
-		</form>
-	</div>
+                </div>
+                <!-- /.box-body -->
+
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-md-6 col-xs-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Menu's Ingredient</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form" class="input_form" method="POST" action="<?= base_url()?>menu/add/<?= $store_id ?>" enctype="multipart/form-data">
+                <div class="box-body">
+                    <?php 
+                    if (isset($error)) { 
+                        ?>
+                        <div class="alert alert-danger alert-dismissable">
+                            <?= $error; ?>						
+                        </div>
+                        <?php 
+                    }
+                    ?>
+                    <div class="form-row">
+                        <div class="form-group col-md-8">
+                            <label>Ingredient</label>
+                            <select class="form-control" required name="ingredient_id" id="selection_ingredient">
+                                <?php foreach ($ingredient as $row) { ?>
+                                    <option value="<?= $row['ingredient_id'] ?>"><?= $row['ingredient'] ?></option>
+                                <?php } ?>
+                            </select>
+                            <br>
+                            <div class="form-group">
+                                <table id="" class="table table-hover table-stripe">
+                                    <thead>
+                                        <tr>
+                                            <th width="40%">Ingredient On Lists</th>
+                                            <th width="40%"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="ingredient_list"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    
+                        <div class="col-md-3" style="padding-top: 24px;">
+                            <button type="button" id="confirm_ingredient" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                <!-- /.box-body -->
+
+            </form>
+        </div>
+    </div>
 </section>
+
+<script>
+    $("#confirm_ingredient").click(function () {
+
+        var selected = $('#selection_ingredient').val();
+        var selected_ingredient_text = $("#selection_ingredient").children(":selected").text();
+
+        postParam = {
+            ingredient_id: selected,
+            ingredient : selected_ingredient_text
+        };
+
+        $.post("<?= base_url() ?>Menu/add_ingredient", postParam, function(response){
+            // alert(response);
+
+            var html = '<tr>';
+                html += '<td>' + selected_ingredient_text + '</td>';
+                html += '<td><button type="button" name="delete" id="delete" class="btn btn-danger pull-right" >Remove</button></td>';
+                html += '</tr>';
+            
+                $("#ingredient_list").append(html);
+                $("#ingredient_list").on('click', '#delete', function () {
+				$(this).closest('tr').remove();
+			});
+        });
+
+    });
+			
+</script>
+
+
