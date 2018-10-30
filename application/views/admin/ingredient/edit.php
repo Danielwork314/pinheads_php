@@ -33,8 +33,8 @@
                 ?>
                 
 				<div class="form-group">
-					<label>Ingredient Title</label>
-					<input type="text" class="form-control" name="ingredient_title" required value="<?= $ingredient['ingredient_title'] ?>">
+					<label>Ingredient</label>
+					<input type="text" class="form-control" name="ingredient" required value="<?= $ingredient['ingredient'] ?>">
 				</div>
 			</div>
 			<!-- /.box-body -->

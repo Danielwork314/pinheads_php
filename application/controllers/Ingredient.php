@@ -33,7 +33,7 @@ class Ingredient extends Base_Controller
             $error = false;
 
             $data = array(
-                'ingredient_title' => $input['ingredient_title'],
+                'ingredient' => $input['ingredient'],
                 'created_by' => $this->session->userdata('login_id'),
             );
 
@@ -82,7 +82,7 @@ class Ingredient extends Base_Controller
             $date = new DateTime(null, new DateTimeZone('Asia/Kuala_Lumpur'));
             
             $data = array(
-                'ingredient_title' => $input['ingredient_title'],
+                'ingredient' => $input['ingredient'],
                 'created_by' => $this->session->userdata('login_id'),
                 'modified_date' => $date->format("Y-m-d h:i:s"),
                 'modified_by' => $this->session->userdata('login_id')

@@ -1,6 +1,6 @@
 <section class="content-header">
 	<h1>
-		Add Ingredient Title
+		Add Ingredient
 	</h1>
 	<ol class="breadcrumb">
 		<li>
@@ -8,7 +8,7 @@
 				<i class="fa fa-clipboard-list"></i> Pricing</a>
 		</li>
 		<li>
-			<a href="<?= base_url() ?>ingredient/add"> Add Ingredient Title</a>
+			<a href="<?= base_url() ?>ingredient/add"> Add Ingredient</a>
 		</li>
 	</ol>
 </section>
@@ -32,8 +32,8 @@
 				}
 				?>
 				<div class="form-group">
-					<label>Ingredient Title</label>
-					<input type="text" class="form-control" name="ingredient_title" required placeholder="Ingredient title">
+					<label>Ingredient</label>
+					<input type="text" class="form-control" name="ingredient" required placeholder="Ingredient">
 				</div>
 			<!-- /.box-body -->
 

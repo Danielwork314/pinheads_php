@@ -9,7 +9,7 @@
 		</li>
 		<li>
 			<a href="<?= base_url() ?>coupon/details/<?= $coupon['coupon_id'] ?>">
-				<?= $coupon['coupon_title'] ?>
+				<?= $coupon['coupon'] ?>
 			</a>
 		</li>
 	</ol>
@@ -20,7 +20,7 @@
 		<div class="box box-primary">
 			<div class="box-header with-border">
 				<h3 class="box-title">
-					<?= $coupon['coupon_title'] ?>'s Info
+					<?= $coupon['coupon'] ?>'s Info
 				</h3>
 				<a href="<?php echo site_url('coupon/edit') . '/' . $coupon['coupon_id'] ?>" class='btn btn-default pull-right'>
 					<i class='fa fa-edit'></i> Edit</a>

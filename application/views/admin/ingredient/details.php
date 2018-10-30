@@ -1,6 +1,6 @@
 <section class="content-header">
 	<h1>
-		<?= $ingredient['ingredient_title'] ?>
+		<?= $ingredient['ingredient'] ?>
 	</h1>
 	<ol class="breadcrumb">
 		<li>
@@ -9,7 +9,7 @@
 		</li>
 		<li>
 			<a href="<?= base_url() ?>ingredient/details/<?= $ingredient['ingredient_id'] ?>">
-				<?= $ingredient['ingredient_title'] ?>
+				<?= $ingredient['ingredient'] ?>
 			</a>
 		</li>
 	</ol>
@@ -20,7 +20,7 @@
 		<div class="box box-primary">
 			<div class="box-header with-border">
 				<h3 class="box-title">
-					<?= $ingredient['ingredient_title'] ?>'s Info
+					<?= $ingredient['ingredient'] ?>'s Info
 				</h3>
 				<a href="<?php echo site_url('ingredient/edit') . '/' . $ingredient['ingredient_id'] ?>" class='btn btn-default pull-right'>
 					<i class='fa fa-edit'></i> Edit</a>
@@ -30,9 +30,9 @@
 			<div class="box-body">
 				<table class="formTable">
 					<tr>
-						<th>Ingredient Title</th>
+						<th>Ingredient</th>
 						<td>:
-							<?= $ingredient["ingredient_title"] ?>
+							<?= $ingredient["ingredient"] ?>
 						</td>
 					</tr>
 				</table>

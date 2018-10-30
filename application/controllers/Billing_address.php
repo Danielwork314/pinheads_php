@@ -33,8 +33,12 @@ class Billing_address extends Base_Controller
             $error = false;
 
             $data = array(
-                // 'gourmet_type_title' => $input['gourmet_type_title'],
-                // 'created_by' => $this->session->userdata('login_id'),
+                'address1' => $input['address1'],
+                'address2' => $input['address2'],
+                'state' => $input['state'],
+                'postcode' => $input['postcode'],
+                'country' => $input['country'],
+                'created_by' => $this->session->userdata('login_id'),
             );
 
             $this->Billing_address_model->insert($data);
@@ -82,8 +86,11 @@ class Billing_address extends Base_Controller
             $date = new DateTime(null, new DateTimeZone('Asia/Kuala_Lumpur'));
             
             $data = array(
-                // 'gourmet_type_title' => $input['gourmet_type_title'],
-                'created_by' => $this->session->userdata('login_id'),
+                'address1' => $input['address1'],
+                'address2' => $input['address2'],
+                'state' => $input['state'],
+                'postcode' => $input['postcode'],
+                'country' => $input['country'],
                 'modified_date' => $date->format("Y-m-d h:i:s"),
                 'modified_by' => $this->session->userdata('login_id')
             );

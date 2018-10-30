@@ -39,7 +39,8 @@ class Coupon extends Base_Controller
                 'valid_date' => $input['valid_date'],
                 'created_by' => $this->session->userdata('login_id'),
                 'store_id' => $input['store_id'],
-                'user_id' => $input['user_id'],
+                // 'user_id' => $input['user_id'],
+                'user_id' => 1,
             );
 
             $this->Coupon_model->insert($data);
@@ -47,7 +48,7 @@ class Coupon extends Base_Controller
             redirect("coupon", "refresh");
         }
 
-        $this->page_data['coupon'] = $this->Coupon_model->get_all();
+        $this->page_data['store'] = $this->Store_model->get_all();
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/coupon/add");
@@ -92,8 +93,8 @@ class Coupon extends Base_Controller
                 'coupon' => $input['coupon'],
                 'description' => $input['description'],
                 'valid_date' => $input['valid_date'],
-                'partner_coupon' => $input['partner_coupon'],
-                'used' => $input['used'],
+                // 'partner_coupon' => $input['partner_coupon'],
+                // 'used' => $input['used'],
                 'modified_date' => $date->format("Y-m-d h:i:s"),
                 'modified_by' => $this->session->userdata('login_id'),
                 'store_id' => $input['store_id'],
@@ -103,7 +104,7 @@ class Coupon extends Base_Controller
 
             $this->Coupon_model->update_where($where, $data);
 
-            redirect("coupon", "refresh");
+            // redirect("coupon", "refresh");
         }
 
         
@@ -155,7 +156,7 @@ class Coupon extends Base_Controller
         );
 
         $data = array(
-            "used" => 1,
+            "used" => 0,
         );
 
         $this->Coupon_model->update_where($where, $data);
@@ -170,7 +171,7 @@ class Coupon extends Base_Controller
         );
 
         $data = array(
-            "used" => 0,
+            "used" => 1,
         );
 
         $this->Coupon_model->update_where($where, $data);

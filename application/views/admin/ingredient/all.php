@@ -23,7 +23,7 @@
 					<thead>
 						<tr>
 							<th>No.</th>
-                            <th>Ingredient Title</th>
+                            <th>Ingredient</th>
                             <th>Created Date</th>
                             <th>Created By</th>
                             <th></th>
@@ -42,7 +42,7 @@
                             </td>
 							<td>
                                 <a href="<?= base_url() ?>ingredient/details/<?= $row['ingredient_id']?>">
-									<?= $row['ingredient_title'] ?>
+									<?= $row['ingredient'] ?>
                                 </a>
                             </td>
                             <td>
@@ -67,7 +67,7 @@
 					<tfoot>
 						<tr>
                             <th>No.</th>
-                            <th>Ingredient Title</th>
+                            <th>Ingredient</th>
                             <th>Created Date</th>
                             <th>Created By</th>
                             <th></th>

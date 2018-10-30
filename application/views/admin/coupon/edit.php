@@ -38,7 +38,7 @@
 				</div>
                 <div class="form-group">
 					<label>Coupon Description</label>
-					<input type="text" class="form-control" name="coupon_description" required value="<?= $coupon['description'] ?>">
+					<input type="text" class="form-control" name="description" required value="<?= $coupon['description'] ?>">
 				</div>
 				<div class="form-group">
 					<label>Valid Date</label>

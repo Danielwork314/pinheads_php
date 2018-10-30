@@ -33,24 +33,24 @@
 				?>
 
 				<div class="form-group">
-					<label>Coupon Title</label>
-					<input type="text" class="form-control" name="notificaiton_title" required placeholder="Coupon title">
+					<label>Address 1</label>
+					<input type="text" class="form-control" name="address1" required placeholder="Address 1">
 				</div>
                 <div class="form-group">
-					<label>Coupon Description</label>
-					<input type="text" class="form-control" name="coupon_description" required placeholder="Coupon description">
+					<label>Address 2</label>
+					<input type="text" class="form-control" name="address2" required placeholder="Address 2">
 				</div>
 				<div class="form-group">
-					<label>Valid Date</label>
-					<input type="date" class="form-control" name="valid_date" required placeholder="Valid date">
+					<label>State</label>
+					<input type="text" class="form-control" name="state" required placeholder="State">
 				</div>
                 <div class="form-group">
-					<label>Partner Coupon</label>
-					<input type="text" class="form-control" name="valid_date" required placeholder="Valid date">
+					<label>Postcode</label>
+					<input type="text" class="form-control" name="postcode" required placeholder="Postcode">
 				</div>
                 <div class="form-group">
-					<label>Used</label>
-					<input type="text" class="form-control" name="used" required placeholder="Used">
+					<label>Country</label>
+					<input type="text" class="form-control" name="country" required placeholder="Country">
 				</div>
 			</div>
 			<!-- /.box-body -->

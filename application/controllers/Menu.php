@@ -28,6 +28,7 @@ class Menu extends Base_Controller
     function add($store_id)
     {
         $this->page_data['store_id'] = $store_id;
+        // $this->page_data['ingredient_id'] = $ingredient_id;
 
         if ($_POST) {
             $input = $this->input->post();
@@ -65,10 +66,15 @@ class Menu extends Base_Controller
                 'ingredient_id' => $ingredient_id,
                 'store_id' => $store_id,
 
-
             );
 
             $this->Menu_model->insert($data);
+
+            // $data2 = array(
+            //     'ingredient_id' => $input['ingredient'],
+            // );
+
+            // $this->Ingredient_food_model->insert($data2);
 
             redirect("store/details/" . $store_id, "refresh");
 
@@ -194,9 +200,7 @@ class Menu extends Base_Controller
             $ingredient_id = $this->Ingredient_model->get_where($data)[0];
 
 
-          
-
-            die(json_encode($ingredient_id));
+            // die(json_encode($ingredient_id));
         
 
             // $this->Menu_model->insert($data);

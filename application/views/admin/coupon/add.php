@@ -44,18 +44,17 @@
 					<label>Valid Date</label>
 					<input type="date" class="form-control" name="valid_date" required placeholder="Valid date">
 				</div>
-                <div class="form-group">
+                <!-- <div class="form-group">
 					<label>Partner Coupon</label>
-					<input type="text" class="form-control" name="valid_date" required placeholder="Valid date">
+					<input type="text" class="form-control" name="valid_date" required placeholder="Partner Coupon">
 				</div>
                 <div class="form-group">
 					<label>Used</label>
 					<input type="text" class="form-control" name="used" required placeholder="Used">
-				</div>
+				</div> -->
                 <div class="form-group">
 					<label>Store</label>
 					<select class="form-control" required name="store_id" id="form_store_id">
-                        <option value="none">None</option>
                             <?php foreach ($store as $row) { ?>
                                 <option value="<?= $row['store_id'] ?>"><?= $row['store'] ?></option>
                             <?php } ?>

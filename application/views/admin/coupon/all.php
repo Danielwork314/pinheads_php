@@ -48,7 +48,7 @@
                             </td>
                             <td>
                                 <a href="<?= base_url() ?>coupon/details/<?= $row['coupon_id']?>">
-									<?= $row['store_id'] ?>
+									<?= $row['store'] ?>
                                 </a>
                             </td>
                             <td>
@@ -81,10 +81,10 @@
                             </td>
                             <td>
                                 <?php if($row['used'] == 0){ ?>
-                                    <a class="btn btn-success" data-id="<?=$row["coupon_id"]?>" href="<?= base_url()?>coupon/used_yes/<?= $row['coupon_id']?>"><i class="fa fa-check"></i> </a>
+                                    <a class="btn btn-danger" data-id="<?=$row["coupon_id"]?>" href="<?= base_url()?>coupon/used_no/<?= $row['coupon_id']?>"><i class="fa fa-times"></i> </a>
                                         
                                 <?php } else { ?>
-                                    <a class="btn btn-danger" data-id="<?=$row["coupon_id"]?>" href="<?= base_url()?>coupon/used_no/<?= $row['coupon_id']?>"><i class="fa fa-times"></i> </a>
+                                    <a class="btn btn-success" data-id="<?=$row["coupon_id"]?>" href="<?= base_url()?>coupon/used_yes/<?= $row['coupon_id']?>"><i class="fa fa-check"></i> </a>
                                         
                                 <?php } ?>
                             </td>

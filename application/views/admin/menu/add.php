@@ -59,7 +59,6 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" class="input_form" method="POST" action="<?= base_url()?>menu/add/<?= $store_id ?>" enctype="multipart/form-data">
                 <div class="box-body">
                     <?php 
                     if (isset($error)) { 
@@ -71,34 +70,33 @@
                     }
                     ?>
                     <div class="form-row">
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-7">
                             <label>Ingredient</label>
                             <select class="form-control" required name="ingredient_id" id="selection_ingredient">
                                 <?php foreach ($ingredient as $row) { ?>
                                     <option value="<?= $row['ingredient_id'] ?>"><?= $row['ingredient'] ?></option>
                                 <?php } ?>
                             </select>
-                            <br>
-                            <div class="form-group">
-                                <table id="" class="table table-hover table-stripe">
-                                    <thead>
-                                        <tr>
-                                            <th width="40%">Ingredient On Lists</th>
-                                            <th width="40%"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="ingredient_list"></tbody>
-                                </table>
-                            </div>
                         </div>
                     
-                        <div class="col-md-3" style="padding-top: 24px;">
+                        <div class="col-md-1" style="padding-top: 24px;">
                             <button type="button" id="confirm_ingredient" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add</button>
                         </div>
                     </div>
-                <!-- /.box-body -->
 
-            </form>
+                    <div class="form-group">
+                        <table id="" class="table table-hover table-stripe">
+                            <thead>
+                                <tr>
+                                    <th width="40%">Ingredient On Lists</th>
+                                    <th width="40%"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="ingredient_list"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.box-body -->
         </div>
     </div>
 </section>

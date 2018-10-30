@@ -1,6 +1,6 @@
 <section class="content-header">
 	<h1>
-		<?= $billing_address['billing_address'] ?>
+		<?= $billing_address['address1'] ?>
 	</h1>
 	<ol class="breadcrumb">
 		<li>
@@ -9,7 +9,7 @@
 		</li>
 		<li>
 			<a href="<?= base_url() ?>billing_address/details/<?= $billing_address['billing_address_id'] ?>">
-				<?= $billing_address['billing_address'] ?>
+				<?= $billing_address['address1'] ?>
 			</a>
 		</li>
 	</ol>
@@ -20,7 +20,7 @@
 		<div class="box box-primary">
 			<div class="box-header with-border">
 				<h3 class="box-title">
-					<?= $billing_address['billing_address'] ?>'s Info
+					<?= $billing_address['address1'] ?>'s Info
 				</h3>
 				<a href="<?php echo site_url('billing_address/edit') . '/' . $billing_address['billing_address_id'] ?>" class='btn btn-default pull-right'>
 					<i class='fa fa-edit'></i> Edit</a>
@@ -44,7 +44,7 @@
                     <tr>
 						<th>Address 2</th>
 						<td>:
-							<?= $billing_address["address 2"] ?>
+							<?= $billing_address["address2"] ?>
 						</td>
                     </tr>
                     <tr>
