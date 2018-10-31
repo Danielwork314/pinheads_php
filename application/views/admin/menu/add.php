@@ -79,7 +79,7 @@
                             </select>
                         </div>
                     
-                        <div class="col-md-1" style="padding-top: 24px;">
+                        <div class="col-md-2" style="padding-top: 24px;">
                             <button type="button" id="confirm_ingredient" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Add</button>
                         </div>
                     </div>
@@ -107,10 +107,16 @@
         var selected = $('#selection_ingredient').val();
         var selected_ingredient_text = $("#selection_ingredient").children(":selected").text();
 
-        postParam = {
-            ingredient_id: selected,
+        var ingredient_details = {
+            ingredient_id : selected,
             ingredient : selected_ingredient_text
         };
+
+        postParam = {
+            // ingredient_id: selected,
+            // ingredient : selected_ingredient_text
+            ingredient_detail:ingredient_details
+        }
 
         $.post("<?= base_url() ?>Menu/add_ingredient", postParam, function(response){
             // alert(response);

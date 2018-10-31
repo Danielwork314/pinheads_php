@@ -57,8 +57,8 @@ class Food extends Base_Controller
                 'description' => $input['description'],
                 'price' => $input['price'],
                 'discount' => $input['discount'],
-                'created_by' => $this->session->userdata('login_id'),
                 'store_id' => $input['store_id'],
+                'created_by' => $this->session->userdata('login_id'),
             );
 
             $this->Food_model->insert($data);
