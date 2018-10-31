@@ -13,6 +13,7 @@ class User extends Base_Controller
 
         $this->load->model("Role_model");
         $this->load->model("User_model");
+        $this->load->model("Payment_model");
     }
 
     function index()
@@ -84,6 +85,10 @@ class User extends Base_Controller
         $this->show_404_if_empty($user);
 
         $this->page_data["user"] = $user[0];
+
+        $payment = $this->Payment_model->get_where($where);
+        $this->page_data["payment"] = $payment;
+
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/user/details");

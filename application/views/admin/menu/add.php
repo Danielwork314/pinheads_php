@@ -21,7 +21,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" class="input_form" method="POST" action="<?= base_url()?>menu/add/<?= $store_id ?>" enctype="multipart/form-data">
+            <form role="form" class="input_form" method="POST" enctype="multipart/form-data" id="menu_form">
                 <div class="box-body">
                     <?php 
                     if (isset($error)) { 
@@ -35,8 +35,9 @@
 
                     <div class="form-group">
                         <label>Menu Image</label>
-                        <input type="file" class="form-control" name="file" required>
+                        <input type="file" class="form-control" name="file" id="file" required>
                     </div>
+                    
                     <?= $input_fields['menu'] ?>
                     <?= $input_fields['description'] ?>
                     <?= $input_fields['price'] ?>
@@ -46,7 +47,7 @@
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                    <button type="submit" class="btn btn-primary pull-right">Submit</button>
+                    <button type="button" id="submit_menu" class="btn btn-primary pull-right">Submit</button>
                 </div>
             </form>
         </div>
@@ -102,6 +103,9 @@
 </section>
 
 <script>
+
+    var ingredient_array = [];
+
     $("#confirm_ingredient").click(function () {
 
         var selected = $('#selection_ingredient').val();
@@ -125,14 +129,125 @@
                 html += '<td>' + selected_ingredient_text + '</td>';
                 html += '<td><button type="button" name="delete" id="delete" class="btn btn-danger pull-right" >Remove</button></td>';
                 html += '</tr>';
+
+                ingredient_array.push(selected);
+
+                // console.log(ingredient_array);
             
                 $("#ingredient_list").append(html);
                 $("#ingredient_list").on('click', '#delete', function () {
 				$(this).closest('tr').remove();
 			});
         });
+        
 
     });
+
+    $("#submit_menu").click(function(e){
+
+        var fd = new FormData();
+        var files = $('#file')[0].files[0];
+        fd.append('file', files);
+
+        console.log(fd);
+
+
+
+        // var data = new FormData(form);
+
+        $.ajax({
+            url: '<?= base_url()?>menu/add/<?= $store_id ?>',
+            data: fd,
+            processData: false,
+            contentType: false,
+            type: "POST",
+            success: function (data) {
+
+            },
+            error: function(){
+                console.log('error');
+            },
+
+            dataType: "JSON"
+        });
+        });
+
+        $(document).ready(function () {
+        var menu_form = document.getElementById("menu_form");
+
+        menu_form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            form_submit(menu_form);
+        });
+
+        });
+
+        // $.ajax({
+        //     url: '<?= base_url()?>menu/add/<?= $store_id ?>',
+        //     type: 'post',
+        //     data: fd,
+        //     contentType: false,
+        //     processData: false,
+        //     success: function(response){
+
+        //         console.log(response);
+                // if(response != 0){
+                //     $("#img").attr("src",response); 
+                //     $(".preview img").show(); // Display image element
+                // }else{
+                //     alert('file not uploaded');
+                // }
+           
+      
+
+
+        // alert('asd');
+
+        // e.preventDefault();
+
+        // var form = $('#menu_form').submit(function(e){
+        //     return ;
+        // });
+
+        // var formData = new FormData(form[0]);
+
+        // console.log(formData);
+
+        // var fileInput = document.getElementById('file');
+        // var file = fileInput.files[0];
+     
+ 
+
+        // // console.log(file);
+ 
+        // // var file = $("#file").val();
+        // var menu = $("#form_menu").val();
+
+        // // console.log(menu);
+        
+        // var description = $("#form_description").val();
+        // var price = $("#form_price").val();
+        // var discount = $("#form_discount").val();
+
+        // var menu_list = {
+        //     file : file,
+        //     menu : menu,
+        //     description : description,
+        //     price : price,
+        //     discount : discount,
+        //     ingredient_id: ingredient_array
+        // };
+
+        // postParam = {
+        //     menu_list : menu_list,
+        // }
+
+        // console.log(postParam);
+
+        //  $.post("<?= base_url()?>menu/add/<?= $store_id ?>", fd, function(response){
+          
+        //  });
+    // });
 			
 </script>
 

@@ -22,6 +22,7 @@ class Food extends Base_Controller
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/food/all");
         $this->load->view("admin/footer");
+        // $this->debug($this->page_data["food"]);
     }
 
     function add()

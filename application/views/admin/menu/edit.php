@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>Menu">
-				<i class="fa fa-utensils"></i> Food</a>
+				<i class="fa fa-utensils"></i> Menu</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>menu/edit/<?= $menu['menu_id'] ?>"> Edit menu</a>

@@ -14,6 +14,7 @@ class Menu extends Base_Controller
         $this->load->model("Menu_model");
         $this->load->model("Store_model");
         $this->load->model("Ingredient_model");
+        $this->load->model("Food_ingredient_model");
     }
 
     // public function index()
@@ -31,9 +32,12 @@ class Menu extends Base_Controller
         // $this->page_data['ingredient_id'] = $ingredient_id;
 
         if ($_POST) {
+
+            // $this->debug($_POST);
+
             $input = $this->input->post();
 
-            // $this->debug($input);
+            $this->debug($_FILES['file']['name']);
 
             $error = false;
 
@@ -63,22 +67,36 @@ class Menu extends Base_Controller
                 'price' => $input['price'],
                 'discount' => $input['discount'],
                 'created_by' => $this->session->userdata('login_id'),
-                'ingredient_id' => $ingredient_id,
+                // 'ingredient_id' => $ingredient_id,
                 'store_id' => $store_id,
 
             );
 
-            $this->Menu_model->insert($data);
+            $menu_id = $this->Menu_model->insert($data); 
 
-            // $data2 = array(
-            //     'ingredient_id' => $input['ingredient'],
-            // );
+        //    $ingredient_id =  $input['ingredient_id'];
 
-            // $this->Ingredient_food_model->insert($data2);
+        // //    $this->debug($input);
+
+        //     foreach($ingredient_id AS $row){
+
+        //         $data = array(
+                 
+        //             'menu_id' => $menu_id,
+        //             'ingredient_id' => $row
+
+        //         );
+        //         $this->Food_ingredient_model->insert($data);
+        //     }
+
+
+        
 
             redirect("store/details/" . $store_id, "refresh");
 
         }
+
+        $this->page_data['food_ingredient'] = $this->Food_ingredient_model->get_all();
 
         $this->page_data['ingredient'] = $this->Ingredient_model->get_all();
 

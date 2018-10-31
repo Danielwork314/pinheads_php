@@ -63,3 +63,68 @@
 		</div>
 	</div>
 </section>
+
+<section class="content">
+<div class="col-md-12 col-xs-12">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+					<h3 class="box-title">
+						<?=$user['username']?>'s Card Lists
+					</h3>
+					<a href="<?php echo site_url('payment/add') . '/' . $user['user_id'] ?>" class='btn btn-default pull-right'>
+						<i class='fa fa-plus'></i> Add</a>
+			</div>
+				
+			<br>
+
+			<div class='box-body no-padding'>
+				<div id="refreshBox">
+					<table id="data-table" class="table table-bordered table-hover data-table">
+						<thead>
+						<tr>
+							<th>No.</th>
+							<th>Bank </th>
+							<th>Card Type</th>
+							<th>Created Date</th>
+							<th></th>
+						</tr>
+						<?php
+							$i = 1;
+							foreach($payment as $row){
+								?>
+								<tr>
+									<td>
+										<a href="<?= base_url() ?>payment/details/<?= $row['payment_id']?>">
+											<?= $i ?>
+                                		</a>
+									</td>
+									
+									<td>
+										<a href="<?= base_url() ?>payment/details/<?= $row['payment_id']?>">
+											<?= $row['bank'] ?>
+										</a>
+									</td>
+									<td>
+										<a href="<?= base_url() ?>payment/details/<?= $row['payment_id']?>">
+											<?= $row['card_type'] ?>
+										</a>
+									</td>
+									<td>
+										<a href="<?= base_url() ?>payment/details/<?= $row['payment_id']?>">
+											<?= $row['created_date'] ?>
+										</a>
+									</td>
+									<td>
+                                		<a href="<?= base_url() ?>payment/delete/<?= $row['payment_id']?>" class="btn btn-danger delete-button">Delete</a>
+                            		</td>
+								</tr>
+								<?php
+								$i++;
+							}
+							?>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
