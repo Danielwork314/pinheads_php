@@ -35,7 +35,10 @@
 
                     <div class="form-group">
                         <label>Take Away</label>
-                        <input type="text" class="form-control" name="take_away" required placeholder="Take Away">
+                        <select class="form-control" required name="take_away">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Sub Total</label>
@@ -48,6 +51,10 @@
                     <div class="form-group">
                         <label>Total</label>
                         <input type="text" class="form-control" name="total" required placeholder="Total">
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <input type="text" class="form-control" name="status" required placeholder="Status">
                     </div>
                     
                     

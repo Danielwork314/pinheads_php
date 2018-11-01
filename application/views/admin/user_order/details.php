@@ -22,8 +22,8 @@
 				<h3 class="box-title">
 					<?= $user_order['user_order_id'] ?>'s Info
 				</h3>
-				<a href="<?php echo site_url('user_order/edit') . '/' . $user_order['user_order_id'] ?>" class='btn btn-default pull-right'>
-					<i class='fa fa-edit'></i> Edit</a>
+				<!-- <a href="<?php echo site_url('user_order/edit') . '/' . $user_order['user_order_id'] ?>" class='btn btn-default pull-right'>
+					<i class='fa fa-edit'></i> Edit</a> -->
 			</div>
 			<!-- /.box-header -->
 			<!-- form start -->
@@ -57,6 +57,18 @@
 						<th>Total</th>
 						<td>:
 							<?= $user_order["total"] ?>
+						</td>
+                    </tr>
+					<tr>
+						<th>Status</th>
+						<td>:
+							<?=($user_order['status'] == 1) ? "Delivered" : "Processing..."?>
+						</td>
+                    </tr>
+					<tr>
+						<th>Created Date</th>
+						<td>:
+							<?= $user_order["created_date"] ?>
 						</td>
                     </tr>
 				</table>

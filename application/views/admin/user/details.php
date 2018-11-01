@@ -250,6 +250,7 @@
 							<th>Sub Total</th>
 							<th>Service Change</th>
 							<th>Total</th>
+							<th>Status</th>
 							<th>Created Date</th>
 							<th></th>
 						</tr>
@@ -289,6 +290,17 @@
 										<a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">
 											<?= $row['total'] ?>
 										</a>
+									</td>
+									<td>
+										<!-- <a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">
+											<?=($row['status'] == 1) ? "Delivered" : "Processing..."?>
+										</a> -->
+										<?php if($row['status'] == 0){ ?>
+											<a class="btn btn-warning" data-id="<?=$row["user_order_id"]?>" href="<?= base_url()?>user_order/deliver/<?= $row['user_order_id']?>"><i class="fa fa-times"></i> Processing...</a>  
+										<?php } else { ?>
+											<a class="btn btn-success" data-id="<?=$row["user_order_id"]?>" href="<?= base_url()?>user_order/processing/<?= $row['user_order_id']?>"><i class="fa fa-check"> Delivered</i> </a>
+												
+										<?php } ?>
 									</td>
 									<td>
 										<a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">

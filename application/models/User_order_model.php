@@ -12,6 +12,7 @@ class User_order_model extends Base_model{
     {
         $this->db->select("*");
         $this->db->from($this->table_name);
+        $this->db->order_by("user_order_id", "DESC");
         $this->db->where($where);
         $this->db->where('deleted', 0);
 
