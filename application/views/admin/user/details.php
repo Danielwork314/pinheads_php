@@ -29,16 +29,12 @@
 			<!-- form start -->
 			<div class="box-body">
 				<table class="formTable">
-				<tr>
-					<td>
-						<a href="<?= base_url() ?>user/details/<?= $user['user_id']?>">
-							<img src="<?= base_url() . $user['image'] ?>" class="xs_thumbnail">
-                        </a>
-					</td>
-				</tr>
 					<tr>
+						<th>Profile Picture</th>
 						<td>:
-							<?= $user["username"] ?>
+							<a href="<?= base_url() ?>user/details/<?= $user['user_id']?>">
+								<img src="<?= base_url() . $user['image'] ?>" class="xs_thumbnail">
+                        	</a>
 						</td>
 					</tr>
 					<tr>
