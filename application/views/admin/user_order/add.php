@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>user_order">
-				<i class="fa fa-utensils"></i> User Order</a>
+				<i class="fas fa-clipboard-list"></i> User Order</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>user_order/add"> Add user order</a>

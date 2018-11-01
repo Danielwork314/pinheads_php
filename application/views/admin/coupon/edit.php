@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>Coupon">
-				<i class="fa fa-gift"></i> Coupon</a>
+				<i class="fas fa-money-bill-wave"></i> Coupon</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>Coupon/edit/<?= $coupon['coupon_id'] ?>"> Edit coupon</a>

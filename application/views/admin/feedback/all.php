@@ -3,7 +3,7 @@
 		Feedback
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="<?= base_url() ?>feedback"><i class="fa fa-gift"></i> Feedback</a></li>
+		<li><a href="<?= base_url() ?>feedback"><i class="fas fa-comments"></i> Feedback</a></li>
 	</ol>
 </section>
 <br>

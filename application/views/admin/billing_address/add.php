@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>billing_address">
-				<i class="fa fa-gift"></i> Billing Address</a>
+				<i class="far fa-address-book"></i> Billing Address</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>billing_address/add"> Add billing address</a>

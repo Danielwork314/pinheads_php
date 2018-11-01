@@ -32,7 +32,9 @@
 					<tr>
 						<th>Food Image</th>
 						<td>:
-							<?= $food["image"] ?>
+							<a href="<?= base_url() ?>food/details/<?= $food['food_id']?>">
+								<img src="<?= base_url() . $food['image'] ?>" class="xs_thumbnail">
+                        	</a>
 						</td>
 					</tr>
 					<tr>

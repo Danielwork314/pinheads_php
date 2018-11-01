@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>Billing Address">
-				<i class="fa fa-gift"></i> Billing Address</a>
+				<i class="far fa-address-book"></i> Billing Address</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>billing_address/edit/<?= $billing_address['billing_address_id'] ?>"> Edit billing address</a>

@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>feedback">
-				<i class="fa fa-gift"></i> Feedback</a>
+				<i class="fas fa-comments"></i> Feedback</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>feedback/add"> Add feedback</a>
