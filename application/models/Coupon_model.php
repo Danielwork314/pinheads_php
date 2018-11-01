@@ -10,7 +10,7 @@ class Coupon_model extends Base_model{
     
     public function get_all(){
 
-        $this->db->select('*');
+        $this->db->select('*, coupon.created_by AS created_by');
         $this->db->from('coupon');
         $this->db->join('store', 'store.store_id = coupon.store_id', 'left');
         $this->db->where('coupon.deleted', 0);
@@ -21,3 +21,4 @@ class Coupon_model extends Base_model{
     }
     
 }
+
