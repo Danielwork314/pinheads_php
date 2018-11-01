@@ -14,6 +14,7 @@ class User extends Base_Controller
         $this->load->model("Role_model");
         $this->load->model("User_model");
         $this->load->model("Payment_model");
+        $this->load->model("Billing_address_model");
     }
 
     function index()
@@ -88,6 +89,9 @@ class User extends Base_Controller
 
         $payment = $this->Payment_model->get_where($where);
         $this->page_data["payment"] = $payment;
+
+        $billing_address = $this->Billing_address_model->get_where($where);
+        $this->page_data["billing_address"] = $billing_address;
 
 
         $this->load->view("admin/header", $this->page_data);

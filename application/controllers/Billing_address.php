@@ -12,6 +12,7 @@ class Billing_address extends Base_Controller
         $this->page_data = array();
 
         $this->load->model("Billing_address_model");
+        $this->load->model("User_model");
        
     }
 
@@ -24,8 +25,9 @@ class Billing_address extends Base_Controller
         $this->load->view("admin/footer");
     }
 
-    function add()
+    function add($user_id)
     {
+        $this->page_data['user_id'] = $user_id;
 
         if ($_POST) {
             $input = $this->input->post();
@@ -39,11 +41,12 @@ class Billing_address extends Base_Controller
                 'postcode' => $input['postcode'],
                 'country' => $input['country'],
                 'created_by' => $this->session->userdata('login_id'),
+                'user_id' => $user_id,
             );
 
-            $this->Billing_address_model->insert($data);
+            $user_id = $this->Billing_address_model->insert($data);
 
-            redirect("billing_address", "refresh");
+            redirect("user/details/" . $user_id, "refresh");
         }
 
         $this->page_data['billing_address'] = $this->Billing_address_model->get_all();
@@ -95,9 +98,11 @@ class Billing_address extends Base_Controller
                 'modified_by' => $this->session->userdata('login_id')
             );
 
+            $user_id = $this->Billing_address_model->get_where($where)[0];
+
             $this->Billing_address_model->update_where($where, $data);
 
-            redirect("billing_address", "refresh");
+            redirect("user/details/" . $user_id['user_id'], "refresh");
         }
 
         $this->page_data['billing_address'] = $billing_address[0];
@@ -109,8 +114,15 @@ class Billing_address extends Base_Controller
 
     function delete($billing_address_id){
 
-        $this->Billing_address_model->soft_delete($billing_address_id);
-        redirect("billing_address", "refresh");
+        $where = array(
+            "billing_address_id" => $billing_address_id
+        );
+
+        $user_id = $this->Billing_address_model->get_where($where)[0];
+
+
+        $this->Menu_model->soft_delete($menu_id);
+        redirect("user/details/" . $user_id['user_id'], "refresh");
     }
 
 }

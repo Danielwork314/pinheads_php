@@ -145,14 +145,17 @@
 									<th>Created Date</th>
 									<th>Created By</th>
 									<th></th>
-								</tr>
-								<?php
-							$i = 1;
-							foreach($menu as $row){
-								?>
+							</tr>
+							</thead>
+							<?php
+								$i = 1;
+								foreach($menu as $row){
+							?>
 								<tr>
 									<td>
-										<?= $i ?>
+										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
+											<?= $i ?>
+										</a>
 									</td>
 									
 									<td>
