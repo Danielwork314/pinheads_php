@@ -28,7 +28,7 @@ class User_order extends Base_Controller
             $error = false;
 
             $data = array(
-                'take_away' => $input['takeaway'],
+                'take_away' => $input['take_away'],
                 'sub_total' => $input['sub_total'],
                 'service_change' => $input['service_change'],
                 'total' => $input['total'],
@@ -36,7 +36,7 @@ class User_order extends Base_Controller
                 'user_id' => $user_id,
             );
 
-            $user_order_id = $this->Payment_model->insert($data);
+            $user_order_id = $this->User_order_model->insert($data);
 
             redirect("user/details/" . $user_id, "refresh");
         }

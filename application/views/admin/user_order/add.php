@@ -35,15 +35,15 @@
 
                     <div class="form-group">
                         <label>Take Away</label>
-                        <input type="text" class="form-control" name="card_no" required placeholder="Take Away">
+                        <input type="text" class="form-control" name="take_away" required placeholder="Take Away">
                     </div>
                     <div class="form-group">
                         <label>Sub Total</label>
-                        <input type="text" class="form-control" name="bank" required placeholder="Sub Total">
+                        <input type="text" class="form-control" name="sub_total" required placeholder="Sub Total">
                     </div>
                     <div class="form-group">
                         <label>Service Change</label>
-                        <input type="text" class="form-control" name="card_type" required placeholder="Service Change">
+                        <input type="text" class="form-control" name="service_change" required placeholder="Service Change">
                     </div>
                     <div class="form-group">
                         <label>Total</label>
