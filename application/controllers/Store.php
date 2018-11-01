@@ -87,8 +87,9 @@ class Store extends Base_Controller
 
             $data = array(
                 'thumbnail' => $thumbnail,
-                'title' => $input['title'],
+                'store' => $input['store'],
                 'address' => $input['address'],
+                'social_media_link' => $input['social_media_link'],
                 'phone' => $input['phone'],
                 'latitude' => $input['latitude'],
                 'longitude' => $input['longitude'],
@@ -195,9 +196,10 @@ class Store extends Base_Controller
 
             $data = array(
                 'store_thumbnail' => $store_thumbnail,
-                'store_title' => $input['store_title'],
-                'store_address' => $input['store_address'],
-                'store_phone' => $input['store_phone'],
+                'store' => $input['store'],
+                'address' => $input['address'],
+                'social_media_link' => $input['social_media_link'],
+                'phone' => $input['phone'],
                 'latitude' => $input['latitude'],
                 'longitude' => $input['longitude'],
                 'business_hour' => $input['business_hour'],
