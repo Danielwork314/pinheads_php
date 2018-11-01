@@ -25,6 +25,10 @@
                             <th>No.</th>
                             <th>Username</th>
                             <th>Name</th>
+                            <th>Gender</th>
+                            <th>Birthday</th>
+                            <th>Contact</th>
+                            <th>Email</th>
                             <th>Role</th>
                             <th></th>
                         </tr>
@@ -38,6 +42,10 @@
                                         <td><a href="<?= base_url() ?>user/details/<?= $row['user_id']?>"><?= $i ?></a></td>
                                         <td><a href="<?= base_url() ?>user/details/<?= $row['user_id']?>"><?= $row['username'] ?></a></td>
                                         <td><a href="<?= base_url() ?>user/details/<?= $row['user_id']?>"><?= $row['name'] ?></a></td>
+                                        <td><a href="<?= base_url() ?>user/details/<?= $row['user_id']?>"><?= $row['gender'] ?></a></td>
+                                        <td><a href="<?= base_url() ?>user/details/<?= $row['user_id']?>"><?= $row['birthday'] ?></a></td>
+                                        <td><a href="<?= base_url() ?>user/details/<?= $row['user_id']?>"><?= $row['contact'] ?></a></td>
+                                        <td><a href="<?= base_url() ?>user/details/<?= $row['user_id']?>"><?= $row['email'] ?></a></td>
                                         <td><a href="<?= base_url() ?>user/details/<?= $row['user_id']?>"><?= $row['role'] ?></a></td>
                                         <td><a href="<?= base_url() ?>user/delete/<?= $row['user_id']?>" class="btn btn-danger delete-button">Delete</a></td>
                                     </tr>
@@ -51,6 +59,10 @@
                             <th>No.</th>
                             <th>Username</th>
                             <th>Name</th>
+                            <th>Gender</th>
+                            <th>Birthday</th>
+                            <th>Contact</th>
+                            <th>Email</th>
                             <th>Role</th>
                             <th></th>
                         </tr>

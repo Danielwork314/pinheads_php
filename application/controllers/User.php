@@ -15,6 +15,8 @@ class User extends Base_Controller
         $this->load->model("User_model");
         $this->load->model("Payment_model");
         $this->load->model("Billing_address_model");
+        $this->load->model("User_order_model");
+
     }
 
     function index()
@@ -54,10 +56,12 @@ class User extends Base_Controller
                     'username' => $input['username'],
                     'role_id' => $input['role_id'],
                     'name' => $input['name'],
+                    'gender' => $input['gender'],
+                    'birthday' => $input['birthday'],
                     'email' => $input['email'],
                     'contact' => $input['contact'],
                     'password' => $hash['password'],
-                    'salt' => $hash['salt']
+                    'salt' => $hash['salt'],
                 );
 
                 $this->User_model->insert($data);
@@ -92,6 +96,9 @@ class User extends Base_Controller
 
         $billing_address = $this->Billing_address_model->get_where($where);
         $this->page_data["billing_address"] = $billing_address;
+
+        $user_order = $this->User_order_model->get_where($where);
+        $this->page_data["user_order"] = $user_order;
 
 
         $this->load->view("admin/header", $this->page_data);
@@ -130,6 +137,8 @@ class User extends Base_Controller
                 $data = array(
                     'username' => $input['username'],
                     'name' => $input['name'],
+                    'gender' => $input['gender'],
+                    'birthday' => $input['birthday'],
                     'role_id' => $input['role_id'],
                     'email' => $input['email'],
                     'contact' => $input['contact']

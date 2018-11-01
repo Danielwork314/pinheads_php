@@ -43,6 +43,11 @@
 				?>
 				<?= $input_field['username'] ?>
 				<?= $input_field['name'] ?>
+				<?= $input_field['gender'] ?>
+				<div class="form-group">
+                    <label>Borthday</label>
+                    <input type="date" class="form-control" name="birthday" required placeholder="Birthday">
+                </div>
 				<?= $input_field['email'] ?>
 				<?= $input_field['contact'] ?>
 				<?= $input_field['password'] ?>

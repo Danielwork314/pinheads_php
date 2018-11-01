@@ -41,14 +41,28 @@
 							<?= $user["name"] ?>
 						</td>
 					</tr>
-						<th>Email</th>
+					<tr>
+						<th>Gender</th>
 						<td>:
-							<?= $user["email"] ?>
+							<?= $user["gender"] ?>
 						</td>
 					</tr>
+					<tr>
+						<th>Birthday</th>
+						<td>:
+							<?= $user["birthday"] ?>
+						</td>
+					</tr>
+					<tr>
 						<th>Contact Number</th>
 						<td>:
 							<?= $user["contact"] ?>
+						</td>
+					</tr>
+					<tr>
+						<th>Email</th>
+						<td>:
+							<?= $user["email"] ?>
 						</td>
 					</tr>
 					<tr>
@@ -199,6 +213,90 @@
 									</td>
 									<td>
                                 		<a href="<?= base_url() ?>billing_address/delete/<?= $row['billing_address_id']?>" class="btn btn-danger delete-button">Delete</a>
+                            		</td>
+								</tr>
+								<?php
+								$i++;
+							}
+							?>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="content">
+	<div class="col-md-12 col-xs-12">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+					<h3 class="box-title">
+						<?=$user['username']?>'s Order Food History Lists
+					</h3>
+					<a href="<?php echo site_url('order_food/add') . '/' . $user['user_id'] ?>" class='btn btn-default pull-right'>
+						<i class='fa fa-plus'></i> Add</a>
+			</div>
+				
+			<br>
+
+			<div class='box-body no-padding'>
+				<div id="refreshBox">
+					<table id="data-table" class="table table-bordered table-hover data-table">
+						<thead>
+						<tr>
+							<th>No.</th>
+							<th>User Order ID </th>
+							<th>Take Away</th>
+							<th>Sub Total</th>
+							<th>Service Change</th>
+							<th>Total</th>
+							<th>Created Date</th>
+							<th></th>
+						</tr>
+						</thead>
+						<?php
+							$i = 1;
+							foreach($user_order as $row){
+								?>
+								<tr>
+									<td>
+										<a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">
+											<?= $i ?>
+                                		</a>
+									</td>
+									
+									<td>
+										<a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">
+											<?= $row['user_order_id'] ?>
+										</a>
+									</td>
+									<td>
+										<a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">
+											<?=($row['take_away'] == 1) ? "YES" : "NO"?>
+										</a>
+									</td>
+									<td>
+										<a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">
+											<?= $row['sub_total'] ?>
+										</a>
+									</td>
+									<td>
+										<a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">
+											<?= $row['service_change'] ?>
+										</a>
+									</td>
+									<td>
+										<a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">
+											<?= $row['total'] ?>
+										</a>
+									</td>
+									<td>
+										<a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">
+											<?= $row['created_date'] ?>
+										</a>
+									</td>
+									<td>
+                                		<a href="<?= base_url() ?>user_order/delete/<?= $row['user_order_id']?>" class="btn btn-danger delete-button">Delete</a>
                             		</td>
 								</tr>
 								<?php
