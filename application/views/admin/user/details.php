@@ -29,6 +29,18 @@
 			<!-- form start -->
 			<div class="box-body">
 				<table class="formTable">
+				<tr>
+					<td>
+						<a href="<?= base_url() ?>user/details/<?= $user['user_id']?>">
+							<img src="<?= base_url() . $user['image'] ?>" class="xs_thumbnail">
+                        </a>
+					</td>
+				</tr>
+					<tr>
+						<td>:
+							<?= $user["username"] ?>
+						</td>
+					</tr>
 					<tr>
 						<th>Username</th>
 						<td>:

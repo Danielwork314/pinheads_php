@@ -50,9 +50,30 @@ class User extends Base_Controller
             }
 
             if (!$error) {
+
+                if (!empty($_FILES['file']['name'])) {
+                    $config = array(
+                        "allowed_types" => "gif|png|jpg|jpeg",
+                        "upload_path"   => "./images/food/",
+                        "path"          => "/images/food/"
+                    );
+    
+                    $this->load->library("upload", $config);
+    
+                    if ($this->upload->do_upload("file")) {
+                        $image = $config['path'] . $this->upload->data()['file_name'];
+                    } else {
+                        die(json_encode(array(
+                            "status" => false,
+                            "message" => $this->upload->display_errors()
+                        )));
+                    }
+                }
+
                 $hash = $this->hash($input['password']);
 
                 $data = array(
+                    'image' => $image,
                     'username' => $input['username'],
                     'role_id' => $input['role_id'],
                     'name' => $input['name'],
@@ -134,7 +155,27 @@ class User extends Base_Controller
                     'user_id' => $user_id
                 );
 
+                if (!empty($_FILES['file']['name'])) {
+                    $config = array(
+                        "allowed_types" => "gif|png|jpg|jpeg",
+                        "upload_path"   => "./images/user/",
+                        "path"          => "/images/user/"
+                    );
+    
+                    $this->load->library("upload", $config);
+    
+                    if ($this->upload->do_upload("file")) {
+                        $image = $config['path'] . $this->upload->data()['file_name'];
+                    } else {
+                        die(json_encode(array(
+                            "status" => false,
+                            "message" => $this->upload->display_errors()
+                        )));
+                    }
+                }
+
                 $data = array(
+                    'image' => $image,
                     'username' => $input['username'],
                     'name' => $input['name'],
                     'gender' => $input['gender'],
@@ -144,6 +185,8 @@ class User extends Base_Controller
                     'contact' => $input['contact']
                 );
 
+                $this->debug($data);
+
                 if (!empty($input['password'])) {
                     $hash = $this->hash($input['password']);
                     $data['password'] = $hash['password'];
@@ -152,7 +195,7 @@ class User extends Base_Controller
 
                 $this->User_model->update_where($where, $data);
 
-                redirect('user/details/' . $user_id, "refresh");
+                // redirect('user/details/' . $user_id, "refresh");
             }
         }
 

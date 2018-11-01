@@ -31,6 +31,11 @@
 					<?php 
 				}
 				?>
+
+				<div class="form-group">
+					<label>Profile Picture</label>
+					<input type="file" class="form-control" name="file" required>
+				</div>
 				<?= $input_field['username'] ?>
 				<?= $input_field['name'] ?>
 				<?= $input_field['gender'] ?>

@@ -23,6 +23,7 @@
                     <thead>
                         <tr>
                             <th>No.</th>
+                            <th>Profile Picture</th>
                             <th>Username</th>
                             <th>Name</th>
                             <th>Gender</th>
@@ -40,6 +41,7 @@
                                 ?>
                                     <tr>
                                         <td><a href="<?= base_url() ?>user/details/<?= $row['user_id']?>"><?= $i ?></a></td>
+                                        <td><a href="<?= base_url() ?>user/details/<?= $row['user_id']?>"><img src="<?= base_url() . $row['image'] ?>" class="xs_thumbnail"></a></td>
                                         <td><a href="<?= base_url() ?>user/details/<?= $row['user_id']?>"><?= $row['username'] ?></a></td>
                                         <td><a href="<?= base_url() ?>user/details/<?= $row['user_id']?>"><?= $row['name'] ?></a></td>
                                         <td><a href="<?= base_url() ?>user/details/<?= $row['user_id']?>"><?= $row['gender'] ?></a></td>
@@ -57,6 +59,7 @@
                     <tfoot>
                         <tr>
                             <th>No.</th>
+                            <th>Profile Picture</th>
                             <th>Username</th>
                             <th>Name</th>
                             <th>Gender</th>
