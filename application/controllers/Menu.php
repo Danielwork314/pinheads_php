@@ -37,7 +37,7 @@ class Menu extends Base_Controller
 
             $input = $this->input->post();
 
-            $this->debug($_FILES['file']['name']);
+            // $this->debug($_FILES['file']['name']);
 
             $error = false;
 

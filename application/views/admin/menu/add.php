@@ -47,7 +47,7 @@
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                    <button type="button" id="submit_menu" class="btn btn-primary pull-right">Submit</button>
+                    <button type="submit" id="submit_menu" class="btn btn-primary pull-right">Submit</button>
                 </div>
             </form>
         </div>
@@ -145,109 +145,38 @@
 
     $("#submit_menu").click(function(e){
 
-        var fd = new FormData();
-        var files = $('#file')[0].files[0];
-        fd.append('file', files);
+        // var fd = new FormData();
+        // var files = $('#file')[0].files[0];
+        // fd.append('file',files);
 
-        console.log(fd);
-
-
-
-        // var data = new FormData(form);
-
-        $.ajax({
-            url: '<?= base_url()?>menu/add/<?= $store_id ?>',
-            data: fd,
-            processData: false,
-            contentType: false,
-            type: "POST",
-            success: function (data) {
-
-            },
-            error: function(){
-                console.log('error');
-            },
-
-            dataType: "JSON"
-        });
-        });
-
-        $(document).ready(function () {
-        var menu_form = document.getElementById("menu_form");
-
-        menu_form.addEventListener("submit", function (e) {
-            e.preventDefault();
-            form_submit(menu_form);
-        });
-
-        });
-
-        // $.ajax({
-        //     url: '<?= base_url()?>menu/add/<?= $store_id ?>',
-        //     type: 'post',
-        //     data: fd,
-        //     contentType: false,
-        //     processData: false,
-        //     success: function(response){
-
-        //         console.log(response);
-                // if(response != 0){
-                //     $("#img").attr("src",response); 
-                //     $(".preview img").show(); // Display image element
-                // }else{
-                //     alert('file not uploaded');
-                // }
-           
-      
-
-
-        // alert('asd');
-
-        // e.preventDefault();
-
-        // var form = $('#menu_form').submit(function(e){
-        //     return ;
-        // });
-
-        // var formData = new FormData(form[0]);
-
-        // console.log(formData);
-
-        // var fileInput = document.getElementById('file');
-        // var file = fileInput.files[0];
-     
  
+        var file = $("#file").val();
+        var menu = $("#form_menu").val();
+        var description = $("#form_description").val();
+        var price = $("#form_price").val();
+        var discount = $("#form_discount").val();
 
-        // // console.log(file);
- 
-        // // var file = $("#file").val();
-        // var menu = $("#form_menu").val();
+        var menu_list = {
+            file : file,
+            menu : menu,
+            description : description,
+            price : price,
+            discount : discount,
+            ingredient_id: ingredient_array,
+            contentType : false,
+            processData : false,
+        };
 
-        // // console.log(menu);
-        
-        // var description = $("#form_description").val();
-        // var price = $("#form_price").val();
-        // var discount = $("#form_discount").val();
-
-        // var menu_list = {
-        //     file : file,
-        //     menu : menu,
-        //     description : description,
-        //     price : price,
-        //     discount : discount,
-        //     ingredient_id: ingredient_array
-        // };
-
-        // postParam = {
-        //     menu_list : menu_list,
-        // }
+        postParam = {
+            menu_list : menu_list,
+        }
 
         // console.log(postParam);
 
-        //  $.post("<?= base_url()?>menu/add/<?= $store_id ?>", fd, function(response){
+         $.post("<?= base_url()?>menu/add/<?= $store_id ?>", postParam, function(response){
           
-        //  });
-    // });
+         });
+    });
 			
 </script>
 
