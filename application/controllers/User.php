@@ -54,8 +54,8 @@ class User extends Base_Controller
                 if (!empty($_FILES['file']['name'])) {
                     $config = array(
                         "allowed_types" => "gif|png|jpg|jpeg",
-                        "upload_path"   => "./images/food/",
-                        "path"          => "/images/food/"
+                        "upload_path"   => "./images/user/",
+                        "path"          => "/images/user/"
                     );
     
                     $this->load->library("upload", $config);
@@ -182,10 +182,10 @@ class User extends Base_Controller
                     'birthday' => $input['birthday'],
                     'role_id' => $input['role_id'],
                     'email' => $input['email'],
-                    'contact' => $input['contact']
+                    'contact' => $input['contact'],
                 );
 
-                $this->debug($data);
+                // $this->debug($data);
 
                 if (!empty($input['password'])) {
                     $hash = $this->hash($input['password']);

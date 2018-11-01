@@ -133,6 +133,7 @@ class User_order extends Base_Controller
             "status" => 0,
         );
         
+        $user_id = $this->User_order_model->get_where($where)[0];
 
         $this->User_order_model->update_where($where, $data);
         
@@ -150,7 +151,9 @@ class User_order extends Base_Controller
             "status" => 1,
         );
 
-       $this->User_order_model->update_where($where, $data);
+        $user_id = $this->User_order_model->get_where($where)[0];
+
+        $this->User_order_model->update_where($where, $data);
        
 
         redirect("user/details/" . $user_id['user_id'], "refresh");

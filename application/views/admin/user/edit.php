@@ -30,7 +30,7 @@
 				<?php
 			}
 		?>
-		<form role="form" class="input_form" method="POST" action="<?= base_url()?>user/edit/<?= $user['user_id'] ?>">
+		<form role="form" class="input_form" method="POST" action="<?= base_url()?>user/edit/<?= $user['user_id'] ?>" enctype="multipart/form-data">
 			<div class="box-body">
 				<?php 
 				if (isset($error)) { 
