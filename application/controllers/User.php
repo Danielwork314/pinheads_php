@@ -195,7 +195,7 @@ class User extends Base_Controller
 
                 $this->User_model->update_where($where, $data);
 
-                // redirect('user/details/' . $user_id, "refresh");
+                redirect('user', "refresh");
             }
         }
 

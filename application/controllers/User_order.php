@@ -130,13 +130,12 @@ class User_order extends Base_Controller
         );
 
         $data = array(
-            "status" => 0,
+            "status" => 1,
         );
         
         $user_id = $this->User_order_model->get_where($where)[0];
 
         $this->User_order_model->update_where($where, $data);
-        
 
         redirect("user/details/" . $user_id['user_id'], "refresh");
     }
@@ -148,13 +147,12 @@ class User_order extends Base_Controller
         );
 
         $data = array(
-            "status" => 1,
+            "status" => 0,
         );
 
         $user_id = $this->User_order_model->get_where($where)[0];
 
         $this->User_order_model->update_where($where, $data);
-       
 
         redirect("user/details/" . $user_id['user_id'], "refresh");
     }
