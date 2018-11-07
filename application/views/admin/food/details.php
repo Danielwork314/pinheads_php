@@ -64,7 +64,7 @@
                     <tr>
 						<th>Store</th>
 						<td>:
-							<?= $food["store_id"] ?>
+							<?= $food["store"] ?>
 						</td>
                     </tr>
 				</table>

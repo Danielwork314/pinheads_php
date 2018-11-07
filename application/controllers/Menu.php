@@ -76,7 +76,7 @@ class Menu extends Base_Controller
 
         //    $ingredient_id =  $input['ingredient_id'];
 
-        // //    $this->debug($input);
+        //    $this->debug($input);
 
         //     foreach($ingredient_id AS $row){
 

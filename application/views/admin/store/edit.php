@@ -33,7 +33,7 @@
                 ?>
                 
                 <div class="form-group">
-                    <img class="img-thumbnail" src="<?= base_url() . $store['thumbnail'] ?>">
+                    <img class="img-thumbnail" src="<?= base_url() . $store['thumbnail'] ?>" style="width:50%; height:50%;">
 				</div>
 				<div class="form-group">
 					<label>Store Thumbnail</label>

@@ -35,6 +35,30 @@
 							<?= $pricing["pricing_title"] ?>
 						</td>
 					</tr>
+					<tr>
+						<th>Created Date</th>
+						<td>:
+							<?= $pricing["created_date"] ?>
+						</td>
+					</tr>
+					<tr>
+						<th>Created By</th>
+						<td>:
+							<?= $pricing["created_by"] ?>
+						</td>
+					</tr>
+					<tr>
+						<th>Modified Date</th>
+						<td>:
+							<?= $pricing["modified_date"] ?>
+						</td>
+					</tr>
+					<tr>
+						<th>Modified By</th>
+						<td>:
+							<?= $pricing["modified_by"] ?>
+						</td>
+					</tr>
 				</table>
 			</div>
 			<!-- /.box-body -->

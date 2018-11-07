@@ -35,6 +35,30 @@
 							<?= $ingredient["ingredient"] ?>
 						</td>
 					</tr>
+					<tr>
+						<th>Created Date</th>
+						<td>:
+							<?= $ingredient["created_date"] ?>
+						</td>
+					</tr>
+					<tr>
+						<th>Created By</th>
+						<td>:
+							<?= $ingredient["created_by"] ?>
+						</td>
+					</tr>
+					<tr>
+						<th>Modified Date</th>
+						<td>:
+							<?= $ingredient["modified_date"] ?>
+						</td>
+					</tr>
+					<tr>
+						<th>Modified By</th>
+						<td>:
+							<?= $ingredient["modified_by"] ?>
+						</td>
+					</tr>
 				</table>
 			</div>
 			<!-- /.box-body -->

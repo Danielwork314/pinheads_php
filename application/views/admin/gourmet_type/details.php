@@ -35,6 +35,30 @@
 							<?= $gourmet_type["gourmet_type_title"] ?>
 						</td>
 					</tr>
+					<tr>
+						<th>Created Date</th>
+						<td>:
+							<?= $gourmet_type["created_date"] ?>
+						</td>
+					</tr>
+					<tr>
+						<th>Created By</th>
+						<td>:
+							<?= $gourmet_type["created_by"] ?>
+						</td>
+					</tr>
+					<tr>
+						<th>Modified Date</th>
+						<td>:
+							<?= $gourmet_type["modified_date"] ?>
+						</td>
+					</tr>
+					<tr>
+						<th>Modified By</th>
+						<td>:
+							<?= $gourmet_type["modified_by"] ?>
+						</td>
+					</tr>
 				</table>
 			</div>
 			<!-- /.box-body -->

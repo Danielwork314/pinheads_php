@@ -32,7 +32,9 @@
 					<tr>
 						<th>Menu Image</th>
 						<td>:
-							<?= $menu["image"] ?>
+						<a href="<?= base_url() ?>menu/details/<?= $menu['menu_id']?>">
+								<img src="<?= base_url() . $menu['image'] ?>" class="xs_thumbnail">
+                        	</a>
 						</td>
 					</tr>
 					<tr>

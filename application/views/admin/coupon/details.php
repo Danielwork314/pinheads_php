@@ -62,7 +62,7 @@
                     <tr>
 						<th>Store</th>
 						<td>:
-							<?= $coupon["store_id"] ?>
+							<?= $coupon["store"] ?>
 						</td>
                     </tr>
 				</table>

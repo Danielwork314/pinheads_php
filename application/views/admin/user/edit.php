@@ -42,7 +42,7 @@
 				}
 				?>
 				<div class="form-group">
-                    <img class="img-thumbnail" src="<?= base_url() . $user['image'] ?>">
+                    <img class="img-thumbnail" src="<?= base_url() . $user['image'] ?>" style="width:50%; height:50%;">
 				</div>
 				<div class="form-group">
 					<label>Profile Picture</label>

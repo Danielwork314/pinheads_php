@@ -23,7 +23,7 @@
 					<thead>
 						<tr>
 							<th>No.</th>
-                            <th>Store ID</th>
+                            <th>Store Title</th>
                             <th>User ID</th>
 							<th>Coupon Title</th>
 							<th>Coupon Description</th>
