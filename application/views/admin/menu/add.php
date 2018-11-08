@@ -47,7 +47,7 @@
                 <!-- /.box-body -->
 
                 <div class="box-footer">
-                    <button type="submit" id="submit_menu" class="btn btn-primary pull-right">Submit</button>
+                    <button type="button" id="submit_menu" class="btn btn-primary pull-right">Submit</button>
                 </div>
             </form>
         </div>
@@ -148,7 +148,6 @@
         // var fd = new FormData();
         // var files = $('#file')[0].files[0];
         // fd.append('file',files);
-
  
         var file = $("#file").val();
         var menu = $("#form_menu").val();
@@ -174,7 +173,8 @@
         // console.log(postParam);
 
          $.post("<?= base_url()?>menu/add/<?= $store_id ?>", postParam, function(response){
-          
+            // redirect("store/details/" . $store_id['store_id'], "refresh");
+            window.location.replace("<?=base_url()?>store/details/<?= $store_id ?>" );
          });
     });
 			

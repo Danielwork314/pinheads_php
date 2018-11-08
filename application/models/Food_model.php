@@ -26,9 +26,7 @@ class Food_model extends Base_model{
         $this->db->from($this->table_name);
         $this->db->join('store', 'store.store_id = food.store_id', 'left');
         $this->db->where($where);
-
         $query = $this->db->get();
-
         return $query->result_array();
     }
 

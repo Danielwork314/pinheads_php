@@ -38,25 +38,25 @@
 						</td>
 					</tr>
 					<tr>
-						<th>Food Title</th>
+						<th>Menu Title</th>
 						<td>:
 							<?= $menu["menu"] ?>
 						</td>
 					</tr>
 					<tr>
-						<th>Food Description</th>
+						<th>Menu Description</th>
 						<td>:
 							<?= $menu["description"] ?>
 						</td>
                     </tr>
                     <tr>
-						<th>Food_Price</th>
+						<th>Menu Price</th>
 						<td>:
 							<?= $menu["price"] ?>
 						</td>
                     </tr>
                     <tr>
-						<th>Food Discount</th>
+						<th>Menu Discount</th>
 						<td>:
 							<?= $menu["discount"] ?>
 						</td>
@@ -66,52 +66,51 @@
 			<!-- /.box-body -->
 		</div>
     </div>
-    <div class="col-md-6 col-xs-12">
+
+	<div class="col-md-6 col-xs-12">
 		<div class="box box-primary">
 			<div class="box-header with-border">
-				<h3 class="box-title">
-					<?= $menu['menu'] ?>'s Info
-				</h3>
-				<a href="<?php echo site_url('menu/edit') . '/' . $menu['menu_id'] ?>" class='btn btn-default pull-right'>
-					<i class='fa fa-edit'></i> Edit</a>
+					<h3 class="box-title">
+						<?=$menu['menu']?>'s Ingredient Lists
+					</h3>
+					
 			</div>
-			<!-- /.box-header -->
-			<!-- form start -->
-			<div class="box-body">
-				<table class="formTable">
-					<tr>
-						<th>Menu Image</th>
-						<td>:
-							<?= $menu["image"] ?>
-						</td>
-					</tr>
-					<tr>
-						<th>Food Title</th>
-						<td>:
-							<?= $menu["menu"] ?>
-						</td>
-					</tr>
-					<tr>
-						<th>Food Description</th>
-						<td>:
-							<?= $menu["description"] ?>
-						</td>
-                    </tr>
-                    <tr>
-						<th>Food_Price</th>
-						<td>:
-							<?= $menu["price"] ?>
-						</td>
-                    </tr>
-                    <tr>
-						<th>Food Discount</th>
-						<td>:
-							<?= $menu["discount"] ?>
-						</td>
-                    </tr>
-				</table>
+				
+			<br>
+
+			<div class='box-body no-padding'>
+				<div id="refreshBox">
+					<table id="data-table" class="table table-bordered table-hover data-table">
+						<thead>
+						<tr>
+							<th>No.</th>
+							<th>Ingredient </th>
+						</tr>
+						</thead>
+						<?php
+							$i = 1;
+							foreach($food_ingredient as $row){
+								?>
+								<tr>
+									<td>
+										<a href="<?= base_url() ?>food_ingredient/details/<?= $row['food_ingredient_id']?>">
+											<?= $i ?>
+                                		</a>
+									</td>
+									
+									<td>
+										<a href="<?= base_url() ?>food_ingredient/details/<?= $row['food_ingredient_id']?>">
+											<?= $row['ingredient'] ?>
+										</a>
+									</td>
+								</tr>
+								<?php
+								$i++;
+							}
+							?>
+					</table>
+				</div>
 			</div>
-			<!-- /.box-body -->
 		</div>
 	</div>
 </section>

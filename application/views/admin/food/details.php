@@ -72,4 +72,51 @@
 			<!-- /.box-body -->
 		</div>
 	</div>
+
+	<div class="col-md-6 col-xs-12">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+					<h3 class="box-title">
+						<?=$food['food']?>'s Ingredient Lists
+					</h3>
+					
+			</div>
+				
+			<br>
+
+			<div class='box-body no-padding'>
+				<div id="refreshBox">
+					<table id="data-table" class="table table-bordered table-hover data-table">
+						<thead>
+						<tr>
+							<th>No.</th>
+							<th>Ingredient </th>
+						</tr>
+						</thead>
+						<?php
+							$i = 1;
+							foreach($food_ingredient as $row){
+								?>
+								<tr>
+									<td>
+										<a href="<?= base_url() ?>food_ingredient/details/<?= $row['food_ingredient_id']?>">
+											<?= $i ?>
+                                		</a>
+									</td>
+									
+									<td>
+										<a href="<?= base_url() ?>food_ingredient/details/<?= $row['food_ingredient_id']?>">
+											<?= $row['ingredient'] ?>
+										</a>
+									</td>
+								</tr>
+								<?php
+								$i++;
+							}
+							?>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>

@@ -36,6 +36,9 @@ class Menu extends Base_Controller
             // $this->debug($_POST);
 
             $input = $this->input->post();
+            $input = $input['menu_list'];
+            // $this->debug($input);
+
 
             // $this->debug($_FILES['file']['name']);
 
@@ -74,23 +77,20 @@ class Menu extends Base_Controller
 
             $menu_id = $this->Menu_model->insert($data); 
 
-        //    $ingredient_id =  $input['ingredient_id'];
+            // $ingredient_id =  $input['ingredient_id'];
 
-        //    $this->debug($input);
+            foreach($input['ingredient_id'] as $row){
+                
 
-        //     foreach($ingredient_id AS $row){
-
-        //         $data = array(
+                $data = array(
                  
-        //             'menu_id' => $menu_id,
-        //             'ingredient_id' => $row
+                    'menu_id' => $menu_id,
+                    'ingredient_id' => $row,
 
-        //         );
-        //         $this->Food_ingredient_model->insert($data);
-        //     }
+                );
 
-
-        
+                $this->Food_ingredient_model->insert($data);
+            }
 
             redirect("store/details/" . $store_id, "refresh");
 
@@ -117,9 +117,8 @@ class Menu extends Base_Controller
         $menu = $this->Menu_model->get_where($where);
         $this->page_data["menu"] = $menu[0];
 
-        // $store = $this->Store_model->get_where($where);
-        // $this->page_data["store"] = $store[0];
-
+        $food_ingredient = $this->Food_ingredient_model->get_where($where);
+        $this->page_data["food_ingredient"] = $food_ingredient;
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/menu/details");
@@ -203,8 +202,7 @@ class Menu extends Base_Controller
     }
 
     function add_ingredient(){
-
-   
+        
         if($_POST){
 
             $input = $this->input->post();
@@ -212,13 +210,13 @@ class Menu extends Base_Controller
             $error = false;
 
             $data = array(
-                'ingredient_id' => $input['ingredient_id'],
+                'ingredient_id' => $input['ingredient_detail']['ingredient_id'],
             );
-
+            
             $ingredient_id = $this->Ingredient_model->get_where($data)[0];
+            
 
-
-            // die(json_encode($ingredient_id));
+            die(json_encode($ingredient_id));
         
 
             // $this->Menu_model->insert($data);
