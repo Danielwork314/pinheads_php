@@ -36,23 +36,23 @@
                     <img class="img-thumbnail" src="<?= base_url() . $food['image'] ?>" style="width:50%; height:50%;">
 				</div>
 				<div class="form-group">
-					<label>Food Image</label>
+					<label>Image</label>
 					<input type="file" class="form-control" name="file" required>
 				</div>
 				<div class="form-group">
-					<label>Food Title</label>
+					<label>Title</label>
 					<input type="text" class="form-control" name="food" required value="<?= $food['food'] ?>">
 				</div>
                 <div class="form-group">
-					<label>Food Description</label>
+					<label>Description</label>
 					<input type="text" class="form-control" name="description" required value="<?= $food['description'] ?>">
 				</div>
 				<div class="form-group">
-					<label>Food Price</label>
+					<label>Price</label>
 					<input type="text" class="form-control" name="price" required value="<?= $food['price'] ?>">
 				</div>
 				<div class="form-group">
-					<label>Food Discount</label>
+					<label>Discount (%)</label>
 					<input type="text" class="form-control" name="discount" required value="<?= $food['discount'] ?>">
 				</div>
 				<div class="form-group">

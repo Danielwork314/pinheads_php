@@ -93,15 +93,11 @@
 								?>
 								<tr>
 									<td>
-										<a href="<?= base_url() ?>food_ingredient/details/<?= $row['food_ingredient_id']?>">
-											<?= $i ?>
-                                		</a>
+										<?= $i ?>
 									</td>
 									
 									<td>
-										<a href="<?= base_url() ?>food_ingredient/details/<?= $row['food_ingredient_id']?>">
-											<?= $row['ingredient'] ?>
-										</a>
+										<?= $row['ingredient'] ?>
 									</td>
 								</tr>
 								<?php

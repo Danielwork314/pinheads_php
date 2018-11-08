@@ -36,23 +36,23 @@
                     <img class="img-thumbnail" src="<?= base_url() . $menu['image'] ?>" style="width:50%; height:50%;">
 				</div>
 				<div class="form-group">
-					<label>Menu Image</label>
+					<label>Image</label>
 					<input type="file" class="form-control" name="file" required>
 				</div>
 				<div class="form-group">
-					<label>Menu Title</label>
+					<label>Title</label>
 					<input type="text" class="form-control" name="menu" required value="<?= $menu['menu'] ?>">
 				</div>
                 <div class="form-group">
-					<label>Menu Description</label>
+					<label>Description</label>
 					<input type="text" class="form-control" name="description" required value="<?= $menu['description'] ?>">
 				</div>
 				<div class="form-group">
-					<label>Menu Price</label>
+					<label>Price</label>
 					<input type="text" class="form-control" name="price" required value="<?= $menu['price'] ?>">
 				</div>
 				<div class="form-group">
-					<label>Menu Discount</label>
+					<label>Discount (%)</label>
 					<input type="text" class="form-control" name="discount" required value="<?= $menu['discount'] ?>">
 				</div>
 			</div>

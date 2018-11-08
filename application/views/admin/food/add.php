@@ -34,23 +34,23 @@
 					?>
 
 					<div class="form-group">
-						<label>Food Image</label>
+						<label>Image</label>
 						<input type="file" class="form-control" name="file" id="file" required>
 					</div>
 					<div class="form-group">
-						<label>Food</label>
+						<label>Title</label>
 						<input type="text" class="form-control" name="food" id="form_food" required placeholder="Food title">
 					</div>
 					<div class="form-group">
-						<label>Food Description</label>
+						<label>Description</label>
 						<input type="text" class="form-control" name="description" id="form_description" required placeholder="Food description">
 					</div>
 					<div class="form-group">
-						<label>Food Price</label>
+						<label>Price</label>
 						<input type="text" class="form-control" name="price" id="form_price" required placeholder="Food Price">
 					</div>
 					<div class="form-group">
-						<label>Food Discount</label>
+						<label>Discount (%)</label>
 						<input type="text" class="form-control" name="discount" id="form_discount" required placeholder="Food discount">
 					</div>
 					<div class="form-group">

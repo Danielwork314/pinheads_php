@@ -34,7 +34,7 @@
                     ?>
 
                     <div class="form-group">
-                        <label>Menu Image</label>
+                        <label>Image</label>
                         <input type="file" class="form-control" name="file" id="file" required>
                     </div>
                     

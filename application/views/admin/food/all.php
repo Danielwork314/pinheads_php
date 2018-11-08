@@ -23,12 +23,12 @@
 					<thead>
 						<tr>
 							<th>No.</th>
-                            <th>Store Title</th>
-                            <th>Food Image</th>
-							<th>Food Title</th>
-							<th>Food Description</th>
-							<th>Food Price</th>
-                            <th>Food Discount</th>
+                            <th>Store </th>
+                            <th>Image</th>
+							<th>Title</th>
+							<th>Description</th>
+							<th>Price</th>
+                            <th>Discount (%)</th>
                             <th>Created Date</th>
                             <th>Created By</th>
                             <th></th>

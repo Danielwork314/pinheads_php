@@ -1,3 +1,4 @@
+<div class="content-container" style="display: flow-root;">
 <section class="content-header">
 	<h1>
 		<?= $store['store'] ?>
@@ -137,11 +138,11 @@
 							<thead>
 							<tr>
 									<th>No.</th>
-									<th>Menu Image</th>
-									<th>Menu Title</th>
-									<th>Menu Description</th>
-									<th>Menu Price</th>
-									<th>Menu Discount</th>
+									<th>Image</th>
+									<th>Title</th>
+									<th>Description</th>
+									<th>Price</th>
+									<th>Discount (%)</th>
 									<th>Created Date</th>
 									<th>Created By</th>
 									<th></th>
@@ -208,6 +209,6 @@
 			</div>
 	</div>
 </section>
-
+</div>
 
 

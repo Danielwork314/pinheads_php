@@ -50,7 +50,7 @@
                     <tr>
 						<th>Valid Date</th>
                         <td>: 
-                            <?=($coupon['valid_date'] == 1) ? "YES" : "NO"?>
+                            <?= $coupon['valid_date'] ?>
                         </td>
                     </tr>
                     <tr>

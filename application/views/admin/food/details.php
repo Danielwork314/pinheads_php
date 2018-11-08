@@ -38,25 +38,25 @@
 						</td>
 					</tr>
 					<tr>
-						<th>Food Title</th>
+						<th>Title</th>
 						<td>:
 							<?= $food["food"] ?>
 						</td>
 					</tr>
 					<tr>
-						<th>Food Description</th>
+						<th>Description</th>
 						<td>:
 							<?= $food["description"] ?>
 						</td>
                     </tr>
                     <tr>
-						<th>Food_Price</th>
+						<th>Price</th>
 						<td>:
 							<?= $food["price"] ?>
 						</td>
                     </tr>
                     <tr>
-						<th>Food Discount</th>
+						<th>Discount (%)</th>
 						<td>:
 							<?= $food["discount"] ?>
 						</td>
@@ -99,15 +99,11 @@
 								?>
 								<tr>
 									<td>
-										<a href="<?= base_url() ?>food_ingredient/details/<?= $row['food_ingredient_id']?>">
 											<?= $i ?>
-                                		</a>
 									</td>
 									
 									<td>
-										<a href="<?= base_url() ?>food_ingredient/details/<?= $row['food_ingredient_id']?>">
 											<?= $row['ingredient'] ?>
-										</a>
 									</td>
 								</tr>
 								<?php
