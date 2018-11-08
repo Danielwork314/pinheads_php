@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 01, 2018 at 10:21 AM
+-- Generation Time: Nov 08, 2018 at 10:37 AM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.8
 
@@ -165,7 +165,10 @@ INSERT INTO `food` (`food_id`, `food`, `description`, `image`, `price`, `discoun
 (8, 'xxpq', 'xxpq', '/images/store/12182952_931303283611539_2519289305849580604_o.jpg', '44.00', '2', '2018-10-31 02:13:12', 0, '0000-00-00 00:00:00', 0, 0, 2),
 (9, 'yyu', 'uyy', '/images/store/_-24_(1).jpg', '121.00', '2', '2018-10-31 02:15:28', 3, '0000-00-00 00:00:00', 0, 1, 2),
 (10, 'eee', 'eee', '/images/store/_-25.jpg', '999.99', '12', '2018-10-31 02:16:17', 0, '0000-00-00 00:00:00', 0, 1, 2),
-(11, 'xxx', 'xxx', '/images/store/_-46.jpg', '32.00', '3', '2018-10-31 02:17:16', 3, '0000-00-00 00:00:00', 0, 0, 2);
+(11, 'xxx', 'xxx', '/images/store/_-46.jpg', '32.00', '3', '2018-10-31 02:17:16', 3, '0000-00-00 00:00:00', 0, 0, 2),
+(12, 'e', 'e', '', '999.99', '11111', '2018-11-08 04:04:23', 3, '0000-00-00 00:00:00', 0, 0, 2),
+(13, '22', '22', '', '22.00', '22', '2018-11-08 04:05:37', 3, '0000-00-00 00:00:00', 0, 0, 2),
+(14, '22', '22', '', '22.00', '22', '2018-11-08 04:06:31', 3, '0000-00-00 00:00:00', 0, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -179,6 +182,39 @@ CREATE TABLE `food_ingredient` (
   `menu_id` int(11) NOT NULL,
   `ingredient_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `food_ingredient`
+--
+
+INSERT INTO `food_ingredient` (`food_ingredient_id`, `food_id`, `menu_id`, `ingredient_id`) VALUES
+(1, 0, 95, 1),
+(2, 0, 95, 1),
+(3, 0, 96, 1),
+(4, 0, 97, 1),
+(5, 0, 98, 1),
+(6, 0, 99, 3),
+(7, 0, 99, 4),
+(8, 0, 100, 3),
+(9, 0, 100, 4),
+(10, 0, 101, 1),
+(11, 0, 102, 1),
+(12, 0, 103, 1),
+(13, 0, 104, 1),
+(14, 0, 105, 1),
+(15, 0, 106, 1),
+(16, 0, 107, 1),
+(17, 0, 108, 1),
+(18, 0, 109, 1),
+(19, 0, 110, 1),
+(20, 0, 111, 1),
+(21, 0, 113, 1),
+(22, 0, 114, 1),
+(23, 0, 115, 1),
+(24, 0, 116, 1),
+(25, 0, 117, 1),
+(26, 0, 118, 1),
+(27, 14, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -308,7 +344,76 @@ INSERT INTO `menu` (`menu_id`, `store_id`, `image`, `menu`, `description`, `pric
 (46, 2, '/images/food/_-346.jpg', '1', '1', '1.00', '1', '2018-10-31 07:45:58', 3, '0000-00-00 00:00:00', 0, 0),
 (47, 2, '/images/food/_-2319.jpg', 'www', 'www', '999.99', '33', '2018-11-01 02:04:36', 3, '0000-00-00 00:00:00', 0, 0),
 (48, 2, '/images/food/2000px-Flag_map_of_Singapore_svg.png', 'sg', 'sg', '999.99', '2', '2018-11-01 02:05:24', 3, '0000-00-00 00:00:00', 0, 0),
-(49, 2, '/images/food/1266328_632236806821825_1303126686_o.jpg', 'cckuu', 'uuu', '545.00', '44', '2018-11-01 05:50:00', 3, '0000-00-00 00:00:00', 0, 0);
+(49, 2, '/images/food/1266328_632236806821825_1303126686_o.jpg', 'cckuu', 'uuu', '545.00', '44', '2018-11-01 05:50:00', 3, '0000-00-00 00:00:00', 0, 0),
+(50, 2, '/images/food/car_accessories_abundant_connectivity.jpg', 'aa', 'aa', '11.00', '11', '2018-11-07 15:08:34', 3, '0000-00-00 00:00:00', 0, 0),
+(51, 2, '/images/food/car_accessories_abundant_connectivity1.jpg', 'aa', 'aa', '11.00', '11', '2018-11-07 15:09:19', 3, '0000-00-00 00:00:00', 0, 0),
+(52, 2, '/images/food/car_accessories_abundant_connectivity2.jpg', 'aa', 'aa', '11.00', '11', '2018-11-07 15:09:23', 3, '0000-00-00 00:00:00', 0, 0),
+(53, 2, '/images/food/car_accessories_abundant_connectivity4.jpg', 'aa', 'aa', '11.00', '11', '2018-11-07 15:12:10', 3, '0000-00-00 00:00:00', 0, 0),
+(54, 2, '/images/food/car_accessories_completepeaceofmind.jpg', 'qq', 'qq', '11.00', '11', '2018-11-07 15:12:38', 3, '0000-00-00 00:00:00', 0, 0),
+(55, 2, '/images/food/car_accessories_completepeaceofmind1.jpg', 'ss', 'ss', '22.00', '22', '2018-11-07 15:13:23', 3, '0000-00-00 00:00:00', 0, 0),
+(56, 2, '/images/food/car_accessories_completepeaceofmind2.jpg', 'aa', 'aa', '22.00', '222', '2018-11-07 22:56:01', 3, '0000-00-00 00:00:00', 0, 0),
+(57, 2, '/images/food/car_accessories_completepeaceofmind3.jpg', 'aa', 'aa', '22.00', '222', '2018-11-07 23:00:41', 3, '0000-00-00 00:00:00', 0, 0),
+(58, 2, '/images/food/car_accessories_completepeaceofmind4.jpg', 'aa', 'aa', '22.00', '222', '2018-11-07 23:00:50', 3, '0000-00-00 00:00:00', 0, 0),
+(59, 2, '/images/food/car_accessories_completepeaceofmind5.jpg', 'aa', 'aa', '22.00', '222', '2018-11-07 23:01:04', 3, '0000-00-00 00:00:00', 0, 0),
+(60, 2, '/images/food/car_accessories_completepeaceofmind6.jpg', 'aa', 'aa', '22.00', '222', '2018-11-07 23:01:17', 3, '0000-00-00 00:00:00', 0, 0),
+(61, 2, '/images/food/car_accessories_completepeaceofmind7.jpg', 'aa', 'aa', '22.00', '222', '2018-11-07 23:03:43', 3, '0000-00-00 00:00:00', 0, 0),
+(62, 2, '/images/food/car_accessories_completepeaceofmind8.jpg', 'aa', 'aa', '22.00', '222', '2018-11-07 23:04:32', 3, '0000-00-00 00:00:00', 0, 0),
+(63, 2, '/images/food/car_accessories_completepeaceofmind9.jpg', 'aa', 'aa', '22.00', '222', '2018-11-07 23:05:02', 3, '0000-00-00 00:00:00', 0, 0),
+(64, 2, '/images/food/car_accessories_completepeaceofmind10.jpg', 'aa', 'aa', '22.00', '222', '2018-11-07 23:06:51', 3, '0000-00-00 00:00:00', 0, 0),
+(65, 2, '/images/food/car_accessories_completepeaceofmind11.jpg', 'aa', 'aa', '22.00', '222', '2018-11-07 23:07:08', 3, '0000-00-00 00:00:00', 0, 0),
+(66, 2, '/images/food/car_accessories_completepeaceofmind12.jpg', 'aa', 'aa', '22.00', '222', '2018-11-07 23:08:14', 3, '0000-00-00 00:00:00', 0, 0),
+(67, 2, '/images/food/car_accessories_completepeaceofmind13.jpg', 'aa', 'aa', '11.00', '11', '2018-11-07 23:08:34', 3, '0000-00-00 00:00:00', 0, 0),
+(68, 2, '/images/food/car_accessories_completepeaceofmind14.jpg', 'aa', 'aa', '11.00', '11', '2018-11-07 23:14:01', 3, '0000-00-00 00:00:00', 0, 0),
+(69, 2, '/images/food/car_accessories_completepeaceofmind16.jpg', 'ss', 'ss', '4.00', '4', '2018-11-07 23:23:31', 3, '0000-00-00 00:00:00', 0, 0),
+(70, 2, '/images/food/car_accessories_cmos_sensor1.jpg', 'rr', 'rr', '4.00', '4', '2018-11-08 00:02:11', 3, '0000-00-00 00:00:00', 0, 0),
+(71, 2, '/images/food/car_accessories_ratedip67.jpg', 'q', 'q', '2.00', '2', '2018-11-08 00:05:36', 3, '0000-00-00 00:00:00', 0, 0),
+(72, 2, '/images/food/car_accessories_cmos_sensor2.jpg', 'w', 'w', '1.00', '1', '2018-11-08 00:36:36', 3, '0000-00-00 00:00:00', 0, 0),
+(73, 2, '/images/food/car_accessories_cmos_sensor3.jpg', 'w', 'w', '1.00', '1', '2018-11-08 00:37:06', 3, '0000-00-00 00:00:00', 0, 0),
+(74, 2, '/images/food/car_accessories_cmos_sensor4.jpg', 'w', 'w', '1.00', '1', '2018-11-08 00:37:11', 3, '0000-00-00 00:00:00', 0, 0),
+(75, 2, '/images/food/car_accessories_cmos_sensor5.jpg', 'w', 'w', '1.00', '1', '2018-11-08 00:42:37', 3, '0000-00-00 00:00:00', 0, 0),
+(76, 2, '/images/food/car_accessories_cmos_sensor6.jpg', 'w', 'w', '1.00', '1', '2018-11-08 00:42:46', 3, '0000-00-00 00:00:00', 0, 0),
+(77, 2, '/images/food/car_accessories_cmos_sensor7.jpg', 'w', 'w', '1.00', '1', '2018-11-08 00:45:50', 3, '0000-00-00 00:00:00', 0, 0),
+(78, 2, '/images/food/car_accessories_cmos_sensor8.jpg', 'w', 'w', '1.00', '1', '2018-11-08 00:45:54', 3, '0000-00-00 00:00:00', 0, 0),
+(79, 2, '/images/food/car_accessories_cmos_sensor9.jpg', 'w', 'w', '1.00', '1', '2018-11-08 00:46:05', 3, '0000-00-00 00:00:00', 0, 0),
+(80, 2, '/images/food/car_accessories_cmos_sensor10.jpg', 'w', 'w', '1.00', '1', '2018-11-08 00:56:24', 3, '0000-00-00 00:00:00', 0, 0),
+(81, 2, '/images/food/car_accessories_cmos_sensor11.jpg', 'w', 'w', '1.00', '1', '2018-11-08 00:58:39', 3, '0000-00-00 00:00:00', 0, 0),
+(82, 2, '/images/food/car_accessories_cmos_sensor12.jpg', 'w', 'w', '1.00', '1', '2018-11-08 00:58:54', 3, '0000-00-00 00:00:00', 0, 0),
+(83, 2, '/images/food/car_accessories_cmos_sensor13.jpg', 'w', 'w', '1.00', '1', '2018-11-08 01:04:38', 3, '0000-00-00 00:00:00', 0, 0),
+(84, 2, '/images/food/car_accessories_cmos_sensor14.jpg', 'w', 'w', '1.00', '1', '2018-11-08 01:07:17', 3, '0000-00-00 00:00:00', 0, 0),
+(85, 2, '/images/food/car_accessories_cmos_sensor15.jpg', 'w', 'w', '1.00', '1', '2018-11-08 01:28:00', 3, '0000-00-00 00:00:00', 0, 0),
+(86, 2, '/images/food/car_accessories_cmos_sensor16.jpg', 'w', 'w', '1.00', '1', '2018-11-08 01:28:04', 3, '0000-00-00 00:00:00', 0, 0),
+(87, 2, '/images/food/car_accessories_abundant_connectivity5.jpg', 'q', 'q', '2.00', '2', '2018-11-08 02:31:42', 3, '0000-00-00 00:00:00', 0, 0),
+(88, 2, '/images/food/car_accessories_abundant_connectivity6.jpg', 'q', 'q', '2.00', '2', '2018-11-08 02:32:20', 3, '0000-00-00 00:00:00', 0, 0),
+(89, 2, '/images/food/car_accessories_abundant_connectivity7.jpg', 'q', 'q', '2.00', '2', '2018-11-08 02:34:01', 3, '0000-00-00 00:00:00', 0, 0),
+(90, 2, '/images/food/car_accessories_abundant_connectivity8.jpg', 'q', 'q', '2.00', '2', '2018-11-08 02:35:03', 3, '0000-00-00 00:00:00', 0, 0),
+(91, 2, '/images/food/car_accessories_abundant_connectivity9.jpg', '1', '1', '1.00', '1', '2018-11-08 02:39:43', 3, '0000-00-00 00:00:00', 0, 0),
+(92, 2, '/images/food/car_accessories_abundant_connectivity10.jpg', '1', '1', '1.00', '1', '2018-11-08 02:40:32', 3, '0000-00-00 00:00:00', 0, 0),
+(93, 2, '/images/food/car_accessories_abundant_connectivity11.jpg', '1', '1', '1.00', '1', '2018-11-08 02:40:35', 3, '0000-00-00 00:00:00', 0, 0),
+(94, 2, '/images/food/car_accessories_cmos_sensor17.jpg', '1', '1', '1.00', '1', '2018-11-08 02:40:49', 3, '0000-00-00 00:00:00', 0, 0),
+(95, 2, '', '1', '1', '1.00', '1', '2018-11-08 02:48:11', 3, '0000-00-00 00:00:00', 0, 0),
+(96, 2, '', 'q', 'q', '222.00', '222', '2018-11-08 02:49:17', 3, '0000-00-00 00:00:00', 0, 0),
+(97, 2, '', 'q', 'q', '222.00', '222', '2018-11-08 02:50:03', 3, '0000-00-00 00:00:00', 0, 0),
+(98, 2, '', 'w', 'w', '44.00', '44', '2018-11-08 02:50:17', 3, '0000-00-00 00:00:00', 0, 0),
+(99, 2, '', 'uuu', 'uuuq', '122.00', '221', '2018-11-08 02:52:23', 3, '0000-00-00 00:00:00', 0, 0),
+(100, 2, '', 'uuu', 'uuuq', '122.00', '221', '2018-11-08 02:54:32', 3, '0000-00-00 00:00:00', 0, 0),
+(101, 2, '', 'w', 'w', '22.00', '22', '2018-11-08 02:55:49', 3, '0000-00-00 00:00:00', 0, 0),
+(102, 2, '', 'w', 'w', '22.00', '22', '2018-11-08 02:56:55', 3, '0000-00-00 00:00:00', 0, 0),
+(103, 2, '', 'w', 'w', '22.00', '22', '2018-11-08 02:56:56', 3, '0000-00-00 00:00:00', 0, 0),
+(104, 2, '', 'w', 'w', '22.00', '22', '2018-11-08 02:56:56', 3, '0000-00-00 00:00:00', 0, 0),
+(105, 2, '', '2', '2', '2.00', '2', '2018-11-08 02:57:07', 3, '0000-00-00 00:00:00', 0, 0),
+(106, 2, '', '2', '2', '2.00', '2', '2018-11-08 03:02:33', 3, '0000-00-00 00:00:00', 0, 0),
+(107, 2, '', 'w', 'w', '22.00', '22', '2018-11-08 03:03:05', 3, '0000-00-00 00:00:00', 0, 0),
+(108, 2, '', '4', '4', '4.00', '4', '2018-11-08 03:08:56', 3, '0000-00-00 00:00:00', 0, 0),
+(109, 2, '', '2', '2', '2.00', '2', '2018-11-08 03:09:18', 3, '0000-00-00 00:00:00', 0, 0),
+(110, 2, '', 'ee', 'e', '33.00', '33', '2018-11-08 03:15:39', 3, '0000-00-00 00:00:00', 0, 0),
+(111, 2, '', 'r', 'r', '4.00', '4', '2018-11-08 03:16:24', 3, '0000-00-00 00:00:00', 0, 0),
+(112, 2, '', 'r', 'r', '3.00', '3', '2018-11-08 03:29:55', 3, '0000-00-00 00:00:00', 0, 0),
+(113, 2, '', '3', '3', '3.00', '3', '2018-11-08 03:30:14', 3, '0000-00-00 00:00:00', 0, 0),
+(114, 2, '', '2', '2', '2.00', '2', '2018-11-08 03:39:32', 3, '0000-00-00 00:00:00', 0, 0),
+(115, 2, '', 'r', 'r', '3.00', '3', '2018-11-08 03:40:07', 3, '0000-00-00 00:00:00', 0, 0),
+(116, 2, '', '3', '3', '3.00', '3', '2018-11-08 03:43:54', 3, '0000-00-00 00:00:00', 0, 0),
+(117, 2, '', '2', '2', '2.00', '2', '2018-11-08 03:44:32', 3, '0000-00-00 00:00:00', 0, 0),
+(118, 2, '', '2', '2', '3.00', '3', '2018-11-08 03:45:16', 3, '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -430,7 +535,8 @@ CREATE TABLE `payment` (
 
 INSERT INTO `payment` (`payment_id`, `user_id`, `card_no`, `bank`, `card_type`, `cvv`, `month`, `year`, `firstname`, `lastname`, `address`, `region`, `phone`, `email`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
 (1, 1, 43336548, 'qwe', 'qwe', 111, 111, 111, 'qwe', 'qwe', 'qwe', 'qwe', '9988888765', 'qwe', '2018-10-31 14:35:09', 3, '0000-00-00 00:00:00', 0, 0),
-(2, 1, 231313, 'qeq', 'qeq', 131, 11, 22, 'ww', 'ww', 'ww', 'ww', '21212', 'qwqw@qwq', '2018-10-31 15:16:32', 3, '0000-00-00 00:00:00', 0, 0);
+(2, 1, 231313, 'qeq', 'qeq', 131, 11, 22, 'ww', 'ww', 'ww', 'ww', '21212', 'qwqw@qwq', '2018-10-31 15:16:32', 3, '0000-00-00 00:00:00', 0, 0),
+(3, 3, 111, 'qqq', 'qqq', 1111, 111, 111, 'qqq', 'qqq', 'qqq', 'qqq', '111', 'qq@qq', '2018-11-07 14:51:35', 3, '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -851,13 +957,13 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `food`
 --
 ALTER TABLE `food`
-  MODIFY `food_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `food_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `food_ingredient`
 --
 ALTER TABLE `food_ingredient`
-  MODIFY `food_ingredient_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `food_ingredient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `gourmet_type`
@@ -875,7 +981,7 @@ ALTER TABLE `ingredient`
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT for table `module`
@@ -899,7 +1005,7 @@ ALTER TABLE `order_food`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pricing`
