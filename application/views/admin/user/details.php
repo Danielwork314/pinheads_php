@@ -221,7 +221,7 @@
 										</a>
 									</td>
 									<td>
-                                		<a href="<?= base_url() ?>billing_address/delete/<?= $row['billing_address_id']?>" class="btn btn-danger delete-button">Delete</a>
+                                		<button type="button" class="btn btn-danger remove_billing_address" data-id="<?= $row['billing_address_id']?>">Delete</button>
                             		</td>
 								</tr>
 								<?php
@@ -332,5 +332,30 @@
 </section>
 </div>
 
+<script>
 
+	$('.remove_billing_address').click(function(){
 
+		var billing_address_id = $(this).attr('data-id');
+		var user_id = <?= $user['user_id'] ?>;
+
+		postParam = {
+			billing_address_id: billing_address_id,
+		};
+
+		$.ajax({
+            url:'<?=base_url()?>Billing_address/delete',
+            type: "POST",
+            data: postParam,
+            success:function(data)
+            {
+                console.log(data);
+				// window.location = "<?= base_url() ?>user/details/" + user_id;
+				location.reload();
+            }, 
+            error: function () {
+                console.log("error");
+            }
+        });
+	});
+</script>

@@ -56,10 +56,12 @@ class Billing_address extends Base_Controller
         $this->load->view("admin/footer");
     }
 
-    function delete($billing_address_id){
+    function delete(){
 
-        $this->Billing_address_model->soft_delete($billing_address_id);
-        redirect("user", "refresh");
+        if($_POST){
+
+            $this->Billing_address_model->soft_delete($_POST['billing_address_id']);
+        }
     }
 
 }
