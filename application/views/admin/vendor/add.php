@@ -1,14 +1,14 @@
 <section class="content-header">
 	<h1>
-		Add User
+		Add Vendor
 	</h1>
 	<ol class="breadcrumb">
 		<li>
-			<a href="<?= base_url() ?>User">
-				<i class="fa fa-users"></i> User</a>
+			<a href="<?= base_url() ?>Vendor">
+				<i class="fa fa-user"></i> Vendor</a>
 		</li>
 		<li>
-			<a href="<?= base_url() ?>User/add"> Add User</a>
+			<a href="<?= base_url() ?>vendor/add"> Add Vendor</a>
 		</li>
 	</ol>
 </section>
@@ -16,11 +16,11 @@
 <section class="content">
 	<div class="box box-primary">
 		<div class="box-header with-border">
-			<h3 class="box-title">User</h3>
+			<h3 class="box-title">Vendor</h3>
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
-		<form role="form" class="input_form" method="POST" action="<?= base_url()?>user/add" enctype="multipart/form-data">
+		<form role="form" class="input_form" method="POST" action="<?= base_url()?>vendor/add" enctype="multipart/form-data">
 			<div class="box-body">
 				<?php 
 				if (isset($error)) { 
@@ -38,11 +38,6 @@
 				</div>
 				<?= $input_field['username'] ?>
 				<?= $input_field['name'] ?>
-				<?= $input_field['gender'] ?>
-				<div class="form-group">
-                    <label>Borthday</label>
-                    <input type="date" class="form-control" name="birthday" required placeholder="Birthday">
-                </div>
 				<?= $input_field['email'] ?>
 				<?= $input_field['contact'] ?>
 				<?= $input_field['password'] ?>

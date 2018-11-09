@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>User">
-				<i class="fa fa-user"></i> User</a>
+				<i class="fa fa-users"></i> User</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>User/edit/<?= $user['user_id'] ?>"> Edit User</a>

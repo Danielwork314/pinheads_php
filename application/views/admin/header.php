@@ -123,12 +123,32 @@
 						</li>
 						<?php
 					}
+					if($this->session->userdata('role_access')['vendor']['read_control'] == 1){
+						?>
+						<li class=" <?php if ($this->router->fetch_class() == 'vendor') echo 'active'; ?> ">
+							<a href="<?=base_url();?>vendor">
+								<i class="fa fa-user"></i>
+								<span>Vendor</span>
+							</a>
+						</li>
+						<?php
+					}
 					if($this->session->userdata('role_access')['user']['read_control'] == 1){
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'user') echo 'active'; ?> ">
 							<a href="<?=base_url();?>user">
-								<i class="fa fa-user"></i>
+								<i class="fa fa-users"></i>
 								<span>User</span>
+							</a>
+						</li>
+						<?php
+					}
+					if($this->session->userdata('role_access')['order']['read_control'] == 1){
+						?>
+						<li class=" <?php if ($this->router->fetch_class() == 'order') echo 'active'; ?> ">
+							<a href="<?=base_url();?>order">
+								<i class="fa fa-tasks"></i>
+								<span>Order</span>
 							</a>
 						</li>
 						<?php

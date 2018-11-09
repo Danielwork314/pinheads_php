@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class User extends Base_Controller
+class Vendor extends Base_Controller
 {
 
     function __construct()
@@ -12,19 +12,16 @@ class User extends Base_Controller
         $this->page_data = array();
 
         $this->load->model("Role_model");
-        $this->load->model("User_model");
-        $this->load->model("Payment_model");
-        $this->load->model("Billing_address_model");
-        $this->load->model("User_order_model");
+        $this->load->model("Vendor_model");
 
     }
 
     function index()
     {
-        $this->page_data["user"] = $this->User_model->get_all_with_role();
+        $this->page_data["vendor"] = $this->Vendor_model->get_all_with_role();
 
         $this->load->view("admin/header", $this->page_data);
-        $this->load->view("admin/user/all");
+        $this->load->view("admin/vendor/all");
         $this->load->view("admin/footer");
     }
 
@@ -54,8 +51,8 @@ class User extends Base_Controller
                 if (!empty($_FILES['file']['name'])) {
                     $config = array(
                         "allowed_types" => "gif|png|jpg|jpeg",
-                        "upload_path"   => "./images/user/",
-                        "path"          => "/images/user/"
+                        "upload_path"   => "./images/vendor/",
+                        "path"          => "/images/vendor/"
                     );
     
                     $this->load->library("upload", $config);
@@ -77,57 +74,45 @@ class User extends Base_Controller
                     'username' => $input['username'],
                     'role_id' => $input['role_id'],
                     'name' => $input['name'],
-                    'gender' => $input['gender'],
-                    'birthday' => $input['birthday'],
                     'email' => $input['email'],
                     'contact' => $input['contact'],
                     'password' => $hash['password'],
                     'salt' => $hash['salt'],
                 );
 
-                $this->User_model->insert($data);
+                $this->Vendor_model->insert($data);
 
-                redirect("user", "refresh");
+                redirect("vendor", "refresh");
             }
         }
 
-        // $this->page_data["role"] = $this->Role_model->get_type("USER");
-        $this->page_data['input_field'] = $this->User_model->generate_input();
+        $this->page_data["role"] = $this->Role_model->get_type("CLIENT");
+        $this->page_data['input_field'] = $this->Vendor_model->generate_input();
 
         $this->load->view("admin/header", $this->page_data);
-        $this->load->view("admin/user/add");
+        $this->load->view("admin/vendor/add");
         $this->load->view("admin/footer");
     }
 
-    function details($user_id)
+    function details($vendor_id)
     {
 
         $where = array(
-            "user_id" => $user_id
+            "vendor_id" => $vendor_id
         );
 
-        $user = $this->User_model->get_where_with_role($where);
+        $vendor = $this->Vendor_model->get_where_with_role($where);
 
-        $this->show_404_if_empty($user);
+        $this->show_404_if_empty($vendor);
 
-        $this->page_data["user"] = $user[0];
-
-        $payment = $this->Payment_model->get_where($where);
-        $this->page_data["payment"] = $payment;
-
-        $billing_address = $this->Billing_address_model->get_where($where);
-        $this->page_data["billing_address"] = $billing_address;
-
-        $user_order = $this->User_order_model->get_where($where);
-        $this->page_data["user_order"] = $user_order;
-
+        $this->page_data["vendor"] = $vendor[0];
 
         $this->load->view("admin/header", $this->page_data);
-        $this->load->view("admin/user/details");
+        $this->load->view("admin/vendor/details");
         $this->load->view("admin/footer");
     }
 
-    function edit($user_id)
+    function edit($vendor_id)
     {
 
         if ($_POST) {
@@ -135,7 +120,7 @@ class User extends Base_Controller
 
             $error = false;
 
-            $exists = $this->check_exists($input["username"], $user_id);
+            $exists = $this->check_exists($input["username"], $vendor_id);
 
             if ($exists) {
                 $error = true;
@@ -152,14 +137,14 @@ class User extends Base_Controller
 
             if (!$error) {
                 $where = array(
-                    'user_id' => $user_id
+                    'vendor_id' => $vendor_id
                 );
 
                 if (!empty($_FILES['file']['name'])) {
                     $config = array(
                         "allowed_types" => "gif|png|jpg|jpeg",
-                        "upload_path"   => "./images/user/",
-                        "path"          => "/images/user/"
+                        "upload_path"   => "./images/vendor/",
+                        "path"          => "/images/vendor/"
                     );
     
                     $this->load->library("upload", $config);
@@ -178,8 +163,6 @@ class User extends Base_Controller
                     'image' => $image,
                     'username' => $input['username'],
                     'name' => $input['name'],
-                    'gender' => $input['gender'],
-                    'birthday' => $input['birthday'],
                     'role_id' => $input['role_id'],
                     'email' => $input['email'],
                     'contact' => $input['contact'],
@@ -193,34 +176,34 @@ class User extends Base_Controller
                     $data['salt'] = $hash['salt'];
                 }
 
-                $this->User_model->update_where($where, $data);
+                $this->Vendor_model->update_where($where, $data);
 
-                redirect('user', "refresh");
+                redirect('vendor', "refresh");
             }
         }
 
         $where = array(
-            "user_id" => $user_id
+            "vendor_id" => $vendor_id
         );
 
-        $user = $this->User_model->get_where_with_role($where);
+        $vendor = $this->Vendor_model->get_where_with_role($where);
 
-        $this->show_404_if_empty($user);
+        $this->show_404_if_empty($vendor);
 
-        $this->page_data["user"] = $user[0];
-        $this->page_data["role"] = $this->Role_model->get_type("USER");
-        $this->page_data['input_field'] = $this->User_model->generate_edit_input($user_id);
+        $this->page_data["vendor"] = $vendor[0];
+        $this->page_data["role"] = $this->Role_model->get_type("CLIENT");
+        $this->page_data['input_field'] = $this->Vendor_model->generate_edit_input($vendor_id);
 
         $this->load->view("admin/header", $this->page_data);
-        $this->load->view("admin/user/edit");
+        $this->load->view("admin/vendor/edit");
         $this->load->view("admin/footer");
     }
 
-    function delete($user_id)
+    function delete($vendor_id)
     {
-        $this->User_model->soft_delete($user_id);
+        $this->Vendor_model->soft_delete($vendor_id);
 
-        redirect("user", "refresh");
+        redirect("vendor", "refresh");
     }
 
 }
