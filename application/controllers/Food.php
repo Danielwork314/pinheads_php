@@ -13,11 +13,30 @@ class Food extends Base_Controller
 
         $this->load->model("Food_model");
         $this->load->model("Store_model");
+        $this->load->model("Role_model");
+        $this->load->model("Access_model");
+        // $this->load->model("Vendor_model");
     }
 
     public function index()
     {
-        $this->page_data["food"] = $this->Food_model->get_all();
+        $type = $this->session->userdata('login_data')['type'];
+
+        if($type == "VENDOR") {
+            // die(var_dump($this->session->userdata('login_data')));
+
+            $where = array(
+                "food.vendor_id" => $this->session->userdata("login_data")["vendor_id"],
+            );
+
+            $food_id = $this->Food_model->get_where($where);
+            $this->page_data["food"] = $food_id;
+
+        }else{
+            
+            $this->page_data["food"] = $this->Food_model->get_all();
+        }
+        
         // $this->debug($this->page_data["food"]);
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/food/all");

@@ -15,11 +15,28 @@ class Store extends Base_Controller
         $this->load->model("Gourmet_type_model");
         $this->load->model("Pricing_model");
         $this->load->model("Food_model");
+        $this->load->model("Role_model");
+        $this->load->model("Access_model");
     }
 
     public function index()
     {
-        $this->page_data["store"] = $this->Store_model->get_all();
+        $role_id = $this->session->userdata('login_data')['role_id'];
+
+        if($role_id == 4) {
+            // die(var_dump($this->session->userdata('login_data')));
+
+            $where = array(
+                "vendor_id" => $this->session->userdata("login_data")["vendor_id"],
+            );
+
+            $store_id = $this->Store_model->get_where($where);
+            $this->page_data["store"] = $store_id;
+
+        }else{
+            
+            $this->page_data["store"] = $this->Store_model->get_all();
+        }
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/store/all");

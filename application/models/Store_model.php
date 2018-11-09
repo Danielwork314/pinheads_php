@@ -9,6 +9,18 @@ class Store_model extends Base_model
 
         $this->table_name = "store";
     }
+    // public function get_all()
+    // {
+    //     $this->db->select("*");
+    //     $this->db->from("store");
+    //     $this->db->join("role", "role.role_id = store.vendor_id", "left");
+    //     $this->db->where("store.deleted", 0);
+
+    //     $query = $this->db->get();
+
+    //     return $query->result_array();
+    // }
+    
 
     // public function get_all()
     // {
