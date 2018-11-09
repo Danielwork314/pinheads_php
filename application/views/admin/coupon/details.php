@@ -1,3 +1,4 @@
+<div class="content-container" style="display: flow-root;">
 <section class="content-header">
 	<h1>
 		<?= $coupon['coupon'] ?>
@@ -71,3 +72,4 @@
 		</div>
 	</div>
 </section>
+</div>

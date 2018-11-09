@@ -1,3 +1,4 @@
+<div class="content-container" style="display: flow-root;">
 <section class="content-header">
 	<h1>
 		Add Payment
@@ -92,6 +93,7 @@
         </div>
     </div>
 </section>
+</div>
 
 
 
