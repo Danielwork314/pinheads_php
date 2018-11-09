@@ -13,8 +13,6 @@ class Food extends Base_Controller
 
         $this->load->model("Food_model");
         $this->load->model("Store_model");
-        $this->load->model("Ingredient_model");
-        $this->load->model("Food_ingredient_model");
     }
 
     public function index()
@@ -32,7 +30,6 @@ class Food extends Base_Controller
 
         if ($_POST) {
             $input = $this->input->post();
-            $input = $input['food_list'];
 
             $error = false;
 
@@ -56,35 +53,22 @@ class Food extends Base_Controller
             }
 
             $data = array(
-                // 'image' => $image,
+                'image' => $image,
                 'food' => $input['food'],
                 'description' => $input['description'],
                 'price' => $input['price'],
                 'discount' => $input['discount'],
+                'discounted_price' =>$input['discounted_price'],
                 'store_id' => $input['store_id'],
                 'created_by' => $this->session->userdata('login_id'),
             );
 
             $food_id = $this->Food_model->insert($data);
 
-            foreach($input['ingredient_id'] as $row){
-                
-
-                $data = array(
-                 
-                    'food_id' => $food_id,
-                    'ingredient_id' => $row,
-
-                );
-
-                $this->Food_ingredient_model->insert($data);
-            }
-
             redirect("food", "refresh");
         }
 
         $this->page_data['store'] = $this->Store_model->get_all();
-        $this->page_data['ingredient'] = $this->Ingredient_model->get_all();
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/food/add");
@@ -100,9 +84,6 @@ class Food extends Base_Controller
         // $this->debug($food_id);
         $food = $this->Food_model->get_where($where);
         $this->page_data["food"] = $food[0];
-
-        $food_ingredient = $this->Food_ingredient_model->get_where($where);
-        $this->page_data["food_ingredient"] = $food_ingredient;
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/food/details");
@@ -148,6 +129,7 @@ class Food extends Base_Controller
                 'food' => $input['food'],
                 'description' => $input['description'],
                 'price' => $input['price'],
+                'discounted_price' =>$input['discounted_price'],
                 'discount' => $input['discount'],
                 'modified_date' => $date->format("Y-m-d h:i:s"),
                 'store_id' => $input['store_id'],
@@ -173,26 +155,6 @@ class Food extends Base_Controller
 
         $this->Food_model->soft_delete($food_id);
         redirect("food", "refresh");
-    }
-
-    function add_ingredient(){
-        
-        if($_POST){
-
-            $input = $this->input->post();
-
-            $error = false;
-
-            $data = array(
-                'ingredient_id' => $input['ingredient_detail']['ingredient_id'],
-            );
-            
-            $ingredient_id = $this->Ingredient_model->get_where($data)[0];
-            
-
-            die(json_encode($ingredient_id));
-
-        }
     }
 
 }

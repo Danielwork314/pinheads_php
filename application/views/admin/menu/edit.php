@@ -45,15 +45,19 @@
 				</div>
                 <div class="form-group">
 					<label>Description</label>
-					<input type="text" class="form-control" name="description" required value="<?= $menu['description'] ?>">
+					<textarea type="text" class="form-control" name="description" rows="4" required><?= $menu['description'] ?></textarea>
 				</div>
 				<div class="form-group">
 					<label>Price</label>
-					<input type="text" class="form-control" name="price" required value="<?= $menu['price'] ?>">
+					<input type="text" class="form-control" name="price" id="form_price" required value="<?= $menu['price'] ?>">
+				</div>
+				<div class="form-group">
+					<label>Discounted Price</label>
+					<input type="text" class="form-control" name="discounted_price" id="form_discounted_price" required value="<?= $menu['discounted_price'] ?>">
 				</div>
 				<div class="form-group">
 					<label>Discount (%)</label>
-					<input type="text" class="form-control" name="discount" required value="<?= $menu['discount'] ?>">
+					<input type="text" class="form-control" name="discount" id="form_discount" required value="<?= $menu['discount'] ?>">
 				</div>
 			</div>
 			<!-- /.box-body -->
@@ -64,3 +68,15 @@
 		</form>
 	</div>
 </section>
+
+<script>
+ $("#form_discount,#form_discounted_price,#form_price").change(function () {
+    var form_discounted_price = $('#form_discounted_price').val();
+    var form_price = $('#form_price').val();
+    var form_discount =  $('#form_discount');
+
+    var discount = (form_discounted_price/form_price) * 100;
+    form_discount.val(discount);
+
+});
+</script>

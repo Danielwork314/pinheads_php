@@ -38,25 +38,31 @@
 						</td>
 					</tr>
 					<tr>
-						<th>Menu Title</th>
+						<th>Title</th>
 						<td>:
 							<?= $menu["menu"] ?>
 						</td>
 					</tr>
 					<tr>
-						<th>Menu Description</th>
+						<th>Description</th>
 						<td>:
 							<?= $menu["description"] ?>
 						</td>
                     </tr>
                     <tr>
-						<th>Menu Price</th>
+						<th>Price</th>
 						<td>:
 							<?= $menu["price"] ?>
 						</td>
+					</tr>
+					<tr>
+						<th>Discounted Price</th>
+						<td>:
+							<?= $menu["discounted_price"] ?>
+						</td>
                     </tr>
                     <tr>
-						<th>Menu Discount</th>
+						<th>Discount</th>
 						<td>:
 							<?= $menu["discount"] ?>
 						</td>
@@ -67,46 +73,4 @@
 		</div>
     </div>
 
-	<div class="col-md-6 col-xs-12">
-		<div class="box box-primary">
-			<div class="box-header with-border">
-					<h3 class="box-title">
-						<?=$menu['menu']?>'s Ingredient Lists
-					</h3>
-					
-			</div>
-				
-			<br>
-
-			<div class='box-body no-padding'>
-				<div id="refreshBox">
-					<table id="data-table" class="table table-bordered table-hover data-table">
-						<thead>
-						<tr>
-							<th>No.</th>
-							<th>Ingredient </th>
-						</tr>
-						</thead>
-						<?php
-							$i = 1;
-							foreach($food_ingredient as $row){
-								?>
-								<tr>
-									<td>
-										<?= $i ?>
-									</td>
-									
-									<td>
-										<?= $row['ingredient'] ?>
-									</td>
-								</tr>
-								<?php
-								$i++;
-							}
-							?>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
 </section>

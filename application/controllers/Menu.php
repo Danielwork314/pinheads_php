@@ -13,8 +13,6 @@ class Menu extends Base_Controller
 
         $this->load->model("Menu_model");
         $this->load->model("Store_model");
-        $this->load->model("Ingredient_model");
-        $this->load->model("Food_ingredient_model");
     }
 
     // public function index()
@@ -29,14 +27,12 @@ class Menu extends Base_Controller
     function add($store_id)
     {
         $this->page_data['store_id'] = $store_id;
-        // $this->page_data['ingredient_id'] = $ingredient_id;
 
         if ($_POST) {
 
             // $this->debug($_POST);
 
             $input = $this->input->post();
-            $input = $input['menu_list'];
             // $this->debug($input);
 
 
@@ -68,37 +64,18 @@ class Menu extends Base_Controller
                 'menu' => $input['menu'],
                 'description' => $input['description'],
                 'price' => $input['price'],
+                'discounted_price' =>$input['discounted_price'],
                 'discount' => $input['discount'],
                 'created_by' => $this->session->userdata('login_id'),
-                // 'ingredient_id' => $ingredient_id,
                 'store_id' => $store_id,
 
             );
 
-            $menu_id = $this->Menu_model->insert($data); 
-
-            // $ingredient_id =  $input['ingredient_id'];
-
-            foreach($input['ingredient_id'] as $row){
-                
-
-                $data = array(
-                 
-                    'menu_id' => $menu_id,
-                    'ingredient_id' => $row,
-
-                );
-
-                $this->Food_ingredient_model->insert($data);
-            }
+            $menu_id = $this->Menu_model->insert($data);
 
             redirect("store/details/" . $store_id, "refresh");
 
         }
-
-        $this->page_data['food_ingredient'] = $this->Food_ingredient_model->get_all();
-
-        $this->page_data['ingredient'] = $this->Ingredient_model->get_all();
 
         $this->page_data['input_fields'] = $this->Menu_model->generate_input();
 
@@ -116,9 +93,6 @@ class Menu extends Base_Controller
         // $this->debug($menu_id);
         $menu = $this->Menu_model->get_where($where);
         $this->page_data["menu"] = $menu[0];
-
-        $food_ingredient = $this->Food_ingredient_model->get_where($where);
-        $this->page_data["food_ingredient"] = $food_ingredient;
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/menu/details");
@@ -199,29 +173,6 @@ class Menu extends Base_Controller
 
         $this->Menu_model->soft_delete($menu_id);
         redirect("store/details/" . $store_id['store_id'], "refresh");
-    }
-
-    function add_ingredient(){
-        
-        if($_POST){
-
-            $input = $this->input->post();
-
-            $error = false;
-
-            $data = array(
-                'ingredient_id' => $input['ingredient_detail']['ingredient_id'],
-            );
-            
-            $ingredient_id = $this->Ingredient_model->get_where($data)[0];
-            
-
-            die(json_encode($ingredient_id));
-        
-
-            // $this->Menu_model->insert($data);
-
-        }
     }
 
 }

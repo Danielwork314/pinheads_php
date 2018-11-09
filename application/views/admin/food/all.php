@@ -27,7 +27,8 @@
                             <th>Image</th>
 							<th>Title</th>
 							<th>Description</th>
-							<th>Price</th>
+                            <th>Price</th>
+                            <th>Discounted Price</th>
                             <th>Discount (%)</th>
                             <th>Created Date</th>
                             <th>Created By</th>
@@ -72,6 +73,11 @@
                             </td>
                             <td>
                                 <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
+									<?= $row['discounted_price'] ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
 									<?= $row['discount'] ?>
                                 </a>
                             </td>
@@ -97,12 +103,13 @@
 					<tfoot>
 						<tr>
                         <th>No.</th>
-                        <th>Store Title</th>
-                        <th>Food Image</th>
-						<th>Food Title</th>
-						<th>Food Description</th>
-						<th>Food Price</th>
-                        <th>Food Discount</th>
+                        <th>Store</th>
+                        <th>Image</th>
+						<th>Title</th>
+						<th>Description</th>
+                        <th>Price</th>
+                        <th>Discounted Price</th>
+                        <th>Discount</th>
                         <th>Created Date</th>
                         <th>Created By</th>
                          <th></th>

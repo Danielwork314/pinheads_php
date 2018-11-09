@@ -142,6 +142,7 @@
 									<th>Title</th>
 									<th>Description</th>
 									<th>Price</th>
+									<th>Discount Price</th>
 									<th>Discount (%)</th>
 									<th>Created Date</th>
 									<th>Created By</th>
@@ -177,6 +178,11 @@
 									<td>
 										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
 											<?= $row['price'] ?>
+										</a>
+									</td>
+									<td>
+										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
+											<?= $row['discounted_price'] ?>
 										</a>
 									</td>
 									<td>
