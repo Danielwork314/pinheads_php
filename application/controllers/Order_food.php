@@ -17,15 +17,6 @@ class Order_food extends Base_Controller
         $this->load->model("User_order_model");
     }
 
-    public function index()
-    {
-        $this->page_data["order_food"] = $this->Order_food_model->get_all();
-        // $this->debug($this->page_data["notification"]);
-        $this->load->view("admin/header", $this->page_data);
-        $this->load->view("admin/notification/all");
-        $this->load->view("admin/footer");
-    }
-
     function add()
     {
 
