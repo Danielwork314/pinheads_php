@@ -9,42 +9,19 @@ class Store_model extends Base_model
 
         $this->table_name = "store";
     }
-    // public function get_all()
-    // {
-    //     $this->db->select("*");
-    //     $this->db->from("store");
-    //     $this->db->join("role", "role.role_id = store.vendor_id", "left");
-    //     $this->db->where("store.deleted", 0);
 
-    //     $query = $this->db->get();
+    public function get_where($where)
+    {
+        $this->db->select("*");
+        $this->db->from("store");
+        $this->db->join("gourmet_type", "gourmet_type.gourmet_type_id = store.gourmet_type_id", "left");
+        $this->db->join("pricing", "pricing.pricing_id = store.pricing_id", "left");
+        $this->db->where("store.deleted", 0);
+        $this->db->where($where);
 
-    //     return $query->result_array();
-    // }
-    
+        $query = $this->db->get();
 
-    // public function get_all()
-    // {
-    //     $this->db->select("*, product_category.product_category");
-    //     $this->db->from("product");
-    //     $this->db->join("product_category", "product.product_category_id = product_category.product_category_id", "left");
-    //     $this->db->where("product.deleted", 0);
-
-    //     $query = $this->db->get();
-
-    //     return $query->result_array();
-    // }
-
-    // public function get_where($where)
-    // {
-    //     $this->db->select("*, product_category.product_category");
-    //     $this->db->from("product");
-    //     $this->db->join("product_category", "product.product_category_id = product_category.product_category_id", "left");
-    //     $this->db->where("product.deleted", 0);
-    //     $this->db->where($where);
-
-    //     $query = $this->db->get();
-
-    //     return $query->result_array();
-    // }
+        return $query->result_array();
+    }
 
 }

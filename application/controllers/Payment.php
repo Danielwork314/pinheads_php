@@ -15,16 +15,6 @@ class Payment extends Base_Controller
         $this->load->model("User_model");
     }
 
-    // public function index()
-    // {
-    //     $this->page_data["payment"] = $this->Payment_model->get_all();
-    //     // $this->debug($this->page_data["payment"]);
-    //     $this->load->view("admin/header", $this->page_data);
-    //     $this->load->view("admin/payment/all");
-    //     $this->load->view("admin/footer");
-    //     // $this->debug($this->page_data["payment"]);
-    // }
-
     function add($user_id)
     {
 

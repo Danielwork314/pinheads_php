@@ -45,6 +45,18 @@
 						</td>
 					</tr>
 					<tr>
+						<th>Type</th>
+						<td>:
+							<?= $store["gourmet_type_title"] ?>
+						</td>
+					</tr>
+					<tr>
+						<th>Pricing</th>
+						<td>:
+							<?= $store["pricing_title"] ?>
+						</td>
+					</tr>
+					<tr>
 						<th>Address</th>
 						<td>:
 							<?= $store["address"] ?>

@@ -21,13 +21,12 @@ class Store extends Base_Controller
 
     public function index()
     {
-        $role_id = $this->session->userdata('login_data')['role_id'];
+        $type = $this->session->userdata('login_data')['type'];
 
-        if($role_id == 4) {
-            // die(var_dump($this->session->userdata('login_data')));
+        if($type == "VENDOR"){
 
             $where = array(
-                "vendor_id" => $this->session->userdata("login_data")["vendor_id"],
+                "vendor_id" => $this->session->userdata("login_id"),
             );
 
             $store_id = $this->Store_model->get_where($where);
@@ -70,38 +69,6 @@ class Store extends Base_Controller
                 }
             }
 
-
-            if($input['take_away']){
-                $take_away = 1;
-            } else {
-                $take_away = 0;
-            }
-
-            if($input['dine_in']){
-                $dine_in = 1;
-            } else {
-                $dine_in = 0;
-            }
-
-            if($input['halal']){
-                $halal = 1;
-            } else {
-                $halal = 0;
-            }
-
-            if($input['vegetarian']){
-                $vegetarian = 1;
-            } else {
-                $vegetarian = 0;
-            }
-
-            if($input['favourite']){
-                $favourite = 1;
-            } else {
-                $favourite = 0;
-            }
-
-
             $data = array(
                 'thumbnail' => $thumbnail,
                 'store' => $input['store'],
@@ -113,18 +80,33 @@ class Store extends Base_Controller
                 'business_hour' => $input['business_hour'],
                 'gourmet_type_id' => $input['gourmet_type_id'],
                 'pricing_id' => $input['pricing_id'],
-                'take_away' => $take_away,
-                'dine_in' => $dine_in,
-                'halal' => $halal,
-                'vegetarian' => $vegetarian,
-                'favourite' => $favourite,
                 'created_by' => $this->session->userdata('login_id'),
+                'vendor_id' => $this->session->userdata('login_id'),
             );
+
+            if(isset($input['take_away'])){
+                $data['take_away'] = 1;
+            }
+
+            if(isset($input['dine_in'])){
+                $data['dine_in'] = 1;
+            }
+
+            if(isset($input['halal'])){
+                $data['halal'] = 1;
+            }
+
+            if(isset($input['vegetarian'])){
+                $data['vegetarian'] = 1;
+            }
+
+            if(isset($input['favourite'])){
+                $data['favourite'] = 1;
+            }
 
             $this->Store_model->insert($data);
             
-                // redirect("store", "refresh");
-                
+            redirect("store", "refresh");    
         }
 
         $this->page_data['type'] = $this->Gourmet_type_model->get_all();

@@ -20,7 +20,7 @@
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
-		<form role="form" class="input_form" method="POST" action="<?= base_url()?>billing_address/add" enctype="multipart/form-data">
+		<form role="form" class="input_form" method="POST" action="<?= base_url()?>billing_address/add/<?= $user_id ?>" enctype="multipart/form-data">
 			<div class="box-body">
 				<?php 
 				if (isset($error)) { 

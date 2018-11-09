@@ -158,7 +158,7 @@
 					<h3 class="box-title">
 						<?=$user['username']?>'s Billing Address Lists
 					</h3>
-					<a href="<?php echo site_url('billing_address/add') . '/' . $user['user_id'] ?>" class='btn btn-default pull-right'>
+					<a href="<?php echo site_url('billing_address/add/') . $user['user_id'] ?>" class='btn btn-default pull-right'>
 						<i class='fa fa-plus'></i> Add</a>
 			</div>
 				
