@@ -165,8 +165,8 @@
 									<th>Discount Price</th>
 									<th>Discount (%)</th>
 									<th>Created Date</th>
-									<th>Created By</th>
-									<th></th>
+									<!-- <th>Created By</th> -->
+									<!-- <th></th> -->
 							</tr>
 							</thead>
 							<?php
@@ -215,14 +215,14 @@
 											<?= $row['created_date'] ?>
 										</a>
 									</td>
-									<td>
+									<!-- <td>
 										<a href="<?= base_url() ?>food/details_menu/<?= $row['food_id']?>">
 											<?= $row['created_by'] ?>
 										</a>
-									</td>
-									<td>
+									</td> -->
+									<!-- <td>
                                 		<a href="<?= base_url() ?>food/delete_menu/<?= $row['food_id']?>" class="btn btn-danger delete-button">Delete</a>
-                            		</td>
+                            		</td> -->
 								</tr>
 								<?php
 								$i++;

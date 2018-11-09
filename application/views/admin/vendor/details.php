@@ -100,7 +100,7 @@
 								<th>No.</th>
 								<th>Thumbnail</th>
 								<th>Name</th>
-								<th></th>
+								<!-- <th></th> -->
 							</tr>
 						</thead>
 						<tbody>
@@ -124,9 +124,9 @@
 										<?= $row['store'] ?>
 									</a>
 								</td>
-								<td>
-									<a href="<?= base_url() ?>store/delete/<?= $row['store_id']?>" class="btn btn-danger delete-button">Delete</a>
-								</td>
+								<!-- <td>
+									<button type="button" class="btn btn-danger remove_store" data-id="<?= $row['store_id']?>">Delete</button>
+								</td> -->
 							</tr>
 							<?php
 									$i++;
@@ -138,7 +138,7 @@
 								<th>No.</th>
 								<th>Thumbnail</th>
 								<th>Name</th>
-								<th></th>
+								<!-- <th></th> -->
 							</tr>
 						</tfoot>
 					</table>
@@ -149,6 +149,3 @@
 </section>
 
 </div>
-
-
-

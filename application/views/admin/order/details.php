@@ -1,3 +1,4 @@
+<div class="content-container" style="display: flow-root;">
 <section class="content-header">
 	<h1>
 		User's Order
@@ -176,3 +177,4 @@
 		</div>
 	</div>
 </section>
+</div>

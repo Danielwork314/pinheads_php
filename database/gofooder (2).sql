@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2018 at 11:21 AM
+-- Generation Time: Nov 09, 2018 at 12:29 PM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -73,6 +73,22 @@ CREATE TABLE `billing_address` (
   `deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Dumping data for table `billing_address`
+--
+
+INSERT INTO `billing_address` (`billing_address_id`, `user_id`, `address1`, `address2`, `state`, `postcode`, `country`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
+(1, 1, 'address1', 'asdfas', 'address1', '1', 'address1', '2018-11-09 10:55:07', 3, '0000-00-00 00:00:00', 0, 0),
+(2, 1, 'address2', 'address2', 'address2', 'address2', 'address2', '2018-11-09 10:55:28', 3, '0000-00-00 00:00:00', 0, 1),
+(3, 1, 'address2', 'address2', 'address2', 'address2', 'address2', '2018-11-09 10:55:35', 3, '0000-00-00 00:00:00', 0, 1),
+(4, 1, 'address5', 'asdfas', 'address5', 'address5', 'address5', '2018-11-09 10:56:14', 3, '0000-00-00 00:00:00', 0, 1),
+(5, 1, 'address5', 'address5', 'address5', 'address5', 'address5', '2018-11-09 10:57:16', 3, '0000-00-00 00:00:00', 0, 1),
+(6, 1, 'address1', 'asdfas', 'address1', 'asd', 'address1', '2018-11-09 11:00:58', 3, '0000-00-00 00:00:00', 0, 1),
+(7, 1, 'address5', 'asdfas', 'address1', '1', 'address5', '2018-11-09 11:01:47', 3, '0000-00-00 00:00:00', 0, 1),
+(8, 1, 'address2', 'asdfas', 'address1', 'asd', 'address1', '2018-11-09 11:02:15', 3, '0000-00-00 00:00:00', 0, 1),
+(9, 1, 'address5', 'asdfas', 'address1', '1', 'address1', '2018-11-09 11:02:35', 3, '0000-00-00 00:00:00', 0, 1),
+(10, 1, 'address2', 'asdfas', 'address1', 'asd', 'address1', '2018-11-09 11:04:01', 3, '0000-00-00 00:00:00', 0, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -94,6 +110,13 @@ CREATE TABLE `coupon` (
   `modified_by` int(11) NOT NULL DEFAULT '0',
   `deleted` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `coupon`
+--
+
+INSERT INTO `coupon` (`coupon_id`, `store_id`, `user_id`, `coupon`, `description`, `valid_date`, `partner_coupon`, `used`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
+(1, 7, 1, 'coupon1', 'coupon1', '2018-11-11', 0, 0, '2018-11-09 10:49:03', 1, '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -129,6 +152,14 @@ CREATE TABLE `food` (
   `store_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Dumping data for table `food`
+--
+
+INSERT INTO `food` (`food_id`, `food`, `description`, `image`, `price`, `discounted_price`, `discount`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`, `store_id`) VALUES
+(1, 'food1', 'food1', '/images/food/default_no.jpg', '11.00', '10.00', '9', '2018-11-09 10:48:11', 1, '0000-00-00 00:00:00', 0, 0, 7),
+(2, 'food2', 'food2', '/images/food/default_no1.jpg', '22.22', '20.00', '10', '2018-11-09 10:48:32', 1, '0000-00-00 00:00:00', 0, 0, 7);
+
 -- --------------------------------------------------------
 
 --
@@ -157,6 +188,14 @@ CREATE TABLE `gourmet_type` (
   `modified_by` int(11) NOT NULL,
   `deleted` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `gourmet_type`
+--
+
+INSERT INTO `gourmet_type` (`gourmet_type_id`, `gourmet_type_title`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
+(1, 'Local', '2018-11-09 10:25:49', 3, '0000-00-00 00:00:00', 0, 0),
+(2, 'Western', '2018-11-09 10:25:56', 3, '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -285,6 +324,19 @@ CREATE TABLE `order_food` (
   `deleted` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Dumping data for table `order_food`
+--
+
+INSERT INTO `order_food` (`order_food_id`, `user_order_id`, `food_id`, `created_date`, `created_by`, `deleted`) VALUES
+(1, 1, 1, '2018-11-09 11:05:50', 0, 0),
+(2, 1, 2, '2018-11-09 11:05:50', 0, 0),
+(3, 2, 2, '2018-11-09 11:20:33', 0, 0),
+(4, 2, 1, '2018-11-09 11:20:33', 0, 0),
+(5, 2, 1, '2018-11-09 11:20:33', 0, 0),
+(6, 2, 1, '2018-11-09 11:20:33', 0, 0),
+(7, 2, 1, '2018-11-09 11:20:33', 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -313,6 +365,15 @@ CREATE TABLE `payment` (
   `deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`payment_id`, `user_id`, `card_no`, `bank`, `card_type`, `cvv`, `month`, `year`, `firstname`, `lastname`, `address`, `region`, `phone`, `email`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
+(1, 1, 0, 'card1', 'card1', 0, 0, 0, 'card1', 'card1', 'card1', 'card1', 'card1', 'card1@card1', '2018-11-09 10:51:55', 3, '0000-00-00 00:00:00', 0, 0),
+(2, 1, 0, 'card2', 'card2', 0, 0, 0, 'card2', 'card2', 'card2card2', 'card2', 'card2', 'card2@card2', '2018-11-09 10:52:24', 3, '0000-00-00 00:00:00', 0, 1),
+(3, 1, 0, 'card2', 'card2', 0, 0, 0, 'card2', 'card2', 'card2', 'card2', 'card2', 'card2@card2', '2018-11-09 11:04:55', 3, '0000-00-00 00:00:00', 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -328,6 +389,14 @@ CREATE TABLE `pricing` (
   `modified_by` int(11) NOT NULL,
   `deleted` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `pricing`
+--
+
+INSERT INTO `pricing` (`pricing_id`, `pricing_title`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
+(1, 'Average', '2018-11-09 10:26:05', 3, '0000-00-00 00:00:00', 0, 0),
+(2, 'Below Average', '2018-11-09 10:26:11', 3, '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -488,6 +557,19 @@ CREATE TABLE `store` (
   `vendor_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Dumping data for table `store`
+--
+
+INSERT INTO `store` (`store_id`, `thumbnail`, `store`, `address`, `social_media_link`, `phone`, `latitude`, `longitude`, `business_hour`, `take_away`, `dine_in`, `halal`, `vegetarian`, `favourite`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`, `gourmet_type_id`, `pricing_id`, `vendor_id`) VALUES
+(1, '/images/store/default_no4.jpg', 'Store1', 'Store1', 'Store1', '000', '000', '000', '000', 0, 0, 0, 0, 0, '2018-11-09 10:31:41', 1, '0000-00-00 00:00:00', 0, 0, 2, 1, 0),
+(2, '/images/store/default_no5.jpg', 'Store1', 'Store1', 'Store1', '000', '000', '000', '000', 0, 0, 0, 0, 0, '2018-11-09 10:35:42', 1, '0000-00-00 00:00:00', 0, 0, 2, 2, 0),
+(3, '/images/store/default_no6.jpg', 'Store1', 'Jalan Molek 22', 'Store1', '000', '000', '000', '000', 0, 0, 0, 0, 0, '2018-11-09 10:37:18', 1, '0000-00-00 00:00:00', 0, 0, 2, 2, 0),
+(4, '/images/store/default_no7.jpg', 'Store1', 'Jalan Molek 22', 'Store1', '111', '111', '111', '111', 0, 0, 0, 0, 0, '2018-11-09 10:38:11', 1, '0000-00-00 00:00:00', 0, 0, 2, 2, 1),
+(5, '/images/store/default_no8.jpg', '1', '11', '1', '1212', '1', '1', '1', 0, 0, 0, 0, 0, '2018-11-09 10:43:27', 1, '0000-00-00 00:00:00', 0, 0, 2, 1, 1),
+(6, '/images/store/default_no9.jpg', '1', '11', '1', '1', '1', '1', '1', 0, 1, 0, 0, 0, '2018-11-09 10:43:44', 1, '0000-00-00 00:00:00', 0, 0, 2, 2, 1),
+(7, '/images/store/default_no10.jpg', '22', '22', '22', '22', '22', '22', '22', 1, 1, 1, 1, 1, '2018-11-09 10:44:26', 1, '0000-00-00 00:00:00', 0, 0, 2, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -542,6 +624,13 @@ CREATE TABLE `user` (
   `modified_by` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `username`, `password`, `salt`, `role_id`, `image`, `name`, `gender`, `birthday`, `email`, `contact`, `deleted`, `created_date`, `created_by`, `modified_date`, `modified_by`) VALUES
+(1, 'user1', '45987bb6718f40f4b91788b0a03a6590a0863305fa1fdc78bfb1c06be05851a16b87f7351b536593a5906f240a74d33a5948b8c771c84543737d710464eb31f0', 197733, 3, '/images/user/default_no1.jpg', 'user1', 'user1', '1111-11-11', 'daniellim314@gmail.com', '111', 0, '2018-11-09 10:51:13', 0, '0000-00-00 00:00:00', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -563,6 +652,14 @@ CREATE TABLE `user_order` (
   `created_by` int(11) NOT NULL,
   `deleted` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `user_order`
+--
+
+INSERT INTO `user_order` (`user_order_id`, `user_id`, `store_id`, `take_away`, `sub_total`, `service_change`, `total`, `status`, `billing_address_id`, `payment_id`, `created_date`, `created_by`, `deleted`) VALUES
+(1, 1, 7, 1, '0.00', '0.00', '33.22', 0, 6, 3, '2018-11-09 11:05:50', 0, 0),
+(2, 1, 7, 1, '0.00', '0.00', '66.22', 0, 1, 3, '2018-11-09 11:20:33', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -586,6 +683,13 @@ CREATE TABLE `vendor` (
   `modified_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `modified_by` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `vendor`
+--
+
+INSERT INTO `vendor` (`vendor_id`, `username`, `password`, `salt`, `role_id`, `image`, `name`, `email`, `contact`, `deleted`, `created_date`, `created_by`, `modified_date`, `modified_by`) VALUES
+(1, 'vendor1', '2f4e2717cbde448ce184cd227c0557a48633861605f21666e5d7e47c2a1524b8cdddc32a5662c4f8f0632823d95a9a2a8031c8b3a88449060f125c2aa219b8f2', 663608, 4, '/images/vendor/default_no1.jpg', 'vendor1', 'vendor1@asd.com', '000', 0, '2018-11-09 10:25:05', 0, '0000-00-00 00:00:00', 0);
 
 --
 -- Indexes for dumped tables
@@ -741,13 +845,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `billing_address`
 --
 ALTER TABLE `billing_address`
-  MODIFY `billing_address_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `billing_address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `coupon`
 --
 ALTER TABLE `coupon`
-  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `feedback`
@@ -759,7 +863,7 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `food`
 --
 ALTER TABLE `food`
-  MODIFY `food_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `food_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `food_ingredient`
@@ -771,7 +875,7 @@ ALTER TABLE `food_ingredient`
 -- AUTO_INCREMENT for table `gourmet_type`
 --
 ALTER TABLE `gourmet_type`
-  MODIFY `gourmet_type_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `gourmet_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ingredient`
@@ -801,19 +905,19 @@ ALTER TABLE `notification`
 -- AUTO_INCREMENT for table `order_food`
 --
 ALTER TABLE `order_food`
-  MODIFY `order_food_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_food_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pricing`
 --
 ALTER TABLE `pricing`
-  MODIFY `pricing_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `pricing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -831,7 +935,7 @@ ALTER TABLE `role_access`
 -- AUTO_INCREMENT for table `store`
 --
 ALTER TABLE `store`
-  MODIFY `store_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `store_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `store_gourmet_type`
@@ -849,19 +953,19 @@ ALTER TABLE `store_image`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_order`
 --
 ALTER TABLE `user_order`
-  MODIFY `user_order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `vendor`
 --
 ALTER TABLE `vendor`
-  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
