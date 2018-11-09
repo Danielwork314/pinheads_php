@@ -14,7 +14,7 @@ class Store extends Base_Controller
         $this->load->model("Store_model");
         $this->load->model("Gourmet_type_model");
         $this->load->model("Pricing_model");
-        $this->load->model("Menu_model");
+        $this->load->model("Food_model");
     }
 
     public function index()
@@ -44,7 +44,7 @@ class Store extends Base_Controller
                 $this->load->library("upload", $config);
 
                 if ($this->upload->do_upload("file")) {
-                    $store_thumbnail = $config['path'] . $this->upload->data()['file_name'];
+                    $thumbnail = $config['path'] . $this->upload->data()['file_name'];
                 } else {
                     die(json_encode(array(
                         "status" => false,
@@ -106,7 +106,7 @@ class Store extends Base_Controller
 
             $this->Store_model->insert($data);
             
-                redirect("store", "refresh");
+                // redirect("store", "refresh");
                 
         }
 
@@ -126,10 +126,14 @@ class Store extends Base_Controller
         );
 
         $store = $this->Store_model->get_where($where);
-        $menu = $this->Menu_model->get_where($where);
+
+        $where = array(
+            "food.store_id" => $store_id
+        );
+        $food = $this->Food_model->get_where($where);
 
         $this->page_data["store"] = $store[0];
-        $this->page_data["menu"] = $menu;
+        $this->page_data["food"] = $food;
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/store/details");

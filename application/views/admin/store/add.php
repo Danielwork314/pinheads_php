@@ -45,6 +45,10 @@
 					<input type="text" class="form-control" name="address" required placeholder="Store Address">
 				</div>
 				<div class="form-group">
+					<label>Social Media Link</label>
+					<input type="text" class="form-control" name="social_media_link" required placeholder="Social Media Link">
+				</div>
+				<div class="form-group">
 					<label>Phone</label>
 					<input type="text" class="form-control" name="phone" required placeholder="Phone number">
 				</div>

@@ -8,7 +8,7 @@
 				<i class="fa fa-user"></i> Vendor</a>
 		</li>
 		<li>
-			<a href="<?= base_url() ?>vendor/edit/<?= $vendor['user_id'] ?>"> Edit Vendor</a>
+			<a href="<?= base_url() ?>vendor/edit/<?= $vendor['vendor_id'] ?>"> Edit Vendor</a>
 		</li>
 	</ol>
 </section>

@@ -64,7 +64,6 @@ class Menu extends Base_Controller
                 'menu' => $input['menu'],
                 'description' => $input['description'],
                 'price' => $input['price'],
-                'discounted_price' =>$input['discounted_price'],
                 'discount' => $input['discount'],
                 'created_by' => $this->session->userdata('login_id'),
                 'store_id' => $store_id,

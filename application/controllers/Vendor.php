@@ -13,6 +13,7 @@ class Vendor extends Base_Controller
 
         $this->load->model("Role_model");
         $this->load->model("Vendor_model");
+        $this->load->model("Store_model");
 
     }
 
@@ -106,6 +107,9 @@ class Vendor extends Base_Controller
         $this->show_404_if_empty($vendor);
 
         $this->page_data["vendor"] = $vendor[0];
+
+        $store = $this->Store_model->get_where($where);
+        $this->page_data["store"] = $store;
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/vendor/details");

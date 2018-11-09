@@ -54,6 +54,12 @@
 						<td>:
 							<?= $food["price"] ?>
 						</td>
+					</tr>
+					<tr>
+						<th>Discounted Price</th>
+						<td>:
+							<?= $food["discounted_price"] ?>
+						</td>
                     </tr>
                     <tr>
 						<th>Discount (%)</th>

@@ -61,10 +61,9 @@
 					<div class="form-group">
 						<label>Store</label>
 						<select class="form-control" required name="store_id" id="form_store_id">
-							<option value="none">None</option>
-								<?php foreach ($store as $row) { ?>
-									<option value="<?= $row['store_id'] ?>"><?= $row['store'] ?></option>
-								<?php } ?>
+							<?php foreach ($store as $row) { ?>
+								<option value="<?= $row['store_id'] ?>"><?= $row['store'] ?></option>
+							<?php } ?>
 						</select>
 					</div>
 				</div>
@@ -78,14 +77,47 @@
 	</div>
 </section>
 </div>
+
 <script>
  $("#form_discount,#form_discounted_price,#form_price").change(function () {
     var form_discounted_price = $('#form_discounted_price').val();
     var form_price = $('#form_price').val();
     var form_discount =  $('#form_discount');
 
-    var discount = (form_discounted_price/form_price) * 100;
-    form_discount.val(discount);
+    var cal1 = form_price - form_discounted_price;
+	var cal2 = (cal1 / form_price);
+	var discount = cal2 * 100;
+    form_discount.val(Math.round(discount));
 
 });
 </script>
+
+<!-- <script>
+    $("#submit_food").click(function(e){
+ 
+        var file = $("#file").val();
+        var food = $("#form_food").val();
+        var description = $("#form_description").val();
+        var price = $("#form_price").val();
+		var discounted_price = $('#form_discounted_price').val();
+        var discount = $("#form_discount").val();
+        var food_list = {
+            file : file,
+            food : food,
+            description : description,
+            price : price,
+			discounted_price : discounted_price,
+            discount : discount,
+            contentType : false,
+            processData : false,
+        };
+        postParam = {
+            food_list : food_list,
+        }
+        // console.log(postParam);
+         $.post("<?= base_url()?>food/add/<?= $store_id ?>", postParam, function(response){
+            window.location.replace("<?=base_url()?>store/details/<?= $store_id ?>" );
+         });
+    });
+			
+</script> -->

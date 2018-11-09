@@ -84,8 +84,10 @@
     var form_price = $('#form_price').val();
     var form_discount =  $('#form_discount');
 
-    var discount = (form_discounted_price/form_price) * 100;
-    form_discount.val(discount);
+    var cal1 = form_price - form_discounted_price;
+	var cal2 = (cal1 / form_price);
+	var discount = cal2 * 100;
+    form_discount.val(Math.round(discount));
 
 });
 </script>

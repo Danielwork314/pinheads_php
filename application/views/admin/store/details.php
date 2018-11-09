@@ -31,6 +31,14 @@
 			<div class="box-body">
 				<table class="formTable">
 					<tr>
+						<th>Store Image</th>
+						<td>:
+							<a href="<?= base_url() ?>food/details/<?= $store['store_id']?>">
+								<img src="<?= base_url() . $store['thumbnail'] ?>" class="xs_thumbnail">
+                        	</a>
+						</td>
+					</tr>
+					<tr>
 						<th>Store</th>
 						<td>:
 							<?= $store["store"] ?>
@@ -125,9 +133,9 @@
 		<div class="box box-primary">
 			<div class="box-header with-border">
 					<h3 class="box-title">
-						<?=$store['store']?>'s Menu Lists
+						<?=$store['store']?>'s Food Lists
 					</h3>
-					<a href="<?php echo site_url('menu/add') . '/' . $store['store_id'] ?>" class='btn btn-default pull-right'>
+					<a href="<?php echo site_url('food/add_menu') . '/' . $store['store_id'] ?>" class='btn btn-default pull-right'>
 						<i class='fa fa-plus'></i> Add</a>
 			</div>
 				
@@ -151,57 +159,57 @@
 							</thead>
 							<?php
 								$i = 1;
-								foreach($menu as $row){
+								foreach($food as $row){
 							?>
 								<tr>
 									<td>
-										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
+										<a href="<?= base_url() ?>food/details_menu/<?= $row['food_id']?>">
 											<?= $i ?>
 										</a>
 									</td>
 									
 									<td>
-										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
+										<a href="<?= base_url() ?>food/details_menu/<?= $row['food_id']?>">
 											<img src="<?= base_url() . $row['image'] ?>" class="xs_thumbnail">
                                 		</a>
 									</td>
 									<td>
-										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
-											<?= $row['menu'] ?>
+										<a href="<?= base_url() ?>food/details_menu/<?= $row['food_id']?>">
+											<?= $row['food'] ?>
 										</a>
 									</td>
 									<td>
-										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
+										<a href="<?= base_url() ?>food/details_menu/<?= $row['food_id']?>">
 											<?= $row['description'] ?>
 										</a>
 									</td>
 									<td>
-										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
+										<a href="<?= base_url() ?>food/details_menu/<?= $row['food_id']?>">
 											<?= $row['price'] ?>
 										</a>
 									</td>
 									<td>
-										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
+										<a href="<?= base_url() ?>food/details_menu/<?= $row['food_id']?>">
 											<?= $row['discounted_price'] ?>
 										</a>
 									</td>
 									<td>
-										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
+										<a href="<?= base_url() ?>food/details_menu/<?= $row['food_id']?>">
 											<?= $row['discount'] ?>
 										</a>
 									</td>
 									<td>
-										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
+										<a href="<?= base_url() ?>food/details_menu/<?= $row['food_id']?>">
 											<?= $row['created_date'] ?>
 										</a>
 									</td>
 									<td>
-										<a href="<?= base_url() ?>menu/details/<?= $row['menu_id']?>">
+										<a href="<?= base_url() ?>food/details_menu/<?= $row['food_id']?>">
 											<?= $row['created_by'] ?>
 										</a>
 									</td>
 									<td>
-                                		<a href="<?= base_url() ?>menu/delete/<?= $row['menu_id']?>" class="btn btn-danger delete-button">Delete</a>
+                                		<a href="<?= base_url() ?>food/delete_menu/<?= $row['food_id']?>" class="btn btn-danger delete-button">Delete</a>
                             		</td>
 								</tr>
 								<?php
