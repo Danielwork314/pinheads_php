@@ -26,7 +26,7 @@ class Food extends Base_Controller
             // die(var_dump($this->session->userdata('login_data')));
 
             $where = array(
-                "food.vendor_id" => $this->session->userdata("login_data")["vendor_id"],
+                "food.created_by" => $this->session->userdata("login_data")["vendor_id"],
             );
 
             $food_id = $this->Food_model->get_where($where);

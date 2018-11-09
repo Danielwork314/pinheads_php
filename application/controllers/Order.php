@@ -31,23 +31,23 @@ class Order extends Base_Controller
                 'vendor_id' => $this->session->userdata('login_id')
             );
 
-            $owned_store = $this->Store_model->get_where($where);
+            $owned_store = $this->Store_model->get_where($where)[0];
 
             foreach($owned_store as $row){
 
                 $where = array(
-                    'store_id' => $owned_store['store_id']
+                    'user_order.store_id' => $owned_store['store_id']
                 );
 
-                $order = $this->Order_model->get_where($where);
-                die(var_dump($order));
+                $orders = $this->Order_model->get_where($where);
 
-                array_push($order_array, $order);
+                foreach($orders as $order){
+
+                    array_push($order_array, $order);
+                }
             }
 
             $this->page_data['order'] = $order_array;
-
-            die(var_dump($order_array));
 
         } else {
             
