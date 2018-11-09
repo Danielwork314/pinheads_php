@@ -193,16 +193,6 @@
 						</li>
 						<?php
 					}
-					if($this->session->userdata('role_access')['ingredient']['read_control'] == 1){
-						?>
-						<li class=" <?php if ($this->router->fetch_class() == 'ingredient') echo 'active'; ?> ">
-							<a href="<?=base_url();?>ingredient">
-								<i class="fa fa-clipboard-list"></i>
-								<span>Ingredient</span>
-							</a>
-						</li>
-						<?php
-					}
 					if($this->session->userdata('role_access')['notification']['read_control'] == 1){
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'notification') echo 'active'; ?> ">
