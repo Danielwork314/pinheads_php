@@ -38,7 +38,7 @@ class Order extends Base_Controller
                 foreach($owned_store as $row){
 
                     $where = array(
-                        'user_order.store_id' => $owned_store[0]['store_id']
+                        'user_order.store_id' => $row['store_id']
                     );
 
                     $orders = $this->Order_model->get_where($where);
@@ -49,7 +49,7 @@ class Order extends Base_Controller
                     }
                 }
             }
-                
+
             $this->page_data["order"] = $order_array;
 
         } else {
