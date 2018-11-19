@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class User extends Base_Controller
 {
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
 
@@ -19,7 +19,7 @@ class User extends Base_Controller
 
     }
 
-    function index()
+    public function index()
     {
         $this->page_data["user"] = $this->User_model->get_all_with_role();
 
@@ -28,7 +28,7 @@ class User extends Base_Controller
         $this->load->view("admin/footer");
     }
 
-    function add()
+    public function add()
     {
 
         if ($_POST) {
@@ -49,26 +49,21 @@ class User extends Base_Controller
                 $this->page_data["input"] = $input;
             }
 
-            if (!$error) {
+            if (!empty($_FILES['image']['name'])) {
+                $image = $this->multi_image_upload($_FILES, "image", "user", 1);
 
-                if (!empty($_FILES['file']['name'])) {
-                    $config = array(
-                        "allowed_types" => "gif|png|jpg|jpeg",
-                        "upload_path"   => "./images/user/",
-                        "path"          => "/images/user/"
-                    );
-    
-                    $this->load->library("upload", $config);
-    
-                    if ($this->upload->do_upload("file")) {
-                        $image = $config['path'] . $this->upload->data()['file_name'];
-                    } else {
-                        die(json_encode(array(
-                            "status" => false,
-                            "message" => $this->upload->display_errors()
-                        )));
-                    }
+                if (!$image["error"]) {
+                    $image = $image['urls'];
+                } else {
+                    $error = true;
+                    $error_message = $image["error_message"];
                 }
+            } else {
+                $error = true;
+                $error_message = "Please upload an image";
+            }
+
+            if (!$error) {
 
                 $hash = $this->hash($input['password']);
 
@@ -77,8 +72,8 @@ class User extends Base_Controller
                     'username' => $input['username'],
                     'role_id' => $input['role_id'],
                     'name' => $input['name'],
-                    'gender' => $input['gender'],
-                    'birthday' => $input['birthday'],
+                    'gender_id' => $input['gender_id'],
+                    'birthday' => date("Y-m-d", strtotime($input['birthday'])),
                     'email' => $input['email'],
                     'contact' => $input['contact'],
                     'password' => $hash['password'],
@@ -88,6 +83,8 @@ class User extends Base_Controller
                 $this->User_model->insert($data);
 
                 redirect("user", "refresh");
+            } else {
+                $this->page_data['error'] = $error_message;
             }
         }
 
@@ -99,11 +96,11 @@ class User extends Base_Controller
         $this->load->view("admin/footer");
     }
 
-    function details($user_id)
+    public function details($user_id)
     {
 
         $where = array(
-            "user_id" => $user_id
+            "user_id" => $user_id,
         );
 
         $user = $this->User_model->get_where_with_role($where);
@@ -121,13 +118,12 @@ class User extends Base_Controller
         $user_order = $this->User_order_model->get_where($where);
         $this->page_data["user_order"] = $user_order;
 
-
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/user/details");
         $this->load->view("admin/footer");
     }
 
-    function edit($user_id)
+    public function edit($user_id)
     {
 
         if ($_POST) {
@@ -150,42 +146,31 @@ class User extends Base_Controller
                 }
             }
 
+            if (!empty($_FILES['image']['name'])) {
+                $image = $this->multi_image_upload($_FILES, "image", "product", 1);
+
+                if (!$image["error"]) {
+                    $image_url = $image['urls'];
+                } else {
+                    $error = true;
+                    $error_message = $image["error_message"];
+                }
+            }
+
             if (!$error) {
                 $where = array(
-                    'user_id' => $user_id
+                    'user_id' => $user_id,
                 );
 
-                if (!empty($_FILES['file']['name'])) {
-                    $config = array(
-                        "allowed_types" => "gif|png|jpg|jpeg",
-                        "upload_path"   => "./images/user/",
-                        "path"          => "/images/user/"
-                    );
-    
-                    $this->load->library("upload", $config);
-    
-                    if ($this->upload->do_upload("file")) {
-                        $image = $config['path'] . $this->upload->data()['file_name'];
-                    } else {
-                        die(json_encode(array(
-                            "status" => false,
-                            "message" => $this->upload->display_errors()
-                        )));
-                    }
-                }
-
                 $data = array(
-                    'image' => $image,
                     'username' => $input['username'],
                     'name' => $input['name'],
-                    'gender' => $input['gender'],
-                    'birthday' => $input['birthday'],
+                    'gender_id' => $input['gender_id'],
+                    'birthday' => date("Y-m-d", strtotime($input['birthday'])),
                     'role_id' => $input['role_id'],
                     'email' => $input['email'],
                     'contact' => $input['contact'],
                 );
-
-                // $this->debug($data);
 
                 if (!empty($input['password'])) {
                     $hash = $this->hash($input['password']);
@@ -193,14 +178,18 @@ class User extends Base_Controller
                     $data['salt'] = $hash['salt'];
                 }
 
+                if (!empty($image_url)) {
+                    $data['image'] = $image_url;
+                }
+
                 $this->User_model->update_where($where, $data);
 
-                redirect('user', "refresh");
+                redirect('user/details/' . $user_id, "refresh");
             }
         }
 
         $where = array(
-            "user_id" => $user_id
+            "user_id" => $user_id,
         );
 
         $user = $this->User_model->get_where_with_role($where);
@@ -216,7 +205,7 @@ class User extends Base_Controller
         $this->load->view("admin/footer");
     }
 
-    function delete($user_id)
+    public function delete($user_id)
     {
         $this->User_model->soft_delete($user_id);
 

@@ -41,20 +41,11 @@
 					<?php 
 				}
 				?>
-				<div class="form-group">
-                    <img class="img-thumbnail" src="<?= base_url() . $user['image'] ?>" style="width:50%; height:50%;">
-				</div>
-				<div class="form-group">
-					<label>Profile Picture</label>
-					<input type="file" class="form-control" name="file" required>
-				</div>
+				<?= $input_field['image'] ?>
 				<?= $input_field['username'] ?>
 				<?= $input_field['name'] ?>
-				<?= $input_field['gender'] ?>
-				<div class="form-group">
-                    <label>Birthday</label>
-                    <input type="date" class="form-control" name="birthday" value="<?= $user['birthday'] ?>"" required>
-                </div>
+				<?= $input_field['gender_id'] ?>
+				<?= $input_field['birthday'] ?>
 				<?= $input_field['email'] ?>
 				<?= $input_field['contact'] ?>
 				<?= $input_field['password'] ?>
