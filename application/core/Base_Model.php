@@ -211,6 +211,9 @@ class Base_Model extends CI_Model
             } else if ($row->name == "email") {
                 $html .= '<label for="form_' . $row->name . '">' . $label . '</label>';
                 $html .= '<input type="email" class="form-control" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required>';
+            } else if ($row->type == "date") {
+                $html .= '<label for="form_' . $row->name . '">' . $label . '</label>';
+                $html .= '<input type="text" class="form-control datepicker" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required>';
             } else if (substr($row->name, -3) == "_id" and substr($row->name, 0, -3) != $this->table_name) {
                 if ($this->db->table_exists(substr($row->name, 0, -3))) {
                     $this->db->select('*');
@@ -295,6 +298,9 @@ class Base_Model extends CI_Model
             } else if ($row->name == "email") {
                 $html .= '<label for="form_' . $row->name . '">' . $label . '</label>';
                 $html .= '<input type="email" class="form-control" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required value="' . $data[$row->name] . '">';
+            } else if ($row->type == "date") {
+                $html .= '<label for="form_' . $row->name . '">' . $label . '</label>';
+                $html .= '<input type="text" class="form-control datepicker" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required value="' . date("d-m-Y", strtotime($data[$row->name])) . '">';
             } else if (substr($row->name, -3) == "_id" and substr($row->name, 0, -3) != $this->table_name) {
                 if ($this->db->table_exists(substr($row->name, 0, -3))) {
                     $this->db->select('*');
