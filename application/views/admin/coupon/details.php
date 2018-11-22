@@ -43,11 +43,21 @@
 						</td>
 					</tr>
 					<tr>
+						<td></td>
+					</tr>
+					<tr>
 						<th>Coupon Description</th>
-						<td>:
-							<?= $coupon["description"] ?>
-						</td>
+						<td></td>
                     </tr>
+					<tr>
+						<td colspan="4" class="pre_wrap"><?= $coupon["description"] ?></td>
+					</tr>
+					<tr>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+					</tr>
                     <tr>
 						<th>Valid Date</th>
                         <td>: 

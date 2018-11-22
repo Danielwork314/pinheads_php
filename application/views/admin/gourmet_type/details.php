@@ -41,24 +41,24 @@
 							<?= $gourmet_type["created_date"] ?>
 						</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<th>Created By</th>
 						<td>:
 							<?= $gourmet_type["created_by"] ?>
 						</td>
-					</tr>
+					</tr> -->
 					<tr>
 						<th>Modified Date</th>
 						<td>:
 							<?= $gourmet_type["modified_date"] ?>
 						</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<th>Modified By</th>
 						<td>:
 							<?= $gourmet_type["modified_by"] ?>
 						</td>
-					</tr>
+					</tr> -->
 				</table>
 			</div>
 			<!-- /.box-body -->

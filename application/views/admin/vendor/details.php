@@ -31,8 +31,8 @@
 			<div class="box-body">
 				<table class="formTable">
 					<tr>
-						<th>Profile Picture</th>
-						<td>:
+						<!-- <th>Profile Picture</th> -->
+						<td>
 							<a href="<?= base_url() ?>vendor/details/<?= $vendor['vendor_id']?>">
 								<img src="<?= base_url() . $vendor['image'] ?>" class="xs_thumbnail">
                         	</a>

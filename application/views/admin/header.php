@@ -163,12 +163,32 @@
 						</li>
 						<?php
 					}
+					if($this->session->userdata('role_access')['food_category']['read_control'] == 1){
+						?>
+						<li class=" <?php if ($this->router->fetch_class() == 'food_category') echo 'active'; ?> ">
+							<a href="<?=base_url();?>food_category">
+								<i class="fa fa-utensils"></i>
+								<span>Food Category</span>
+							</a>
+						</li>
+						<?php
+					}
 					if($this->session->userdata('role_access')['food']['read_control'] == 1){
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'food') echo 'active'; ?> ">
 							<a href="<?=base_url();?>food">
 								<i class="fa fa-utensils"></i>
 								<span>Food</span>
+							</a>
+						</li>
+						<?php
+					}
+					if($this->session->userdata('role_access')['table']['read_control'] == 1){
+						?>
+						<li class=" <?php if ($this->router->fetch_class() == 'table') echo 'active'; ?> ">
+							<a href="<?=base_url();?>table">
+								<i class="fas fa-clipboard-list"></i>
+								<span>Table</span>
 							</a>
 						</li>
 						<?php

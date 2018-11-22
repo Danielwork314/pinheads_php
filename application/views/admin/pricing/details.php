@@ -41,24 +41,24 @@
 							<?= $pricing["created_date"] ?>
 						</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<th>Created By</th>
 						<td>:
 							<?= $pricing["created_by"] ?>
 						</td>
-					</tr>
+					</tr> -->
 					<tr>
 						<th>Modified Date</th>
 						<td>:
 							<?= $pricing["modified_date"] ?>
 						</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<th>Modified By</th>
 						<td>:
 							<?= $pricing["modified_by"] ?>
 						</td>
-					</tr>
+					</tr> -->
 				</table>
 			</div>
 			<!-- /.box-body -->

@@ -15,6 +15,8 @@ class Food extends Base_Controller
         $this->load->model("Store_model");
         $this->load->model("Role_model");
         $this->load->model("Access_model");
+        $this->load->model("Food_category_model");
+        $this->load->model("Food_model_model");
         // $this->load->model("Vendor_model");
     }
 
@@ -79,15 +81,29 @@ class Food extends Base_Controller
                 'discount' => $input['discount'],
                 'discounted_price' =>$input['discounted_price'],
                 'store_id' => $input['store_id'],
+                'food_category_id' => $input['food_category_id'],
                 'created_by' => $this->session->userdata('login_id'),
             );
 
             $food_id = $this->Food_model->insert($data);
 
+            for ($i = 0; $i < count($input['food_model']); $i++) {
+                if (trim($input['food_model'][$i]) != "") {
+                    $data = array(
+                        "food_id" => $food_id,
+                        "food_model" => $input['food_model'][$i],
+                        "SKU" => $input['sku'][$i],
+                    );
+
+                    $this->Food_model_model->insert($data);
+                }
+            }
+
             redirect("food", "refresh");
         }
 
         $this->page_data['store'] = $this->Store_model->get_all();
+        $this->page_data['food_category'] = $this->Food_category_model->get_all();
     
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/food/add");
@@ -97,12 +113,28 @@ class Food extends Base_Controller
     function details($food_id)
     {
 
+        if ($_POST) {
+
+            $where = array(
+                "food_model_id" => $this->input->post("food_model_id")
+            );
+            $data = array(
+                "quantity" => $this->input->post("quantity")
+            );
+            $this->Food_model_model->update_where($where, $data);
+
+            redirect("food/details/" . $food_id, "refresh");
+        }
+
         $where = array(
             "food_id" => $food_id
         );
+
         // $this->debug($food_id);
         $food = $this->Food_model->get_where($where);
         $this->page_data["food"] = $food[0];
+
+        $this->page_data["food_model"] = $this->Food_model_model->get_where($where);
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/food/details");
@@ -152,6 +184,7 @@ class Food extends Base_Controller
                 'discount' => $input['discount'],
                 'modified_date' => $date->format("Y-m-d h:i:s"),
                 'store_id' => $input['store_id'],
+                'food_category_id' => $input['food_category_id'],
                 'modified_by' => $this->session->userdata('login_id')
             );
 
@@ -163,6 +196,7 @@ class Food extends Base_Controller
         
 
         $this->page_data['store'] = $this->Store_model->get_all();
+        $this->page_data['food_category'] = $this->Food_category_model->get_all();
         $this->page_data['food'] = $food[0];
 
         $this->load->view("admin/header", $this->page_data);

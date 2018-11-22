@@ -28,7 +28,7 @@
 							<th>Notification Description</th>
 							<th>End Date</th>
                             <th>Created Date</th>
-                            <th>Created By</th>
+                            <!-- <th>Created By</th> -->
                             <th></th>
 						</tr>
 					</thead>
@@ -68,11 +68,11 @@
 									<?= $row['created_date'] ?>
                                 </a>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <a href="<?= base_url() ?>notification/details/<?= $row['notification_id']?>">
 									<?= $row['created_by'] ?>
                                 </a>
-                            </td>
+                            </td> -->
 							<td>
                                 <a href="<?= base_url() ?>notification/delete/<?= $row['notification_id']?>" class="btn btn-danger delete-button">Delete</a>
                             </td>
@@ -90,7 +90,7 @@
 							<th>Notification Description</th>
 							<th>End Date</th>
                             <th>Created Date</th>
-                            <th>Created By</th>
+                            <!-- <th>Created By</th> -->
                             <th></th>
 						</tr>
 					</tfoot>
