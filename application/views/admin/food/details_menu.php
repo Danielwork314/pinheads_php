@@ -31,8 +31,8 @@
 			<div class="box-body">
 				<table class="formTable">
 					<tr>
-						<th>Image</th>
-						<td>:
+						<!-- <th>Image</th> -->
+						<td>
 						<a href="<?= base_url() ?>food/details_menu/<?= $food['food_id']?>">
 								<img src="<?= base_url() . $food['image'] ?>" class="xs_thumbnail">
                         	</a>

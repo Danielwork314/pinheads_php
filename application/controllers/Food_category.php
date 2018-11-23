@@ -25,6 +25,7 @@ class Food_category extends Base_Controller
 
     function add()
     {
+        $this->page_data['input_field'] = $this->Food_category_model->generate_input();
 
         if ($_POST) {
             $input = $this->input->post();
@@ -40,10 +41,12 @@ class Food_category extends Base_Controller
                 $this->Food_category_model->insert($data);
 
                 redirect("food_category", "refresh");
+
+            }else{
+
+                $this->page_data["input"] = $input;
             }
         }
-
-        $this->page_data['input_field'] = $this->Food_category_model->generate_input();
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/food_category/add");
@@ -71,7 +74,6 @@ class Food_category extends Base_Controller
     function edit($food_category_id)
     {
 
-        
         $where = array(
             "food_category_id" => $food_category_id
         );
@@ -83,12 +85,13 @@ class Food_category extends Base_Controller
         $this->page_data["food_category"] = $food_category[0];
         $this->page_data['input_field'] = $this->Food_category_model->generate_edit_input($food_category_id);
 
+
         if ($_POST) {
             $input = $this->input->post();
 
             $error = false;
 
-            if (!$error) {
+            if (!$error){
                 $where = array(
                     "food_category_id" => $food_category_id
                 );
@@ -101,6 +104,9 @@ class Food_category extends Base_Controller
                 $this->Food_category_model->update_where($where, $data);
 
                 redirect("food_category/details/" . $food_category_id, "refresh");
+            }else{
+
+                $this->page_data["input"] = $input;
             }
         }
 

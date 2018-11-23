@@ -20,26 +20,35 @@ class Order_food extends Base_Controller
     function add()
     {
 
+        $this->page_data['order_food'] = $this->Order_food_model->get_all();
+        $this->page_data['user_order'] = $this->User_order_model->get_all();
+        $this->page_data['food'] = $this->Food_model->get_all();
+        $this->page_data['input_field'] = $this->Order_food_model->generate_input();
+
         if ($_POST) {
             $input = $this->input->post();
 
             $error = false;
 
-            $data = array(
-                'user_order_id' => $input['user_order_id'],
-                'food_id' => $input['food_id'],
-                'end_date' => $input['end_date'],
-                'created_by' => $this->session->userdata('login_id'),
-            );
+            if(!$error){
 
-            $this->Order_food_model->insert($data);
+                $data = array(
+                    'user_order_id' => $input['user_order_id'],
+                    'food_id' => $input['food_id'],
+                    'end_date' => $input['end_date'],
+                    'created_by' => $this->session->userdata('login_id'),
+                );
 
-            redirect("Order_food_model", "refresh");
+                $this->Order_food_model->insert($data);
+
+                redirect("Order_food_model", "refresh");
+
+            }else{
+
+                $this->page_data["input"] = $input;
+            }
+            
         }
-
-        $this->page_data['order_food'] = $this->Order_food_model->get_all();
-        $this->page_data['user_order'] = $this->User_order_model->get_all();
-        $this->page_data['food'] = $this->Food_model->get_all();
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/order_food/add");
