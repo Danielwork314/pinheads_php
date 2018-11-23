@@ -33,7 +33,7 @@
 				?>
 				<div class="form-group">
 					<label>Table No.</label>
-					<input type="text" class="form-control" name="table_no" required placeholder="Table No.">
+					<input type="text" class="form-control" name="table_position" required placeholder="Table No.">
 				</div>
 			<!-- /.box-body -->
 

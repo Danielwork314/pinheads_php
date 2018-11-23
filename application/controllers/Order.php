@@ -68,7 +68,7 @@ class Order extends Base_Controller
         $this->page_data['food'] = $this->Food_model->get_all();
         $this->page_data['user'] = $this->User_model->get_all();
         $this->page_data['store'] = $this->Store_model->get_all();
-        $this->page_data['input_field'] = $this->Order_model->generate_input();
+        // $this->page_data['input_field'] = $this->Order_model->generate_input();
 
         if ($_POST) {
 

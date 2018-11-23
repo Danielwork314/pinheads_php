@@ -68,7 +68,7 @@
 					<label>Gourmet Type</label>
 					<select class="form-control" name="gourmet_type_id">
 						<?php foreach($type as $row) { ?>
-						<option value="<?= $row['gourmet_type_id'] ?>"><?= $row['gourmet_type_title'] ?></option>
+						<option value="<?= $row['gourmet_type_id'] ?>"><?= $row['gourmet_type'] ?></option>
 						<?php } ?>
 					</select> 
 				</div>
@@ -76,7 +76,7 @@
 					<label>Pricing</label>
 					<select class="form-control" name="pricing_id">
 						<?php foreach($price as $row) { ?>
-						<option value="<?= $row['pricing_id'] ?>"><?= $row['pricing_title'] ?></option>
+						<option value="<?= $row['pricing_id'] ?>"><?= $row['pricing'] ?></option>
 						<?php } ?>
 					</select> 
 				</div>

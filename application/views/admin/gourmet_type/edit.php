@@ -34,7 +34,7 @@
                 
 				<div class="form-group">
 					<label>Gourmet Type Title</label>
-					<input type="text" class="form-control" name="gourmet_type_title" required value="<?= $gourmet_type['gourmet_type_title'] ?>">
+					<input type="text" class="form-control" name="gourmet_type" required value="<?= $gourmet_type['gourmet_type'] ?>">
 				</div>
 			</div>
 			<!-- /.box-body -->
