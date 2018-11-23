@@ -37,7 +37,7 @@ class Gourmet_type extends Base_Controller
             if(!$error){
 
                 $data = array(
-                    'gourmet_type_title' => $input['gourmet_type_title'],
+                    'gourmet_type' => $input['gourmet_type'],
                     'created_by' => $this->session->userdata('login_id'),
                 );
 
@@ -96,7 +96,7 @@ class Gourmet_type extends Base_Controller
                 $date = new DateTime(null, new DateTimeZone('Asia/Kuala_Lumpur'));
             
                 $data = array(
-                    'gourmet_type_title' => $input['gourmet_type_title'],
+                    'gourmet_type' => $input['gourmet_type'],
                     'created_by' => $this->session->userdata('login_id'),
                     'modified_date' => $date->format("Y-m-d h:i:s"),
                     'modified_by' => $this->session->userdata('login_id')

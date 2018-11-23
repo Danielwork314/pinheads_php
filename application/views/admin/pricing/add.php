@@ -33,7 +33,7 @@
 				?>
 				<div class="form-group">
 					<label>Pricing Title</label>
-					<input type="text" class="form-control" name="pricing_title" required placeholder="Pricing title">
+					<input type="text" class="form-control" name="pricing" required placeholder="Pricing title">
 				</div>
 			<!-- /.box-body -->
 

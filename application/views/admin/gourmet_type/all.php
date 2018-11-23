@@ -23,7 +23,7 @@
 					<thead>
 						<tr>
 							<th>No.</th>
-                            <th>Gourmet Type Title</th>
+                            <th>Gourmet Type</th>
                             <th>Created Date</th>
                             <!-- <th>Created By</th> -->
                             <th></th>
@@ -42,7 +42,7 @@
                             </td>
 							<td>
                                 <a href="<?= base_url() ?>gourmet_type/details/<?= $row['gourmet_type_id']?>">
-									<?= $row['gourmet_type_title'] ?>
+									<?= $row['gourmet_type'] ?>
                                 </a>
                             </td>
                             <td>

@@ -40,7 +40,7 @@ class Table extends Base_Controller
             if(!$error){
 
                 $data = array(
-                    'table_no' => $input['table_no'],
+                    'table_position' => $input['table_position'],
                     'created_by' => $this->session->userdata('login_id'),
                 );
 
@@ -60,13 +60,13 @@ class Table extends Base_Controller
         $this->load->view("admin/footer");
     }
 
-    function details($table_id)
+    function details($table_position_id)
     {
 
         $where = array(
-            "table_id" => $table_id
+            "table_position_id" => $table_position_id
         );
-        // $this->debug($table_id);
+        // $this->debug($table_position_id);
         $table = $this->Table_model->get_where($where);
 
         $this->page_data["table"] = $table[0];
@@ -76,18 +76,18 @@ class Table extends Base_Controller
         $this->load->view("admin/footer");
     }
 
-    function edit($table_id)
+    function edit($table_position_id)
     {
 
         $where = array(
-            'table_id' => $table_id
+            'table_position_id' => $table_position_id
         );
 
         $table = $this->Table_model->get_where($where);
 
         $this->page_data['table'] = $table[0];
 
-        $this->page_data['input_field'] = $this->Table_model->generate_edit_input($table_id);
+        $this->page_data['input_field'] = $this->Table_model->generate_edit_input($table_position_id);
 
         if ($_POST) {
 
@@ -101,7 +101,7 @@ class Table extends Base_Controller
                 
                 $data = array(
 
-                    'table_no' => $input['table_no'],
+                    'table_position' => $input['table_position'],
                     'created_by' => $this->session->userdata('login_id'),
                     'modified_date' => $date->format("Y-m-d h:i:s"),
                     'modified_by' => $this->session->userdata('login_id')
@@ -122,9 +122,9 @@ class Table extends Base_Controller
         $this->load->view("admin/footer");
     }
 
-    function delete($table_id){
+    function delete($table_position_id){
 
-        $this->Table_model->soft_delete($table_id);
+        $this->Table_model->soft_delete($table_position_id);
         redirect("table", "refresh");
     }
 

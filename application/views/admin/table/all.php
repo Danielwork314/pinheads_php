@@ -35,22 +35,22 @@
                                 ?>
 						<tr>
 							<td>
-                                <a href="<?= base_url() ?>table/details/<?= $row['table_id']?>">
+                                <a href="<?= base_url() ?>table/details/<?= $row['table_position_id']?>">
 									<?= $i ?>
                                 </a>
                             </td>
 							<td>
-                                <a href="<?= base_url() ?>table/details/<?= $row['table_id']?>">
-									<?= $row['table_no'] ?>
+                                <a href="<?= base_url() ?>table/details/<?= $row['table_position_id']?>">
+									<?= $row['table_position'] ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="<?= base_url() ?>table/details/<?= $row['table_id']?>">
+                                <a href="<?= base_url() ?>table/details/<?= $row['table_position_id']?>">
 									<?= $row['created_date'] ?>
                                 </a>
                             </td>
 							<td>
-                                <a href="<?= base_url() ?>table/delete/<?= $row['table_id']?>" class="btn btn-danger delete-button">Delete</a>
+                                <a href="<?= base_url() ?>table/delete/<?= $row['table_position_id']?>" class="btn btn-danger delete-button">Delete</a>
                             </td>
 						</tr>
 						<?php

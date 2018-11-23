@@ -1,6 +1,6 @@
 <section class="content-header">
 	<h1>
-		<?= $table['table_no'] ?>
+		<?= $table['table_position'] ?>
 	</h1>
 	<ol class="breadcrumb">
 		<li>
@@ -8,8 +8,8 @@
             <i class="fas fa-clipboard-list"></i> Table</a>
 		</li>
 		<li>
-			<a href="<?= base_url() ?>table/details/<?= $table['table_id'] ?>">
-				<?= $table['table_no'] ?>
+			<a href="<?= base_url() ?>table/details/<?= $table['table_position_id'] ?>">
+				<?= $table['table_position'] ?>
 			</a>
 		</li>
 	</ol>
@@ -20,9 +20,9 @@
 		<div class="box box-primary">
 			<div class="box-header with-border">
 				<h3 class="box-title">
-					<?= $table['table_no'] ?>'s Info
+					<?= $table['table_position'] ?>'s Info
 				</h3>
-				<a href="<?php echo site_url('table/edit') . '/' . $table['table_id'] ?>" class='btn btn-default pull-right'>
+				<a href="<?php echo site_url('table/edit') . '/' . $table['table_position_id'] ?>" class='btn btn-default pull-right'>
 					<i class='fa fa-edit'></i> Edit</a>
 			</div>
 			<!-- /.box-header -->
@@ -32,7 +32,7 @@
 					<tr>
 						<th>Table No.</th>
 						<td>:
-							<?= $table["table_no"] ?>
+							<?= $table["table_position"] ?>
 						</td>
 					</tr>
 					<tr>
