@@ -27,25 +27,35 @@ class Notification extends Base_Controller
     function add()
     {
 
+        $this->page_data['notification'] = $this->Notification_model->get_all();
+        $this->page_data['input_field'] = $this->Notification_model->generate_input();
+
         if ($_POST) {
             $input = $this->input->post();
 
             $error = false;
 
-            $data = array(
-                'notification' => $input['notification'],
-                'description' => $input['description'],
-                'end_date' => $input['end_date'],
-                'created_by' => $this->session->userdata('login_id'),
-                'user_id' => $input['user_id'],
-            );
+            if(!$error){
 
-            $this->Notification_model->insert($data);
+                $data = array(
+                    'notification' => $input['notification'],
+                    'description' => $input['description'],
+                    'end_date' => $input['end_date'],
+                    'created_by' => $this->session->userdata('login_id'),
+                    'user_id' => $input['user_id'],
+                );
 
-            redirect("notification", "refresh");
+                $this->Notification_model->insert($data);
+
+                redirect("notification", "refresh");
+
+            }else{
+
+                $this->page_data["input"] = $input;
+            }
+
+            
         }
-
-        $this->page_data['notification'] = $this->Notification_model->get_all();
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/notification/add");
@@ -76,34 +86,43 @@ class Notification extends Base_Controller
         );
 
         $notification = $this->Notification_model->get_where($where);
+
+        $this->page_data['notification'] = $notification[0];
+
+        $this->page_data['user'] = $this->User_model->get_all();
+
+        $this->page_data['input_field'] = $this->Notification_model->generate_edit_input($notification_id);
         
         if ($_POST) {
+
             $input = $this->input->post();
 
             $error = false;
 
-          
-            $date = new DateTime(null, new DateTimeZone('Asia/Kuala_Lumpur'));
+            if(!$error){
 
-            $data = array(
+                $date = new DateTime(null, new DateTimeZone('Asia/Kuala_Lumpur'));
 
-                'notification' => $input['notification'],
-                'description' => $input['description'],
-                'end_date' => $input['end_date'],
-                'modified_date' => $date->format("Y-m-d h:i:s"),
-                'modified_by' => $this->session->userdata('login_id'),
-                'user_id' => $input['user_id'],
-            
-            );
+                $data = array(
 
-            $this->Notification_model->update_where($where, $data);
+                    'notification' => $input['notification'],
+                    'description' => $input['description'],
+                    'end_date' => $input['end_date'],
+                    'modified_date' => $date->format("Y-m-d h:i:s"),
+                    'modified_by' => $this->session->userdata('login_id'),
+                    'user_id' => $input['user_id'],
+                
+                );
 
-            redirect("notification", "refresh");
+                $this->Notification_model->update_where($where, $data);
+
+                redirect("notification", "refresh");
+
+            }else{
+
+                $this->page_data["input"] = $input;
+            }
         }
-
-        $this->page_data['user'] = $this->User_model->get_all();
-
-        $this->page_data['notification'] = $notification[0];
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/notification/edit");

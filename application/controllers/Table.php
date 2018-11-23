@@ -27,22 +27,33 @@ class Table extends Base_Controller
     function add()
     {
 
+        $this->page_data['table'] = $this->Table_model->get_all();
+
+        $this->page_data['input_field'] = $this->Table_model->generate_input();
+
         if ($_POST) {
+
             $input = $this->input->post();
 
             $error = false;
 
-            $data = array(
-                'table_no' => $input['table_no'],
-                'created_by' => $this->session->userdata('login_id'),
-            );
+            if(!$error){
 
-            $this->Table_model->insert($data);
+                $data = array(
+                    'table_no' => $input['table_no'],
+                    'created_by' => $this->session->userdata('login_id'),
+                );
 
-            redirect("table", "refresh");
+                $this->Table_model->insert($data);
+
+                redirect("table", "refresh");
+
+            }else{
+
+                $this->page_data["input"] = $input;
+            }
+           
         }
-
-        $this->page_data['table'] = $this->Table_model->get_all();
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/table/add");
@@ -74,26 +85,37 @@ class Table extends Base_Controller
 
         $table = $this->Table_model->get_where($where);
 
+        $this->page_data['table'] = $table[0];
+
+        $this->page_data['input_field'] = $this->Table_model->generate_edit_input($table_id);
+
         if ($_POST) {
+
             $input = $this->input->post();
 
             $error = false;
 
-            $date = new DateTime(null, new DateTimeZone('Asia/Kuala_Lumpur'));
-            
-            $data = array(
-                'table_no' => $input['table_no'],
-                'created_by' => $this->session->userdata('login_id'),
-                'modified_date' => $date->format("Y-m-d h:i:s"),
-                'modified_by' => $this->session->userdata('login_id')
-            );
+            if(!$error){
 
-            $this->Table_model->update_where($where, $data);
+                $date = new DateTime(null, new DateTimeZone('Asia/Kuala_Lumpur'));
+                
+                $data = array(
 
-            redirect("table", "refresh");
+                    'table_no' => $input['table_no'],
+                    'created_by' => $this->session->userdata('login_id'),
+                    'modified_date' => $date->format("Y-m-d h:i:s"),
+                    'modified_by' => $this->session->userdata('login_id')
+                );
+
+                $this->Table_model->update_where($where, $data);
+
+                redirect("table", "refresh");
+
+            }else{
+
+                $this->page_data["input"] = $input;
+            }
         }
-
-        $this->page_data['table'] = $table[0];
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/table/edit");

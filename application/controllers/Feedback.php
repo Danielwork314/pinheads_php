@@ -26,24 +26,31 @@ class Feedback extends Base_Controller
 
     function add()
     {
+        $this->page_data['feedback'] = $this->Feedback_model->get_all();
+        $this->page_data['input_field'] = $this->Feedback_model->generate_input();
 
         if ($_POST) {
             $input = $this->input->post();
 
             $error = false;
 
-            $data = array(
-                'feedback' => $input['feedback'],
-                'created_by' => $this->session->userdata('login_id'),
-                'user_id' => $input['user_id'],
-            );
+            if(!$error){
 
-            $this->Feedback_model->insert($data);
+                $data = array(
+                    'feedback' => $input['feedback'],
+                    'created_by' => $this->session->userdata('login_id'),
+                    'user_id' => $input['user_id'],
+                );
 
-            redirect("feedback", "refresh");
+                 $this->Feedback_model->insert($data);
+
+                redirect("feedback", "refresh");
+
+            }else{
+
+                $this->page_data["input"] = $input;
+            }
         }
-
-        $this->page_data['feedback'] = $this->Feedback_model->get_all();
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/feedback/add");
@@ -75,26 +82,35 @@ class Feedback extends Base_Controller
 
         $feedback = $this->Feedback_model->get_where($where);
 
+        $this->page_data['feedback'] = $feedback[0];
+
+        $this->page_data['input_field'] = $this->Feedback_model->generate_edit_input($feedback_id);
+
         if ($_POST) {
             $input = $this->input->post();
 
             $error = false;
 
-            $date = new DateTime(null, new DateTimeZone('Asia/Kuala_Lumpur'));
+            if(!$error){
+
+                $date = new DateTime(null, new DateTimeZone('Asia/Kuala_Lumpur'));
             
-            $data = array(
-                'feedback' => $input['feedback'],
-                'created_by' => $this->session->userdata('login_id'),
-                'modified_date' => $date->format("Y-m-d h:i:s"),
-                'modified_by' => $this->session->userdata('login_id')
-            );
+                $data = array(
+                    'feedback' => $input['feedback'],
+                    'created_by' => $this->session->userdata('login_id'),
+                    'modified_date' => $date->format("Y-m-d h:i:s"),
+                    'modified_by' => $this->session->userdata('login_id')
+                );
 
-            $this->Feedback_model->update_where($where, $data);
+                $this->Feedback_model->update_where($where, $data);
 
-            redirect("feedback", "refresh");
+                redirect("feedback", "refresh");
+
+            }else{
+
+                $this->page_data["input"] = $input;
+            }
         }
-
-        $this->page_data['feedback'] = $feedback[0];
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/feedback/edit");
