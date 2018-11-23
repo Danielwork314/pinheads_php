@@ -187,13 +187,8 @@
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'table') echo 'active'; ?> ">
 							<a href="<?=base_url();?>table">
-<<<<<<< HEAD
-								<i class="fas fa-clipboard-list"></i>
-								<span><?php echo '&nbsp;&nbsp;' ?> Table</span>
-=======
 								<i class="fa fa-clipboard-list"></i>
 								<span>Table</span>
->>>>>>> 1fbea26021cc5185b29c4b6206cf7368ec3e4505
 							</a>
 						</li>
 						<?php
