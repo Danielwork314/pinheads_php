@@ -12,6 +12,7 @@ class Payment extends Base_Controller
         $this->page_data = array();
 
         $this->load->model("Payment_model");
+        $this->load->model("Card_model");
         $this->load->model("User_model");
     }
 
@@ -27,19 +28,6 @@ class Payment extends Base_Controller
             $error = false;
 
             $data = array(
-                'card_no' => $input['card_no'],
-                'bank' => $input['bank'],
-                'card_type' => $input['card_type'],
-                'cvv' => $input['cvv'],
-                'month' => $input['month'],
-                'year' => $input['year'],
-                'firstname' => $input['firstname'],
-                'lastname' => $input['lastname'],
-                'address' => $input['address'],
-                'region' => $input['region'],
-                'phone' => $input['phone'],
-                'email' => $input['email'],
-                'created_by' => $this->session->userdata('login_id'),
                 'user_id' => $user_id,
             );
 
@@ -50,7 +38,7 @@ class Payment extends Base_Controller
 
         $this->page_data['user'] = $this->User_model->get_all();
 
-        // $this->page_data['input_fields'] = $this->Payment_model->generate_input();
+        $this->page_data['input_fields'] = $this->Card_model->generate_input();
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/payment/add");

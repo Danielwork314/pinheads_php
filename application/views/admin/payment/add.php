@@ -33,56 +33,10 @@
                         <?php 
                     }
                     ?>
-
-                    <div class="form-group">
-                        <label>Card No</label>
-                        <input type="text" class="form-control" name="card_no" required placeholder="Card No">
-                    </div>
-                    <div class="form-group">
-                        <label>Bank</label>
-                        <input type="text" class="form-control" name="bank" required placeholder="Bank">
-                    </div>
-                    <div class="form-group">
-                        <label>Card Type</label>
-                        <input type="text" class="form-control" name="card_type" required placeholder="Card Type">
-                    </div>
-                    <div class="form-group">
-                        <label>CVV</label>
-                        <input type="text" class="form-control" name="cvv" required placeholder="CVV">
-                    </div>
-                    <div class="form-group">
-                        <label>Month</label>
-                        <input type="text" class="form-control" name="month" required placeholder="Month">
-                    </div>
-                    <div class="form-group">
-                        <label>Year</label>
-                        <input type="text" class="form-control" name="year" required placeholder="Year">
-                    </div>
-                    <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" class="form-control" name="firstname" required placeholder="First Name">
-                    </div>
-                    <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" class="form-control" name="lastname" required placeholder="Last Name">
-                    </div>
-                    <div class="form-group">
-                        <label>Address</label>
-                        <input type="text" class="form-control" name="address" required placeholder="Address">
-                    </div>
-                    <div class="form-group">
-                        <label>Region</label>
-                        <input type="text" class="form-control" name="region" required placeholder="Region">
-                    </div>
-                    <div class="form-group">
-                        <label>Phone No</label>
-                        <input type="text" class="form-control" name="phone" required placeholder="Phone No">
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" name="email" required placeholder="Email">
-                    </div>
-                    
+                    <?= $input_fields['name_on_card'] ?>
+                    <?= $input_fields['card_number'] ?>
+                    <?= $input_fields['postal_code'] ?>
+                    <?= $input_fields['cvv'] ?>
                 </div>
                 <!-- /.box-body -->
 

@@ -201,7 +201,7 @@ class Base_Model extends CI_Model
             } else if ($row->type == "longtext" or $row->type == "text") {
                 $html .= '<label for="form_' . $row->name . '">' . $label . '</label>';
                 $html .= '<textarea class="form-control" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required rows="5"></textarea>';
-            } else if ($row->name == "thumbnail" or $row->name == "image") {
+            } else if ($row->name == "thumbnail" or $row->name == "image" or $row->name == "photo") {
                 $html .= '<div id="preview_' . $row->name . '" class="upload_preview"></div>';
                 $html .= '<label for="form_' . $row->name . '">' . $label . '</label>';
                 $html .= '<input type="file" class="form-control image_input" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required>';
@@ -216,23 +216,39 @@ class Base_Model extends CI_Model
                 $html .= '<input type="text" class="form-control datepicker" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required>';
             } else if (substr($row->name, -3) == "_id" and substr($row->name, 0, -3) != $this->table_name) {
                 if ($this->db->table_exists(substr($row->name, 0, -3))) {
-                    $this->db->select('*');
-                    $this->db->from(substr($row->name, 0, -3));
-                    $this->db->where(substr($row->name, 0, -3) . '.deleted', 0);
-                    if (substr($row->name, 0, -3) == "role") {
-                        $this->db->where('type', strtoupper($this->table_name));
+                    $fields = $this->db->list_fields(substr($row->name, 0, -3));
+
+                    $field_exists = false;
+                    foreach ($fields as $field_row) {
+                        if ($field_row == substr($row->name, 0, -3)) {
+                            $field_exists = true;
+                        }
                     }
 
-                    $query = $this->db->get();
+                    if ($field_exists) {
+                        $this->db->select('*');
+                        $this->db->from(substr($row->name, 0, -3));
+                        $this->db->where(substr($row->name, 0, -3) . '.deleted', 0);
+                        if (substr($row->name, 0, -3) == "role") {
+                            $this->db->where('type', strtoupper($this->table_name));
+                        }
 
-                    $result = $query->result_array();
+                        $query = $this->db->get();
 
-                    $html .= '<label for="form_' . $row->name . '">' . ucwords(substr($row->name, 0, -3)) . '</label>';
-                    $html .= '<select class="form-control" id="form_' . $row->name . '" name="' . $row->name . '">';
-                    foreach ($result as $result_row) {
-                        $html .= '<option value="' . $result_row[substr($row->name, 0, -3) . '_id'] . '">' . $result_row[substr($row->name, 0, -3)] . '</option>';
+                        $result = $query->result_array();
+
+                        $this->debug($result);
+
+                        $html .= '<label for="form_' . $row->name . '">' . ucwords(substr($row->name, 0, -3)) . '</label>';
+                        $html .= '<select class="form-control" id="form_' . $row->name . '" name="' . $row->name . '">';
+                        foreach ($result as $result_row) {
+                            $html .= '<option value="' . $result_row[substr($row->name, 0, -3) . '_id'] . '">' . $result_row[substr($row->name, 0, -3)] . '</option>';
+                        }
+                        $html .= '</select>';
+                    } else {
+                        $html .= '<label for="form_' . $row->name . '">' . $label . '</label>';
+                        $html .= '<input type="text" class="form-control" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required>';
                     }
-                    $html .= '</select>';
                 } else if (substr($row->name, 0, -3) == "parent") {
                     $self_data = $this->get_all();
 
