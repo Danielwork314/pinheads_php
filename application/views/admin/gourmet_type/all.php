@@ -3,7 +3,7 @@
 		Gourmet Type
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="<?= base_url() ?>gourmet_type"><i class="fa fa-mortar-pestle"></i> Food</a></li>
+		<li><a href="<?= base_url() ?>gourmet_type"><i class="fa fa-mortar-pestle"></i> Gourmet Type</a></li>
 	</ol>
 </section>
 <br>

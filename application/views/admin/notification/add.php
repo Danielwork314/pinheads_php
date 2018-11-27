@@ -31,15 +31,17 @@
 					<?php 
 				}
 				?>
-
-				<div class="form-group">
+				<?= $input_field['notification'] ?>
+				<?= $input_field['description'] ?>
+				<!-- <?= $input_field['end_date'] ?> -->
+				<!-- <div class="form-group">
 					<label>Notification</label>
 					<input type="text" class="form-control" name="notificaiton" required placeholder="Notification">
 				</div>
                 <div class="form-group">
 					<label>Notification Description</label>
 					<input type="text" class="form-control" name="description" required placeholder="Notification description">
-				</div>
+				</div> -->
 				<div class="form-group">
 					<label>End Date</label>
 					<input type="date" class="form-control" name="end_date" required placeholder="End date">

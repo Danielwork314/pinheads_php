@@ -27,6 +27,7 @@ class Store extends Base_Controller
 
             $where = array(
                 "vendor_id" => $this->session->userdata("login_id"),
+                // "store.created_by" => $this->session->userdata("login_data")["vendor_id"],
             );
 
             $store_id = $this->Store_model->get_where($where);
@@ -47,7 +48,7 @@ class Store extends Base_Controller
 
         $this->page_data['type'] = $this->Gourmet_type_model->get_all();
         $this->page_data['price'] = $this->Pricing_model->get_all();
-        // $this->page_data['input_field'] = $this->Store_model->generate_input();
+        $this->page_data['input_field'] = $this->Store_model->generate_input();
 
         if ($_POST) {
             $input = $this->input->post();

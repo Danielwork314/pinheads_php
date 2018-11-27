@@ -108,7 +108,7 @@ class Notification extends Base_Controller
                     'notification' => $input['notification'],
                     'description' => $input['description'],
                     'end_date' => $input['end_date'],
-                    'modified_date' => $date->format("Y-m-d h:i:s"),
+                    'modified_date' => $date->format("Y-m-d H:i:s"),
                     'modified_by' => $this->session->userdata('login_id'),
                     'user_id' => $input['user_id'],
                 

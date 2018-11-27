@@ -33,8 +33,21 @@
                         <?php 
                     }
                     ?>
+                    
+                    <?= $input_field['card_no'] ?>
+                    <?= $input_field['bank'] ?>
+                    <?= $input_field['card_type'] ?>
+                    <?= $input_field['cvv'] ?>
+                    <?= $input_field['month'] ?>
+                    <?= $input_field['year'] ?>
+                    <?= $input_field['firstname'] ?>
+                    <?= $input_field['lastname'] ?>
+                    <?= $input_field['address'] ?>
+                    <?= $input_field['region'] ?>
+                    <?= $input_field['phone'] ?>
+                    <?= $input_field['email'] ?>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label>Card No</label>
                         <input type="text" class="form-control" name="card_no" required placeholder="Card No">
                     </div>
@@ -81,7 +94,7 @@
                     <div class="form-group">
                         <label>Email</label>
                         <input type="email" class="form-control" name="email" required placeholder="Email">
-                    </div>
+                    </div> -->
                     
                 </div>
                 <!-- /.box-body -->

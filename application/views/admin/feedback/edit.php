@@ -31,11 +31,11 @@
 					<?php 
 				}
                 ?>
-                
-				<div class="form-group">
+                <?= $input_field['feedback'] ?>
+				<!-- <div class="form-group">
 					<label>Feedback</label>
 					<input type="text" class="form-control" name="feedback" required value="<?= $feedback['feedback'] ?>">
-				</div>
+				</div> -->
 			</div>
 			<!-- /.box-body -->
 

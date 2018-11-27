@@ -31,11 +31,11 @@
 					<?php 
 				}
                 ?>
-                
-				<div class="form-group">
+                <?= $input_field['pricing'] ?>
+				<!-- <div class="form-group">
 					<label>Pricing Title</label>
 					<input type="text" class="form-control" name="pricing" required value="<?= $pricing['pricing'] ?>">
-				</div>
+				</div> -->
 			</div>
 			<!-- /.box-body -->
 

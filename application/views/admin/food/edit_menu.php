@@ -39,8 +39,17 @@
 					<label>Image</label>
 					<input type="file" class="form-control" name="file" required>
 				</div>
-				<div class="form-group">
-					<label>Title</label>
+
+				<?= $input_field['food'] ?>
+				<?= $input_field['food_category_id'] ?>
+				<?= $input_field['description'] ?>
+				<?= $input_field['price'] ?>
+				<?= $input_field['discounted_price'] ?>
+				<?= $input_field['discount'] ?>
+				<?= $input_field['store_id'] ?>
+
+				<!-- <div class="form-group">
+					<label>Food</label>
 					<input type="text" class="form-control" name="food" required value="<?= $food['food'] ?>">
 				</div>
                 <div class="form-group">
@@ -58,7 +67,7 @@
 				<div class="form-group">
 					<label>Discount (%)</label>
 					<input type="text" class="form-control" name="discount" id="form_discount" required value="<?= $food['discount'] ?>">
-				</div>
+				</div> -->
 			</div>
 			<!-- /.box-body -->
 

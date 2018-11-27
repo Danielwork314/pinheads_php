@@ -12,6 +12,7 @@ class Feedback extends Base_Controller
         $this->page_data = array();
 
         $this->load->model("Feedback_model");
+        // $this->load->model("User_model");
        
     }
 
@@ -27,9 +28,11 @@ class Feedback extends Base_Controller
     function add()
     {
         $this->page_data['feedback'] = $this->Feedback_model->get_all();
+        // $this->page_data['user'] = $this->User_model->get_all();
         $this->page_data['input_field'] = $this->Feedback_model->generate_input();
 
         if ($_POST) {
+            
             $input = $this->input->post();
 
             $error = false;
@@ -39,7 +42,7 @@ class Feedback extends Base_Controller
                 $data = array(
                     'feedback' => $input['feedback'],
                     'created_by' => $this->session->userdata('login_id'),
-                    'user_id' => $input['user_id'],
+                    // 'user_id' => $this->session->userdata('login_id'),
                 );
 
                  $this->Feedback_model->insert($data);
