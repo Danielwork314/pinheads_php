@@ -27,6 +27,7 @@ class Store extends Base_Controller
 
             $where = array(
                 "vendor_id" => $this->session->userdata("login_id"),
+                // "store.created_by" => $this->session->userdata("login_data")["vendor_id"],
             );
 
             $store_id = $this->Store_model->get_where($where);

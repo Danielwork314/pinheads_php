@@ -30,16 +30,20 @@
 					</div>
 					<?php 
 				}
-                ?>
-                
-				<div class="form-group">
+				?>
+				
+                <?= $input_field['notification'] ?>
+				<?= $input_field['description'] ?>
+				<!-- <?= $input_field['end_date'] ?> -->
+
+				<!-- <div class="form-group">
 					<label>Notification Title</label>
 					<input type="text" class="form-control" name="notification" required value="<?= $notification['notification'] ?>">
 				</div>
                 <div class="form-group">
 					<label>Notification Description</label>
 					<input type="text" class="form-control" name="description" required value="<?= $notification['description'] ?>">
-				</div>
+				</div> -->
                 <div class="form-group">
 					<label>End Date</label>
 					<input type="text" class="form-control" name="end_date" required value="<?= $notification['end_date'] ?>">

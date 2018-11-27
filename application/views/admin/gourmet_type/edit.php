@@ -31,11 +31,11 @@
 					<?php 
 				}
                 ?>
-                
-				<div class="form-group">
+                <?= $input_field['gourmet_type'] ?>
+				<!-- <div class="form-group">
 					<label>Gourmet Type Title</label>
 					<input type="text" class="form-control" name="gourmet_type" required value="<?= $gourmet_type['gourmet_type'] ?>">
-				</div>
+				</div> -->
 			</div>
 			<!-- /.box-body -->
 

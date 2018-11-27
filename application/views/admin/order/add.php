@@ -40,7 +40,10 @@
                         <?php } ?>
                     </select>
                 </div>
-
+                <!-- <?= $input_field['payment_id'] ?>
+                <?= $input_field['billing_address_id'] ?>
+                <?= $input_field['store_id'] ?> -->
+                
                 <div class="form-group">
                     <label>Payment</label>
                     <div class="form_payment">

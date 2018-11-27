@@ -39,17 +39,22 @@
                         <input type="file" class="form-control" name="file" id="file" required>
                     </div>
                     
-                    <?= $input_fields['food'] ?>
-                    <div class="form-group">
+                    <?= $input_field['food'] ?>
+                    <?= $input_field['food_category_id'] ?>
+                    <?= $input_field['description'] ?>
+                    <?= $input_field['price'] ?>
+                    <?= $input_field['discounted_price'] ?>
+                    <?= $input_field['discount'] ?>
+                    <?= $input_field['store_id'] ?>
+
+                    <!-- <div class="form-group">
                         <label>Description</label>
-                        <textarea type="file" class="form-control" name="description" id="form_description" rows="5" required></textarea>
+                        <textarea type="text" class="form-control" name="description" id="form_description" rows="5" required></textarea>
                     </div>
-                    <?= $input_fields['price'] ?>
-                    <?= $input_fields['discounted_price'] ?>
                     <div class="form-group">
                         <label>Discount (%)</label>
                         <input type="text" class="form-control" name="discount" id="form_discount" readonly>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- /.box-body -->
 

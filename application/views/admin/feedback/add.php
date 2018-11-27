@@ -31,11 +31,13 @@
 					<?php 
 				}
 				?>
+				
+				<?= $input_field['feedback'] ?>
 
-				<div class="form-group">
+				<!-- <div class="form-group">
 					<label>Feedback</label>
 					<input type="text" class="form-control" name="feedback" required placeholder="Feedback">
-				</div>
+				</div> -->
 			</div>
 			<!-- /.box-body -->
 

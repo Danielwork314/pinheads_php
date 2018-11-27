@@ -17,7 +17,22 @@ class Gourmet_type extends Base_Controller
 
     public function index()
     {
-        $this->page_data["gourmet_type"] = $this->Gourmet_type_model->get_all();
+        $type = $this->session->userdata('login_data')['type'];
+
+        if($type == "VENDOR"){
+
+            $where = array(
+                "gourmet_type.created_by" => $this->session->userdata("login_data")["vendor_id"],
+            );
+
+            $gourmet_type_id = $this->Gourmet_type_model->get_where($where);
+            $this->page_data["gourmet_type"] = $gourmet_type_id;
+
+        }else{
+            
+            $this->page_data["gourmet_type"] = $this->Gourmet_type_model->get_all();
+        }
+
         // $this->debug($this->page_data["gourmet"]);
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/gourmet_type/all");
@@ -98,7 +113,7 @@ class Gourmet_type extends Base_Controller
                 $data = array(
                     'gourmet_type' => $input['gourmet_type'],
                     'created_by' => $this->session->userdata('login_id'),
-                    'modified_date' => $date->format("Y-m-d h:i:s"),
+                    'modified_date' => $date->format("Y-m-d H:i:s"),
                     'modified_by' => $this->session->userdata('login_id')
                 );
 
