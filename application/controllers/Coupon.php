@@ -12,6 +12,7 @@ class Coupon extends Base_Controller
         $this->page_data = array();
 
         $this->load->model("Coupon_model");
+        $this->load->model("Coupon_type_model");
         $this->load->model("Store_model");
         $this->load->model("User_model");
     }
@@ -49,6 +50,8 @@ class Coupon extends Base_Controller
         }
 
         $this->page_data['store'] = $this->Store_model->get_all();
+        $this->page_data['coupon_type'] = $this->Coupon_type_model->get_all();
+        $this->page_data['input_field'] = $this->Coupon_model->generate_input();
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/coupon/add");
@@ -113,6 +116,8 @@ class Coupon extends Base_Controller
         $this->page_data['user'] = $this->User_model->get_all();
 
         $this->page_data['coupon'] = $coupon[0];
+        $this->page_data['coupon_type'] = $this->Coupon_type_model->get_all();
+        $this->page_data['input_field'] = $this->Coupon_model->generate_edit_input($coupon_id);
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/coupon/edit");

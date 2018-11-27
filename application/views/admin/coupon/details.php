@@ -30,12 +30,6 @@
 			<!-- form start -->
 			<div class="box-body">
 				<table class="formTable">
-                    <tr>
-						<th>User ID</th>
-						<td>:
-							<?= $coupon["user_id"] ?>
-						</td>
-					</tr>
 					<tr>
 						<th>Coupon</th>
 						<td>:
@@ -58,16 +52,26 @@
 					<tr>
 						<td></td>
 					</tr>
+					<tr>
+						<th>Partner Coupon</th>
+                        <td>: 
+                            <?php if($coupon['partner_coupon'] != 0){ ?>
+								YES
+							<?php } else { ?>
+								NO
+							<?php } ?>
+                        </td>
+                    </tr>
+					<tr>
+						<th>Number Assigned</th>
+                        <td>: 
+                            <?= $coupon['number'] ?>
+                        </td>
+                    </tr>
                     <tr>
 						<th>Valid Date</th>
                         <td>: 
                             <?= $coupon['valid_date'] ?>
-                        </td>
-                    </tr>
-                    <tr>
-						<th>Used</th>
-                        <td>: 
-                            <?=($coupon['used'] == 1) ? "YES" : "NO"?>
                         </td>
                     </tr>
                     <tr>

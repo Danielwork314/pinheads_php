@@ -24,12 +24,11 @@
 						<tr>
 							<th>No.</th>
                             <th>Store Title</th>
-                            <th>User ID</th>
 							<th>Coupon Title</th>
 							<th>Coupon Description</th>
                             <th>Valid Date</th>
+                            <th>Number Assigned</th>
 							<th>Partner Coupon</th>
-                            <th>Used</th>
                             <th>Created Date</th>
                             <!-- <th>Created By</th> -->
                             <th></th>
@@ -51,11 +50,6 @@
 									<?= $row['store'] ?>
                                 </a>
                             </td>
-                            <td>
-                                <a href="<?= base_url() ?>coupon/details/<?= $row['coupon_id']?>">
-									<?= $row['user_id'] ?>
-                                </a>
-                            </td>
 							<td>
                                 <a href="<?= base_url() ?>coupon/details/<?= $row['coupon_id']?>">
 									<?= $row['coupon'] ?>
@@ -70,22 +64,17 @@
                                 <a href="<?= base_url() ?>coupon/details/<?= $row['coupon_id']?>">
 									<?= $row['valid_date'] ?>
                                 </a>
+                            </td>   
+                            <td>
+                                <a href="<?= base_url() ?>coupon/details/<?= $row['coupon_id']?>">
+									<?= $row['number'] ?>
+                                </a>
                             </td>                            
                             <td>
                                 <?php if($row['partner_coupon'] == 0){ ?>
-                                    <a class="btn btn-danger" data-id="<?=$row["coupon_id"]?>" href="<?= base_url()?>coupon/partner_valid_no/<?= $row['coupon_id']?>"><i class="fa fa-times"></i> </a>  
+                                    <a href="<?= base_url() ?>coupon/details/<?= $row['coupon_id']?>">NO</a>
                                 <?php } else { ?>
-                                    <a class="btn btn-success" data-id="<?=$row["coupon_id"]?>" href="<?= base_url()?>coupon/partner_valid_yes/<?= $row['coupon_id']?>"><i class="fa fa-check"></i> </a>
-                                        
-                                <?php } ?>
-                            </td>
-                            <td>
-                                <?php if($row['used'] == 0){ ?>
-                                    <a class="btn btn-danger" data-id="<?=$row["coupon_id"]?>" href="<?= base_url()?>coupon/used_no/<?= $row['coupon_id']?>"><i class="fa fa-times"></i> </a>
-                                        
-                                <?php } else { ?>
-                                    <a class="btn btn-success" data-id="<?=$row["coupon_id"]?>" href="<?= base_url()?>coupon/used_yes/<?= $row['coupon_id']?>"><i class="fa fa-check"></i> </a>
-                                        
+                                    <a href="<?= base_url() ?>coupon/details/<?= $row['coupon_id']?>">YES</a>
                                 <?php } ?>
                             </td>
                             <td>
@@ -111,12 +100,11 @@
 						<tr>
                             <th>No.</th>
                             <th>Store ID</th>
-                            <th>User ID</th>
 							<th>Coupon Title</th>
 							<th>Coupon Description</th>
                             <th>Valid Date</th>
+                            <th>Number Assigned</th>
 							<th>Partner Coupon</th>
-                            <th>Used</th>
                             <th>Created Date</th>
                             <!-- <th>Created By</th> -->
                             <th></th>
