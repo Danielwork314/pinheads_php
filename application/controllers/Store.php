@@ -83,7 +83,7 @@ class Store extends Base_Controller
                     'thumbnail'         => $thumbnail,
                     'store'             => $input['store'],
                     'address'           => $input['address'],
-                    'social_media_link' => $input['social_media_link'],
+                    // 'social_media_link' => $input['social_media_link'],
                     'phone'             => $input['phone'],
                     'latitude'          => $input['latitude'],
                     'longitude'         => $input['longitude'],
