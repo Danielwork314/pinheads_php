@@ -14,6 +14,11 @@
 			</a>
 		</li>
 		<li>
+			<a href="<?= base_url() ?>Card/details/<?= $card['card_id'] ?>">
+				<?= $card['bank'] ?>
+			</a>
+		</li>
+		<li>
 			<a href="<?= base_url() ?>card/edit/<?= $card['card_id'] ?>"> Edit card</a>
 		</li>
 	</ol>

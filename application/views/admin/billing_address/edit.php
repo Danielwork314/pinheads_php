@@ -4,8 +4,18 @@
 	</h1>
 	<ol class="breadcrumb">
 		<li>
-			<a href="<?= base_url() ?>Billing Address">
-				<i class="far fa-address-book"></i> Billing Address</a>
+			<a href="<?= base_url() ?>User">
+				<i class="fa fa-users"></i> User</a>
+		</li>
+		<li>
+			<a href="<?= base_url() ?>User/details/<?= $user['user_id'] ?>">
+				<?= $user['username'] ?>
+			</a>
+		</li>
+		<li>
+			<a href="<?= base_url() ?>billing_address/details/<?= $billing_address['billing_address_id'] ?>">
+				<?= $billing_address['address1'] ?>
+			</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>billing_address/edit/<?= $billing_address['billing_address_id'] ?>"> Edit billing address</a>

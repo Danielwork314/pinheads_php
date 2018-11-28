@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2018 at 10:46 AM
+-- Generation Time: Nov 28, 2018 at 11:10 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -78,7 +78,9 @@ CREATE TABLE `billing_address` (
 --
 
 INSERT INTO `billing_address` (`billing_address_id`, `user_id`, `address1`, `address2`, `state`, `postcode`, `country`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
-(1, 1, 'xxx', 'xxx', 'xxx', '88888', 'xxx', '2018-11-09 11:12:05', 3, '0000-00-00 00:00:00', 0, 0);
+(1, 1, 'xxx', 'xxx', 'xxx', '88888', 'xxx', '2018-11-09 11:12:05', 3, '0000-00-00 00:00:00', 0, 0),
+(2, 2, '2', '2', '2', '2', '2', '2018-11-28 09:49:50', 3, '2018-11-28 06:10:04', 3, 0),
+(3, 2, '3', '3', '3', '3', '3', '2018-11-28 10:09:03', 3, '2018-11-28 06:10:11', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -785,7 +787,7 @@ INSERT INTO `table_position` (`table_position_id`, `table_position`, `created_da
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
-  `user` varchar(256) NOT NULL,
+  `user` int(11) NOT NULL,
   `username` varchar(256) NOT NULL,
   `password` varchar(256) NOT NULL,
   `salt` int(8) NOT NULL,
@@ -807,8 +809,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `role_id`, `user`, `username`, `password`, `salt`, `image`, `name`, `gender_id`, `dob`, `email`, `contact`, `deleted`, `created_date`, `created_by`, `modified_date`, `modified_by`) VALUES
-(1, 3, '', 'vernuser', '173ffbf5e2cce197a62ef4f5eae6db7e17f5c0cc65d10e7fcc5b72d779671f70d43db9f457fe7c14c2b31a7b68ba8026a2491c9f76f3ed2fcb28b7d4f7b84cfd', 521308, '/images/user/26612967874_849e90a848_h.jpg', 'zzz', 0, '1996-04-28', 'verndarrien0428@gmail.com', '0123456789', 0, '2018-11-09 11:00:08', 0, '0000-00-00 00:00:00', 0),
-(2, 3, '', 'testing', '2b9e8c83c606894c8a8352be227d2aaba0b45340fd9e9b6977f3215ad9e625a28f2dde544d22cd9ea423a188f5d8cbce830f7dea2145f3905dab3620de273d33', 992731, '/images/user/user_20181128100152.jpg', 'testing user', 2, '2018-11-20', 'daniellim314@gmail.com', '000', 0, '2018-11-28 09:01:52', 0, '0000-00-00 00:00:00', 0);
+(1, 3, 0, 'vernuser', '173ffbf5e2cce197a62ef4f5eae6db7e17f5c0cc65d10e7fcc5b72d779671f70d43db9f457fe7c14c2b31a7b68ba8026a2491c9f76f3ed2fcb28b7d4f7b84cfd', 521308, '/images/user/26612967874_849e90a848_h.jpg', 'zzz', 0, '1996-04-28', 'verndarrien0428@gmail.com', '0123456789', 0, '2018-11-09 11:00:08', 0, '0000-00-00 00:00:00', 0),
+(2, 3, 0, 'testing', '2b9e8c83c606894c8a8352be227d2aaba0b45340fd9e9b6977f3215ad9e625a28f2dde544d22cd9ea423a188f5d8cbce830f7dea2145f3905dab3620de273d33', 992731, '/images/user/user_20181128100152.jpg', 'testing user', 2, '2018-11-20', 'daniellim314@gmail.com', '000', 0, '2018-11-28 09:01:52', 0, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -1050,7 +1052,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `billing_address`
 --
 ALTER TABLE `billing_address`
-  MODIFY `billing_address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `billing_address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `card`
