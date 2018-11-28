@@ -90,7 +90,7 @@
 					</select> 
 				</div> -->
 				<div class="form-group">
-					<div class="">
+					<!-- <div class="">
                         <input type="checkbox" name="take_away" value="take_away" <?php if($store['take_away'] != 0){ ?> checked <?php } ?>> Take Away
 					</div>
 					<div class="">
@@ -101,7 +101,7 @@
 					</div>
 					<div class="">
 						<input type="checkbox" name="vegetarian" value="vegetarian" <?php if($store['vegetarian'] != 0){ ?> checked <?php } ?>> Vegetarian
-					</div>
+					</div> -->
 					<div class="">
 						<input type="checkbox" name="favourite" value="favourite" <?php if($store['favourite'] != 0){ ?> checked <?php } ?>> Favourite
 					</div>

@@ -6,11 +6,22 @@ class Performance_model extends Base_model{
         parent::__construct();
         
     }
-    
-    public function get_total_sales(){
 
-        $this->db->select('SUM(total) as total_sales');
+    public function get_all_total_sales(){
+
+        $this->db->select('sales.created_date, total');
         $this->db->from('sales');
+        $this->db->where('temp', 0);
+
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    
+    public function get_total_sales($where){
+
+        $this->db->select('sales.created_date, total');
+        $this->db->from('sales');
+        $this->db->where($where);
         $this->db->where('temp', 0);
 
         $query = $this->db->get();

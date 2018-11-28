@@ -91,7 +91,7 @@
 					</select> 
 				</div> -->
 				<div class="form-group">
-					<div class="">
+					<!-- <div class="">
 						<input type="checkbox" name="take_away" value="take_away"> Take Away
 					</div>
 					<div class="">
@@ -102,7 +102,7 @@
 					</div>
 					<div class="">
 						<input type="checkbox" name="vegetarian" value="vegetarian"> Vegetarian
-					</div>
+					</div> -->
 					<div class="">
 						<input type="checkbox" name="favourite" value="favourite"> Favourite
 					</div>

@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="<?=base_url();?>css/skins/skin-black.min.css">
 	<!-- Morris chart -->
 	<link rel="stylesheet" href="<?=base_url();?>css/morris.css">
+	<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css"> -->
 	<!-- jvectormap -->
 	<link rel="stylesheet" href="<?=base_url();?>css/jquery-jvectormap.css">
 	<!-- Date Picker -->
@@ -39,14 +40,18 @@
 	<link rel="stylesheet" href="<?=base_url();?>css/util.css">
 	<link rel="stylesheet" href="<?=base_url();?>css/custom.css">
 
-
+	<!-- Select2 -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+	<!-- Chart -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+		<![endif]-->
 
 	<script src="<?=base_url();?>js/bower_components/jquery/dist/jquery.min.js"></script>
 	<!-- jQuery UI 1.11.4 -->
@@ -58,7 +63,7 @@
 	</script>
 	<!-- Bootstrap 3.3.7 -->
 	<script src="<?=base_url();?>js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<!-- Morris.js charts -->
+
 	<!-- Google Font -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
