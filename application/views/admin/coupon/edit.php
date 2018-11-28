@@ -20,7 +20,7 @@
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
-		<form role="form" class="input_form" method="POST" action="<?= base_url()?>coupon/edit/<?= $coupon['coupon_id'] ?>">
+		<form role="form" class="input_form" method="POST" action="<?= base_url()?>coupon/edit/<?= $coupon['coupon_id'] ?>" enctype="multipart/form-data">
 			<div class="box-body">
 				<?php 
 				if (isset($error)) { 
@@ -32,12 +32,26 @@
 				}
                 ?>
                 
-				<?= $input_field['coupon'] ?>
-				<?= $input_field['description'] ?>
-				<?= $input_field['coupon_type_id'] ?>
-				<?= $input_field['valid_date'] ?>
-				<?= $input_field['store_id'] ?>
-
+				<div class="form-group">
+					<label>Coupon</label>
+					<input type="text" class="form-control" name="coupon" required value="<?= $coupon['coupon'] ?>">
+				</div>
+                <div class="form-group">
+					<label>Coupon Description</label>
+					<textarea class="form-control" name="description" id="description" rows="5"><?= $coupon['description'] ?></textarea>
+				</div>
+				<div class="form-group">
+					<label>Valid Date</label>
+					<input type="date" class="form-control" name="valid_date" required value="<?= $coupon['valid_date'] ?>">
+				</div>
+				<div class="form-group">
+					<label>Store</label>
+                    <select class="form-control" required name="store_id" id="form_store_id">
+                        <?php foreach ($store as $row) { ?>
+                            <option value="<?= $row['store_id'] ?>" <?php if($row['store_id'] == $coupon['store_id']){ ?> selected <?php } ?>><?= $row['store'] ?></option>
+                        <?php } ?>
+                    </select>
+				</div>
 			</div>
 			<!-- /.box-body -->
 

@@ -47,9 +47,14 @@ class Store extends Base_Controller
     function add()
     {
 
+<<<<<<< HEAD
         $this->page_data['gourmet_type'] = $this->Gourmet_type_model->get_all();
         $this->page_data['pricing'] = $this->Pricing_model->get_all();
         $this->page_data['vendor'] = $this->Vendor_model->get_all();
+=======
+        $this->page_data['type'] = $this->Gourmet_type_model->get_all();
+        $this->page_data['price'] = $this->Pricing_model->get_all();
+>>>>>>> bb5ed2269ab63a0a426490c84e0181d2d7cb8758
         $this->page_data['input_field'] = $this->Store_model->generate_input();
 
         if ($_POST) {
