@@ -306,6 +306,10 @@ class Food extends Base_Controller
         $food = $this->Food_model->get_where($where);
         $this->page_data["food"] = $food[0];
 
+        // $store = $this->Store_model->get_where($where);
+        // $this->page_data["store"] = $store[0];
+
+
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/food/details_menu");
         $this->load->view("admin/footer");
