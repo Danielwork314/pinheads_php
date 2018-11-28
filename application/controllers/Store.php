@@ -159,11 +159,21 @@ class Store extends Base_Controller
         $where = array(
             "store_id" => $store_id
         );
- 
+
         $store = $this->Store_model->get_where($where);
+
+        $where = array(
+            "food.store_id" => $store_id
+        );
+
+        $food = $this->Food_model->get_where($where);
+
         $this->page_data["store"] = $store[0];
 
+        $this->page_data["food"] = $food;
 
+        
+    
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/store/details_store");
         $this->load->view("admin/footer");

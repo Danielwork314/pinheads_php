@@ -9,8 +9,8 @@
 				<i class="fa fa-archive"></i> Store</a>
 		</li>
         <li>
-			<a href="<?= base_url() ?>vendor/details/<?= $vendor['vendor_id'] ?>">
-				<?= $vendor['vendor'] ?>
+			<a href="<?= base_url() ?>vendor/details/<?= $store['vendor_id'] ?>">
+				<?= $store['vendor_id'] ?>
 			</a>
 		</li>
 		<li>

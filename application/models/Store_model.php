@@ -16,6 +16,7 @@ class Store_model extends Base_model
         $this->db->from("store");
         $this->db->join("gourmet_type", "gourmet_type.gourmet_type_id = store.gourmet_type_id", "left");
         $this->db->join("pricing", "pricing.pricing_id = store.pricing_id", "left");
+        $this->db->join("vendor", "vendor.vendor_id = store.vendor_id", "left");
         $this->db->where("store.deleted", 0);
         $this->db->where($where);
 
