@@ -13,7 +13,7 @@ class User extends Base_Controller
 
         $this->load->model("Role_model");
         $this->load->model("User_model");
-        $this->load->model("Payment_model");
+        $this->load->model("Card_model");
         $this->load->model("Billing_address_model");
         $this->load->model("Sales_model");
 
@@ -110,11 +110,11 @@ class User extends Base_Controller
         $this->page_data["user"] = $user[0];
 
         $where = array(
-            "payment.user_id" => $user_id,
+            "card.user_id" => $user_id,
         );
 
-        $payment = $this->Payment_model->get_where($where);
-        $this->page_data["payment"] = $payment;
+        $card = $this->Card_model->get_where($where);
+        $this->page_data["card"] = $card;
 
         $where = array(
             "billing_address.user_id" => $user_id,
