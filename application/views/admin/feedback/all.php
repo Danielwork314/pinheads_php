@@ -23,7 +23,7 @@
 					<thead>
 						<tr>
 							<th>No.</th>
-							<th>User ID</th>
+							<th>User</th>
                             <th>Feedback</th>
                             <th>Created Date</th>
                             <!-- <th>Created By</th> -->
@@ -43,7 +43,7 @@
                             </td>
 							<td>
                                 <a href="<?= base_url() ?>feedback/details/<?= $row['feedback_id']?>">
-									<?= $row['user_id'] ?>
+									<?= $row['user'] ?>
                                 </a>
                             </td>
                             <td>

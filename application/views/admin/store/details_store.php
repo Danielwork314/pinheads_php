@@ -10,7 +10,7 @@
 		</li>
         <li>
 			<a href="<?= base_url() ?>vendor/details/<?= $store['vendor_id'] ?>">
-				<?= $store['vendor_id'] ?>
+				<?= $store['vendor'] ?>
 			</a>
 		</li>
 		<li>

@@ -30,9 +30,9 @@
 			<div class="box-body">
 				<table class="formTable">
                     <tr>
-						<th>User ID</th>
+						<th>User</th>
 						<td>:
-							<?= $notification["user_id"] ?>
+							<?= $notification["user"] ?>
 						</td>
 					</tr>
 					<tr>
