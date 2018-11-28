@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2018 at 10:12 AM
+-- Generation Time: Nov 28, 2018 at 10:46 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -79,6 +79,63 @@ CREATE TABLE `billing_address` (
 
 INSERT INTO `billing_address` (`billing_address_id`, `user_id`, `address1`, `address2`, `state`, `postcode`, `country`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
 (1, 1, 'xxx', 'xxx', 'xxx', '88888', 'xxx', '2018-11-09 11:12:05', 3, '0000-00-00 00:00:00', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `card`
+--
+
+CREATE TABLE `card` (
+  `card_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `card_type_id` int(11) NOT NULL,
+  `card` int(20) NOT NULL,
+  `bank` varchar(256) COLLATE utf8_bin NOT NULL,
+  `cvv` int(3) NOT NULL,
+  `month` int(11) NOT NULL,
+  `year` int(11) NOT NULL,
+  `firstname` varchar(256) COLLATE utf8_bin NOT NULL,
+  `lastname` varchar(256) COLLATE utf8_bin NOT NULL,
+  `address` varchar(256) COLLATE utf8_bin NOT NULL,
+  `region` varchar(256) COLLATE utf8_bin NOT NULL,
+  `phone` varchar(256) COLLATE utf8_bin NOT NULL,
+  `email` varchar(256) COLLATE utf8_bin NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) NOT NULL,
+  `modified_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified_by` int(11) NOT NULL,
+  `deleted` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `card`
+--
+
+INSERT INTO `card` (`card_id`, `user_id`, `card_type_id`, `card`, `bank`, `cvv`, `month`, `year`, `firstname`, `lastname`, `address`, `region`, `phone`, `email`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
+(1, 1, 0, 2147483647, 'xxx', 888, 88, 888, 'xxx', 'xxx', 'xxx', 'xxx', '8888888888', 'xxx@xxx', '2018-11-09 11:12:50', 3, '0000-00-00 00:00:00', 0, 0),
+(2, 2, 2, 121314123, 'testcard12', 222, 22, 22, '222', '222', '22', '222', '222', 'daniellim314@gmail.com', '2018-11-28 09:27:20', 3, '2018-11-28 05:38:35', 3, 0),
+(3, 2, 1, 987569900, 'Maybank', 123, 1, 11, '1', '1', '1', '1', '1', 'card2@card2', '2018-11-28 09:39:05', 3, '0000-00-00 00:00:00', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `card_type`
+--
+
+CREATE TABLE `card_type` (
+  `card_type_id` int(11) NOT NULL,
+  `card_type` varchar(256) COLLATE utf8_bin NOT NULL,
+  `deleted` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `card_type`
+--
+
+INSERT INTO `card_type` (`card_type_id`, `card_type`, `deleted`) VALUES
+(1, 'VISA', 0),
+(2, 'MASTER', 0);
 
 -- --------------------------------------------------------
 
@@ -381,7 +438,7 @@ INSERT INTO `module` (`module_id`, `module`, `url`, `deleted`, `created_date`, `
 (19, 'Coupon', 'coupon', 0, '2018-10-29 02:41:49', 0, '0000-00-00 00:00:00', 0),
 (20, 'Billing_address', 'billing_address', 0, '2018-10-29 03:26:37', 0, '0000-00-00 00:00:00', 0),
 (21, 'Menu', 'menu', 0, '2018-10-29 06:12:37', 0, '0000-00-00 00:00:00', 0),
-(22, 'Payment', 'payment', 0, '2018-10-31 14:14:27', 0, '0000-00-00 00:00:00', 0),
+(22, 'Card', 'card', 0, '2018-10-31 14:14:27', 0, '0000-00-00 00:00:00', 0),
 (23, 'Sales', 'sales', 0, '2018-11-01 03:53:56', 0, '0000-00-00 00:00:00', 0),
 (24, 'Vendor', 'vendor', 0, '2018-11-09 03:50:48', 0, '0000-00-00 00:00:00', 0),
 (25, 'Table_position', 'table_position', 0, '2018-11-22 00:39:20', 0, '0000-00-00 00:00:00', 0),
@@ -427,41 +484,6 @@ CREATE TABLE `order_food` (
 INSERT INTO `order_food` (`order_food_id`, `sales_id`, `food_id`, `created_date`, `created_by`, `deleted`) VALUES
 (1, 3, 1, '2018-11-09 11:28:44', 0, 0),
 (2, 4, 11, '2018-11-23 08:25:24', 0, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `payment`
---
-
-CREATE TABLE `payment` (
-  `payment_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `card_no` int(20) NOT NULL,
-  `bank` varchar(256) COLLATE utf8_bin NOT NULL,
-  `card_type` varchar(256) COLLATE utf8_bin NOT NULL,
-  `cvv` int(3) NOT NULL,
-  `month` int(11) NOT NULL,
-  `year` int(11) NOT NULL,
-  `firstname` varchar(256) COLLATE utf8_bin NOT NULL,
-  `lastname` varchar(256) COLLATE utf8_bin NOT NULL,
-  `address` varchar(256) COLLATE utf8_bin NOT NULL,
-  `region` varchar(256) COLLATE utf8_bin NOT NULL,
-  `phone` varchar(256) COLLATE utf8_bin NOT NULL,
-  `email` varchar(256) COLLATE utf8_bin NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `created_by` int(11) NOT NULL,
-  `modified_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(11) NOT NULL,
-  `deleted` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Dumping data for table `payment`
---
-
-INSERT INTO `payment` (`payment_id`, `user_id`, `card_no`, `bank`, `card_type`, `cvv`, `month`, `year`, `firstname`, `lastname`, `address`, `region`, `phone`, `email`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
-(1, 1, 2147483647, 'xxx', 'xxx', 888, 88, 888, 'xxx', 'xxx', 'xxx', 'xxx', '8888888888', 'xxx@xxx', '2018-11-09 11:12:50', 3, '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -635,7 +657,7 @@ CREATE TABLE `sales` (
   `sales_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `billing_address_id` int(11) NOT NULL,
-  `payment_id` int(11) NOT NULL,
+  `card_id` int(11) NOT NULL,
   `store_id` int(11) NOT NULL,
   `take_away` int(11) NOT NULL DEFAULT '0',
   `sub_total` decimal(5,2) NOT NULL,
@@ -651,7 +673,7 @@ CREATE TABLE `sales` (
 -- Dumping data for table `sales`
 --
 
-INSERT INTO `sales` (`sales_id`, `user_id`, `billing_address_id`, `payment_id`, `store_id`, `take_away`, `sub_total`, `service_change`, `total`, `status`, `created_date`, `created_by`, `deleted`) VALUES
+INSERT INTO `sales` (`sales_id`, `user_id`, `billing_address_id`, `card_id`, `store_id`, `take_away`, `sub_total`, `service_change`, `total`, `status`, `created_date`, `created_by`, `deleted`) VALUES
 (1, 1, 0, 0, 0, 0, '100.00', '4.00', '104.00', 0, '2018-11-09 11:16:18', 3, 1),
 (2, 1, 0, 0, 0, 1, '200.00', '14.00', '214.00', 0, '2018-11-09 11:17:44', 3, 1),
 (3, 1, 1, 1, 6, 0, '0.00', '0.00', '50.00', 0, '2018-11-09 11:28:44', 0, 0),
@@ -839,6 +861,19 @@ ALTER TABLE `billing_address`
   ADD KEY `user_id` (`user_id`) USING BTREE;
 
 --
+-- Indexes for table `card`
+--
+ALTER TABLE `card`
+  ADD PRIMARY KEY (`card_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `card_type`
+--
+ALTER TABLE `card_type`
+  ADD PRIMARY KEY (`card_type_id`);
+
+--
 -- Indexes for table `coupon`
 --
 ALTER TABLE `coupon`
@@ -928,13 +963,6 @@ ALTER TABLE `order_food`
   ADD KEY `food_id` (`food_id`);
 
 --
--- Indexes for table `payment`
---
-ALTER TABLE `payment`
-  ADD PRIMARY KEY (`payment_id`),
-  ADD KEY `user_id` (`user_id`);
-
---
 -- Indexes for table `pricing`
 --
 ALTER TABLE `pricing`
@@ -961,7 +989,7 @@ ALTER TABLE `sales`
   ADD PRIMARY KEY (`sales_id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `billing_address_id` (`billing_address_id`),
-  ADD KEY `payment_id` (`payment_id`),
+  ADD KEY `payment_id` (`card_id`),
   ADD KEY `store_id` (`store_id`);
 
 --
@@ -1023,6 +1051,18 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `billing_address`
   MODIFY `billing_address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `card`
+--
+ALTER TABLE `card`
+  MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `card_type`
+--
+ALTER TABLE `card_type`
+  MODIFY `card_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `coupon`
@@ -1101,12 +1141,6 @@ ALTER TABLE `notification`
 --
 ALTER TABLE `order_food`
   MODIFY `order_food_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `payment`
---
-ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pricing`
