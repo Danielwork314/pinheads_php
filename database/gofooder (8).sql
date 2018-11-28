@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 28, 2018 at 04:28 AM
+-- Generation Time: Nov 28, 2018 at 04:38 AM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.8
 
@@ -241,6 +241,17 @@ INSERT INTO `food_model` (`food_model_id`, `food_id`, `food_model`, `SKU`, `quan
 (8, 3, 'hhh', 'hhh', 70, '2018-11-23 01:35:13', 0, '0000-00-00 00:00:00', 0, 0),
 (9, 11, 'asd', 'asd', 50, '2018-11-23 07:51:30', 0, '0000-00-00 00:00:00', 0, 0),
 (10, 12, 'asdx', 'asd', 100, '2018-11-26 04:09:27', 0, '0000-00-00 00:00:00', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gender`
+--
+
+CREATE TABLE `gender` (
+  `gender_id` int(11) NOT NULL,
+  `gender` varchar(256) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -712,7 +723,7 @@ CREATE TABLE `user` (
   `salt` int(8) NOT NULL,
   `image` varchar(256) NOT NULL,
   `name` varchar(256) NOT NULL,
-  `gender` varchar(255) NOT NULL,
+  `gender_id` int(11) NOT NULL,
   `dob` date NOT NULL DEFAULT '0000-00-00',
   `email` varchar(256) NOT NULL,
   `contact` varchar(256) NOT NULL,
@@ -727,8 +738,8 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `role_id`, `username`, `password`, `salt`, `image`, `name`, `gender`, `dob`, `email`, `contact`, `deleted`, `created_date`, `created_by`, `modified_date`, `modified_by`) VALUES
-(1, 3, 'vernuser', '173ffbf5e2cce197a62ef4f5eae6db7e17f5c0cc65d10e7fcc5b72d779671f70d43db9f457fe7c14c2b31a7b68ba8026a2491c9f76f3ed2fcb28b7d4f7b84cfd', 521308, '/images/user/26612967874_849e90a848_h.jpg', 'zzz', 'Male', '1996-04-28', 'verndarrien0428@gmail.com', '0123456789', 0, '2018-11-09 11:00:08', 0, '0000-00-00 00:00:00', 0);
+INSERT INTO `user` (`user_id`, `role_id`, `username`, `password`, `salt`, `image`, `name`, `gender_id`, `dob`, `email`, `contact`, `deleted`, `created_date`, `created_by`, `modified_date`, `modified_by`) VALUES
+(1, 3, 'vernuser', '173ffbf5e2cce197a62ef4f5eae6db7e17f5c0cc65d10e7fcc5b72d779671f70d43db9f457fe7c14c2b31a7b68ba8026a2491c9f76f3ed2fcb28b7d4f7b84cfd', 521308, '/images/user/26612967874_849e90a848_h.jpg', 'zzz', 0, '1996-04-28', 'verndarrien0428@gmail.com', '0123456789', 0, '2018-11-09 11:00:08', 0, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -852,6 +863,12 @@ ALTER TABLE `food_ingredient`
 --
 ALTER TABLE `food_model`
   ADD PRIMARY KEY (`food_model_id`);
+
+--
+-- Indexes for table `gender`
+--
+ALTER TABLE `gender`
+  ADD PRIMARY KEY (`gender_id`);
 
 --
 -- Indexes for table `gourmet_type`
@@ -1025,6 +1042,12 @@ ALTER TABLE `food_ingredient`
 --
 ALTER TABLE `food_model`
   MODIFY `food_model_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `gender`
+--
+ALTER TABLE `gender`
+  MODIFY `gender_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `gourmet_type`
