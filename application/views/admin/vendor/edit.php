@@ -42,7 +42,7 @@
 				}
 				?>
 				<div class="form-group">
-                    <img class="img-thumbnail" src="<?= base_url() . $vendor['image'] ?>" style="width:50%; height:50%;">
+                    <img class="img-thumbnail" src="<?= base_url() . $vendor['image'] ?>" style="width:20%; height:30%;">
 				</div>
 				<div class="form-group">
 					<label>Profile Picture</label>

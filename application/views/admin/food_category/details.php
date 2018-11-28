@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>food_category">
-				<i class="fa fa-list-ul"></i> Product Category</a>
+				<i class="fa fa-tags"></i> Product Category</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>food_category/details/<?= $food_category['food_category_id'] ?>">

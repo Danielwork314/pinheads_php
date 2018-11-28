@@ -68,6 +68,24 @@ class Billing_address extends Base_Controller
         $this->load->view("admin/footer");
     }
 
+    function details($billing_address_id)
+    {
+
+        $where = array(
+            "billing_address_id" => $billing_address_id
+        );
+
+        $billing_address = $this->Billing_address_model->get_where($where);
+
+        $this->show_404_if_empty($billing_address);
+
+        $this->page_data["billing_address"] = $billing_address[0];
+
+        $this->load->view("admin/header", $this->page_data);
+        $this->load->view("admin/billing_address/details");
+        $this->load->view("admin/footer");
+    }
+
     function delete(){
 
         if($_POST){

@@ -172,7 +172,7 @@
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'food_category') echo 'active'; ?> ">
 							<a href="<?=base_url();?>food_category">
-								<i class="fa fa-utensils"></i>
+								<i class="fa fa-tags"></i>
 								<span>Food Category</span>
 							</a>
 						</li>
@@ -188,16 +188,7 @@
 						</li>
 						<?php
 					}
-					if($this->session->userdata('role_access')['table_position']['read_control'] == 1){
-						?>
-						<li class=" <?php if ($this->router->fetch_class() == 'table_position') echo 'active'; ?> ">
-							<a href="<?=base_url();?>table_position">
-								<i class="fa fa-clipboard-list"></i>
-								<span>Table</span>
-							</a>
-						</li>
-						<?php
-					}
+
 					if($this->session->userdata('role_access')['gourmet_type']['read_control'] == 1){
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'gourmet_type') echo 'active'; ?> ">
@@ -238,16 +229,7 @@
 						</li>
 						<?php
 					}
-					if($this->session->userdata('role_access')['coupon']['read_control'] == 1){
-						?>
-						<li class=" <?php if ($this->router->fetch_class() == 'coupon') echo 'active'; ?> ">
-							<a href="<?=base_url();?>coupon">
-								<i class="fas fa-money-bill-wave"></i>
-								<span><?php echo '&nbsp;' ?> Coupon</span>
-							</a>
-						</li>
-						<?php
-					}
+					
 					if($this->session->userdata('role_access')['role_access']['read_control'] == 1){
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'role_access') echo 'active'; ?> ">

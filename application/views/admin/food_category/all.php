@@ -3,7 +3,7 @@
     Food Category
     </h1>
     <ol class="breadcrumb">
-        <li><a href="<?= base_url() ?>food_category"><i class="fa fa-user-secret"></i> Food Category</a></li>
+        <li><a href="<?= base_url() ?>food_category"><i class="fa fa-tags"></i> Food Category</a></li>
     </ol>
 </section>
 <br>
