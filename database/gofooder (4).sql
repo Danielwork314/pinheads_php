@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2018 at 09:41 AM
+-- Generation Time: Nov 28, 2018 at 10:12 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -165,7 +165,8 @@ INSERT INTO `food` (`food_id`, `food_category_id`, `store_id`, `food`, `descript
 (9, 2, 1, 'ggg', 'ggg', '/images/store/car_accessories_abundant_connectivity.jpg', '777.00', '8.00', 99, '2018-11-23 00:39:13', 3, '0000-00-00 00:00:00', 0, 1),
 (10, 2, 1, 'zzzyyy', 'yyyzz', '/images/food/car_accessories_largesuismart.jpg', '999.99', '566.00', 99, '2018-11-23 00:40:41', 3, '2018-11-23 09:01:38', 3, 1),
 (11, 0, 7, 'Burger Set', 'American Style Burger', '/images/food/1468282393529.jpg', '20.00', '18.90', 6, '2018-11-23 03:27:40', 3, '0000-00-00 00:00:00', 0, 0),
-(12, 4, 7, 'xxx', 'xxx', '/images/store/27332477_409165236176720_1264135450474402744_n1.jpg', '19.90', '15.90', 20, '2018-11-26 03:40:00', 1, '0000-00-00 00:00:00', 0, 0);
+(12, 4, 7, 'xxx', 'xxx', '/images/store/27332477_409165236176720_1264135450474402744_n1.jpg', '19.90', '15.90', 20, '2018-11-26 03:40:00', 1, '0000-00-00 00:00:00', 0, 0),
+(13, 5, 8, 'testfood', 'testfood', '/images/store/delivery.png', '110.00', '50.00', 55, '2018-11-28 09:10:48', 2, '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -193,7 +194,8 @@ INSERT INTO `food_category` (`food_category_id`, `food_category`, `parent_id`, `
 (2, 'asdx', 0, 1, '2018-11-22 01:50:38', 0, '0000-00-00 00:00:00', 0),
 (3, 'ooo', 2, 1, '2018-11-23 01:44:11', 0, '0000-00-00 00:00:00', 0),
 (4, 'Spicy', 0, 0, '2018-11-23 03:31:24', 0, '0000-00-00 00:00:00', 0),
-(5, 'Noodles', 4, 0, '2018-11-23 03:31:35', 0, '0000-00-00 00:00:00', 0);
+(5, 'Noodles', 4, 0, '2018-11-23 03:31:35', 0, '0000-00-00 00:00:00', 0),
+(6, 'asd', 4, 0, '2018-11-28 09:09:20', 0, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -251,8 +253,17 @@ INSERT INTO `food_model` (`food_model_id`, `food_id`, `food_model`, `SKU`, `quan
 
 CREATE TABLE `gender` (
   `gender_id` int(11) NOT NULL,
-  `gender` varchar(256) COLLATE utf8_bin NOT NULL
+  `gender` varchar(256) COLLATE utf8_bin NOT NULL,
+  `deleted` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `gender`
+--
+
+INSERT INTO `gender` (`gender_id`, `gender`, `deleted`) VALUES
+(1, 'Male', 0),
+(2, 'Female', 0);
 
 -- --------------------------------------------------------
 
@@ -688,7 +699,8 @@ INSERT INTO `store` (`store_id`, `gourmet_type_id`, `pricing_id`, `vendor_id`, `
 (4, 1, 1, 0, '/images/store/15101639_340838102960574_2760845376331186176_n3.jpg', 'Noodles\'s Stall', 'HOUGANG STREET 21 Blk 202 Hougang Street 21, #01-00, Singapore 530202', 'www.instagram.com', '01111450665', '13.465343', '14.346363', '10.00 am', 1, 1, 1, 1, 1, '2018-11-09 10:39:56', 1, '0000-00-00 00:00:00', 0, 1),
 (5, 1, 1, 0, '/images/store/15101639_340838102960574_2760845376331186176_n4.jpg', 'Noodles\'s Stall', 'HOUGANG STREET 21 Blk 202 Hougang Street 21, #01-00, Singapore 530202', 'www.instagram.com', '01111450665', '13.465343', '14.346363', '10.00 am', 1, 1, 1, 1, 1, '2018-11-09 10:42:28', 1, '0000-00-00 00:00:00', 0, 1),
 (6, 1, 1, 1, '/images/store/3f729a04dadea20cd875852fef2c276e4.jpg', 'Western Stall', 'xxx', 'xxx', '01111450665', '13.34424', '1.657544', '10.00 am', 1, 1, 1, 1, 1, '2018-11-09 10:51:24', 1, '0000-00-00 00:00:00', 0, 1),
-(7, 1, 1, 3, '/images/store/27332477_409165236176720_1264135450474402744_n.jpg', 'ROI Spoon Restaurant', '01-20, Menara Hartamas, Block B, Jalan Austin Heights 8/4, Taman Mount Austin', 'https://www.facebook.com/pages/category/Restaurant/Roi-Spoon-Restaurant-Mount-Austin-408431062916804/', '07-351 6783', '1.563548', '103.77780800000005', '11.30 am - 11.00pm', 1, 1, 1, 1, 1, '2018-11-23 03:19:37', 3, '0000-00-00 00:00:00', 0, 0);
+(7, 1, 1, 3, '/images/store/27332477_409165236176720_1264135450474402744_n.jpg', 'ROI Spoon Restaurant', '01-20, Menara Hartamas, Block B, Jalan Austin Heights 8/4, Taman Mount Austin', 'https://www.facebook.com/pages/category/Restaurant/Roi-Spoon-Restaurant-Mount-Austin-408431062916804/', '07-351 6783', '1.563548', '103.77780800000005', '11.30 am - 11.00pm', 1, 1, 1, 1, 1, '2018-11-23 03:19:37', 3, '0000-00-00 00:00:00', 0, 0),
+(8, 1, 1, 2, '/images/store/home1.jpg', 'teststore', 'teststore', '', '123142', '000', '22', '10.00 - 12.00', 0, 0, 0, 0, 1, '2018-11-28 09:07:54', 2, '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -751,6 +763,7 @@ INSERT INTO `table_position` (`table_position_id`, `table_position`, `created_da
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
+  `user` varchar(256) NOT NULL,
   `username` varchar(256) NOT NULL,
   `password` varchar(256) NOT NULL,
   `salt` int(8) NOT NULL,
@@ -771,8 +784,9 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `role_id`, `username`, `password`, `salt`, `image`, `name`, `gender_id`, `dob`, `email`, `contact`, `deleted`, `created_date`, `created_by`, `modified_date`, `modified_by`) VALUES
-(1, 3, 'vernuser', '173ffbf5e2cce197a62ef4f5eae6db7e17f5c0cc65d10e7fcc5b72d779671f70d43db9f457fe7c14c2b31a7b68ba8026a2491c9f76f3ed2fcb28b7d4f7b84cfd', 521308, '/images/user/26612967874_849e90a848_h.jpg', 'zzz', 0, '1996-04-28', 'verndarrien0428@gmail.com', '0123456789', 0, '2018-11-09 11:00:08', 0, '0000-00-00 00:00:00', 0);
+INSERT INTO `user` (`user_id`, `role_id`, `user`, `username`, `password`, `salt`, `image`, `name`, `gender_id`, `dob`, `email`, `contact`, `deleted`, `created_date`, `created_by`, `modified_date`, `modified_by`) VALUES
+(1, 3, '', 'vernuser', '173ffbf5e2cce197a62ef4f5eae6db7e17f5c0cc65d10e7fcc5b72d779671f70d43db9f457fe7c14c2b31a7b68ba8026a2491c9f76f3ed2fcb28b7d4f7b84cfd', 521308, '/images/user/26612967874_849e90a848_h.jpg', 'zzz', 0, '1996-04-28', 'verndarrien0428@gmail.com', '0123456789', 0, '2018-11-09 11:00:08', 0, '0000-00-00 00:00:00', 0),
+(2, 3, '', 'testing', '2b9e8c83c606894c8a8352be227d2aaba0b45340fd9e9b6977f3215ad9e625a28f2dde544d22cd9ea423a188f5d8cbce830f7dea2145f3905dab3620de273d33', 992731, '/images/user/user_20181128100152.jpg', 'testing user', 2, '2018-11-20', 'daniellim314@gmail.com', '000', 0, '2018-11-28 09:01:52', 0, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -783,6 +797,7 @@ INSERT INTO `user` (`user_id`, `role_id`, `username`, `password`, `salt`, `image
 CREATE TABLE `vendor` (
   `vendor_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
+  `vendor` varchar(256) COLLATE utf8_bin NOT NULL,
   `username` varchar(255) COLLATE utf8_bin NOT NULL,
   `password` varchar(256) COLLATE utf8_bin NOT NULL,
   `salt` int(8) NOT NULL,
@@ -801,8 +816,9 @@ CREATE TABLE `vendor` (
 -- Dumping data for table `vendor`
 --
 
-INSERT INTO `vendor` (`vendor_id`, `role_id`, `username`, `password`, `salt`, `image`, `name`, `email`, `contact`, `deleted`, `created_date`, `created_by`, `modified_date`, `modified_by`) VALUES
-(1, 4, 'vern', 'ecc4e67ada7b413b4b9c70acf3b980f7fcfd271a86a393212f87429e0aacfdc48f07c203f96486e26ae7f9f350f17bff6636c9ac73c3b1b0bd5bd10faeda96a9', 274254, '/images/vendor/82812-200.png', 'Darrien Goh Han Vern', 'verndarrien0428@gmail.com', '01111450665', 0, '2018-11-09 10:26:24', 0, '0000-00-00 00:00:00', 0);
+INSERT INTO `vendor` (`vendor_id`, `role_id`, `vendor`, `username`, `password`, `salt`, `image`, `name`, `email`, `contact`, `deleted`, `created_date`, `created_by`, `modified_date`, `modified_by`) VALUES
+(1, 4, '', 'vern', 'ecc4e67ada7b413b4b9c70acf3b980f7fcfd271a86a393212f87429e0aacfdc48f07c203f96486e26ae7f9f350f17bff6636c9ac73c3b1b0bd5bd10faeda96a9', 274254, '/images/vendor/82812-200.png', 'Darrien Goh Han Vern', 'verndarrien0428@gmail.com', '01111450665', 0, '2018-11-09 10:26:24', 0, '0000-00-00 00:00:00', 0),
+(2, 4, '', 'testvendor', 'a7f9a13121d3dc5ed40a36b27719b3d920fd794c0d73c5254bfee8f406d898bec8499c9afc54d11e2984ce44f3bc048c0b623e192b405688168f7f75a3ca8dbc', 790530, '/images/vendor/unnamed.jpg', 'testvendor', 'daniellim314@gmail.com', '000', 0, '2018-11-28 09:04:41', 0, '0000-00-00 00:00:00', 0);
 
 --
 -- Indexes for dumped tables
@@ -1024,13 +1040,13 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `food`
 --
 ALTER TABLE `food`
-  MODIFY `food_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `food_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `food_category`
 --
 ALTER TABLE `food_category`
-  MODIFY `food_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `food_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `food_ingredient`
@@ -1048,7 +1064,7 @@ ALTER TABLE `food_model`
 -- AUTO_INCREMENT for table `gender`
 --
 ALTER TABLE `gender`
-  MODIFY `gender_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `gender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `gourmet_type`
@@ -1120,7 +1136,7 @@ ALTER TABLE `sales`
 -- AUTO_INCREMENT for table `store`
 --
 ALTER TABLE `store`
-  MODIFY `store_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `store_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `store_gourmet_type`
@@ -1144,13 +1160,13 @@ ALTER TABLE `table_position`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `vendor`
 --
 ALTER TABLE `vendor`
-  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
