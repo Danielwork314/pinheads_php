@@ -18,6 +18,7 @@ class Store extends Base_Controller
         $this->load->model("Role_model");
         $this->load->model("Vendor_model");
         $this->load->model("Access_model");
+        $this->load->model("Feature_model");
     }
 
     public function index()
@@ -50,6 +51,7 @@ class Store extends Base_Controller
         $this->page_data['gourmet_type'] = $this->Gourmet_type_model->get_all();
         $this->page_data['pricing'] = $this->Pricing_model->get_all();
         $this->page_data['vendor'] = $this->Vendor_model->get_all();
+        $this->page_data['feature'] = $this->Feature_model->get_all();
         $this->page_data['input_field'] = $this->Store_model->generate_input();
 
         if ($_POST) {

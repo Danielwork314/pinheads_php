@@ -15,7 +15,7 @@ class Ajax extends Base_Controller
         $this->load->model("Admin_model");
         $this->load->model("Food_model");
         $this->load->model("Billing_address_model");
-        $this->load->model("Payment_model");
+        $this->load->model("Card_model");
         // $this->load->model("Project_report_model");
         // $this->load->model("Project_report_item_model");
         // $this->load->model("Project_report_image_model");
@@ -125,7 +125,7 @@ class Ajax extends Base_Controller
             $input = $this->input->post();
 
             $where = array(
-                'user_id' => $input['user_id']
+                'billing_address.user_id' => $input['user_id']
             );
 
             $this->page_data['billing_address'] = $this->Billing_address_model->get_where($where);
@@ -135,7 +135,7 @@ class Ajax extends Base_Controller
         }
     }
 
-    function getPayment(){
+    function getCard(){
 
         if ($_POST) {
             $input = $this->input->post();
@@ -144,9 +144,9 @@ class Ajax extends Base_Controller
                 'user_id' => $input['user_id']
             );
 
-            $this->page_data['payment'] = $this->Payment_model->get_where($where);
+            $this->page_data['card'] = $this->Card_model->get_where($where);
 
-            $this->load->view("admin/ajax/change_payment", $this->page_data);
+            $this->load->view("admin/ajax/change_card", $this->page_data);
 
         }
     }

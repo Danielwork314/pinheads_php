@@ -91,7 +91,7 @@ class Sales extends Base_Controller
                     'user_id' => $input['user_id'],
                     'store_id' => $input['store_id'],
                     'billing_address_id' => $input['billing_address_id'],
-                    'payment_id' => $input['payment_id'],
+                    'card_id' => $input['card_id'],
                     'take_away' => $take_away,
                     'total' => $input['total_price'],
                 );

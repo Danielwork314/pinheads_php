@@ -25,6 +25,7 @@
                             <th>No.</th>
                             <th>User</th>
                             <th>Store</th>
+                            <th>Status</th>
                             <th>Date</th>
                             <th></th>
                         </tr>
@@ -38,6 +39,7 @@
                                         <td><a href="<?= base_url() ?>sales/details/<?= $row['sales_id']?>"><?= $i ?></a></td>
                                         <td><a href="<?= base_url() ?>sales/details/<?= $row['sales_id']?>"><?= $row['name'] ?></a></td>
                                         <td><a href="<?= base_url() ?>sales/details/<?= $row['sales_id']?>"><?= $row['store'] ?></a></td>
+                                        <td><a href="<?= base_url() ?>sales/details/<?= $row['sales_id']?>"><?=($row['status'] == 1) ? "Paid" : "Havn't Pay"?></a></td>
                                         <td><a href="<?= base_url() ?>sales/details/<?= $row['sales_id']?>"><?= $row['created_date'] ?></a></td>
                                         <td><a href="<?= base_url() ?>sales/delete/<?= $row['sales_id']?>" class="btn btn-danger delete-button">Delete</a></td>
                                     </tr>

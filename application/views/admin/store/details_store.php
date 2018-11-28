@@ -5,12 +5,12 @@
 	</h1>
 	<ol class="breadcrumb">
 		<li>
-			<a href="<?= base_url() ?>Store">
-				<i class="fa fa-archive"></i> Store</a>
+			<a href="<?= base_url() ?>Vendor">
+				<i class="fa fa-archive"></i> Vendor</a>
 		</li>
         <li>
 			<a href="<?= base_url() ?>vendor/details/<?= $store['vendor_id'] ?>">
-				<?= $store['vendor_id'] ?>
+				<?= $store['username'] ?>
 			</a>
 		</li>
 		<li>
