@@ -4,11 +4,16 @@
 	</h1>
 	<ol class="breadcrumb">
 		<li>
-			<a href="<?= base_url() ?>billing_address">
-				<i class="far fa-address-book"></i> Billing Address</a>
+			<a href="<?= base_url() ?>User">
+				<i class="fa fa-users"></i> User</a>
 		</li>
 		<li>
-			<a href="<?= base_url() ?>billing_address/add"> Add billing address</a>
+			<a href="<?= base_url() ?>User/details/<?= $user['user_id'] ?>">
+				<?= $user['username'] ?>
+			</a>
+		</li>
+		<li>
+			<a href="<?= base_url() ?>billing_address/add/<?= $user_id ?>"> Add billing address</a>
 		</li>
 	</ol>
 </section>
@@ -32,32 +37,11 @@
 				}
 				?>
 				
-				<!-- <?= $input_field['address1'] ?>
+				<?= $input_field['address1'] ?>
 				<?= $input_field['address2'] ?>
 				<?= $input_field['state'] ?>
 				<?= $input_field['postcode'] ?>
-				<?= $input_field['country'] ?> -->
-
-				<div class="form-group">
-					<label>Address 1</label>
-					<input type="text" class="form-control" name="address1" required placeholder="Address 1">
-				</div>
-                <div class="form-group">
-					<label>Address 2</label>
-					<input type="text" class="form-control" name="address2" required placeholder="Address 2">
-				</div>
-				<div class="form-group">
-					<label>State</label>
-					<input type="text" class="form-control" name="state" required placeholder="State">
-				</div>
-                <div class="form-group">
-					<label>Postcode</label>
-					<input type="text" class="form-control" name="postcode" required placeholder="Postcode">
-				</div>
-                <div class="form-group">
-					<label>Country</label>
-					<input type="text" class="form-control" name="country" required placeholder="Country">
-				</div>
+				<?= $input_field['country'] ?>
 			</div>
 			<!-- /.box-body -->
 

@@ -69,6 +69,7 @@ class User extends Base_Controller
 
                 $data = array(
                     'image' => $image,
+                    'user' => $input['name'],
                     'username' => $input['username'],
                     'role_id' => $input['role_id'],
                     'name' => $input['name'],
@@ -171,6 +172,7 @@ class User extends Base_Controller
                 );
 
                 $data = array(
+                    'user' => $input['name'],
                     'username' => $input['username'],
                     'name' => $input['name'],
                     'gender_id' => $input['gender_id'],
