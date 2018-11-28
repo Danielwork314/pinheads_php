@@ -32,7 +32,7 @@
 				}
 				?>
 				<?= $input_field['food_category'] ?>
-				<?= $input_field['parent_id'] ?>
+				<!-- <?= $input_field['parent_id'] ?> -->
 			</div>
 			<!-- /.box-body -->
 

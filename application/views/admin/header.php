@@ -189,16 +189,7 @@
 						<?php
 					}
 
-					if($this->session->userdata('role_access')['gourmet_type']['read_control'] == 1){
-						?>
-						<li class=" <?php if ($this->router->fetch_class() == 'gourmet_type') echo 'active'; ?> ">
-							<a href="<?=base_url();?>gourmet_type">
-								<i class="fa fa-mortar-pestle"></i>
-								<span>Gourmet Type</span>
-							</a>
-						</li>
-						<?php
-					}
+
 					if($this->session->userdata('role_access')['pricing']['read_control'] == 1){
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'pricing') echo 'active'; ?> ">

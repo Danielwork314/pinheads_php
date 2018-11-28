@@ -95,7 +95,7 @@
 					<tr>
 						<th>Card Number</th>
 						<td>: 
-                            <?= $order['card_no'] ?>
+                            <?= $order['card'] ?>
                         </td>
 					</tr>
 					<tr>

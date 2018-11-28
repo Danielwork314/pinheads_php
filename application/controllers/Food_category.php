@@ -50,7 +50,7 @@ class Food_category extends Base_Controller
             if (!$error) {
                 $data = array(
                     'food_category' => $input['food_category'],
-                    'parent_id' => $input['parent_id'],
+                    // 'parent_id' => $input['parent_id'],
                 );
 
                 $this->Food_category_model->insert($data);
@@ -113,7 +113,7 @@ class Food_category extends Base_Controller
 
                 $data = array(
                     'food_category' => $input['food_category'],
-                    'parent_id' => $input['parent_id'],
+                    // 'parent_id' => $input['parent_id'],
                 );
 
                 $this->Food_category_model->update_where($where, $data);

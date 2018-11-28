@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>food_category">
-				<i class="fa fa-tags"></i> Product Category</a>
+				<i class="fa fa-tags"></i> Food Category</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>food_category/details/<?= $food_category['food_category_id'] ?>">
@@ -35,12 +35,12 @@
 							<?= $food_category["food_category"] ?>
 						</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<th>Parent</th>
 						<td>:
 							<?= $food_category["parent"] ?>
 						</td>
-					</tr>
+					</tr> -->
 				</table>
 			</div>
 			<!-- /.box-body -->

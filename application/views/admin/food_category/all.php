@@ -24,7 +24,7 @@
                         <tr>
                             <th>No.</th>
                             <th>Name</th>
-                            <th>Parent</th>
+                            <!-- <th>Parent</th> -->
                             <th></th>
                         </tr>
                     </thead>
@@ -36,7 +36,7 @@
                                     <tr>
                                         <td><a href="<?= base_url() ?>food_category/details/<?= $row['food_category_id']?>"><?= $i ?></a></td>
                                         <td><a href="<?= base_url() ?>food_category/details/<?= $row['food_category_id']?>"><?= $row['food_category'] ?></a></td>
-                                        <td><a href="<?= base_url() ?>food_category/details/<?= $row['food_category_id']?>"><?= $row['parent'] ?></a></td>
+                                        <!-- <td><a href="<?= base_url() ?>food_category/details/<?= $row['food_category_id']?>"><?= $row['parent'] ?></a></td> -->
                                         <td><a href="<?= base_url() ?>food_category/delete/<?= $row['food_category_id']?>" class="btn btn-danger delete-button">Delete</a></td>
                                     </tr>
                                 <?php
@@ -48,7 +48,7 @@
                         <tr>
                             <th>No.</th>
                             <th>Name</th>
-                            <th>Parent</th>
+                            <!-- <th>Parent</th> -->
                             <th></th>
                         </tr>
                     </tfoot>
