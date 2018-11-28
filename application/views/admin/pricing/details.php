@@ -1,6 +1,6 @@
 <section class="content-header">
 	<h1>
-		<?= $pricing['pricing_title'] ?>
+		<?= $pricing['pricing'] ?>
 	</h1>
 	<ol class="breadcrumb">
 		<li>
@@ -9,7 +9,7 @@
 		</li>
 		<li>
 			<a href="<?= base_url() ?>pricing/details/<?= $pricing['pricing_id'] ?>">
-				<?= $pricing['pricing_title'] ?>
+				<?= $pricing['pricing'] ?>
 			</a>
 		</li>
 	</ol>
@@ -20,7 +20,7 @@
 		<div class="box box-primary">
 			<div class="box-header with-border">
 				<h3 class="box-title">
-					<?= $pricing['pricing_title'] ?>'s Info
+					<?= $pricing['pricing'] ?>'s Info
 				</h3>
 				<a href="<?php echo site_url('pricing/edit') . '/' . $pricing['pricing_id'] ?>" class='btn btn-default pull-right'>
 					<i class='fa fa-edit'></i> Edit</a>
@@ -32,7 +32,7 @@
 					<tr>
 						<th>Pricing Title</th>
 						<td>:
-							<?= $pricing["pricing_title"] ?>
+							<?= $pricing["pricing"] ?>
 						</td>
 					</tr>
 					<tr>
@@ -41,24 +41,24 @@
 							<?= $pricing["created_date"] ?>
 						</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<th>Created By</th>
 						<td>:
 							<?= $pricing["created_by"] ?>
 						</td>
-					</tr>
+					</tr> -->
 					<tr>
 						<th>Modified Date</th>
 						<td>:
 							<?= $pricing["modified_date"] ?>
 						</td>
 					</tr>
-					<tr>
+					<!-- <tr>
 						<th>Modified By</th>
 						<td>:
 							<?= $pricing["modified_by"] ?>
 						</td>
-					</tr>
+					</tr> -->
 				</table>
 			</div>
 			<!-- /.box-body -->

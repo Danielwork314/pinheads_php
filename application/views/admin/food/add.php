@@ -39,8 +39,16 @@
 						<input type="file" class="form-control" name="file" id="file" required>
 					</div>
 					<div class="form-group">
-						<label>Title</label>
+						<label>Food</label>
 						<input type="text" class="form-control" name="food" id="form_food" required placeholder="Food title">
+					</div>
+					<div class="form-group">
+						<label>Food Category</label>
+						<select class="form-control" required name="food_category_id" id="form_food_category_id">
+							<?php foreach ($food_category as $row) { ?>
+								<option value="<?= $row['food_category_id'] ?>"><?= $row['food_category'] ?></option>
+							<?php } ?>
+						</select>
 					</div>
 					<div class="form-group">
 						<label>Description</label>

@@ -50,9 +50,9 @@
 						</td>
 					</tr>
 					<tr>
-						<th>Birthday</th>
+						<th>Date of Birth</th>
 						<td>:
-							<?= $user["birthday"] ?>
+							<?= $user["dob"] ?>
 						</td>
 					</tr>
 					<tr>

@@ -23,9 +23,9 @@
 					<thead>
 						<tr>
 							<th>No.</th>
-                            <th>Gourmet Type Title</th>
+                            <th>Gourmet Type</th>
                             <th>Created Date</th>
-                            <th>Created By</th>
+                            <!-- <th>Created By</th> -->
                             <th></th>
 						</tr>
 					</thead>
@@ -42,7 +42,7 @@
                             </td>
 							<td>
                                 <a href="<?= base_url() ?>gourmet_type/details/<?= $row['gourmet_type_id']?>">
-									<?= $row['gourmet_type_title'] ?>
+									<?= $row['gourmet_type'] ?>
                                 </a>
                             </td>
                             <td>
@@ -50,11 +50,11 @@
 									<?= $row['created_date'] ?>
                                 </a>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <a href="<?= base_url() ?>gourmet_type/details/<?= $row['gourmet_type_id']?>">
 									<?= $row['created_by'] ?>
                                 </a>
-                            </td>
+                            </td> -->
 							<td>
                                 <a href="<?= base_url() ?>gourmet_type/delete/<?= $row['gourmet_type_id']?>" class="btn btn-danger delete-button">Delete</a>
                             </td>
@@ -69,7 +69,7 @@
                             <th>No.</th>
                             <th>Gourmet Type Title</th>
                             <th>Created Date</th>
-                            <th>Created By</th>
+                            <!-- <th>Created By</th> -->
                             <th></th>
 						</tr>
 					</tfoot>

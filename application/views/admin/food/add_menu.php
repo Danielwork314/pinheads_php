@@ -1,3 +1,4 @@
+<div class="content-container" style="display: flow-root;">
 <section class="content-header">
 	<h1>
 		Add Food
@@ -59,6 +60,7 @@
         </div>
     </div>
 </section>
+</div>
 
 <script>
  $("#form_discount,#form_discounted_price,#form_price").change(function () {

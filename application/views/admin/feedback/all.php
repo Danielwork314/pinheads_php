@@ -26,7 +26,7 @@
 							<th>User ID</th>
                             <th>Feedback</th>
                             <th>Created Date</th>
-                            <th>Created By</th>
+                            <!-- <th>Created By</th> -->
                             <th></th>
 						</tr>
 					</thead>
@@ -56,11 +56,11 @@
 									<?= $row['created_date'] ?>
                                 </a>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <a href="<?= base_url() ?>feedback/details/<?= $row['feedback_id']?>">
 									<?= $row['created_by'] ?>
                                 </a>
-                            </td>
+                            </td> -->
 							<td>
                                 <a href="<?= base_url() ?>feedback/delete/<?= $row['feedback_id']?>" class="btn btn-danger delete-button">Delete</a>
                             </td>
@@ -76,7 +76,7 @@
 							<th>User ID</th>
                             <th>Feedback</th>
                             <th>Created Date</th>
-                            <th>Created By</th>
+                            <!-- <th>Created By</th> -->
                             <th></th>
 						</tr>
 					</tfoot>

@@ -163,12 +163,32 @@
 						</li>
 						<?php
 					}
+					if($this->session->userdata('role_access')['food_category']['read_control'] == 1){
+						?>
+						<li class=" <?php if ($this->router->fetch_class() == 'food_category') echo 'active'; ?> ">
+							<a href="<?=base_url();?>food_category">
+								<i class="fa fa-utensils"></i>
+								<span>Food Category</span>
+							</a>
+						</li>
+						<?php
+					}
 					if($this->session->userdata('role_access')['food']['read_control'] == 1){
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'food') echo 'active'; ?> ">
 							<a href="<?=base_url();?>food">
 								<i class="fa fa-utensils"></i>
 								<span>Food</span>
+							</a>
+						</li>
+						<?php
+					}
+					if($this->session->userdata('role_access')['table']['read_control'] == 1){
+						?>
+						<li class=" <?php if ($this->router->fetch_class() == 'table') echo 'active'; ?> ">
+							<a href="<?=base_url();?>table">
+								<i class="fa fa-clipboard-list"></i>
+								<span>Table</span>
 							</a>
 						</li>
 						<?php
@@ -188,7 +208,7 @@
 						<li class=" <?php if ($this->router->fetch_class() == 'pricing') echo 'active'; ?> ">
 							<a href="<?=base_url();?>pricing">
 								<i class="fa fa-money-bill-alt"></i>
-								<span>Pricing</span>
+								<span><?php echo '&nbsp;' ?> Pricing</span>
 							</a>
 						</li>
 						<?php
@@ -208,7 +228,7 @@
 						<li class=" <?php if ($this->router->fetch_class() == 'feedback') echo 'active'; ?> ">
 							<a href="<?=base_url();?>feedback">
 								<i class="fas fa-comments"></i>
-								<span>Feedback</span>
+								<span><?php echo '&nbsp;' ?> Feedback</span>
 							</a>
 						</li>
 						<?php
@@ -218,7 +238,7 @@
 						<li class=" <?php if ($this->router->fetch_class() == 'coupon') echo 'active'; ?> ">
 							<a href="<?=base_url();?>coupon">
 								<i class="fas fa-money-bill-wave"></i>
-								<span>Coupon</span>
+								<span><?php echo '&nbsp;' ?> Coupon</span>
 							</a>
 						</li>
 						<?php
@@ -241,3 +261,5 @@
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
+			<div class="row">
+				<div class="col-xs-12">

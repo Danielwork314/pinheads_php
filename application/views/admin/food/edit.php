@@ -40,6 +40,15 @@
 					<input type="file" class="form-control" name="file" required>
 				</div>
 				<div class="form-group">
+					<label>Food Category</label>
+                    <select class="form-control" required name="food_category_id" id="form_food_category_id">
+                        <option value="none">None</option>
+                        <?php foreach ($food_category as $row) { ?>
+                            <option value="<?= $row['food_category_id'] ?>" <?php if($row['food_category_id'] == $food['food_category_id']){ ?> selected <?php } ?>><?= $row['food_category'] ?></option>
+                        <?php } ?>
+                    </select>
+				</div>
+				<div class="form-group">
 					<label>Title</label>
 					<input type="text" class="form-control" name="food" required value="<?= $food['food'] ?>">
 				</div>

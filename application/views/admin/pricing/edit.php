@@ -34,7 +34,7 @@
                 
 				<div class="form-group">
 					<label>Pricing Title</label>
-					<input type="text" class="form-control" name="pricing_title" required value="<?= $pricing['pricing_title'] ?>">
+					<input type="text" class="form-control" name="pricing" required value="<?= $pricing['pricing'] ?>">
 				</div>
 			</div>
 			<!-- /.box-body -->

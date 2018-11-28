@@ -26,23 +26,30 @@ class Gourmet_type extends Base_Controller
 
     function add()
     {
+        $this->page_data['gourmet_type'] = $this->Gourmet_type_model->get_all();
+        $this->page_data['input_field'] = $this->Gourmet_type_model->generate_input();
 
         if ($_POST) {
             $input = $this->input->post();
 
             $error = false;
 
-            $data = array(
-                'gourmet_type_title' => $input['gourmet_type_title'],
-                'created_by' => $this->session->userdata('login_id'),
-            );
+            if(!$error){
+
+                $data = array(
+                    'gourmet_type' => $input['gourmet_type'],
+                    'created_by' => $this->session->userdata('login_id'),
+                );
 
             $this->Gourmet_type_model->insert($data);
 
             redirect("gourmet_type", "refresh");
-        }
 
-        $this->page_data['gourmet_type'] = $this->Gourmet_type_model->get_all();
+            }else{
+
+                $this->page_data["input"] = $input;
+            }
+        }
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/gourmet_type/add");
@@ -74,26 +81,36 @@ class Gourmet_type extends Base_Controller
 
         $gourmet_type = $this->Gourmet_type_model->get_where($where);
 
+        $this->page_data['gourmet_type'] = $gourmet_type[0];
+
+        $this->page_data['input_field'] = $this->Gourmet_type_model->generate_edit_input($gourmet_type_id);
+
         if ($_POST) {
+
             $input = $this->input->post();
 
             $error = false;
 
-            $date = new DateTime(null, new DateTimeZone('Asia/Kuala_Lumpur'));
+            if(!$error){
+
+                $date = new DateTime(null, new DateTimeZone('Asia/Kuala_Lumpur'));
             
-            $data = array(
-                'gourmet_type_title' => $input['gourmet_type_title'],
-                'created_by' => $this->session->userdata('login_id'),
-                'modified_date' => $date->format("Y-m-d h:i:s"),
-                'modified_by' => $this->session->userdata('login_id')
-            );
+                $data = array(
+                    'gourmet_type' => $input['gourmet_type'],
+                    'created_by' => $this->session->userdata('login_id'),
+                    'modified_date' => $date->format("Y-m-d h:i:s"),
+                    'modified_by' => $this->session->userdata('login_id')
+                );
 
-            $this->Gourmet_type_model->update_where($where, $data);
+                $this->Gourmet_type_model->update_where($where, $data);
 
-            redirect("gourmet_type", "refresh");
+                redirect("gourmet_type", "refresh");
+
+            }else{
+
+                $this->page_data["input"] = $input;
+            }   
         }
-
-        $this->page_data['gourmet_type'] = $gourmet_type[0];
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/gourmet_type/edit");
@@ -105,5 +122,4 @@ class Gourmet_type extends Base_Controller
         $this->Gourmet_type_model->soft_delete($gourmet_type_id);
         redirect("gourmet_type", "refresh");
     }
-
 }

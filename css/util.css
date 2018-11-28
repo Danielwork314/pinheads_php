@@ -97,7 +97,7 @@ input:checked+.slider:before {
 
 .upload_preview img {
 	max-height: 100px;
-	max-width: 100px;
+	max-width: 100%px;
 }
 
 .multi_preview_wrapper {

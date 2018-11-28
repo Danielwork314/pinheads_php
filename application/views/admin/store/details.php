@@ -17,7 +17,7 @@
 </section>
 <br>
 <section class="content">
-	<div class="col-md-6 col-xs-12">
+	<div class="col-md-8 col-xs-12">
 		<div class="box box-primary">
 			<div class="box-header with-border">
 				<h3 class="box-title">
@@ -31,8 +31,8 @@
 			<div class="box-body">
 				<table class="formTable">
 					<tr>
-						<th>Store Image</th>
-						<td>:
+						<!-- <th>Store Image</th> -->
+						<td>
 							<a href="<?= base_url() ?>food/details/<?= $store['store_id']?>">
 								<img src="<?= base_url() . $store['thumbnail'] ?>" class="xs_thumbnail">
                         	</a>

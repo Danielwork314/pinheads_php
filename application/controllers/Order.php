@@ -65,47 +65,57 @@ class Order extends Base_Controller
     function add()
     {
 
+        $this->page_data['food'] = $this->Food_model->get_all();
+        $this->page_data['user'] = $this->User_model->get_all();
+        $this->page_data['store'] = $this->Store_model->get_all();
+        // $this->page_data['input_field'] = $this->Order_model->generate_input();
+
         if ($_POST) {
 
             $input = $this->input->post();
 
-            if($input['take_away'] != 0){
+            $error = false;
 
-                $take_away = 1;
+            if(!$error){
 
-            } else {
+                if($input['take_away'] != 0){
 
-                $take_away = 0;
-            }
+                    $take_away = 1;
 
-            $data = array(
-                'user_id' => $input['user_id'],
-                'store_id' => $input['store_id'],
-                'billing_address_id' => $input['billing_address_id'],
-                'payment_id' => $input['payment_id'],
-                'take_away' => $take_away,
-                'total' => $input['total_price'],
-            );
+                } else {
 
-            $user_order_id = $this->Order_model->insert($data);
-
-            if($user_order_id){
-
-                foreach($input['food_array'] as $row){
-
-                    $data = array(
-                        'user_order_id' => $user_order_id,
-                        'food_id' => $row['food_id'],
-                    );
-
-                    $this->Order_food_model->insert($data);
+                    $take_away = 0;
                 }
+
+                $data = array(
+                    'user_id' => $input['user_id'],
+                    'store_id' => $input['store_id'],
+                    'billing_address_id' => $input['billing_address_id'],
+                    'payment_id' => $input['payment_id'],
+                    'take_away' => $take_away,
+                    'total' => $input['total_price'],
+                );
+
+                $user_order_id = $this->Order_model->insert($data);
+
+                if($user_order_id){
+
+                    foreach($input['food_array'] as $row){
+
+                        $data = array(
+                            'user_order_id' => $user_order_id,
+                            'food_id' => $row['food_id'],
+                        );
+
+                        $this->Order_food_model->insert($data);
+                    }
+                }
+
+            }else{
+
+                $this->page_data["input"] = $input;
             }
         }
-
-        $this->page_data['food'] = $this->Food_model->get_all();
-        $this->page_data['user'] = $this->User_model->get_all();
-        $this->page_data['store'] = $this->Store_model->get_all();
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/order/add");

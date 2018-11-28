@@ -23,9 +23,9 @@
 					<thead>
 						<tr>
 							<th>No.</th>
-                            <th>Pricing Title</th>
+                            <th>Pricing</th>
                             <th>Created Date</th>
-                            <th>Created By</th>
+                            <!-- <th>Created By</th> -->
                             <th></th>
 						</tr>
 					</thead>
@@ -42,7 +42,7 @@
                             </td>
 							<td>
                                 <a href="<?= base_url() ?>pricing/details/<?= $row['pricing_id']?>">
-									<?= $row['pricing_title'] ?>
+									<?= $row['pricing'] ?>
                                 </a>
                             </td>
                             <td>
@@ -50,11 +50,11 @@
 									<?= $row['created_date'] ?>
                                 </a>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <a href="<?= base_url() ?>pricing/details/<?= $row['pricing_id']?>">
 									<?= $row['created_by'] ?>
                                 </a>
-                            </td>
+                            </td> -->
 							<td>
                                 <a href="<?= base_url() ?>pricing/delete/<?= $row['pricing_id']?>" class="btn btn-danger delete-button">Delete</a>
                             </td>
@@ -67,9 +67,9 @@
 					<tfoot>
 						<tr>
                             <th>No.</th>
-                            <th>Pricing Title</th>
+                            <th>Pricing</th>
                             <th>Created Date</th>
-                            <th>Created By</th>
+                            <!-- <th>Created By</th> -->
                             <th></th>
 						</tr>
 					</tfoot>

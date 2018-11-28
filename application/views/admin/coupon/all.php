@@ -31,7 +31,7 @@
 							<th>Partner Coupon</th>
                             <th>Used</th>
                             <th>Created Date</th>
-                            <th>Created By</th>
+                            <!-- <th>Created By</th> -->
                             <th></th>
 						</tr>
 					</thead>
@@ -93,11 +93,11 @@
 									<?= $row['created_date'] ?>
                                 </a>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <a href="<?= base_url() ?>coupon/details/<?= $row['coupon_id']?>">
 									<?= $row['created_by'] ?>
                                 </a>
-                            </td>
+                            </td> -->
 							<td>
                                 <a href="<?= base_url() ?>coupon/delete/<?= $row['coupon_id']?>" class="btn btn-danger delete-button">Delete</a>
                             </td>
@@ -118,7 +118,7 @@
 							<th>Partner Coupon</th>
                             <th>Used</th>
                             <th>Created Date</th>
-                            <th>Created By</th>
+                            <!-- <th>Created By</th> -->
                             <th></th>
 						</tr>
 					</tfoot>

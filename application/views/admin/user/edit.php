@@ -45,7 +45,7 @@
 				<?= $input_field['username'] ?>
 				<?= $input_field['name'] ?>
 				<?= $input_field['gender_id'] ?>
-				<?= $input_field['birthday'] ?>
+				<?= $input_field['dob'] ?>
 				<?= $input_field['email'] ?>
 				<?= $input_field['contact'] ?>
 				<?= $input_field['password'] ?>
