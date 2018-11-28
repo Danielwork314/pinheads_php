@@ -1,16 +1,16 @@
 <div class="content-container" style="display: flow-root;">
 <section class="content-header">
 	<h1>
-		User's Order
+		Sales Order
 	</h1>
 	<ol class="breadcrumb">
 		<li>
-			<a href="<?= base_url() ?>order">
-				<i class="fas fa-tasks"></i> Order</a>
+			<a href="<?= base_url() ?>sales">
+				<i class="fas fa-tasks"></i> Sales</a>
 		</li>
 		<li>
-			<a href="<?= base_url() ?>order/details/<?= $order['user_order_id'] ?>">
-				User Order
+			<a href="<?= base_url() ?>sales/details/<?= $order['sales_id'] ?>">
+				Sales Order
 			</a>
 		</li>
 	</ol>
@@ -21,7 +21,7 @@
 		<div class="box box-primary">
 			<div class="box-header with-border">
 				<h3 class="box-title">
-					User's Order Info
+					Sales Info
 				</h3>
 			</div>
 			<!-- /.box-header -->

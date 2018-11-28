@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 28, 2018 at 04:38 AM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 7.2.8
+-- Host: 127.0.0.1
+-- Generation Time: Nov 28, 2018 at 09:41 AM
+-- Server version: 10.1.32-MariaDB
+-- PHP Version: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -95,6 +95,7 @@ CREATE TABLE `coupon` (
   `valid_date` date NOT NULL,
   `partner_coupon` int(11) NOT NULL DEFAULT '0',
   `used` int(11) NOT NULL DEFAULT '0',
+  `number` int(11) NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `modified_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -106,8 +107,8 @@ CREATE TABLE `coupon` (
 -- Dumping data for table `coupon`
 --
 
-INSERT INTO `coupon` (`coupon_id`, `store_id`, `user_id`, `coupon`, `description`, `valid_date`, `partner_coupon`, `used`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
-(1, 1, 0, 'Discount Voucher', '10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount fo', '2018-11-18', 0, 0, '2018-11-09 10:56:49', 1, '2018-11-21 04:47:53', 3, 0);
+INSERT INTO `coupon` (`coupon_id`, `store_id`, `user_id`, `coupon`, `description`, `valid_date`, `partner_coupon`, `used`, `number`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
+(1, 1, 0, 'Discount Voucher', '10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount fo', '2018-11-18', 0, 0, 0, '2018-11-09 10:56:49', 1, '2018-11-21 04:47:53', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -370,7 +371,7 @@ INSERT INTO `module` (`module_id`, `module`, `url`, `deleted`, `created_date`, `
 (20, 'Billing_address', 'billing_address', 0, '2018-10-29 03:26:37', 0, '0000-00-00 00:00:00', 0),
 (21, 'Menu', 'menu', 0, '2018-10-29 06:12:37', 0, '0000-00-00 00:00:00', 0),
 (22, 'Payment', 'payment', 0, '2018-10-31 14:14:27', 0, '0000-00-00 00:00:00', 0),
-(23, 'User_order', 'user_order', 0, '2018-11-01 03:53:56', 0, '0000-00-00 00:00:00', 0),
+(23, 'Sales', 'sales', 0, '2018-11-01 03:53:56', 0, '0000-00-00 00:00:00', 0),
 (24, 'Vendor', 'vendor', 0, '2018-11-09 03:50:48', 0, '0000-00-00 00:00:00', 0),
 (25, 'Table_position', 'table_position', 0, '2018-11-22 00:39:20', 0, '0000-00-00 00:00:00', 0),
 (26, 'Food Category', 'food_category', 0, '2018-11-22 01:44:43', 0, '0000-00-00 00:00:00', 0),
@@ -401,7 +402,7 @@ CREATE TABLE `notification` (
 
 CREATE TABLE `order_food` (
   `order_food_id` int(11) NOT NULL,
-  `user_order_id` int(11) NOT NULL,
+  `sales_id` int(11) NOT NULL,
   `food_id` int(11) NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
@@ -412,7 +413,7 @@ CREATE TABLE `order_food` (
 -- Dumping data for table `order_food`
 --
 
-INSERT INTO `order_food` (`order_food_id`, `user_order_id`, `food_id`, `created_date`, `created_by`, `deleted`) VALUES
+INSERT INTO `order_food` (`order_food_id`, `sales_id`, `food_id`, `created_date`, `created_by`, `deleted`) VALUES
 (1, 3, 1, '2018-11-09 11:28:44', 0, 0),
 (2, 4, 11, '2018-11-23 08:25:24', 0, 0);
 
@@ -616,6 +617,38 @@ INSERT INTO `role_access` (`role_access_id`, `role_id`, `module_id`, `create_con
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sales`
+--
+
+CREATE TABLE `sales` (
+  `sales_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `billing_address_id` int(11) NOT NULL,
+  `payment_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `take_away` int(11) NOT NULL DEFAULT '0',
+  `sub_total` decimal(5,2) NOT NULL,
+  `service_change` decimal(5,2) NOT NULL,
+  `total` decimal(5,2) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) NOT NULL,
+  `deleted` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `sales`
+--
+
+INSERT INTO `sales` (`sales_id`, `user_id`, `billing_address_id`, `payment_id`, `store_id`, `take_away`, `sub_total`, `service_change`, `total`, `status`, `created_date`, `created_by`, `deleted`) VALUES
+(1, 1, 0, 0, 0, 0, '100.00', '4.00', '104.00', 0, '2018-11-09 11:16:18', 3, 1),
+(2, 1, 0, 0, 0, 1, '200.00', '14.00', '214.00', 0, '2018-11-09 11:17:44', 3, 1),
+(3, 1, 1, 1, 6, 0, '0.00', '0.00', '50.00', 0, '2018-11-09 11:28:44', 0, 0),
+(4, 1, 1, 1, 7, 1, '0.00', '0.00', '20.00', 0, '2018-11-23 08:25:24', 0, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `store`
 --
 
@@ -740,38 +773,6 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `role_id`, `username`, `password`, `salt`, `image`, `name`, `gender_id`, `dob`, `email`, `contact`, `deleted`, `created_date`, `created_by`, `modified_date`, `modified_by`) VALUES
 (1, 3, 'vernuser', '173ffbf5e2cce197a62ef4f5eae6db7e17f5c0cc65d10e7fcc5b72d779671f70d43db9f457fe7c14c2b31a7b68ba8026a2491c9f76f3ed2fcb28b7d4f7b84cfd', 521308, '/images/user/26612967874_849e90a848_h.jpg', 'zzz', 0, '1996-04-28', 'verndarrien0428@gmail.com', '0123456789', 0, '2018-11-09 11:00:08', 0, '0000-00-00 00:00:00', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_order`
---
-
-CREATE TABLE `user_order` (
-  `user_order_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `billing_address_id` int(11) NOT NULL,
-  `payment_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  `take_away` int(11) NOT NULL DEFAULT '0',
-  `sub_total` decimal(5,2) NOT NULL,
-  `service_change` decimal(5,2) NOT NULL,
-  `total` decimal(5,2) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0',
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `created_by` int(11) NOT NULL,
-  `deleted` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Dumping data for table `user_order`
---
-
-INSERT INTO `user_order` (`user_order_id`, `user_id`, `billing_address_id`, `payment_id`, `store_id`, `take_away`, `sub_total`, `service_change`, `total`, `status`, `created_date`, `created_by`, `deleted`) VALUES
-(1, 1, 0, 0, 0, 0, '100.00', '4.00', '104.00', 0, '2018-11-09 11:16:18', 3, 1),
-(2, 1, 0, 0, 0, 1, '200.00', '14.00', '214.00', 0, '2018-11-09 11:17:44', 3, 1),
-(3, 1, 1, 1, 6, 0, '0.00', '0.00', '50.00', 0, '2018-11-09 11:28:44', 0, 0),
-(4, 1, 1, 1, 7, 1, '0.00', '0.00', '20.00', 0, '2018-11-23 08:25:24', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -907,7 +908,7 @@ ALTER TABLE `notification`
 --
 ALTER TABLE `order_food`
   ADD PRIMARY KEY (`order_food_id`),
-  ADD KEY `user_order_id` (`user_order_id`),
+  ADD KEY `user_order_id` (`sales_id`),
   ADD KEY `food_id` (`food_id`);
 
 --
@@ -936,6 +937,16 @@ ALTER TABLE `role_access`
   ADD PRIMARY KEY (`role_access_id`),
   ADD KEY `role_id` (`role_id`),
   ADD KEY `module_id` (`module_id`);
+
+--
+-- Indexes for table `sales`
+--
+ALTER TABLE `sales`
+  ADD PRIMARY KEY (`sales_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `billing_address_id` (`billing_address_id`),
+  ADD KEY `payment_id` (`payment_id`),
+  ADD KEY `store_id` (`store_id`);
 
 --
 -- Indexes for table `store`
@@ -973,16 +984,6 @@ ALTER TABLE `table_position`
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`),
   ADD KEY `role_id` (`role_id`);
-
---
--- Indexes for table `user_order`
---
-ALTER TABLE `user_order`
-  ADD PRIMARY KEY (`user_order_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `billing_address_id` (`billing_address_id`),
-  ADD KEY `payment_id` (`payment_id`),
-  ADD KEY `store_id` (`store_id`);
 
 --
 -- Indexes for table `vendor`
@@ -1110,6 +1111,12 @@ ALTER TABLE `role_access`
   MODIFY `role_access_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
+-- AUTO_INCREMENT for table `sales`
+--
+ALTER TABLE `sales`
+  MODIFY `sales_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `store`
 --
 ALTER TABLE `store`
@@ -1138,12 +1145,6 @@ ALTER TABLE `table_position`
 --
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `user_order`
---
-ALTER TABLE `user_order`
-  MODIFY `user_order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `vendor`

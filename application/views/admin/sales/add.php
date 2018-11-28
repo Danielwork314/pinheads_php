@@ -1,14 +1,14 @@
 <section class="content-header">
 	<h1>
-		Add Order
+		Add Sales
 	</h1>
 	<ol class="breadcrumb">
 		<li>
-			<a href="<?= base_url() ?>order">
-				<i class="fas fa-tasks"></i> Order</a>
+			<a href="<?= base_url() ?>sales">
+				<i class="fas fa-tasks"></i> Sales</a>
 		</li>
 		<li>
-			<a href="<?= base_url() ?>order/add"> Add order</a>
+			<a href="<?= base_url() ?>sales/add"> Add sales</a>
 		</li>
 	</ol>
 </section>
@@ -17,7 +17,7 @@
     <div class="col-md-6 col-xs-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Order Details</h3>
+                <h3 class="box-title">Sales Details</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -97,7 +97,7 @@
     <div class="col-md-6 col-xs-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Order Foods</h3>
+                <h3 class="box-title">Sales Foods</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->

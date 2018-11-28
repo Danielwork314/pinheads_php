@@ -148,12 +148,12 @@
 						</li>
 						<?php
 					}
-					if($this->session->userdata('role_access')['order']['read_control'] == 1){
+					if($this->session->userdata('role_access')['sales']['read_control'] == 1){
 						?>
-						<li class=" <?php if ($this->router->fetch_class() == 'order') echo 'active'; ?> ">
-							<a href="<?=base_url();?>order">
+						<li class=" <?php if ($this->router->fetch_class() == 'sales') echo 'active'; ?> ">
+							<a href="<?=base_url();?>sales">
 								<i class="fa fa-tasks"></i>
-								<span>Order</span>
+								<span>Sales</span>
 							</a>
 						</li>
 						<?php

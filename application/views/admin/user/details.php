@@ -235,7 +235,7 @@
 					<h3 class="box-title">
 						<?=$user['username']?>'s Order Food Lists
 					</h3>
-					<a href="<?php echo site_url('user_order/add') . '/' . $user['user_id'] ?>" class='btn btn-default pull-right'>
+					<a href="<?php echo site_url('sales/add') . '/' . $user['user_id'] ?>" class='btn btn-default pull-right'>
 						<i class='fa fa-plus'></i> Add</a>
 			</div>
 				
@@ -259,58 +259,58 @@
 						</thead>
 						<?php
 							$i = 1;
-							foreach($user_order as $row){
+							foreach($sales as $row){
 								?>
 								<tr>
 									<td>
-										<a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">
+										<a href="<?= base_url() ?>sales/details/<?= $row['sales_id']?>">
 											<?= $i ?>
                                 		</a>
 									</td>
 									
 									<td>
-										<a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">
-											<?= $row['user_order_id'] ?>
+										<a href="<?= base_url() ?>sales/details/<?= $row['sales_id']?>">
+											<?= $row['sales_id'] ?>
 										</a>
 									</td>
 									<td>
-										<a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">
+										<a href="<?= base_url() ?>sales/details/<?= $row['sales_id']?>">
 											<?=($row['take_away'] == 1) ? "YES" : "NO"?>
 										</a>
 									</td>
 									<td>
-										<a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">
+										<a href="<?= base_url() ?>sales/details/<?= $row['sales_id']?>">
 											<?= $row['sub_total'] ?>
 										</a>
 									</td>
 									<td>
-										<a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">
+										<a href="<?= base_url() ?>sales/details/<?= $row['sales_id']?>">
 											<?= $row['service_change'] ?>
 										</a>
 									</td>
 									<td>
-										<a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">
+										<a href="<?= base_url() ?>sales/details/<?= $row['sales_id']?>">
 											<?= $row['total'] ?>
 										</a>
 									</td>
 									<td>
-										<!-- <a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">
+										<!-- <a href="<?= base_url() ?>sales/details/<?= $row['sales_id']?>">
 											<?=($row['status'] == 1) ? "Delivered" : "Processing..."?>
 										</a> -->
 										<?php if($row['status'] == 0){ ?>
-											<a class="btn btn-warning" data-id="<?=$row["user_order_id"]?>" href="<?= base_url()?>user_order/deliver/<?= $row['user_order_id']?>"><i class="fa fa-times"></i> Processing...</a>  
+											<a class="btn btn-warning" data-id="<?=$row["sales_id"]?>" href="<?= base_url()?>sales/deliver/<?= $row['sales_id']?>"><i class="fa fa-times"></i> Processing...</a>  
 										<?php } else { ?>
-											<a class="btn btn-success" data-id="<?=$row["user_order_id"]?>" href="<?= base_url()?>user_order/processing/<?= $row['user_order_id']?>"><i class="fa fa-check"> Delivered</i> </a>
+											<a class="btn btn-success" data-id="<?=$row["sales_id"]?>" href="<?= base_url()?>sales/processing/<?= $row['sales_id']?>"><i class="fa fa-check"> Delivered</i> </a>
 												
 										<?php } ?>
 									</td>
 									<td>
-										<a href="<?= base_url() ?>user_order/details/<?= $row['user_order_id']?>">
+										<a href="<?= base_url() ?>sales/details/<?= $row['sales_id']?>">
 											<?= $row['created_date'] ?>
 										</a>
 									</td>
 									<td>
-                                		<a href="<?= base_url() ?>user_order/delete/<?= $row['user_order_id']?>" class="btn btn-danger delete-button">Delete</a>
+                                		<a href="<?= base_url() ?>sales/delete/<?= $row['sales_id']?>" class="btn btn-danger delete-button">Delete</a>
                             		</td>
 								</tr>
 								<?php
