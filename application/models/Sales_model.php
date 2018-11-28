@@ -14,6 +14,7 @@ class Sales_model extends Base_model{
         $this->db->from('sales');
         $this->db->join('user', 'user.user_id = sales.user_id', 'left');
         $this->db->join('store', 'store.store_id = sales.store_id', 'left');
+        $this->db->where('sales.deleted', 0);
         $this->db->order_by('sales_id', 'DESC');
 
         $query = $this->db->get();

@@ -29,6 +29,12 @@
 			<div class="box-body">
 				<table class="formTable">
 					<tr>
+						<th>Status</th>
+						<td>:
+							<?=($order['status'] == 1) ? "Paid" : "Havn't Pay"?>
+						</td>
+                    </tr>
+					<tr>
 						<th>User</th>
 						<td>: 
                             <?= $order['name'] ?>
@@ -62,12 +68,6 @@
 						<th>Total</th>
 						<td>:
 							<?= $order["total"] ?>
-						</td>
-                    </tr>
-					<tr>
-						<th>Status</th>
-						<td>:
-							<?=($order['status'] == 1) ? "Delivered" : "Processing..."?>
 						</td>
                     </tr>
 					<tr>

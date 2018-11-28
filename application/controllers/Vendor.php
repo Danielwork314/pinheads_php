@@ -72,6 +72,7 @@ class Vendor extends Base_Controller
 
                 $data = array(
                     'image' => $image,
+                    'vendor' => $input['name'],
                     'username' => $input['username'],
                     'role_id' => $input['role_id'],
                     'name' => $input['name'],
@@ -165,6 +166,7 @@ class Vendor extends Base_Controller
 
                 $data = array(
                     'image' => $image,
+                    'vendor' => $input['name'],
                     'username' => $input['username'],
                     'name' => $input['name'],
                     'role_id' => $input['role_id'],

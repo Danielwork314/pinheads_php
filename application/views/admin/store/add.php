@@ -46,6 +46,15 @@
 				<?= $input_field['gourmet_type_id'] ?>
 				<?= $input_field['pricing_id'] ?>
 
+				<!-- <div class="form-group">
+					<label>Feature</label>
+					<?php foreach($feature as $row){ ?>
+					<div class="col-3">
+						<input type="checkbox" name="feature[]"> <?= $row['feature'] ?>
+					</div>
+					<?php } ?>
+				</div> -->
+
 				<div class="form-group">
 					<div class="">
 						<input type="checkbox" name="favourite" value="favourite"> Favourite
