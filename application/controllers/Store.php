@@ -131,7 +131,6 @@ class Store extends Base_Controller
 
     function details($store_id)
     {
-
         $where = array(
             "store_id" => $store_id
         );
