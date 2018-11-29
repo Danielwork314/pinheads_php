@@ -219,7 +219,7 @@ class Food extends Base_Controller
                 );
 
                 $this->Food_model->update_where($where, $data);
-                // redirect("food", "refresh");
+                redirect("food", "refresh");
 
             }else{
 

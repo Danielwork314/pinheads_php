@@ -222,29 +222,29 @@ class Store extends Base_Controller
 
             if(!$error){
 
-                if($input['take_away']){
-                    $take_away = 1;
-                } else {
-                    $take_away = 0;
-                }
+                // if($input['take_away']){
+                //     $take_away = 1;
+                // } else {
+                //     $take_away = 0;
+                // }
 
-                if($input['dine_in']){
-                    $dine_in = 1;
-                } else {
-                    $dine_in = 0;
-                }
+                // if($input['dine_in']){
+                //     $dine_in = 1;
+                // } else {
+                //     $dine_in = 0;
+                // }
 
-                if($input['halal']){
-                    $halal = 1;
-                } else {
-                    $halal = 0;
-                }
+                // if($input['halal']){
+                //     $halal = 1;
+                // } else {
+                //     $halal = 0;
+                // }
 
-                if($input['vegetarian']){
-                    $vegetarian = 1;
-                } else {
-                    $vegetarian = 0;
-                }
+                // if($input['vegetarian']){
+                //     $vegetarian = 1;
+                // } else {
+                //     $vegetarian = 0;
+                // }
 
                 if($input['favourite']){
                     $favourite = 1;
@@ -254,20 +254,20 @@ class Store extends Base_Controller
 
 
                 $data = array(
-                    'store_thumbnail' => $store_thumbnail,
+                    'thumbnail' => $store_thumbnail,
                     'store' => $input['store'],
                     'address' => $input['address'],
-                    'social_media_link' => $input['social_media_link'],
+                    // 'social_media_link' => $input['social_media_link'],
                     'phone' => $input['phone'],
                     'latitude' => $input['latitude'],
                     'longitude' => $input['longitude'],
                     'business_hour' => $input['business_hour'],
                     'gourmet_type_id' => $input['gourmet_type_id'],
                     'pricing_id' => $input['pricing_id'],
-                    'take_away' => $take_away,
-                    'dine_in' => $dine_in,
-                    'halal' => $halal,
-                    'vegetarian' => $vegetarian,
+                    // 'take_away' => $take_away,
+                    // 'dine_in' => $dine_in,
+                    // 'halal' => $halal,
+                    // 'vegetarian' => $vegetarian,
                     'favourite' => $favourite,
                     'modified_by' => $this->session->userdata('login_id'),
                 );

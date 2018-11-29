@@ -156,7 +156,7 @@ class User extends Base_Controller
             }
 
             if (!empty($_FILES['image']['name'])) {
-                $image = $this->multi_image_upload($_FILES, "image", "product", 1);
+                $image = $this->multi_image_upload($_FILES, "image", "user", 1);
 
                 if (!$image["error"]) {
                     $image_url = $image['urls'];
