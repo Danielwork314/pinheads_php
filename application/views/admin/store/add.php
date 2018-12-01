@@ -21,98 +21,70 @@
 		<!-- /.box-header -->
 		<!-- form start -->
 		<form role="form" class="input_form" method="POST" action="<?= base_url()?>store/add" enctype="multipart/form-data">
+			<div class="container-fluid">
+				<br /><br />
+				<ul class="list-unstyled multi-steps">
+					<li class="step_url is-active" id="step_link_1" onclick="changeStep(1)">Add Details</li>
+					<li class="step_url" id="step_link_2" onclick="changeStep(2)">Add Features</li>
+				</ul>
+			</div>
 			<div class="box-body">
 				<?php 
 				if (isset($error)) { 
 					?>
-					<div class="alert alert-danger alert-dismissable">
-						<?= $error; ?>						
-					</div>
-					<?php 
+				<div class="alert alert-danger alert-dismissable">
+					<?= $error; ?>
+				</div>
+				<?php 
 				}
 				?>
-
-				<div class="form-group">
-					<label>Store Thumbnail</label>
-					<input type="file" class="form-control" name="file" required>
-				</div>
-
-				<?= $input_field['store'] ?>
-				<?= $input_field['address'] ?>
-				<?= $input_field['phone'] ?>
-				<?= $input_field['latitude'] ?>
-				<?= $input_field['longitude'] ?>
-				<?= $input_field['business_hour'] ?>
-				<?= $input_field['gourmet_type_id'] ?>
-				<?= $input_field['pricing_id'] ?>
-
-				<!-- <div class="form-group">
-					<label>Store Title</label>
-					<input type="text" class="form-control" name="store" required placeholder="Store">
-				</div>
-				<div class="form-group">
-					<label>Store Address</label>
-					<input type="text" class="form-control" name="address" required placeholder="Store Address">
-				</div>
-				<div class="form-group">
-					<label>Social Media Link</label>
-					<input type="text" class="form-control" name="social_media_link" required placeholder="Social Media Link">
-				</div>
-				<div class="form-group">
-					<label>Phone</label>
-					<input type="text" class="form-control" name="phone" required placeholder="Phone number">
-				</div>
-				<div class="form-group">
-					<label>Latitude</label>
-					<input type="text" class="form-control" name="latitude" required placeholder="Latitude">
-				</div>
-				<div class="form-group">
-					<label>Longitude</label>
-					<input type="text" class="form-control" name="longitude" required placeholder="Lognitude">
-				</div>
-				<div class="form-group">
-					<label>Business Hour</label>
-					<input type="text" class="form-control" name="business_hour" required placeholder="Business hour">
-				</div>
-				<div class="form-group">
-					<label>Gourmet Type</label>
-					<select class="form-control" name="gourmet_type_id">
-						<?php foreach($type as $row) { ?>
-						<option value="<?= $row['gourmet_type_id'] ?>"><?= $row['gourmet_type'] ?></option>
-						<?php } ?>
-					</select> 
-				</div>
-				<div class="form-group">
-					<label>Pricing</label>
-					<select class="form-control" name="pricing_id">
-						<?php foreach($price as $row) { ?>
-						<option value="<?= $row['pricing_id'] ?>"><?= $row['pricing'] ?></option>
-						<?php } ?>
-					</select> 
-				</div> -->
-				<div class="form-group">
-					<div class="">
-						<input type="checkbox" name="take_away" value="take_away"> Take Away
+				<div class="step_content" id="step_1">
+					<?= $input_field['thumbnail'] ?>
+					<?php
+					if($this->session->userdata("login_data")['type'] == "ADMIN"){
+					echo $input_field['vendor_id'];
+					} else if($this->session->userdata("login_data")['type'] == "VENDOR") {
+					?>
+					<input type="hidden" name="vendor_id" value="<?= $this->session->userdata('login_id') ?>">
+					<?php
+					}
+					?>
+					<?= $input_field['store'] ?>
+					<?= $input_field['address'] ?>
+					<?= $input_field['phone'] ?>
+					<?= $input_field['latitude'] ?>
+					<?= $input_field['longitude'] ?>
+					<?= $input_field['business_hour'] ?>
+					<?= $input_field['gourmet_type_id'] ?>
+					<?= $input_field['pricing_id'] ?>
+					<div class="form-group">
+						<div class="">
+							<input type="checkbox" name="favourite" value="favourite"> Favourite
+						</div>
 					</div>
-					<div class="">
-						<input type="checkbox" name="dine_in" value="dine_in"> Dine In
-					</div>
-					<div class="">
-						<input type="checkbox" name="halal" value="halal"> Halal
-					</div>
-					<div class="">
-						<input type="checkbox" name="vegetarian" value="vegetarian"> Vegetarian
-					</div>
-					<div class="">
-						<input type="checkbox" name="favourite" value="favourite"> Favourite
-					</div>
+					<button type="button" class="btn btn-primary pull-right" onclick="changeStep(2)">Next</button>
 				</div>
-                
+				<div class="step_content hidden_step" id="step_2">
+					<?php
+					foreach($feature as $row){
+					?>
+					<label>
+						<?= $row['feature'] ?></label>
+					<label class="switch pull-right">
+						<input type="checkbox" name="feature_id[]" value="<?= $row['feature_id'] ?>">
+						<span class="slider"></span>
+					</label>
+					<hr>
+					<?php
+					}
+					?>
+					<button type="button" class="btn btn-primary" onclick="changeStep(2)">Previous</button>
+					<button type="submit" class="btn btn-primary pull-right">Submit</button>
+				</div>
 			</div>
 			<!-- /.box-body -->
 
 			<div class="box-footer">
-				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
 		</form>
 	</div>

@@ -5,8 +5,13 @@
 	</h1>
 	<ol class="breadcrumb">
 		<li>
-			<a href="<?= base_url() ?>Food">
-				<i class="fa fa-utensils"></i> Food</a>
+			<a href="<?= base_url() ?>Store">
+				<i class="fa fa-store"></i> Store</a>
+		</li>
+		<li>
+			<a href="<?= base_url() ?>Store/details/<?= $food['store_id'] ?>">
+				<?= $food['store'] ?>
+			</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>Food/details/<?= $food['food_id'] ?>">

@@ -12,8 +12,9 @@ class Billing_address_model extends Base_model{
     {
         $this->db->select("*");
         $this->db->from($this->table_name);
+        $this->db->join('user', 'user.user_id = billing_address.user_id', 'left');
         $this->db->where($where);
-        $this->db->where('deleted', 0);
+        $this->db->where($this->table_name.'.deleted', 0);
 
         $query = $this->db->get();
 

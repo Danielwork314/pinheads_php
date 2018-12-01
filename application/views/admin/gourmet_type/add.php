@@ -31,6 +31,7 @@
 					<?php 
 				}
 				?>
+				<?= $input_field['thumbnail'] ?>
 				<?= $input_field['gourmet_type'] ?>
 				<!-- <div class="form-group">
 					<label>Gourmet Type Title</label>

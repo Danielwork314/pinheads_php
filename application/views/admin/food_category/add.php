@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>Food Category">
-				<i class="fa fa-user-secret"></i> Food Category</a>
+				<i class="fa fa-tags"></i> Food Category</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>food_category/add"> Add Food Category</a>
@@ -20,7 +20,7 @@
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
-		<form role="form" class="input_form" method="POST" action="<?= base_url()?>food_category/add">
+		<form role="form" class="input_form" method="POST" action="<?= base_url()?>food_category/add" enctype="multipart/form-data">
 			<div class="box-body">
 				<?php 
 				if (isset($error)) { 
@@ -31,8 +31,9 @@
 					<?php 
 				}
 				?>
+				<?= $input_field['thumbnail'] ?>
 				<?= $input_field['food_category'] ?>
-				<?= $input_field['parent_id'] ?>
+				<!-- <?= $input_field['parent_id'] ?> -->
 			</div>
 			<!-- /.box-body -->
 

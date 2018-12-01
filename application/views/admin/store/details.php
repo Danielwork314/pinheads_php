@@ -86,7 +86,7 @@
 							<?= $store["business_hour"] ?>
 						</td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
 						<th>Take away</th>
 						<td>:
                             <?php if($store['take_away'] != 0){ ?>
@@ -125,7 +125,7 @@
                                 NO
                             <?php } ?>
 						</td>
-                    </tr>
+                    </tr> -->
                     <tr>
 						<th>Favourite</th>
 						<td>:
@@ -135,7 +135,21 @@
                                 NO
                             <?php } ?>
 						</td>
-                    </tr>
+					</tr>
+					<tr>
+						<th>Features</th>
+						<td>
+						</td>
+					</tr>
+					<?php
+					foreach($store_feature as $row){
+					?>
+					<tr>
+						<td colspan="2"><?= $row['feature'] ?></td>
+					</tr>
+					<?php
+					}
+					?>
 				</table>
 			</div>
 			<!-- /.box-body -->

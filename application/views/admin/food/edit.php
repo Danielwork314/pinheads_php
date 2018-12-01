@@ -33,7 +33,7 @@
                 ?>
                 
                 <div class="form-group">
-                    <img class="img-thumbnail" src="<?= base_url() . $food['image'] ?>" style="width:50%; height:50%;">
+                    <img class="img-thumbnail" src="<?= base_url() . $food['image'] ?>" style="width:30%; height:20%;">
 				</div>
 				<div class="form-group">
 					<label>Image</label>

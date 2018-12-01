@@ -99,7 +99,7 @@ class Vendor extends Base_Controller
     {
 
         $where = array(
-            "vendor_id" => $vendor_id
+            "vendor.vendor_id" => $vendor_id
         );
 
         $vendor = $this->Vendor_model->get_where_with_role($where);

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Nov 28, 2018 at 04:38 AM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 7.2.8
+-- Host: 127.0.0.1
+-- Generation Time: Nov 28, 2018 at 11:10 AM
+-- Server version: 10.1.32-MariaDB
+-- PHP Version: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -78,7 +78,66 @@ CREATE TABLE `billing_address` (
 --
 
 INSERT INTO `billing_address` (`billing_address_id`, `user_id`, `address1`, `address2`, `state`, `postcode`, `country`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
-(1, 1, 'xxx', 'xxx', 'xxx', '88888', 'xxx', '2018-11-09 11:12:05', 3, '0000-00-00 00:00:00', 0, 0);
+(1, 1, 'xxx', 'xxx', 'xxx', '88888', 'xxx', '2018-11-09 11:12:05', 3, '0000-00-00 00:00:00', 0, 0),
+(2, 2, '2', '2', '2', '2', '2', '2018-11-28 09:49:50', 3, '2018-11-28 06:10:04', 3, 0),
+(3, 2, '3', '3', '3', '3', '3', '2018-11-28 10:09:03', 3, '2018-11-28 06:10:11', 3, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `card`
+--
+
+CREATE TABLE `card` (
+  `card_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `card_type_id` int(11) NOT NULL,
+  `card` int(20) NOT NULL,
+  `bank` varchar(256) COLLATE utf8_bin NOT NULL,
+  `cvv` int(3) NOT NULL,
+  `month` int(11) NOT NULL,
+  `year` int(11) NOT NULL,
+  `firstname` varchar(256) COLLATE utf8_bin NOT NULL,
+  `lastname` varchar(256) COLLATE utf8_bin NOT NULL,
+  `address` varchar(256) COLLATE utf8_bin NOT NULL,
+  `region` varchar(256) COLLATE utf8_bin NOT NULL,
+  `phone` varchar(256) COLLATE utf8_bin NOT NULL,
+  `email` varchar(256) COLLATE utf8_bin NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) NOT NULL,
+  `modified_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified_by` int(11) NOT NULL,
+  `deleted` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `card`
+--
+
+INSERT INTO `card` (`card_id`, `user_id`, `card_type_id`, `card`, `bank`, `cvv`, `month`, `year`, `firstname`, `lastname`, `address`, `region`, `phone`, `email`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
+(1, 1, 0, 2147483647, 'xxx', 888, 88, 888, 'xxx', 'xxx', 'xxx', 'xxx', '8888888888', 'xxx@xxx', '2018-11-09 11:12:50', 3, '0000-00-00 00:00:00', 0, 0),
+(2, 2, 2, 121314123, 'testcard12', 222, 22, 22, '222', '222', '22', '222', '222', 'daniellim314@gmail.com', '2018-11-28 09:27:20', 3, '2018-11-28 05:38:35', 3, 0),
+(3, 2, 1, 987569900, 'Maybank', 123, 1, 11, '1', '1', '1', '1', '1', 'card2@card2', '2018-11-28 09:39:05', 3, '0000-00-00 00:00:00', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `card_type`
+--
+
+CREATE TABLE `card_type` (
+  `card_type_id` int(11) NOT NULL,
+  `card_type` varchar(256) COLLATE utf8_bin NOT NULL,
+  `deleted` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `card_type`
+--
+
+INSERT INTO `card_type` (`card_type_id`, `card_type`, `deleted`) VALUES
+(1, 'VISA', 0),
+(2, 'MASTER', 0);
 
 -- --------------------------------------------------------
 
@@ -95,6 +154,7 @@ CREATE TABLE `coupon` (
   `valid_date` date NOT NULL,
   `partner_coupon` int(11) NOT NULL DEFAULT '0',
   `used` int(11) NOT NULL DEFAULT '0',
+  `number` int(11) NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
   `modified_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -106,8 +166,8 @@ CREATE TABLE `coupon` (
 -- Dumping data for table `coupon`
 --
 
-INSERT INTO `coupon` (`coupon_id`, `store_id`, `user_id`, `coupon`, `description`, `valid_date`, `partner_coupon`, `used`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
-(1, 1, 0, 'Discount Voucher', '10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount fo', '2018-11-18', 0, 0, '2018-11-09 10:56:49', 1, '2018-11-21 04:47:53', 3, 0);
+INSERT INTO `coupon` (`coupon_id`, `store_id`, `user_id`, `coupon`, `description`, `valid_date`, `partner_coupon`, `used`, `number`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
+(1, 1, 0, 'Discount Voucher', '10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount for All Beverage 10% Discount fo', '2018-11-18', 0, 0, 0, '2018-11-09 10:56:49', 1, '2018-11-21 04:47:53', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -164,7 +224,8 @@ INSERT INTO `food` (`food_id`, `food_category_id`, `store_id`, `food`, `descript
 (9, 2, 1, 'ggg', 'ggg', '/images/store/car_accessories_abundant_connectivity.jpg', '777.00', '8.00', 99, '2018-11-23 00:39:13', 3, '0000-00-00 00:00:00', 0, 1),
 (10, 2, 1, 'zzzyyy', 'yyyzz', '/images/food/car_accessories_largesuismart.jpg', '999.99', '566.00', 99, '2018-11-23 00:40:41', 3, '2018-11-23 09:01:38', 3, 1),
 (11, 0, 7, 'Burger Set', 'American Style Burger', '/images/food/1468282393529.jpg', '20.00', '18.90', 6, '2018-11-23 03:27:40', 3, '0000-00-00 00:00:00', 0, 0),
-(12, 4, 7, 'xxx', 'xxx', '/images/store/27332477_409165236176720_1264135450474402744_n1.jpg', '19.90', '15.90', 20, '2018-11-26 03:40:00', 1, '0000-00-00 00:00:00', 0, 0);
+(12, 4, 7, 'xxx', 'xxx', '/images/store/27332477_409165236176720_1264135450474402744_n1.jpg', '19.90', '15.90', 20, '2018-11-26 03:40:00', 1, '0000-00-00 00:00:00', 0, 0),
+(13, 5, 8, 'testfood', 'testfood', '/images/store/delivery.png', '110.00', '50.00', 55, '2018-11-28 09:10:48', 2, '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -192,7 +253,8 @@ INSERT INTO `food_category` (`food_category_id`, `food_category`, `parent_id`, `
 (2, 'asdx', 0, 1, '2018-11-22 01:50:38', 0, '0000-00-00 00:00:00', 0),
 (3, 'ooo', 2, 1, '2018-11-23 01:44:11', 0, '0000-00-00 00:00:00', 0),
 (4, 'Spicy', 0, 0, '2018-11-23 03:31:24', 0, '0000-00-00 00:00:00', 0),
-(5, 'Noodles', 4, 0, '2018-11-23 03:31:35', 0, '0000-00-00 00:00:00', 0);
+(5, 'Noodles', 4, 0, '2018-11-23 03:31:35', 0, '0000-00-00 00:00:00', 0),
+(6, 'asd', 4, 0, '2018-11-28 09:09:20', 0, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -250,8 +312,17 @@ INSERT INTO `food_model` (`food_model_id`, `food_id`, `food_model`, `SKU`, `quan
 
 CREATE TABLE `gender` (
   `gender_id` int(11) NOT NULL,
-  `gender` varchar(256) COLLATE utf8_bin NOT NULL
+  `gender` varchar(256) COLLATE utf8_bin NOT NULL,
+  `deleted` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `gender`
+--
+
+INSERT INTO `gender` (`gender_id`, `gender`, `deleted`) VALUES
+(1, 'Male', 0),
+(2, 'Female', 0);
 
 -- --------------------------------------------------------
 
@@ -369,8 +440,8 @@ INSERT INTO `module` (`module_id`, `module`, `url`, `deleted`, `created_date`, `
 (19, 'Coupon', 'coupon', 0, '2018-10-29 02:41:49', 0, '0000-00-00 00:00:00', 0),
 (20, 'Billing_address', 'billing_address', 0, '2018-10-29 03:26:37', 0, '0000-00-00 00:00:00', 0),
 (21, 'Menu', 'menu', 0, '2018-10-29 06:12:37', 0, '0000-00-00 00:00:00', 0),
-(22, 'Payment', 'payment', 0, '2018-10-31 14:14:27', 0, '0000-00-00 00:00:00', 0),
-(23, 'User_order', 'user_order', 0, '2018-11-01 03:53:56', 0, '0000-00-00 00:00:00', 0),
+(22, 'Card', 'card', 0, '2018-10-31 14:14:27', 0, '0000-00-00 00:00:00', 0),
+(23, 'Sales', 'sales', 0, '2018-11-01 03:53:56', 0, '0000-00-00 00:00:00', 0),
 (24, 'Vendor', 'vendor', 0, '2018-11-09 03:50:48', 0, '0000-00-00 00:00:00', 0),
 (25, 'Table_position', 'table_position', 0, '2018-11-22 00:39:20', 0, '0000-00-00 00:00:00', 0),
 (26, 'Food Category', 'food_category', 0, '2018-11-22 01:44:43', 0, '0000-00-00 00:00:00', 0),
@@ -401,7 +472,7 @@ CREATE TABLE `notification` (
 
 CREATE TABLE `order_food` (
   `order_food_id` int(11) NOT NULL,
-  `user_order_id` int(11) NOT NULL,
+  `sales_id` int(11) NOT NULL,
   `food_id` int(11) NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by` int(11) NOT NULL,
@@ -412,44 +483,9 @@ CREATE TABLE `order_food` (
 -- Dumping data for table `order_food`
 --
 
-INSERT INTO `order_food` (`order_food_id`, `user_order_id`, `food_id`, `created_date`, `created_by`, `deleted`) VALUES
+INSERT INTO `order_food` (`order_food_id`, `sales_id`, `food_id`, `created_date`, `created_by`, `deleted`) VALUES
 (1, 3, 1, '2018-11-09 11:28:44', 0, 0),
 (2, 4, 11, '2018-11-23 08:25:24', 0, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `payment`
---
-
-CREATE TABLE `payment` (
-  `payment_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `card_no` int(20) NOT NULL,
-  `bank` varchar(256) COLLATE utf8_bin NOT NULL,
-  `card_type` varchar(256) COLLATE utf8_bin NOT NULL,
-  `cvv` int(3) NOT NULL,
-  `month` int(11) NOT NULL,
-  `year` int(11) NOT NULL,
-  `firstname` varchar(256) COLLATE utf8_bin NOT NULL,
-  `lastname` varchar(256) COLLATE utf8_bin NOT NULL,
-  `address` varchar(256) COLLATE utf8_bin NOT NULL,
-  `region` varchar(256) COLLATE utf8_bin NOT NULL,
-  `phone` varchar(256) COLLATE utf8_bin NOT NULL,
-  `email` varchar(256) COLLATE utf8_bin NOT NULL,
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `created_by` int(11) NOT NULL,
-  `modified_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `modified_by` int(11) NOT NULL,
-  `deleted` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Dumping data for table `payment`
---
-
-INSERT INTO `payment` (`payment_id`, `user_id`, `card_no`, `bank`, `card_type`, `cvv`, `month`, `year`, `firstname`, `lastname`, `address`, `region`, `phone`, `email`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
-(1, 1, 2147483647, 'xxx', 'xxx', 888, 88, 888, 'xxx', 'xxx', 'xxx', 'xxx', '8888888888', 'xxx@xxx', '2018-11-09 11:12:50', 3, '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -616,6 +652,38 @@ INSERT INTO `role_access` (`role_access_id`, `role_id`, `module_id`, `create_con
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sales`
+--
+
+CREATE TABLE `sales` (
+  `sales_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `billing_address_id` int(11) NOT NULL,
+  `card_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `take_away` int(11) NOT NULL DEFAULT '0',
+  `sub_total` decimal(5,2) NOT NULL,
+  `service_change` decimal(5,2) NOT NULL,
+  `total` decimal(5,2) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) NOT NULL,
+  `deleted` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `sales`
+--
+
+INSERT INTO `sales` (`sales_id`, `user_id`, `billing_address_id`, `card_id`, `store_id`, `take_away`, `sub_total`, `service_change`, `total`, `status`, `created_date`, `created_by`, `deleted`) VALUES
+(1, 1, 0, 0, 0, 0, '100.00', '4.00', '104.00', 0, '2018-11-09 11:16:18', 3, 1),
+(2, 1, 0, 0, 0, 1, '200.00', '14.00', '214.00', 0, '2018-11-09 11:17:44', 3, 1),
+(3, 1, 1, 1, 6, 0, '0.00', '0.00', '50.00', 0, '2018-11-09 11:28:44', 0, 0),
+(4, 1, 1, 1, 7, 1, '0.00', '0.00', '20.00', 0, '2018-11-23 08:25:24', 0, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `store`
 --
 
@@ -655,7 +723,8 @@ INSERT INTO `store` (`store_id`, `gourmet_type_id`, `pricing_id`, `vendor_id`, `
 (4, 1, 1, 0, '/images/store/15101639_340838102960574_2760845376331186176_n3.jpg', 'Noodles\'s Stall', 'HOUGANG STREET 21 Blk 202 Hougang Street 21, #01-00, Singapore 530202', 'www.instagram.com', '01111450665', '13.465343', '14.346363', '10.00 am', 1, 1, 1, 1, 1, '2018-11-09 10:39:56', 1, '0000-00-00 00:00:00', 0, 1),
 (5, 1, 1, 0, '/images/store/15101639_340838102960574_2760845376331186176_n4.jpg', 'Noodles\'s Stall', 'HOUGANG STREET 21 Blk 202 Hougang Street 21, #01-00, Singapore 530202', 'www.instagram.com', '01111450665', '13.465343', '14.346363', '10.00 am', 1, 1, 1, 1, 1, '2018-11-09 10:42:28', 1, '0000-00-00 00:00:00', 0, 1),
 (6, 1, 1, 1, '/images/store/3f729a04dadea20cd875852fef2c276e4.jpg', 'Western Stall', 'xxx', 'xxx', '01111450665', '13.34424', '1.657544', '10.00 am', 1, 1, 1, 1, 1, '2018-11-09 10:51:24', 1, '0000-00-00 00:00:00', 0, 1),
-(7, 1, 1, 3, '/images/store/27332477_409165236176720_1264135450474402744_n.jpg', 'ROI Spoon Restaurant', '01-20, Menara Hartamas, Block B, Jalan Austin Heights 8/4, Taman Mount Austin', 'https://www.facebook.com/pages/category/Restaurant/Roi-Spoon-Restaurant-Mount-Austin-408431062916804/', '07-351 6783', '1.563548', '103.77780800000005', '11.30 am - 11.00pm', 1, 1, 1, 1, 1, '2018-11-23 03:19:37', 3, '0000-00-00 00:00:00', 0, 0);
+(7, 1, 1, 3, '/images/store/27332477_409165236176720_1264135450474402744_n.jpg', 'ROI Spoon Restaurant', '01-20, Menara Hartamas, Block B, Jalan Austin Heights 8/4, Taman Mount Austin', 'https://www.facebook.com/pages/category/Restaurant/Roi-Spoon-Restaurant-Mount-Austin-408431062916804/', '07-351 6783', '1.563548', '103.77780800000005', '11.30 am - 11.00pm', 1, 1, 1, 1, 1, '2018-11-23 03:19:37', 3, '0000-00-00 00:00:00', 0, 0),
+(8, 1, 1, 2, '/images/store/home1.jpg', 'teststore', 'teststore', '', '123142', '000', '22', '10.00 - 12.00', 0, 0, 0, 0, 1, '2018-11-28 09:07:54', 2, '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -718,6 +787,7 @@ INSERT INTO `table_position` (`table_position_id`, `table_position`, `created_da
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
+  `user` int(11) NOT NULL,
   `username` varchar(256) NOT NULL,
   `password` varchar(256) NOT NULL,
   `salt` int(8) NOT NULL,
@@ -738,40 +808,9 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `role_id`, `username`, `password`, `salt`, `image`, `name`, `gender_id`, `dob`, `email`, `contact`, `deleted`, `created_date`, `created_by`, `modified_date`, `modified_by`) VALUES
-(1, 3, 'vernuser', '173ffbf5e2cce197a62ef4f5eae6db7e17f5c0cc65d10e7fcc5b72d779671f70d43db9f457fe7c14c2b31a7b68ba8026a2491c9f76f3ed2fcb28b7d4f7b84cfd', 521308, '/images/user/26612967874_849e90a848_h.jpg', 'zzz', 0, '1996-04-28', 'verndarrien0428@gmail.com', '0123456789', 0, '2018-11-09 11:00:08', 0, '0000-00-00 00:00:00', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_order`
---
-
-CREATE TABLE `user_order` (
-  `user_order_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `billing_address_id` int(11) NOT NULL,
-  `payment_id` int(11) NOT NULL,
-  `store_id` int(11) NOT NULL,
-  `take_away` int(11) NOT NULL DEFAULT '0',
-  `sub_total` decimal(5,2) NOT NULL,
-  `service_change` decimal(5,2) NOT NULL,
-  `total` decimal(5,2) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0',
-  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `created_by` int(11) NOT NULL,
-  `deleted` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Dumping data for table `user_order`
---
-
-INSERT INTO `user_order` (`user_order_id`, `user_id`, `billing_address_id`, `payment_id`, `store_id`, `take_away`, `sub_total`, `service_change`, `total`, `status`, `created_date`, `created_by`, `deleted`) VALUES
-(1, 1, 0, 0, 0, 0, '100.00', '4.00', '104.00', 0, '2018-11-09 11:16:18', 3, 1),
-(2, 1, 0, 0, 0, 1, '200.00', '14.00', '214.00', 0, '2018-11-09 11:17:44', 3, 1),
-(3, 1, 1, 1, 6, 0, '0.00', '0.00', '50.00', 0, '2018-11-09 11:28:44', 0, 0),
-(4, 1, 1, 1, 7, 1, '0.00', '0.00', '20.00', 0, '2018-11-23 08:25:24', 0, 0);
+INSERT INTO `user` (`user_id`, `role_id`, `user`, `username`, `password`, `salt`, `image`, `name`, `gender_id`, `dob`, `email`, `contact`, `deleted`, `created_date`, `created_by`, `modified_date`, `modified_by`) VALUES
+(1, 3, 0, 'vernuser', '173ffbf5e2cce197a62ef4f5eae6db7e17f5c0cc65d10e7fcc5b72d779671f70d43db9f457fe7c14c2b31a7b68ba8026a2491c9f76f3ed2fcb28b7d4f7b84cfd', 521308, '/images/user/26612967874_849e90a848_h.jpg', 'zzz', 0, '1996-04-28', 'verndarrien0428@gmail.com', '0123456789', 0, '2018-11-09 11:00:08', 0, '0000-00-00 00:00:00', 0),
+(2, 3, 0, 'testing', '2b9e8c83c606894c8a8352be227d2aaba0b45340fd9e9b6977f3215ad9e625a28f2dde544d22cd9ea423a188f5d8cbce830f7dea2145f3905dab3620de273d33', 992731, '/images/user/user_20181128100152.jpg', 'testing user', 2, '2018-11-20', 'daniellim314@gmail.com', '000', 0, '2018-11-28 09:01:52', 0, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -782,6 +821,7 @@ INSERT INTO `user_order` (`user_order_id`, `user_id`, `billing_address_id`, `pay
 CREATE TABLE `vendor` (
   `vendor_id` int(11) NOT NULL,
   `role_id` int(11) NOT NULL,
+  `vendor` varchar(256) COLLATE utf8_bin NOT NULL,
   `username` varchar(255) COLLATE utf8_bin NOT NULL,
   `password` varchar(256) COLLATE utf8_bin NOT NULL,
   `salt` int(8) NOT NULL,
@@ -800,8 +840,9 @@ CREATE TABLE `vendor` (
 -- Dumping data for table `vendor`
 --
 
-INSERT INTO `vendor` (`vendor_id`, `role_id`, `username`, `password`, `salt`, `image`, `name`, `email`, `contact`, `deleted`, `created_date`, `created_by`, `modified_date`, `modified_by`) VALUES
-(1, 4, 'vern', 'ecc4e67ada7b413b4b9c70acf3b980f7fcfd271a86a393212f87429e0aacfdc48f07c203f96486e26ae7f9f350f17bff6636c9ac73c3b1b0bd5bd10faeda96a9', 274254, '/images/vendor/82812-200.png', 'Darrien Goh Han Vern', 'verndarrien0428@gmail.com', '01111450665', 0, '2018-11-09 10:26:24', 0, '0000-00-00 00:00:00', 0);
+INSERT INTO `vendor` (`vendor_id`, `role_id`, `vendor`, `username`, `password`, `salt`, `image`, `name`, `email`, `contact`, `deleted`, `created_date`, `created_by`, `modified_date`, `modified_by`) VALUES
+(1, 4, '', 'vern', 'ecc4e67ada7b413b4b9c70acf3b980f7fcfd271a86a393212f87429e0aacfdc48f07c203f96486e26ae7f9f350f17bff6636c9ac73c3b1b0bd5bd10faeda96a9', 274254, '/images/vendor/82812-200.png', 'Darrien Goh Han Vern', 'verndarrien0428@gmail.com', '01111450665', 0, '2018-11-09 10:26:24', 0, '0000-00-00 00:00:00', 0),
+(2, 4, '', 'testvendor', 'a7f9a13121d3dc5ed40a36b27719b3d920fd794c0d73c5254bfee8f406d898bec8499c9afc54d11e2984ce44f3bc048c0b623e192b405688168f7f75a3ca8dbc', 790530, '/images/vendor/unnamed.jpg', 'testvendor', 'daniellim314@gmail.com', '000', 0, '2018-11-28 09:04:41', 0, '0000-00-00 00:00:00', 0);
 
 --
 -- Indexes for dumped tables
@@ -820,6 +861,19 @@ ALTER TABLE `admin`
 ALTER TABLE `billing_address`
   ADD PRIMARY KEY (`billing_address_id`),
   ADD KEY `user_id` (`user_id`) USING BTREE;
+
+--
+-- Indexes for table `card`
+--
+ALTER TABLE `card`
+  ADD PRIMARY KEY (`card_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `card_type`
+--
+ALTER TABLE `card_type`
+  ADD PRIMARY KEY (`card_type_id`);
 
 --
 -- Indexes for table `coupon`
@@ -907,15 +961,8 @@ ALTER TABLE `notification`
 --
 ALTER TABLE `order_food`
   ADD PRIMARY KEY (`order_food_id`),
-  ADD KEY `user_order_id` (`user_order_id`),
+  ADD KEY `user_order_id` (`sales_id`),
   ADD KEY `food_id` (`food_id`);
-
---
--- Indexes for table `payment`
---
-ALTER TABLE `payment`
-  ADD PRIMARY KEY (`payment_id`),
-  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `pricing`
@@ -936,6 +983,16 @@ ALTER TABLE `role_access`
   ADD PRIMARY KEY (`role_access_id`),
   ADD KEY `role_id` (`role_id`),
   ADD KEY `module_id` (`module_id`);
+
+--
+-- Indexes for table `sales`
+--
+ALTER TABLE `sales`
+  ADD PRIMARY KEY (`sales_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `billing_address_id` (`billing_address_id`),
+  ADD KEY `payment_id` (`card_id`),
+  ADD KEY `store_id` (`store_id`);
 
 --
 -- Indexes for table `store`
@@ -975,16 +1032,6 @@ ALTER TABLE `user`
   ADD KEY `role_id` (`role_id`);
 
 --
--- Indexes for table `user_order`
---
-ALTER TABLE `user_order`
-  ADD PRIMARY KEY (`user_order_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `billing_address_id` (`billing_address_id`),
-  ADD KEY `payment_id` (`payment_id`),
-  ADD KEY `store_id` (`store_id`);
-
---
 -- Indexes for table `vendor`
 --
 ALTER TABLE `vendor`
@@ -1005,7 +1052,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `billing_address`
 --
 ALTER TABLE `billing_address`
-  MODIFY `billing_address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `billing_address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `card`
+--
+ALTER TABLE `card`
+  MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `card_type`
+--
+ALTER TABLE `card_type`
+  MODIFY `card_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `coupon`
@@ -1023,13 +1082,13 @@ ALTER TABLE `feedback`
 -- AUTO_INCREMENT for table `food`
 --
 ALTER TABLE `food`
-  MODIFY `food_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `food_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `food_category`
 --
 ALTER TABLE `food_category`
-  MODIFY `food_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `food_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `food_ingredient`
@@ -1047,7 +1106,7 @@ ALTER TABLE `food_model`
 -- AUTO_INCREMENT for table `gender`
 --
 ALTER TABLE `gender`
-  MODIFY `gender_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `gender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `gourmet_type`
@@ -1086,12 +1145,6 @@ ALTER TABLE `order_food`
   MODIFY `order_food_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `payment`
---
-ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT for table `pricing`
 --
 ALTER TABLE `pricing`
@@ -1110,10 +1163,16 @@ ALTER TABLE `role_access`
   MODIFY `role_access_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
+-- AUTO_INCREMENT for table `sales`
+--
+ALTER TABLE `sales`
+  MODIFY `sales_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `store`
 --
 ALTER TABLE `store`
-  MODIFY `store_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `store_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `store_gourmet_type`
@@ -1137,19 +1196,13 @@ ALTER TABLE `table_position`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `user_order`
---
-ALTER TABLE `user_order`
-  MODIFY `user_order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `vendor`
 --
 ALTER TABLE `vendor`
-  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

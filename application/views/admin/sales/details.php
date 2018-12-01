@@ -1,16 +1,16 @@
 <div class="content-container" style="display: flow-root;">
 <section class="content-header">
 	<h1>
-		User's Order
+		Sales Order
 	</h1>
 	<ol class="breadcrumb">
 		<li>
-			<a href="<?= base_url() ?>order">
-				<i class="fas fa-tasks"></i> Order</a>
+			<a href="<?= base_url() ?>sales">
+				<i class="fas fa-tasks"></i> Sales</a>
 		</li>
 		<li>
-			<a href="<?= base_url() ?>order/details/<?= $order['user_order_id'] ?>">
-				User Order
+			<a href="<?= base_url() ?>sales/details/<?= $order['sales_id'] ?>">
+				Sales Order
 			</a>
 		</li>
 	</ol>
@@ -21,13 +21,19 @@
 		<div class="box box-primary">
 			<div class="box-header with-border">
 				<h3 class="box-title">
-					User's Order Info
+					Sales Info
 				</h3>
 			</div>
 			<!-- /.box-header -->
 			<!-- form start -->
 			<div class="box-body">
 				<table class="formTable">
+					<tr>
+						<th>Status</th>
+						<td>:
+							<?=($order['status'] == 1) ? "Paid" : "Havn't Pay"?>
+						</td>
+                    </tr>
 					<tr>
 						<th>User</th>
 						<td>: 
@@ -65,12 +71,6 @@
 						</td>
                     </tr>
 					<tr>
-						<th>Status</th>
-						<td>:
-							<?=($order['status'] == 1) ? "Delivered" : "Processing..."?>
-						</td>
-                    </tr>
-					<tr>
 						<th>Created Date</th>
 						<td>:
 							<?= $order["created_date"] ?>
@@ -95,7 +95,7 @@
 					<tr>
 						<th>Card Number</th>
 						<td>: 
-                            <?= $order['card_no'] ?>
+                            <?= $order['card'] ?>
                         </td>
 					</tr>
 					<tr>

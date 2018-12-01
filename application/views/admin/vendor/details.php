@@ -110,17 +110,17 @@
 									?>
 							<tr>
 								<td>
-									<a href="<?= base_url() ?>store/details/<?= $row['store_id']?>">
+									<a href="<?= base_url() ?>store/details_store/<?= $row['store_id']?>">
 										<?= $i ?>
 									</a>
 								</td>
 								<td>
-									<a href="<?= base_url() ?>store/details/<?= $row['store_id']?>">
+									<a href="<?= base_url() ?>store/details_store/<?= $row['store_id']?>">
 										<img src="<?= base_url() . $row['thumbnail'] ?>" class="xs_thumbnail">
 									</a>
 								</td>
 								<td>
-									<a href="<?= base_url() ?>store/details/<?= $row['store_id']?>">
+									<a href="<?= base_url() ?>store/details_store/<?= $row['store_id']?>">
 										<?= $row['store'] ?>
 									</a>
 								</td>

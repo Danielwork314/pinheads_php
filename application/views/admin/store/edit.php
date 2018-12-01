@@ -20,98 +20,74 @@
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
-		<form role="form" class="input_form" method="POST" action="<?= base_url()?>store/edit/<?= $store['store_id'] ?>" enctype="multipart/form-data">
+		<form role="form" class="input_form" method="POST" action="<?= base_url()?>store/edit/<?= $store['store_id'] ?>"
+		 enctype="multipart/form-data">
+			<div class="container-fluid">
+				<br /><br />
+				<ul class="list-unstyled multi-steps">
+					<li class="step_url is-active" id="step_link_1" onclick="changeStep(1)">Add Details</li>
+					<li class="step_url" id="step_link_2" onclick="changeStep(2)">Add Features</li>
+				</ul>
+			</div>
 			<div class="box-body">
 				<?php 
 				if (isset($error)) { 
 					?>
-					<div class="alert alert-danger alert-dismissable">
-						<?= $error; ?>						
-					</div>
-					<?php 
+				<div class="alert alert-danger alert-dismissable">
+					<?= $error; ?>
+				</div>
+				<?php 
 				}
 				?>
+				<div class="step_content" id="step_1">
+					<?= $input_field['thumbnail'] ?>
+					<?= $input_field['store'] ?>
+					<?= $input_field['address'] ?>
+					<?= $input_field['phone'] ?>
+					<?= $input_field['latitude'] ?>
+					<?= $input_field['longitude'] ?>
+					<?= $input_field['business_hour'] ?>
+					<?= $input_field['gourmet_type_id'] ?>
+					<?= $input_field['pricing_id'] ?>
+					<div class="form-group">
+						<div class="">
+							<input type="checkbox" name="favourite" value="favourite"> Favourite
+						</div>
+					</div>
+					<button type="button" class="btn btn-primary pull-right" onclick="changeStep(2)">Next</button>
+				</div>
 
-                <div class="form-group">
-                    <img class="img-thumbnail" src="<?= base_url() . $store['thumbnail'] ?>" style="width:50%; height:50%;">
+				<div class="step_content hidden_step" id="step_2">
+					<?php
+					foreach($feature as $row){
+					?>
+					<label>
+						<?= $row['feature'] ?></label>
+					<label class="switch pull-right">
+						<input type="checkbox" name="feature_id[]" value="<?= $row['feature_id'] ?>"
+						<?php
+						foreach($store_feature as $store_feature_row){
+							if($row['feature_id'] == $store_feature_row['feature_id']){
+								?>
+								checked
+								<?php
+							}
+						}
+						?>
+						>
+						<span class="slider"></span>
+					</label>
+					<hr>
+					<?php
+					}
+					?>
+					<button type="button" class="btn btn-primary" onclick="changeStep(2)">Previous</button>
+					<button type="submit" class="btn btn-primary pull-right">Submit</button>
 				</div>
-				<div class="form-group">
-					<label>Store Thumbnail</label>
-					<input type="file" class="form-control" name="file" required>
-				</div>
-
-				<?= $input_field['store'] ?>
-				<?= $input_field['address'] ?>
-				<?= $input_field['phone'] ?>
-				<?= $input_field['latitude'] ?>
-				<?= $input_field['longitude'] ?>
-				<?= $input_field['business_hour'] ?>
-				<?= $input_field['gourmet_type_id'] ?>
-				<?= $input_field['pricing_id'] ?>
-
-				<!-- <div class="form-group">
-					<label>Store</label>
-					<input type="text" class="form-control" name="store" required value="<?= $store['store'] ?>">
-				</div>
-				<div class="form-group">
-					<label>Store Address</label>
-					<input type="text" class="form-control" name="address" required value="<?= $store['address'] ?>">
-				</div>
-				<div class="form-group">
-					<label>Phone</label>
-					<input type="text" class="form-control" name="phone" required value="<?= $store['phone'] ?>">
-				</div>
-				<div class="form-group">
-					<label>Latitude</label>
-					<input type="text" class="form-control" name="latitude" required value="<?= $store['latitude'] ?>">
-				</div>
-				<div class="form-group">
-					<label>Longitude</label>
-					<input type="text" class="form-control" name="longitude" required value="<?= $store['longitude'] ?>">
-				</div>
-				<div class="form-group">
-					<label>Business Hour</label>
-					<input type="text" class="form-control" name="business_hour" required value="<?= $store['business_hour'] ?>">
-				</div>
-				<div class="form-group">
-					<label>Gourmet Type</label>
-					<select class="form-control" name="gourmet_type_id">
-						<?php foreach($type as $row) { ?>
-                        <option value="<?= $row['gourmet_type_id'] ?>" <?php if($store['gourmet_type_id'] == $row['gourmet_type_id']) { ?> selected <?php } ?>><?= $row['gourmet_type'] ?></option>
-						<?php } ?>
-					</select> 
-				</div>
-				<div class="form-group">
-					<label>Pricing</label>
-					<select class="form-control" name="pricing_id">
-						<?php foreach($price as $row) { ?>
-						<option value="<?= $row['pricing_id'] ?>" <?php if($store['pricing_id'] == $row['pricing_id']) { ?> selected <?php } ?>><?= $row['pricing'] ?></option>
-						<?php } ?>
-					</select> 
-				</div> -->
-				<div class="form-group">
-					<div class="">
-                        <input type="checkbox" name="take_away" value="take_away" <?php if($store['take_away'] != 0){ ?> checked <?php } ?>> Take Away
-					</div>
-					<div class="">
-						<input type="checkbox" name="dine_in" value="dine_in" <?php if($store['dine_in'] != 0){ ?> checked <?php } ?>> Dine In
-					</div>
-					<div class="">
-						<input type="checkbox" name="halal" value="halal" <?php if($store['halal'] != 0){ ?> checked <?php } ?>> Halal
-					</div>
-					<div class="">
-						<input type="checkbox" name="vegetarian" value="vegetarian" <?php if($store['vegetarian'] != 0){ ?> checked <?php } ?>> Vegetarian
-					</div>
-					<div class="">
-						<input type="checkbox" name="favourite" value="favourite" <?php if($store['favourite'] != 0){ ?> checked <?php } ?>> Favourite
-					</div>
-				</div>
-                
 			</div>
 			<!-- /.box-body -->
 
 			<div class="box-footer">
-				<button type="submit" class="btn btn-primary">Submit</button>
 			</div>
 		</form>
 	</div>

@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Food_category extends Base_Controller
 {
 
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
 
@@ -15,11 +15,11 @@ class Food_category extends Base_Controller
         $this->load->model("Vendor_model");
     }
 
-    function index()
+    public function index()
     {
         $type = $this->session->userdata('login_data')['type'];
 
-        if($type == "VENDOR"){
+        if ($type == "VENDOR") {
 
             $where = array(
                 "food_category.created_by" => $this->session->userdata("login_data")["vendor_id"],
@@ -28,17 +28,17 @@ class Food_category extends Base_Controller
             $food_category_id = $this->Food_category_model->get_where($where);
             $this->page_data["food_category"] = $food_category_id;
 
-        }else{
-            
+        } else {
+
             $this->page_data["food_category"] = $this->Food_category_model->get_all();
         }
-        
+
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/food_category/all");
         $this->load->view("admin/footer");
     }
 
-    function add()
+    public function add()
     {
         $this->page_data['input_field'] = $this->Food_category_model->generate_input();
 
@@ -47,19 +47,35 @@ class Food_category extends Base_Controller
 
             $error = false;
 
+            if (!empty($_FILES['thumbnail']['name'])) {
+                $image = $this->multi_image_upload($_FILES, "thumbnail", "food_category", 1);
+
+                if (!$image["error"]) {
+                    $image_url = $image['urls'];
+                } else {
+                    $error = true;
+                    $error_message = $image["error_message"];
+                }
+            } else {
+                $error = true;
+                $error_message = "Please upload a thumbnail";
+            }
+
             if (!$error) {
                 $data = array(
                     'food_category' => $input['food_category'],
-                    'parent_id' => $input['parent_id'],
+                    'thumbnail' => $image_url,
+                    // 'parent_id' => $input['parent_id'],
                 );
 
                 $this->Food_category_model->insert($data);
 
                 redirect("food_category", "refresh");
 
-            }else{
+            } else {
 
                 $this->page_data["input"] = $input;
+                $this->page_data["error"] = $error_message;
             }
         }
 
@@ -68,11 +84,11 @@ class Food_category extends Base_Controller
         $this->load->view("admin/footer");
     }
 
-    function details($food_category_id)
+    public function details($food_category_id)
     {
 
         $where = array(
-            "food_category_id" => $food_category_id
+            "food_category_id" => $food_category_id,
         );
 
         $food_category = $this->Food_category_model->get_where($where);
@@ -86,11 +102,11 @@ class Food_category extends Base_Controller
         $this->load->view("admin/footer");
     }
 
-    function edit($food_category_id)
+    public function edit($food_category_id)
     {
 
         $where = array(
-            "food_category_id" => $food_category_id
+            "food_category_id" => $food_category_id,
         );
 
         $food_category = $this->Food_category_model->get_where($where);
@@ -100,26 +116,40 @@ class Food_category extends Base_Controller
         $this->page_data["food_category"] = $food_category[0];
         $this->page_data['input_field'] = $this->Food_category_model->generate_edit_input($food_category_id);
 
-
         if ($_POST) {
             $input = $this->input->post();
 
             $error = false;
 
-            if (!$error){
+            if (!empty($_FILES['thumbnail']['name'])) {
+                $image = $this->multi_image_upload($_FILES, "thumbnail", "food_category", 1);
+
+                if (!$image["error"]) {
+                    $image_url = $image['urls'];
+                } else {
+                    $error = true;
+                    $error_message = $image["error_message"];
+                }
+            }
+
+            if (!$error) {
                 $where = array(
-                    "food_category_id" => $food_category_id
+                    "food_category_id" => $food_category_id,
                 );
 
                 $data = array(
                     'food_category' => $input['food_category'],
-                    'parent_id' => $input['parent_id'],
+                    // 'parent_id' => $input['parent_id'],
                 );
+
+                if (!empty($image_url)) {
+                    $data['thumbnail'] = $image_url;
+                }
 
                 $this->Food_category_model->update_where($where, $data);
 
                 redirect("food_category/details/" . $food_category_id, "refresh");
-            }else{
+            } else {
 
                 $this->page_data["input"] = $input;
             }
@@ -130,7 +160,7 @@ class Food_category extends Base_Controller
         $this->load->view("admin/footer");
     }
 
-    function delete($food_category_id)
+    public function delete($food_category_id)
     {
         $this->Food_category_model->soft_delete($food_category_id);
 

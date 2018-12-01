@@ -3,7 +3,7 @@
 		Gourmet Type
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="<?= base_url() ?>gourmet_type"><i class="fa fa-mortar-pestle"></i> Gourmet Type</a></li>
+		<li><a href="<?=base_url()?>gourmet_type"><i class="fa fa-mortar-pestle"></i> Gourmet Type</a></li>
 	</ol>
 </section>
 <br>
@@ -23,52 +23,47 @@
 					<thead>
 						<tr>
 							<th>No.</th>
+                            <th>Thumbnail</th>
                             <th>Gourmet Type</th>
-                            <th>Created Date</th>
                             <!-- <th>Created By</th> -->
                             <th></th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php
-                            $i = 1;
-                            foreach($gourmet_type as $row){
-                                ?>
+$i = 1;
+foreach ($gourmet_type as $row) {
+    ?>
 						<tr>
 							<td>
-                                <a href="<?= base_url() ?>gourmet_type/details/<?= $row['gourmet_type_id']?>">
-									<?= $i ?>
+                                <a href="<?=base_url()?>gourmet_type/details/<?=$row['gourmet_type_id']?>">
+									<?=$i?>
                                 </a>
-                            </td>
-							<td>
-                                <a href="<?= base_url() ?>gourmet_type/details/<?= $row['gourmet_type_id']?>">
-									<?= $row['gourmet_type'] ?>
-                                </a>
-                            </td>
+							</td>
                             <td>
-                                <a href="<?= base_url() ?>gourmet_type/details/<?= $row['gourmet_type_id']?>">
-									<?= $row['created_date'] ?>
+                                <a href="<?=base_url()?>gourmet_type/details/<?=$row['gourmet_type_id']?>">
+									<img src="<?=base_url() . $row['thumbnail']?>" class="xs_thumbnail">
                                 </a>
                             </td>
-                            <!-- <td>
-                                <a href="<?= base_url() ?>gourmet_type/details/<?= $row['gourmet_type_id']?>">
-									<?= $row['created_by'] ?>
-                                </a>
-                            </td> -->
 							<td>
-                                <a href="<?= base_url() ?>gourmet_type/delete/<?= $row['gourmet_type_id']?>" class="btn btn-danger delete-button">Delete</a>
+                                <a href="<?=base_url()?>gourmet_type/details/<?=$row['gourmet_type_id']?>">
+									<?=$row['gourmet_type']?>
+                                </a>
+                            </td>
+							<td>
+                                <a href="<?=base_url()?>gourmet_type/delete/<?=$row['gourmet_type_id']?>" class="btn btn-danger delete-button">Delete</a>
                             </td>
 						</tr>
 						<?php
-                                $i++;
-                            }
-                        ?>
+$i++;
+}
+?>
 					</tbody>
 					<tfoot>
 						<tr>
                             <th>No.</th>
-                            <th>Gourmet Type Title</th>
-                            <th>Created Date</th>
+                            <th>Thumbnail</th>
+                            <th>Gorumet Type</th>
                             <!-- <th>Created By</th> -->
                             <th></th>
 						</tr>

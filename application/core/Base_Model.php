@@ -197,11 +197,11 @@ class Base_Model extends CI_Model
             $html = '<div class="form-group">';
             if (($row->type == "int" or $row->type == "decimal") and substr($row->name, -3) != "_id") {
                 $html .= '<label for="form_' . $row->name . '">' . $label . '</label>';
-                $html .= '<input type="number" class="form-control" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required>';
-            } else if ($row->type == "longtext" or $row->type == "text") {
+                $html .= '<input type="number" class="form-control" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required step="any">';
+            } else if ($row->type == "longtext" or $row->type == "text" or $row->type == "longblob") {
                 $html .= '<label for="form_' . $row->name . '">' . $label . '</label>';
                 $html .= '<textarea class="form-control" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required rows="5"></textarea>';
-            } else if ($row->name == "thumbnail" or $row->name == "image" or $row->name == "photo") {
+            } else if ($row->name == "thumbnail" or $row->name == "image" or $row->name == "banner" or $row->name == "banner_xs") {
                 $html .= '<div id="preview_' . $row->name . '" class="upload_preview"></div>';
                 $html .= '<label for="form_' . $row->name . '">' . $label . '</label>';
                 $html .= '<input type="file" class="form-control image_input" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required>';
@@ -215,20 +215,57 @@ class Base_Model extends CI_Model
                 $html .= '<label for="form_' . $row->name . '">' . $label . '</label>';
                 $html .= '<input type="text" class="form-control datepicker" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required>';
             } else if (substr($row->name, -3) == "_id" and substr($row->name, 0, -3) != $this->table_name) {
-                if ($this->db->table_exists(substr($row->name, 0, -3))) {
-                    $fields = $this->db->list_fields(substr($row->name, 0, -3));
+                if (($this->db->table_exists(substr($row->name, 0, -3))) or ((substr($row->name, 0, -3) == "parent"))) {
+
+                    if (substr($row->name, 0, -3) == "parent") {
+                        $fields = $this->db->list_fields($this->table_name);
+                    } else {
+                        $fields = $this->db->list_fields(substr($row->name, 0, -3));
+                    }
 
                     $field_exists = false;
+                    $use_name = false;
+                    $use_label = false;
+                    $use_role = false;
+                    $duplicate_of = false;
                     foreach ($fields as $field_row) {
+                        if ($field_row == "duplicate_of") {
+                            $duplicate_of = true;
+                        }
+
+                        if (substr($row->name, 0, -3) == "parent") {
+                            $field_exists = true;
+                        }
+
                         if ($field_row == substr($row->name, 0, -3)) {
                             $field_exists = true;
+                        } else if ($field_row == "name") {
+                            $field_exists = true;
+                            $use_name = true;
+                        } else if ($field_row == "label") {
+                            $field_exists = true;
+                            $use_label = true;
+                        } else if ($field_row == "role") {
+                            $field_exists = true;
+                            $use_role = true;
                         }
                     }
 
                     if ($field_exists) {
                         $this->db->select('*');
-                        $this->db->from(substr($row->name, 0, -3));
-                        $this->db->where(substr($row->name, 0, -3) . '.deleted', 0);
+                        if (substr($row->name, 0, -3) == "parent") {
+                            $this->db->from($this->table_name);
+                            $this->db->where($this->table_name . '.deleted', 0);
+                            if ($duplicate_of) {
+                                $this->db->where($this->table_name . ".duplicate_of", 0);
+                            }
+                        } else {
+                            $this->db->from(substr($row->name, 0, -3));
+                            $this->db->where(substr($row->name, 0, -3) . '.deleted', 0);
+                            if ($duplicate_of) {
+                                $this->db->where(substr($row->name, 0, -3) . ".duplicate_of", 0);
+                            }
+                        }
                         if (substr($row->name, 0, -3) == "role") {
                             $this->db->where('type', strtoupper($this->table_name));
                         }
@@ -237,10 +274,30 @@ class Base_Model extends CI_Model
 
                         $result = $query->result_array();
 
-                        $html .= '<label for="form_' . $row->name . '">' . ucwords(substr($row->name, 0, -3)) . '</label>';
+                        $temp_label_name = ucwords(str_replace("_", " ", $row->name));
+                        // $this->debug(ucwords(substr($row->name, 0, -3)));
+
+                        if (substr($row->name, 0, -3) == "parent") {
+                            $html .= '<label for="form_' . $row->name . '">Parent</label>';
+                        } else {
+                            $html .= '<label for="form_' . $row->name . '">' . ucwords(substr($temp_label_name, 0, -3)) . '</label>';
+                        }
                         $html .= '<select class="form-control" id="form_' . $row->name . '" name="' . $row->name . '">';
                         foreach ($result as $result_row) {
-                            $html .= '<option value="' . $result_row[substr($row->name, 0, -3) . '_id'] . '">' . $result_row[substr($row->name, 0, -3)] . '</option>';
+                            if ($use_name) {
+                                $html .= '<option value="' . $result_row[substr($row->name, 0, -3) . '_id'] . '">' . $result_row['name'] . '</option>';
+                            } else if ($use_label) {
+                                $html .= '<option value="' . $result_row[substr($row->name, 0, -3) . '_id'] . '">' . $result_row['label'] . '</option>';
+                            } else if ($use_role) {
+                                $html .= '<option value="' . $result_row[substr($row->name, 0, -3) . '_id'] . '">' . $result_row['role'] . '</option>';
+                            } else {
+                                if (substr($row->name, 0, -3) == "parent") {
+                                    $html .= '<option value="' . $result_row[substr($row->name, 0, -3) . '_id'] . '">' . $result_row[$this->table_name] . '</option>';
+                                } else {
+                                    $html .= '<option value="' . $result_row[substr($row->name, 0, -3) . '_id'] . '">' . $result_row[substr($row->name, 0, -3)] . '</option>';
+                                }
+
+                            }
                         }
                         $html .= '</select>';
                     } else {
@@ -248,7 +305,31 @@ class Base_Model extends CI_Model
                         $html .= '<input type="text" class="form-control" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required>';
                     }
                 } else if (substr($row->name, 0, -3) == "parent") {
-                    $self_data = $this->get_all();
+                    $fields = $this->db->list_fields($this->table_name);
+
+                    $field_exists = false;
+                    $use_name = false;
+                    $use_label = false;
+                    $use_role = false;
+                    $duplicate_of = false;
+                    foreach ($fields as $field_row) {
+                        if ($field_row == "duplicate_of") {
+                            $duplicate_of = true;
+                        }
+
+                        if ($field_row == substr($row->name, 0, -3)) {
+                            $field_exists = true;
+                        } else if ($field_row == "name") {
+                            $field_exists = true;
+                            $use_name = true;
+                        } else if ($field_row == "label") {
+                            $field_exists = true;
+                            $use_role = true;
+                        } else if ($field_row == "role") {
+                            $field_exists = true;
+                            $use_role = true;
+                        }
+                    }
 
                     $html .= '<label for="form_' . $row->name . '">Parent</label>';
                     $html .= '<select class="form-control" id="form_' . $row->name . '" name="' . $row->name . '">';
@@ -286,7 +367,7 @@ class Base_Model extends CI_Model
     public function generate_edit_input($primary_key)
     {
         $data = $this->get_where(array(
-            $this->primary_key => $primary_key,
+            $this->table_name . "." . $this->primary_key => $primary_key,
         ))[0];
 
         $fields = $this->db->field_data($this->table_name);
@@ -298,11 +379,11 @@ class Base_Model extends CI_Model
             $html = '<div class="form-group">';
             if (($row->type == "int" or $row->type == "decimal") and substr($row->name, -3) != "_id") {
                 $html .= '<label for="form_' . $row->name . '">' . $label . '</label>';
-                $html .= '<input type="number" class="form-control" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required value="' . $data[$row->name] . '">';
-            } else if ($row->type == "longtext" or $row->type == "text") {
+                $html .= '<input type="number" class="form-control" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required value="' . $data[$row->name] . '" step="any">';
+            } else if ($row->type == "longtext" or $row->type == "text" or $row->type == "longblob") {
                 $html .= '<label for="form_' . $row->name . '">' . $label . '</label>';
                 $html .= '<textarea class="form-control" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required rows="5">' . $data[$row->name] . '</textarea>';
-            } else if ($row->name == "thumbnail" or $row->name == "image") {
+            } else if ($row->name == "thumbnail" or $row->name == "image" or $row->name == "banner" or $row->name == "banner_xs") {
                 $html .= '<div id="preview_' . $row->name . '" class="upload_preview"></div>';
                 $html .= '<label for="form_' . $row->name . '">' . $label . ' <small>*leave blank to keep previous image</small></label>';
                 $html .= '<input type="file" class="form-control image_input" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '">';
@@ -316,28 +397,120 @@ class Base_Model extends CI_Model
                 $html .= '<label for="form_' . $row->name . '">' . $label . '</label>';
                 $html .= '<input type="text" class="form-control datepicker" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required value="' . date("d-m-Y", strtotime($data[$row->name])) . '">';
             } else if (substr($row->name, -3) == "_id" and substr($row->name, 0, -3) != $this->table_name) {
-                if ($this->db->table_exists(substr($row->name, 0, -3))) {
-                    $this->db->select('*');
-                    $this->db->from(substr($row->name, 0, -3));
-                    $this->db->where(substr($row->name, 0, -3) . '.deleted', 0);
-                    if (substr($row->name, 0, -3) == "role") {
-                        $this->db->where('type', strtoupper($this->table_name));
+                if (($this->db->table_exists(substr($row->name, 0, -3))) or ((substr($row->name, 0, -3) == "parent"))) {
+
+                    if (substr($row->name, 0, -3) == "parent") {
+                        $fields = $this->db->list_fields($this->table_name);
+                    } else {
+                        $fields = $this->db->list_fields(substr($row->name, 0, -3));
                     }
 
-                    $query = $this->db->get();
+                    $field_exists = false;
+                    $use_name = false;
+                    $use_label = false;
+                    $use_role = false;
+                    $duplicate_of = false;
+                    foreach ($fields as $field_row) {
+                        if ($field_row == "duplicate_of") {
+                            $duplicate_of = true;
+                        }
 
-                    $result = $query->result_array();
+                        if (substr($row->name, 0, -3) == "parent") {
+                            $field_exists = true;
+                        }
 
-                    $html .= '<label for="form_' . $row->name . '">' . ucwords(substr($row->name, 0, -3)) . '</label>';
-                    $html .= '<select class="form-control" id="form_' . $row->name . '" name="' . $row->name . '">';
-                    foreach ($result as $result_row) {
-                        if ($result_row[$row->name] == $data[$row->name]) {
-                            $html .= '<option value="' . $result_row[$row->name] . '" selected>' . $result_row[substr($row->name, 0, -3)] . '</option>';
-                        } else {
-                            $html .= '<option value="' . $result_row[$row->name] . '">' . $result_row[substr($row->name, 0, -3)] . '</option>';
+                        if ($field_row == substr($row->name, 0, -3)) {
+                            $field_exists = true;
+                        } else if ($field_row == "name") {
+                            $field_exists = true;
+                            $use_name = true;
+                        } else if ($field_row == "label") {
+                            $field_exists = true;
+                            $use_label = true;
+                        } else if ($field_row == "role") {
+                            $field_exists = true;
+                            $use_role = true;
                         }
                     }
-                    $html .= '</select>';
+
+                    // $this->debug($use_role);
+
+                    if ($field_exists) {
+                        $this->db->select('*');
+                        if (substr($row->name, 0, -3) == "parent") {
+                            $this->db->from($this->table_name);
+                            $this->db->where($this->table_name . '.deleted', 0);
+                            if ($duplicate_of) {
+                                $this->db->where($this->table_name . ".duplicate_of", 0);
+                            }
+                        } else {
+                            $this->db->from(substr($row->name, 0, -3));
+                            $this->db->where(substr($row->name, 0, -3) . '.deleted', 0);
+                            if ($duplicate_of) {
+                                $this->db->where(substr($row->name, 0, -3) . ".duplicate_of", 0);
+                            }
+                        }
+                        if (substr($row->name, 0, -3) == "role") {
+                            $this->db->where('type', strtoupper($this->table_name));
+                        }
+
+                        $query = $this->db->get();
+
+                        $result = $query->result_array();
+
+                        $temp_label_name = ucwords(str_replace("_", " ", $row->name));
+                        // $this->debug(ucwords(substr($row->name, 0, -3)));
+
+                        $html .= '<label for="form_' . $row->name . '">' . ucwords(substr($temp_label_name, 0, -3)) . '</label>';
+                        $html .= '<select class="form-control" id="form_' . $row->name . '" name="' . $row->name . '">';
+                        if (substr($row->name, 0, -3) == "parent") {
+                            $html .= '<option value="0">None</option>';
+                        }
+                        foreach ($result as $result_row) {
+                            if ($use_name) {
+                                if ($result_row[$row->name] == $data[$row->name]) {
+                                    $html .= '<option value="' . $result_row[$row->name] . '" selected>' . $result_row['name'] . '</option>';
+                                } else {
+                                    $html .= '<option value="' . $result_row[$row->name] . '">' . $result_row['name'] . '</option>';
+                                }
+                                // $html .= '<option value="' . $result_row[substr($row->name, 0, -3) . '_id'] . '">' . $result_row['name'] . '</option>';
+                            } else if ($use_label) {
+                                if ($result_row[$row->name] == $data[$row->name]) {
+                                    $html .= '<option value="' . $result_row[$row->name] . '" selected>' . $result_row['label'] . '</option>';
+                                } else {
+                                    $html .= '<option value="' . $result_row[$row->name] . '">' . $result_row['label'] . '</option>';
+                                }
+                                // $html .= '<option value="' . $result_row[substr($row->name, 0, -3) . '_id'] . '">' . $result_row['name'] . '</option>';
+                            } else if ($use_role) {
+                                if ($result_row[$row->name] == $data[$row->name]) {
+                                    $html .= '<option value="' . $result_row[$row->name] . '" selected>' . $result_row['role'] . '</option>';
+                                } else {
+                                    $html .= '<option value="' . $result_row[$row->name] . '">' . $result_row['role'] . '</option>';
+                                }
+                                // $html .= '<option value="' . $result_row[substr($row->name, 0, -3) . '_id'] . '">' . $result_row['name'] . '</option>';
+                            } else {
+                                if ($result_row[$row->name] == $data[$row->name]) {
+                                    if (substr($row->name, 0, -3) == "parent") {
+                                        $html .= '<option value="' . $result_row[$row->name] . '" selected>' . $result_row[$this->table_name] . '</option>';
+                                    } else {
+                                        $html .= '<option value="' . $result_row[$row->name] . '" selected>' . $result_row[substr($row->name, 0, -3)] . '</option>';
+                                    }
+                                } else {
+                                    if (substr($row->name, 0, -3) == "parent") {
+                                        $html .= '<option value="' . $result_row[$row->name] . '">' . $result_row[$this->table_name] . '</option>';
+                                    } else {
+                                        $html .= '<option value="' . $result_row[$row->name] . '">' . $result_row[substr($row->name, 0, -3)] . '</option>';
+                                    }
+
+                                }
+                            }
+                        }
+                        $html .= '</select>';
+                    } else {
+                        $html .= '<label for="form_' . $row->name . '">' . $label . '</label>';
+                        $html .= '<input type="text" class="form-control" id="form_' . $row->name . '" placeholder="' . $label . '" name="' . $row->name . '" required value="' . $data[$row->name] . '">';
+                    }
+
                 } else if (substr($row->name, 0, -3) == "parent") {
                     $self_data = $this->get_where($where = array(
                         $this->table_name . "_id != " => $primary_key,

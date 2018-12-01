@@ -42,7 +42,7 @@ class Notification extends Base_Controller
                     'description' => $input['description'],
                     'end_date' => $input['end_date'],
                     'created_by' => $this->session->userdata('login_id'),
-                    'user_id' => $input['user_id'],
+                    'user_id' => $this->session->userdata('login_id'),
                 );
 
                 $this->Notification_model->insert($data);

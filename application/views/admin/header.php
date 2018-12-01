@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="<?=base_url();?>css/skins/skin-black.min.css">
 	<!-- Morris chart -->
 	<link rel="stylesheet" href="<?=base_url();?>css/morris.css">
+	<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css"> -->
 	<!-- jvectormap -->
 	<link rel="stylesheet" href="<?=base_url();?>css/jquery-jvectormap.css">
 	<!-- Date Picker -->
@@ -39,14 +40,18 @@
 	<link rel="stylesheet" href="<?=base_url();?>css/util.css">
 	<link rel="stylesheet" href="<?=base_url();?>css/custom.css">
 
-
+	<!-- Select2 -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+
+	<!-- Chart -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+		<![endif]-->
 
 	<script src="<?=base_url();?>js/bower_components/jquery/dist/jquery.min.js"></script>
 	<!-- jQuery UI 1.11.4 -->
@@ -58,7 +63,7 @@
 	</script>
 	<!-- Bootstrap 3.3.7 -->
 	<script src="<?=base_url();?>js/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<!-- Morris.js charts -->
+
 	<!-- Google Font -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -143,12 +148,12 @@
 						</li>
 						<?php
 					}
-					if($this->session->userdata('role_access')['order']['read_control'] == 1){
+					if($this->session->userdata('role_access')['sales']['read_control'] == 1){
 						?>
-						<li class=" <?php if ($this->router->fetch_class() == 'order') echo 'active'; ?> ">
-							<a href="<?=base_url();?>order">
+						<li class=" <?php if ($this->router->fetch_class() == 'sales') echo 'active'; ?> ">
+							<a href="<?=base_url();?>sales">
 								<i class="fa fa-tasks"></i>
-								<span>Order</span>
+								<span>Sales</span>
 							</a>
 						</li>
 						<?php
@@ -167,7 +172,7 @@
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'food_category') echo 'active'; ?> ">
 							<a href="<?=base_url();?>food_category">
-								<i class="fa fa-utensils"></i>
+								<i class="fa fa-tags"></i>
 								<span>Food Category</span>
 							</a>
 						</li>
@@ -179,16 +184,6 @@
 							<a href="<?=base_url();?>food">
 								<i class="fa fa-utensils"></i>
 								<span>Food</span>
-							</a>
-						</li>
-						<?php
-					}
-					if($this->session->userdata('role_access')['table_position']['read_control'] == 1){
-						?>
-						<li class=" <?php if ($this->router->fetch_class() == 'table_position') echo 'active'; ?> ">
-							<a href="<?=base_url();?>table_position">
-								<i class="fa fa-clipboard-list"></i>
-								<span>Table</span>
 							</a>
 						</li>
 						<?php
@@ -213,6 +208,16 @@
 						</li>
 						<?php
 					}
+					if($this->session->userdata('role_access')['feature']['read_control'] == 1){
+						?>
+						<li class=" <?php if ($this->router->fetch_class() == 'feature') echo 'active'; ?> ">
+							<a href="<?=base_url();?>feature">
+								<i class="fa fa-tag"></i>
+								<span><?php echo '&nbsp;' ?> Feature</span>
+							</a>
+						</li>
+						<?php
+					}
 					if($this->session->userdata('role_access')['notification']['read_control'] == 1){
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'notification') echo 'active'; ?> ">
@@ -233,16 +238,7 @@
 						</li>
 						<?php
 					}
-					if($this->session->userdata('role_access')['coupon']['read_control'] == 1){
-						?>
-						<li class=" <?php if ($this->router->fetch_class() == 'coupon') echo 'active'; ?> ">
-							<a href="<?=base_url();?>coupon">
-								<i class="fas fa-money-bill-wave"></i>
-								<span><?php echo '&nbsp;' ?> Coupon</span>
-							</a>
-						</li>
-						<?php
-					}
+					
 					if($this->session->userdata('role_access')['role_access']['read_control'] == 1){
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'role_access') echo 'active'; ?> ">

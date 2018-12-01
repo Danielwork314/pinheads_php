@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>gourmet_type">
-				<i class="fa fa-mortar-pestle"></i> Food</a>
+				<i class="fa fa-mortar-pestle"></i> Gourmet Type</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>Food/details/<?= $gourmet_type['gourmet_type_id'] ?>">
@@ -28,6 +28,7 @@
 			<!-- /.box-header -->
 			<!-- form start -->
 			<div class="box-body">
+				<img src="<?= base_url() . $gourmet_type['thumbnail'] ?>" class="xs_thumbnail">
 				<table class="formTable">
 					<tr>
 						<th>Gourmet Type Title</th>

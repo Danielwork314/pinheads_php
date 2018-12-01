@@ -42,7 +42,7 @@ class Feedback extends Base_Controller
                 $data = array(
                     'feedback' => $input['feedback'],
                     'created_by' => $this->session->userdata('login_id'),
-                    // 'user_id' => $this->session->userdata('login_id'),
+                    'user_id' => $this->session->userdata('login_id'),
                 );
 
                  $this->Feedback_model->insert($data);
@@ -100,7 +100,6 @@ class Feedback extends Base_Controller
             
                 $data = array(
                     'feedback' => $input['feedback'],
-                    'created_by' => $this->session->userdata('login_id'),
                     'modified_date' => $date->format("Y-m-d h:i:s"),
                     'modified_by' => $this->session->userdata('login_id')
                 );

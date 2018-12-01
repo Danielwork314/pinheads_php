@@ -23,7 +23,7 @@
 					<thead>
 						<tr>
 							<th>No.</th>
-                            <th>User ID</th>
+                            <th>User</th>
 							<th>Notification Title</th>
 							<th>Notification Description</th>
 							<th>End Date</th>
@@ -45,7 +45,7 @@
                             </td>
                             <td>
                                 <a href="<?= base_url() ?>notification/details/<?= $row['notification_id']?>">
-									<?= $row['user_id'] ?>
+									<?= $row['user'] ?>
                                 </a>
                             </td>
 							<td>

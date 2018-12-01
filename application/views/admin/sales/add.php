@@ -1,14 +1,14 @@
 <section class="content-header">
 	<h1>
-		Add Order
+		Add Sales
 	</h1>
 	<ol class="breadcrumb">
 		<li>
-			<a href="<?= base_url() ?>order">
-				<i class="fas fa-tasks"></i> Order</a>
+			<a href="<?= base_url() ?>sales">
+				<i class="fas fa-tasks"></i> Sales</a>
 		</li>
 		<li>
-			<a href="<?= base_url() ?>order/add"> Add order</a>
+			<a href="<?= base_url() ?>sales/add"> Add sales</a>
 		</li>
 	</ol>
 </section>
@@ -17,7 +17,7 @@
     <div class="col-md-6 col-xs-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Order Details</h3>
+                <h3 class="box-title">Sales Details</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -40,14 +40,11 @@
                         <?php } ?>
                     </select>
                 </div>
-                <!-- <?= $input_field['payment_id'] ?>
-                <?= $input_field['billing_address_id'] ?>
-                <?= $input_field['store_id'] ?> -->
                 
                 <div class="form-group">
-                    <label>Payment</label>
-                    <div class="form_payment">
-                    <select class="form-control" required name="payment_id" id="payment_sel">
+                    <label>Card</label>
+                    <div class="form_card">
+                    <select class="form-control" required name="card_id" id="card_sel">
                         <?php foreach($user as $row){ ?>
                             <option value="<?= $row['user_id']?>"><?= $row['name'] ?></option>
                         <?php } ?>
@@ -97,7 +94,7 @@
     <div class="col-md-6 col-xs-12">
         <div class="box box-primary">
             <div class="box-header with-border">
-                <h3 class="box-title">Order Foods</h3>
+                <h3 class="box-title">Sales Foods</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -142,7 +139,7 @@
     $(document).ready(function(){
 
         changeStore();
-        changePayment();
+        changeCard();
         changeBillingAddress();
     });
 
@@ -197,7 +194,7 @@
         var user_id = $('#user_sel').val();
         var store_id = $('#store_sel').val();
         var billing_address_id = $('#billing_address_id').val();
-        var payment_id = $('#payment_id').val();
+        var card_id = $('#card_id').val();
         var take_away = $('#take_away').val();
         var total_price = $('#total_price').val();
 
@@ -211,7 +208,7 @@
             user_id: user_id,
             store_id: store_id,
             billing_address_id: billing_address_id,
-            payment_id: payment_id,
+            card_id: card_id,
             take_away: take_away,
             total_price: total_price,
             food_array: food_array,
@@ -220,13 +217,13 @@
         console.log(postParam);
 
         $.ajax({
-            url:'<?=base_url()?>Order/add',
+            url:'<?=base_url()?>Sales/add',
             type: "POST",
             data: postParam,
             success:function(data)
             {
                 console.log(data);
-                window.location = "<?= base_url() ?>Order/";
+                window.location = "<?= base_url() ?>Sales/";
             }, 
             error: function () {
                 console.log("error");
@@ -241,7 +238,7 @@
 
     $('#user_sel').change(function(){
 
-        changePayment();
+        changeCard();
         changeBillingAddress();
     });
 
@@ -267,7 +264,7 @@
         });
     }   
 
-    function changePayment(){
+    function changeCard(){
 
         var user_id = $('#user_sel').val();
 
@@ -276,12 +273,13 @@
         };
 
         $.ajax({
-            url:'<?=base_url()?>Ajax/getPayment',
+            url:'<?=base_url()?>Ajax/getCard',
             type: "POST",
             data: postParam,
             success:function(data)
             {
-                $('.form_payment').html(data);   
+                $('.form_card').html(data);  
+                console.log(data); 
             }, 
             error: function () {
                 console.log("error");

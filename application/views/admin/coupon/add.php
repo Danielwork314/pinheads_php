@@ -32,34 +32,11 @@
 				}
 				?>
 
-				<div class="form-group">
-					<label>Coupon</label>
-					<input type="text" class="form-control" name="coupon" required placeholder="Coupon title">
-				</div>
-                <div class="form-group">
-					<label>Coupon Description</label>
-					<input type="text" class="form-control" name="description" required placeholder="Coupon description">
-				</div>
-				<div class="form-group">
-					<label>Valid Date</label>
-					<input type="date" class="form-control" name="valid_date" required placeholder="Valid date">
-				</div>
-                <!-- <div class="form-group">
-					<label>Partner Coupon</label>
-					<input type="text" class="form-control" name="valid_date" required placeholder="Partner Coupon">
-				</div>
-                <div class="form-group">
-					<label>Used</label>
-					<input type="text" class="form-control" name="used" required placeholder="Used">
-				</div> -->
-                <div class="form-group">
-					<label>Store</label>
-					<select class="form-control" required name="store_id" id="form_store_id">
-                            <?php foreach ($store as $row) { ?>
-                                <option value="<?= $row['store_id'] ?>"><?= $row['store'] ?></option>
-                            <?php } ?>
-                    </select>
-				</div>
+				<?= $input_field['coupon'] ?>
+				<?= $input_field['description'] ?>
+				<?= $input_field['coupon_type_id'] ?>
+				<?= $input_field['valid_date'] ?>
+				<?= $input_field['store_id'] ?>
 			</div>
 			<!-- /.box-body -->
 

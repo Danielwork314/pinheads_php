@@ -30,9 +30,9 @@
 			<div class="box-body">
 				<table class="formTable">
 					<tr>
-						<th>User ID</th>
+						<th>User</th>
 						<td>:
-							<?= $feedback["user_id"] ?>
+							<?= $feedback["user"] ?>
 						</td>
                     </tr>
                     <tr>

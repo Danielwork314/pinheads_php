@@ -17,21 +17,8 @@ class Pricing extends Base_Controller
 
     public function index()
     {
-        $type = $this->session->userdata('login_data')['type'];
-
-        if($type == "VENDOR"){
-
-            $where = array(
-                "pricing.created_by" => $this->session->userdata("login_data")["vendor_id"],
-            );
-
-            $pricing_id = $this->Pricing_model->get_where($where);
-            $this->page_data["pricing"] = $pricing_id;
-
-        }else{
-            
-            $this->page_data["pricing"] = $this->Pricing_model->get_all();
-        }
+        
+        $this->page_data["pricing"] = $this->Pricing_model->get_all();
 
         // $this->debug($this->page_data["pricing"]);
         $this->load->view("admin/header", $this->page_data);

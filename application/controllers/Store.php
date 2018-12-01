@@ -16,14 +16,17 @@ class Store extends Base_Controller
         $this->load->model("Pricing_model");
         $this->load->model("Food_model");
         $this->load->model("Role_model");
+        $this->load->model("Vendor_model");
         $this->load->model("Access_model");
+        $this->load->model("Feature_model");
+        $this->load->model("Store_feature_model");
     }
 
     public function index()
     {
         $type = $this->session->userdata('login_data')['type'];
 
-        if($type == "VENDOR"){
+        if ($type == "VENDOR") {
 
             $where = array(
                 "vendor_id" => $this->session->userdata("login_id"),
@@ -33,8 +36,8 @@ class Store extends Base_Controller
             $store_id = $this->Store_model->get_where($where);
             $this->page_data["store"] = $store_id;
 
-        }else{
-            
+        } else {
+
             $this->page_data["store"] = $this->Store_model->get_all();
         }
 
@@ -43,11 +46,10 @@ class Store extends Base_Controller
         $this->load->view("admin/footer");
     }
 
-    function add()
+    public function add()
     {
 
-        $this->page_data['type'] = $this->Gourmet_type_model->get_all();
-        $this->page_data['price'] = $this->Pricing_model->get_all();
+        $this->page_data['feature'] = $this->Feature_model->get_all();
         $this->page_data['input_field'] = $this->Store_model->generate_input();
 
         if ($_POST) {
@@ -55,70 +57,58 @@ class Store extends Base_Controller
 
             $error = false;
 
-            if (!empty($_FILES['file']['name'])) {
-                $config = array(
-                    "allowed_types" => "gif|png|jpg|jpeg",
-                    "upload_path"   => "./images/store/",
-                    "path"          => "/images/store/"
-                );
+            if (!empty($_FILES['thumbnail']['name'])) {
+                $image = $this->multi_image_upload($_FILES, "thumbnail", "store", 1);
 
-                $this->load->library("upload", $config);
-
-                if ($this->upload->do_upload("file")) {
-
-                    $thumbnail = $config['path'] . $this->upload->data()['file_name'];
-
+                if (!$image["error"]) {
+                    $image_url = $image['urls'];
                 } else {
-
-                     $error_message = $this->upload->display_errors();
+                    $error = true;
+                    $error_message = $image["error_message"];
                 }
+            } else {
+                $error = true;
+                $error_message = "Please upload a thumbnail";
             }
 
-            if(!$error){
+            if (!$error) {
 
                 $data = array(
 
-                    'thumbnail'         => $thumbnail,
-                    'store'             => $input['store'],
-                    'address'           => $input['address'],
-                    'social_media_link' => $input['social_media_link'],
-                    'phone'             => $input['phone'],
-                    'latitude'          => $input['latitude'],
-                    'longitude'         => $input['longitude'],
-                    'business_hour'     => $input['business_hour'],
-                    'gourmet_type_id'   => $input['gourmet_type_id'],
-                    'pricing_id'        => $input['pricing_id'],
-                    'created_by'        => $this->session->userdata('login_id'),
-                    'vendor_id'         => $this->session->userdata('login_id'),
+                    'thumbnail' => $image_url,
+                    'store' => $input['store'],
+                    'address' => $input['address'],
+                    'phone' => $input['phone'],
+                    'latitude' => $input['latitude'],
+                    'longitude' => $input['longitude'],
+                    'business_hour' => $input['business_hour'],
+                    'gourmet_type_id' => $input['gourmet_type_id'],
+                    'pricing_id' => $input['pricing_id'],
+                    'created_by' => $this->session->userdata('login_id'),
+                    'vendor_id' => $input['vendor_id'],
                 );
 
-                if(isset($input['take_away'])){
-                    $data['take_away'] = 1;
-                }
-
-                if(isset($input['dine_in'])){
-                    $data['dine_in'] = 1;
-                }
-
-                if(isset($input['halal'])){
-                    $data['halal'] = 1;
-                }
-
-                if(isset($input['vegetarian'])){
-                    $data['vegetarian'] = 1;
-                }
-
-                if(isset($input['favourite'])){
+                if ($input['favourite']) {
                     $data['favourite'] = 1;
                 }
 
-                $this->Store_model->insert($data);
-                
-                redirect("store", "refresh"); 
+                $vendor_id = $this->Store_model->insert($data);
 
-            }else{
+                foreach ($input['feature_id'] as $row) {
+                    $data = array(
+                        "vendor_id" => $vendor_id,
+                        "feature_id" => $row,
+                    );
+
+                    $this->Store_feature_model->insert($data);
+                }
+
+                redirect("store", "refresh");
+
+            } else {
 
                 $this->page_data["input"] = $input;
+                $this->page_data["error"] = $error_message;
             }
         }
 
@@ -127,17 +117,41 @@ class Store extends Base_Controller
         $this->load->view("admin/footer");
     }
 
-    function details($store_id)
+    public function details($store_id)
+    {
+        $where = array(
+            "store_id" => $store_id,
+        );
+
+        $store = $this->Store_model->get_where($where);
+        $store_feature = $this->Store_feature_model->get_where($where);
+
+        $where = array(
+            "food.store_id" => $store_id,
+        );
+
+        $food = $this->Food_model->get_where($where);
+
+        $this->page_data["store"] = $store[0];
+        $this->page_data["food"] = $food;
+        $this->page_data["store_feature"] = $store_feature;
+
+        $this->load->view("admin/header", $this->page_data);
+        $this->load->view("admin/store/details");
+        $this->load->view("admin/footer");
+    }
+
+    public function details_store($store_id)
     {
 
         $where = array(
-            "store_id" => $store_id
+            "store_id" => $store_id,
         );
 
         $store = $this->Store_model->get_where($where);
 
         $where = array(
-            "food.store_id" => $store_id
+            "food.store_id" => $store_id,
         );
 
         $food = $this->Food_model->get_where($where);
@@ -147,24 +161,22 @@ class Store extends Base_Controller
         $this->page_data["food"] = $food;
 
         $this->load->view("admin/header", $this->page_data);
-        $this->load->view("admin/store/details");
+        $this->load->view("admin/store/details_store");
         $this->load->view("admin/footer");
     }
 
-    function edit($store_id)
+    public function edit($store_id)
     {
 
         $where = array(
-            'store_id' => $store_id
+            'store_id' => $store_id,
         );
 
         $store = $this->Store_model->get_where($where)[0];
 
         $this->page_data['store'] = $store;
-
-        $this->page_data['type'] = $this->Gourmet_type_model->get_all();
-        $this->page_data['price'] = $this->Pricing_model->get_all();
-
+        $this->page_data['store_feature'] = $this->Store_feature_model->get_where($where);
+        $this->page_data['feature'] = $this->Feature_model->get_all();
         $this->page_data['input_field'] = $this->Store_model->generate_edit_input($store_id);
 
         if ($_POST) {
@@ -172,78 +184,54 @@ class Store extends Base_Controller
 
             $error = false;
 
-            if (!empty($_FILES['file']['name'])) {
-                $config = array(
-                    "allowed_types" => "gif|png|jpg|jpeg",
-                    "upload_path"   => "./images/store/",
-                    "path"          => "/images/store/"
-                );
+            if (!empty($_FILES['thumbnail']['name'])) {
+                $image = $this->multi_image_upload($_FILES, "thumbnail", "store", 1);
 
-                $this->load->library("upload", $config);
-
-                if ($this->upload->do_upload("file")) {
-
-                    $store_thumbnail = $config['path'] . $this->upload->data()['file_name'];
-
+                if (!$image["error"]) {
+                    $image_url = $image['urls'];
                 } else {
-                    
-                     $error_message = $this->upload->display_errors();
+                    $error = true;
+                    $error_message = $image["error_message"];
                 }
             }
 
-            if(!$error){
+            if (!$error) {
 
-                if($input['take_away']){
-                    $take_away = 1;
-                } else {
-                    $take_away = 0;
-                }
-
-                if($input['dine_in']){
-                    $dine_in = 1;
-                } else {
-                    $dine_in = 0;
-                }
-
-                if($input['halal']){
-                    $halal = 1;
-                } else {
-                    $halal = 0;
-                }
-
-                if($input['vegetarian']){
-                    $vegetarian = 1;
-                } else {
-                    $vegetarian = 0;
-                }
-
-                if($input['favourite']){
-                    $favourite = 1;
-                } else {
-                    $favourite = 0;
-                }
-
+                $where = array(
+                    "store_id" => $store_id,
+                );
 
                 $data = array(
-                    'store_thumbnail' => $store_thumbnail,
                     'store' => $input['store'],
                     'address' => $input['address'],
-                    'social_media_link' => $input['social_media_link'],
                     'phone' => $input['phone'],
                     'latitude' => $input['latitude'],
                     'longitude' => $input['longitude'],
                     'business_hour' => $input['business_hour'],
                     'gourmet_type_id' => $input['gourmet_type_id'],
                     'pricing_id' => $input['pricing_id'],
-                    'take_away' => $take_away,
-                    'dine_in' => $dine_in,
-                    'halal' => $halal,
-                    'vegetarian' => $vegetarian,
-                    'favourite' => $favourite,
                     'modified_by' => $this->session->userdata('login_id'),
                 );
 
-                $this->Store_model->insert($data);
+                if (!empty($image_url)) {
+                    $data['thumbnail'] = $image_url;
+                }
+                if (!empty($input['favourite'])) {
+                    $data['favourite'] = 1;
+                }
+
+                $this->Store_model->update_where($where, $data);
+
+                $this->Store_feature_model->hard_delete_where($where);
+
+                foreach ($input['feature_id'] as $row) {
+                    $data = array(
+                        "store_id" => $store_id,
+                        "feature_id" => $row,
+                    );
+
+                    $this->Store_feature_model->insert($data);
+                }
 
                 redirect("store", "refresh");
             }
@@ -254,7 +242,8 @@ class Store extends Base_Controller
         $this->load->view("admin/footer");
     }
 
-    function delete($store_id){
+    public function delete($store_id)
+    {
         $this->Store_model->soft_delete($store_id);
         redirect("store", "refresh");
     }

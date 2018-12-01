@@ -3,7 +3,7 @@
     Food Category
     </h1>
     <ol class="breadcrumb">
-        <li><a href="<?= base_url() ?>food_category"><i class="fa fa-user-secret"></i> Food Category</a></li>
+        <li><a href="<?=base_url()?>food_category"><i class="fa fa-tags"></i> Food Category</a></li>
     </ol>
 </section>
 <br>
@@ -23,32 +23,35 @@
                     <thead>
                         <tr>
                             <th>No.</th>
+                            <th>Thumbnail</th>
                             <th>Name</th>
-                            <th>Parent</th>
+                            <!-- <th>Parent</th> -->
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
-                            $i = 1;
-                            foreach($food_category as $row){
-                                ?>
+$i = 1;
+foreach ($food_category as $row) {
+    ?>
                                     <tr>
-                                        <td><a href="<?= base_url() ?>food_category/details/<?= $row['food_category_id']?>"><?= $i ?></a></td>
-                                        <td><a href="<?= base_url() ?>food_category/details/<?= $row['food_category_id']?>"><?= $row['food_category'] ?></a></td>
-                                        <td><a href="<?= base_url() ?>food_category/details/<?= $row['food_category_id']?>"><?= $row['parent'] ?></a></td>
-                                        <td><a href="<?= base_url() ?>food_category/delete/<?= $row['food_category_id']?>" class="btn btn-danger delete-button">Delete</a></td>
+                                        <td><a href="<?=base_url()?>food_category/details/<?=$row['food_category_id']?>"><?=$i?></a></td>
+                                        <td><a href="<?=base_url()?>food_category/details/<?=$row['food_category_id']?>"><img src="<?=base_url() . $row['thumbnail']?>" class="xs_thumbnail"></a></td>
+                                        <td><a href="<?=base_url()?>food_category/details/<?=$row['food_category_id']?>"><?=$row['food_category']?></a></td>
+                                        <!-- <td><a href="<?=base_url()?>food_category/details/<?=$row['food_category_id']?>"><?=$row['parent']?></a></td> -->
+                                        <td><a href="<?=base_url()?>food_category/delete/<?=$row['food_category_id']?>" class="btn btn-danger delete-button">Delete</a></td>
                                     </tr>
                                 <?php
-                                $i++;
-                            }
-                        ?>
+$i++;
+}
+?>
                     </tbody>
                     <tfoot>
                         <tr>
                             <th>No.</th>
+                            <th>Thumbnail</th>
                             <th>Name</th>
-                            <th>Parent</th>
+                            <!-- <th>Parent</th> -->
                             <th></th>
                         </tr>
                     </tfoot>

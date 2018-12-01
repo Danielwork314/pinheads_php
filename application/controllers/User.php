@@ -13,9 +13,9 @@ class User extends Base_Controller
 
         $this->load->model("Role_model");
         $this->load->model("User_model");
-        $this->load->model("Payment_model");
+        $this->load->model("Card_model");
         $this->load->model("Billing_address_model");
-        $this->load->model("User_order_model");
+        $this->load->model("Sales_model");
 
     }
 
@@ -69,6 +69,7 @@ class User extends Base_Controller
 
                 $data = array(
                     'image' => $image,
+                    'user' => $input['name'],
                     'username' => $input['username'],
                     'role_id' => $input['role_id'],
                     'name' => $input['name'],
@@ -109,14 +110,22 @@ class User extends Base_Controller
 
         $this->page_data["user"] = $user[0];
 
-        $payment = $this->Payment_model->get_where($where);
-        $this->page_data["payment"] = $payment;
+        $where = array(
+            "card.user_id" => $user_id,
+        );
+
+        $card = $this->Card_model->get_where($where);
+        $this->page_data["card"] = $card;
+
+        $where = array(
+            "billing_address.user_id" => $user_id,
+        );
 
         $billing_address = $this->Billing_address_model->get_where($where);
         $this->page_data["billing_address"] = $billing_address;
 
-        $user_order = $this->User_order_model->get_where($where);
-        $this->page_data["user_order"] = $user_order;
+        $sales = $this->Sales_model->get_where($where);
+        $this->page_data["sales"] = $sales;
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/user/details");
@@ -147,7 +156,7 @@ class User extends Base_Controller
             }
 
             if (!empty($_FILES['image']['name'])) {
-                $image = $this->multi_image_upload($_FILES, "image", "product", 1);
+                $image = $this->multi_image_upload($_FILES, "image", "user", 1);
 
                 if (!$image["error"]) {
                     $image_url = $image['urls'];
@@ -163,6 +172,7 @@ class User extends Base_Controller
                 );
 
                 $data = array(
+                    'user' => $input['name'],
                     'username' => $input['username'],
                     'name' => $input['name'],
                     'gender_id' => $input['gender_id'],

@@ -5,7 +5,7 @@
 	<ol class="breadcrumb">
 		<li>
 			<a href="<?= base_url() ?>food_category">
-				<i class="fa fa-list-ul"></i> Food Category</a>
+				<i class="fa fa-tags"></i> Food Category</a>
 		</li>
 		<li>
 			<a href="<?= base_url() ?>food_category/edit/<?= $food_category['food_category_id'] ?>"> Edit Food Category</a>
@@ -31,8 +31,9 @@
 					<?php 
 				}
 				?>
+				<?= $input_field['thumbnail'] ?>
 				<?= $input_field['food_category'] ?>
-				<?= $input_field['parent_id'] ?>
+				<!-- <?= $input_field['parent_id'] ?> -->
 			</div>
 			<!-- /.box-body -->
 

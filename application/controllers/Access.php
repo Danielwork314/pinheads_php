@@ -24,7 +24,8 @@ class Access extends Base_Controller
             $error = false;
 
             $where = array(
-                "username" => $input["username"]
+                "username" => $input["username"],
+                // "password" => $input["password"]
             );
 
             $admin = $this->Admin_model->get_where($where);
@@ -35,6 +36,8 @@ class Access extends Base_Controller
                 $login = $this->Admin_model->login($input["username"], $input["password"]);
                 $login_data = $login[0];
                 $login_id = $login[0]["admin_id"];
+
+                // $this->debug($login);
             } else if (!empty($user)) {
                 $login = $this->User_model->login($input["username"], $input["password"]);
                 $login_data = $login[0];
