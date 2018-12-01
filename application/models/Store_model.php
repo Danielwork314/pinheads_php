@@ -10,9 +10,23 @@ class Store_model extends Base_model
         $this->table_name = "store";
     }
 
+    public function get_all()
+    {
+        $this->db->select("store.*, gourmet_type, pricing, vendor.name AS vendor");
+        $this->db->from("store");
+        $this->db->join("gourmet_type", "gourmet_type.gourmet_type_id = store.gourmet_type_id", "left");
+        $this->db->join("pricing", "pricing.pricing_id = store.pricing_id", "left");
+        $this->db->join("vendor", "vendor.vendor_id = store.vendor_id", "left");
+        $this->db->where("store.deleted", 0);
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
     public function get_where($where)
     {
-        $this->db->select("store.*, gourmet_type, pricing");
+        $this->db->select("store.*, gourmet_type, pricing, vendor.name AS vendor");
         $this->db->from("store");
         $this->db->join("gourmet_type", "gourmet_type.gourmet_type_id = store.gourmet_type_id", "left");
         $this->db->join("pricing", "pricing.pricing_id = store.pricing_id", "left");

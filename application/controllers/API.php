@@ -10,6 +10,10 @@ class API extends Base_Controller
         $this->load->model("User_model");
         $this->load->model("Food_category_model");
         $this->load->model("Gourmet_type_model");
+        $this->load->model("Store_model");
+        $this->load->model("Store_feature_model");
+        $this->load->model("Store_image_model");
+        $this->load->model("Food_model");
     }
 
     public function test()
@@ -162,6 +166,167 @@ class API extends Base_Controller
                 "gourmet_types" => $gourmet_types,
             ),
         )));
+    }
+
+    public function stores()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+
+            if (!empty($input['gourmet_type_id'])) {
+                $where = array(
+                    "store.gourmet_type_id" => $input['gourmet_type_id'],
+                );
+            } else if (!empty($input['recommended'])) {
+                $where = array(
+                    "favourite" => 1,
+                );
+            }
+
+            $stores = $this->Store_model->get_where($where);
+        } else {
+            $stores = $this->Store_model->get_all();
+        }
+
+        $store_data = array();
+        foreach ($stores as $row) {
+            $data = array(
+                "store_id" => $row['store_id'],
+                "gourmet_type_id" => $row['gourmet_type_id'],
+                "gourmet_type" => $row['gourmet_type'],
+                "pricing_id" => $row['pricing_id'],
+                "pricing" => $row['pricing'],
+                "pricing_id" => $row['pricing_id'],
+                "pricing" => $row['pricing'],
+                "vendor_id" => $row['vendor_id'],
+                "vendor" => $row['vendor'],
+                "thumbnail" => base_url() . $row['thumbnail'],
+                "store" => $row['store'],
+                "address" => $row['address'],
+                "phone" => $row['phone'],
+                "latitude" => $row['latitude'],
+                "longitude" => $row['longitude'],
+                "business_hour" => $row['business_hour'],
+                "favourite" => ($row['favourite'] == 1) ? "YES" : "NO",
+                "description" => $store['description'],
+            );
+
+            array_push($store_data, $data);
+        }
+
+        die(json_encode(array(
+            "status" => true,
+            "data" => array(
+                "stores" => $store_data,
+            ),
+        )));
+    }
+
+    public function store()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $where = array(
+                "store_id" => $input['store_id'],
+            );
+
+            $store = $this->Store_model->get_where($where)[0];
+            $store_feature = $this->Store_feature_model->get_where($where);
+            $store_image = $this->Store_image_model->get_where($where);
+
+            $store_feature_data = array();
+            foreach ($store_feature as $row) {
+                $data = array(
+                    "store_feature_id" => $row['store_feature_id'],
+                    "store_id" => $row['store_id'],
+                    "feature_id" => $row['feature_id'],
+                    "feature" => $row['feature'],
+                );
+
+                array_push($store_feature_data, $data);
+            }
+
+            $store_image_data = array();
+            foreach ($store_image as $row) {
+                $data = array(
+                    "store_image_id" => $row['store_image_id'],
+                    "store_id" => $row['store_id'],
+                    "image" => base_url() . $row['image'],
+                );
+
+                array_push($store_image_data, $data);
+            }
+
+            $data = array(
+                "store_id" => $store['store_id'],
+                "gourmet_type_id" => $store['gourmet_type_id'],
+                "gourmet_type" => $store['gourmet_type'],
+                "pricing_id" => $store['pricing_id'],
+                "pricing" => $store['pricing'],
+                "pricing_id" => $store['pricing_id'],
+                "pricing" => $store['pricing'],
+                "vendor_id" => $store['vendor_id'],
+                "vendor" => $store['vendor'],
+                "thumbnail" => base_url() . $store['thumbnail'],
+                "store" => $store['store'],
+                "address" => $store['address'],
+                "phone" => $store['phone'],
+                "latitude" => $store['latitude'],
+                "longitude" => $store['longitude'],
+                "business_hour" => $store['business_hour'],
+                "favourite" => ($store['favourite'] == 1) ? "YES" : "NO",
+                "description" => $store['description'],
+                "features" => $store_feature_data,
+                "images" => $store_image_data,
+            );
+
+            die(json_encode(array(
+                "status" => true,
+                "data" => array(
+                    "store" => $data,
+                ),
+            )));
+        }
+    }
+
+    public function menu()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $where = array(
+                "food.store_id" => $input['store_id'],
+            );
+
+            $foods = $this->Food_model->get_where($where);
+
+            $food_data = array();
+            foreach ($foods as $row) {
+                $data = array(
+                    "food_id" => $row['food_id'],
+                    "food" => $row['food'],
+                    "store_id" => $row['store_id'],
+                    "store" => $row['store'],
+                    "food_category_id" => $row['food_category_id'],
+                    "food_category" => $row['food_category'],
+                    "description" => $row['description'],
+                    "price" => $row['price'],
+                    "discounted_price" => $row['discounted_price'],
+                    "discount" => $row['discount'],
+                    "image" => base_url() . $row['image'],
+                );
+
+                array_push($food_data, $data);
+            }
+
+            die(json_encode(array(
+                "status" => true,
+                "data" => array(
+                    "menu" => $food_data,
+                ),
+            )));
+        }
     }
 
     // public function searchStore()

@@ -10,9 +10,10 @@ class Food_model extends Base_model{
 
     public function get_all(){
 
-        $this->db->select('*, food.created_by AS created_by');
+        $this->db->select('food.*, store, food.created_by AS created_by, food_category');
         $this->db->from('food');
         $this->db->join('store', 'store.store_id = food.store_id', 'left');
+        $this->db->join('food_category', 'food.food_category_id = food_category.food_category_id', 'left');
         $this->db->where('food.deleted', 0);
         
         $query = $this->db->get();
@@ -22,9 +23,10 @@ class Food_model extends Base_model{
 
     public function get_where($where)
     {
-        $this->db->select("*");
+        $this->db->select("food.*, store, food_category");
         $this->db->from($this->table_name);
         $this->db->join('store', 'store.store_id = food.store_id', 'left');
+        $this->db->join('food_category', 'food.food_category_id = food_category.food_category_id', 'left');
         $this->db->where($where);
         $query = $this->db->get();
         return $query->result_array();

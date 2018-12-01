@@ -20,6 +20,7 @@ class Store extends Base_Controller
         $this->load->model("Access_model");
         $this->load->model("Feature_model");
         $this->load->model("Store_feature_model");
+        $this->load->model("Store_image_model");
     }
 
     public function index()
@@ -71,6 +72,17 @@ class Store extends Base_Controller
                 $error_message = "Please upload a thumbnail";
             }
 
+            if (!empty($_FILES['store_images']['name'] and $_FILES['store_images']['name'][0] != "")) {
+                $images = $this->multi_image_upload($_FILES, "store_images", "store_images");
+
+                if (!$images["error"]) {
+                    $store_images_urls = $images['urls'];
+                } else {
+                    $error = true;
+                    $error_message = $images["error_message"];
+                }
+            }
+
             if (!$error) {
 
                 $data = array(
@@ -86,21 +98,31 @@ class Store extends Base_Controller
                     'pricing_id' => $input['pricing_id'],
                     'created_by' => $this->session->userdata('login_id'),
                     'vendor_id' => $input['vendor_id'],
+                    'description' => $input['description'],
                 );
 
                 if ($input['favourite']) {
                     $data['favourite'] = 1;
                 }
 
-                $vendor_id = $this->Store_model->insert($data);
+                $store_id = $this->Store_model->insert($data);
 
                 foreach ($input['feature_id'] as $row) {
                     $data = array(
-                        "vendor_id" => $vendor_id,
+                        "store_id" => $store_id,
                         "feature_id" => $row,
                     );
 
                     $this->Store_feature_model->insert($data);
+                }
+
+                foreach ($store_images_urls as $row) {
+                    $data = array(
+                        "store_id" => $store_id,
+                        "image" => $row,
+                    );
+
+                    $this->Store_image_model->insert($data);
                 }
 
                 redirect("store", "refresh");
@@ -125,6 +147,7 @@ class Store extends Base_Controller
 
         $store = $this->Store_model->get_where($where);
         $store_feature = $this->Store_feature_model->get_where($where);
+        $store_images = $this->Store_image_model->get_where($where);
 
         $where = array(
             "food.store_id" => $store_id,
@@ -135,6 +158,7 @@ class Store extends Base_Controller
         $this->page_data["store"] = $store[0];
         $this->page_data["food"] = $food;
         $this->page_data["store_feature"] = $store_feature;
+        $this->page_data["store_images"] = $store_images;
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/store/details");
@@ -211,6 +235,7 @@ class Store extends Base_Controller
                     'gourmet_type_id' => $input['gourmet_type_id'],
                     'pricing_id' => $input['pricing_id'],
                     'modified_by' => $this->session->userdata('login_id'),
+                    'description' => $input['description'],
                 );
 
                 if (!empty($image_url)) {
@@ -233,7 +258,7 @@ class Store extends Base_Controller
                     $this->Store_feature_model->insert($data);
                 }
 
-                redirect("store", "refresh");
+                redirect("store/details/" . $store_id, "refresh");
             }
         }
 

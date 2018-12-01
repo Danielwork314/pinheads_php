@@ -25,7 +25,8 @@
 				<br /><br />
 				<ul class="list-unstyled multi-steps">
 					<li class="step_url is-active" id="step_link_1" onclick="changeStep(1)">Add Details</li>
-					<li class="step_url" id="step_link_2" onclick="changeStep(2)">Add Features</li>
+					<li class="step_url" id="step_link_2" onclick="changeStep(2)">Add Image</li>
+					<li class="step_url" id="step_link_2" onclick="changeStep(3)">Add Features</li>
 				</ul>
 			</div>
 			<div class="box-body">
@@ -57,6 +58,7 @@
 					<?= $input_field['business_hour'] ?>
 					<?= $input_field['gourmet_type_id'] ?>
 					<?= $input_field['pricing_id'] ?>
+					<?= $input_field['description'] ?>
 					<div class="form-group">
 						<div class="">
 							<input type="checkbox" name="favourite" value="favourite"> Favourite
@@ -65,6 +67,19 @@
 					<button type="button" class="btn btn-primary pull-right" onclick="changeStep(2)">Next</button>
 				</div>
 				<div class="step_content hidden_step" id="step_2">
+					<div class="form_group">
+						<label for="form_store_images">Store Images</label>
+						<input type="file" class="form-control image_input_multiple" id="form_store_images" name="store_images[]"
+						 multiple placeholder="Store Images">
+						<div class="help-block with-errors"></div>
+						<div class="row" id="preview_store_images">
+
+						</div>
+					</div>
+					<button type="button" class="btn btn-primary" onclick="changeStep(1)">Previous</button>
+					<button type="button" class="btn btn-primary pull-right" onclick="changeStep(3)">Next</button>
+				</div>
+				<div class="step_content hidden_step" id="step_3">
 					<?php
 					foreach($feature as $row){
 					?>

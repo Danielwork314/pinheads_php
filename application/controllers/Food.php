@@ -242,7 +242,7 @@ class Food extends Base_Controller
     function add_menu($store_id)
     {
         $this->page_data['store_id'] = $store_id;
-        $this->page_data['input_fields'] = $this->Food_model->generate_input();
+        $this->page_data['input_field'] = $this->Food_model->generate_input();
 
         if ($_POST) {
 
