@@ -30,8 +30,8 @@
 					</div>
 					<?php 
 				}
-                ?>
-                
+				?>
+
                 <div class="form-group">
                     <img class="img-thumbnail" src="<?= base_url() . $store['thumbnail'] ?>" style="width:50%; height:50%;">
 				</div>
@@ -39,7 +39,17 @@
 					<label>Store Thumbnail</label>
 					<input type="file" class="form-control" name="file" required>
 				</div>
-				<div class="form-group">
+
+				<?= $input_field['store'] ?>
+				<?= $input_field['address'] ?>
+				<?= $input_field['phone'] ?>
+				<?= $input_field['latitude'] ?>
+				<?= $input_field['longitude'] ?>
+				<?= $input_field['business_hour'] ?>
+				<?= $input_field['gourmet_type_id'] ?>
+				<?= $input_field['pricing_id'] ?>
+
+				<!-- <div class="form-group">
 					<label>Store</label>
 					<input type="text" class="form-control" name="store" required value="<?= $store['store'] ?>">
 				</div>
@@ -67,7 +77,7 @@
 					<label>Gourmet Type</label>
 					<select class="form-control" name="gourmet_type_id">
 						<?php foreach($type as $row) { ?>
-                        <option value="<?= $row['gourmet_type_id'] ?>" <?php if($store['gourmet_type_id'] == $row['gourmet_type_id']) { ?> selected <?php } ?>><?= $row['gourmet_type_title'] ?></option>
+                        <option value="<?= $row['gourmet_type_id'] ?>" <?php if($store['gourmet_type_id'] == $row['gourmet_type_id']) { ?> selected <?php } ?>><?= $row['gourmet_type'] ?></option>
 						<?php } ?>
 					</select> 
 				</div>
@@ -75,10 +85,10 @@
 					<label>Pricing</label>
 					<select class="form-control" name="pricing_id">
 						<?php foreach($price as $row) { ?>
-						<option value="<?= $row['pricing_id'] ?>" <?php if($store['pricing_id'] == $row['pricing_id']) { ?> selected <?php } ?>><?= $row['pricing_title'] ?></option>
+						<option value="<?= $row['pricing_id'] ?>" <?php if($store['pricing_id'] == $row['pricing_id']) { ?> selected <?php } ?>><?= $row['pricing'] ?></option>
 						<?php } ?>
 					</select> 
-				</div>
+				</div> -->
 				<div class="form-group">
 					<div class="">
                         <input type="checkbox" name="take_away" value="take_away" <?php if($store['take_away'] != 0){ ?> checked <?php } ?>> Take Away

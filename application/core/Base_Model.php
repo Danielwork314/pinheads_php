@@ -237,8 +237,6 @@ class Base_Model extends CI_Model
 
                         $result = $query->result_array();
 
-                        $this->debug($result);
-
                         $html .= '<label for="form_' . $row->name . '">' . ucwords(substr($row->name, 0, -3)) . '</label>';
                         $html .= '<select class="form-control" id="form_' . $row->name . '" name="' . $row->name . '">';
                         foreach ($result as $result_row) {

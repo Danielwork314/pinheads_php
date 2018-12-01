@@ -21,30 +21,38 @@ class User_order extends Base_Controller
 
         $this->page_data['user_id'] = $user_id;
 
+        $this->page_data['user'] = $this->User_model->get_all();
+
+        $this->page_data['input_fields'] = $this->User_order_model->generate_input();
+
+
         if ($_POST) {    
 
             $input = $this->input->post();
 
             $error = false;
 
-            $data = array(
-                'take_away' => $input['take_away'],
-                'sub_total' => $input['sub_total'],
-                'service_change' => $input['service_change'],
-                'total' => $input['total'],
-                'status' => $input['status'],
-                'created_by' => $this->session->userdata('login_id'),
-                'user_id' => $user_id,
-            );
+            if(!$error){
 
-            $user_order_id = $this->User_order_model->insert($data);
+                $data = array(
+                    'take_away' => $input['take_away'],
+                    'sub_total' => $input['sub_total'],
+                    'service_change' => $input['service_change'],
+                    'total' => $input['total'],
+                    'status' => $input['status'],
+                    'created_by' => $this->session->userdata('login_id'),
+                    'user_id' => $user_id,
+                );
 
-            redirect("user/details/" . $user_id, "refresh");
+                $user_order_id = $this->User_order_model->insert($data);
+
+                redirect("user/details/" . $user_id, "refresh");
+
+            }else{
+
+                $this->page_data["input"] = $input;
+            }
         }
-
-        $this->page_data['user'] = $this->User_model->get_all();
-
-        // $this->page_data['input_fields'] = $this->Payment_model->generate_input();
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/user_order/add");
@@ -118,8 +126,8 @@ class User_order extends Base_Controller
 
         $user_id = $this->User_order_model->get_where($where)[0];
 
-
         $this->User_order_model->soft_delete($user_order_id);
+
         redirect("user/details/" . $user_id['user_id'], "refresh");
     }
 

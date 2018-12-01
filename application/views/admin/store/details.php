@@ -47,13 +47,13 @@
 					<tr>
 						<th>Type</th>
 						<td>:
-							<?= $store["gourmet_type_title"] ?>
+							<?= $store["gourmet_type"] ?>
 						</td>
 					</tr>
 					<tr>
 						<th>Pricing</th>
 						<td>:
-							<?= $store["pricing_title"] ?>
+							<?= $store["pricing"] ?>
 						</td>
 					</tr>
 					<tr>

@@ -3,7 +3,7 @@
 		Table
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="<?= base_url() ?>table"><i class="fas fa-clipboard-list"></i> Table</a></li>
+		<li><a href="<?= base_url() ?>table_position"><i class="fas fa-clipboard-list"></i> Table</a></li>
 	</ol>
 </section>
 <br>
@@ -12,7 +12,7 @@
 		<div class='box-header'>
 			<h4 class="whiteTitle" style='display: inline-block;'>Table</h4>
 
-			<a href='<?php echo site_url("table/add"); ?>' class='btn btn-info pull-right'>
+			<a href='<?php echo site_url("table_position/add"); ?>' class='btn btn-info pull-right'>
 				<i class='fa fa-plus'></i> Add</a>
 
 		</div>
@@ -31,26 +31,26 @@
 					<tbody>
 						<?php
                             $i = 1;
-                            foreach($table as $row){
+                            foreach($table_position as $row){
                                 ?>
 						<tr>
 							<td>
-                                <a href="<?= base_url() ?>table/details/<?= $row['table_position_id']?>">
+                                <a href="<?= base_url() ?>table_position/details/<?= $row['table_position_id']?>">
 									<?= $i ?>
                                 </a>
                             </td>
 							<td>
-                                <a href="<?= base_url() ?>table/details/<?= $row['table_position_id']?>">
+                                <a href="<?= base_url() ?>table_position/details/<?= $row['table_position_id']?>">
 									<?= $row['table_position'] ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="<?= base_url() ?>table/details/<?= $row['table_position_id']?>">
+                                <a href="<?= base_url() ?>table_position/details/<?= $row['table_position_id']?>">
 									<?= $row['created_date'] ?>
                                 </a>
                             </td>
 							<td>
-                                <a href="<?= base_url() ?>table/delete/<?= $row['table_position_id']?>" class="btn btn-danger delete-button">Delete</a>
+                                <a href="<?= base_url() ?>table_position/delete/<?= $row['table_position_id']?>" class="btn btn-danger delete-button">Delete</a>
                             </td>
 						</tr>
 						<?php

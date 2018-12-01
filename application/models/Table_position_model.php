@@ -1,6 +1,6 @@
 <?php
 
-class Table_model extends Base_model
+class Table_position_model extends Base_model
 {
 
     public function __construct()

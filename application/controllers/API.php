@@ -17,116 +17,117 @@ class API extends Base_Controller
         $this->load->model("Notification_model");
     }
 
+    public function test()
+    {
+        if ($_POST) {
+            die("post");
+        } else {
+            die("didnt post");
+        }
+    }
+
     public function register()
     {
-        if (!$_POST) {
-            die(json_encode(array(
-                "message" => "invalid method",
-            )));
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $error = false;
+
+            if ($input['password'] != $input['password2']) {
+                $error = true;
+                $error_message = "Passwords do not match";
+            }
+
+            //check email
+            $where = array(
+                'email' => $input['email'],
+            );
+            $email_exists = $this->User_model->get_where($where);
+
+            if ($email_exists) {
+                $error = true;
+                $error_message = "Email already exists.";
+            }
+
+            //check phone
+            $where = array(
+                'phone' => $input['phone'],
+            );
+            $phone_exists = $this->User_model->get_where($where);
+
+            if ($phone_exists) {
+                $error = true;
+                $error_message = "Phone already exists.";
+            }
+
+            if (!$error) {
+                $hash = $this->hash($input['password']);
+
+                $data = array(
+                    "username" => $input['email'],
+                    "name" => $input['email'],
+                    "email" => $input['email'],
+                    "contact" => $input['contact'],
+                    "password" => $hash['password'],
+                    "salt" => $hash['salt'],
+                );
+
+                $user_id = $this->User_model->insert($data);
+
+                die(json_encode(array(
+                    'status' => true,
+                )));
+
+            } else {
+                die(json_encode(array(
+                    'status' => false,
+                    "error_message" => $error_message,
+                )));
+            }
         }
-
-        $input = $this->input->post();
-        $error = false;
-
-        //validate confirm password
-        if($input['password'] != $input['confirm_password']){
-            $error = true;
-            $error_message = "Password and Confirm Password are not match.";
-        }
-
-        //check tac
-        $where = array(
-            'tac' => $input['tac']
-        );
-        $tac_exists = $this->User_model->get_where($where);
-
-        if(!$tac_exists){
-            $error = true;
-            $error_message = "TAC incorrect.";
-        }
-
-        //check email
-        $where = array(
-            'email' => $input['email']
-        );
-        $email_exists = $this->User_model->get_where($where);
-
-        if($email_exists){
-            $error = true;
-            $error_message = "Email already exists.";
-        }
-
-        //check phone
-        $where = array(
-            'phone' => $input['phone']
-        );
-        $phone_exists = $this->User_model->get_where($where);
-
-        if($phone_exists){
-            $error = true;
-            $error_message = "Phone already exists.";
-        }
-
-        if ($error) {
-            die(json_encode(array(
-                "status" => false,
-                "error_message" => $error_message,
-            )));
-        }
-
-        $hash = $this->hash($input['password']);
-
-        $data = array(
-            "email" => $input['email'],
-            "phone" => $input['phone'],
-            "password" => $hash['password'],
-            "salt" => $hash['salt'],
-        );
-
-        $this->User_model->insert($data);
-
-        die(json_encode(array(
-            "status" => 1,
-            "message" => "Register success.",
-        )));
-
     }
 
     public function login()
     {
-        $input = $this->input->post();
-        $error = false;
-        $loginSuccess = false;
+        if ($_POST) {
+            $input = $this->input->post();
 
-        $account = $input["account"];
-        $password = $input["password"];
+            $error = false;
 
-        $emailLogin = $this->User_model->login_email($account, $password);
-        $phoneLogin = $this->User_model->login_phone($account, $password);
+            $user = $this->User_model->user_login($input);
 
-        if(!empty($emailLogin)){
-            $loginSuccess = true;
-        }
+            if (!empty($user)) {
+                $user = $user[0];
 
-        if(!empty($phoneLogin)){
-            $loginSuccess = true;
-        }
+                $data = array(
+                    "login_time" => date("Y-m-d h:i:s"),
+                    "token" => md5($user['user_id'] . date("Y-m-d h:i:s")),
+                );
 
-        if ($loginSuccess) {
-            die(json_encode(array(
-                "status" => 1,
-                "message" => "Login success.",
-                "user" => array(
+                $where = array(
+                    "user_id" => $user_id,
+                );
 
-                    'user_id' => $loginSuccess[0]['user_id'],
-                ),
-            )));
-        } else {
-            die(json_encode(array(
-                "status" => 0,
-                "message" => "Login Failed",
+                $this->User_model->update_where($where, $data);
 
-            )));
+                $user["login_time"] = $data['login_time'];
+                $user["token"] = $data['token'];
+
+                $this->session->set_userdata("user", $user);
+
+                die(json_encode(array(
+                    "status" => true,
+                    "data" => array(
+                        "user" => $user,
+                    ),
+                )));
+
+            } else {
+                die(json_encode(array(
+                    "status" => false,
+                    "error_message" => "invalid ID or Password",
+                )));
+            }
         }
     }
 
@@ -174,7 +175,7 @@ class API extends Base_Controller
     public function storeTakeAway()
     {
         $where = array(
-            'take_away' => 1
+            'take_away' => 1,
         );
 
         $result = $this->Store_model->get_where($where);
@@ -187,7 +188,7 @@ class API extends Base_Controller
     public function storeDelivery()
     {
         $where = array(
-            'delivery' => 1
+            'delivery' => 1,
         );
 
         $result = $this->Store_model->get_where($where);
@@ -200,7 +201,7 @@ class API extends Base_Controller
     public function storeHalal()
     {
         $where = array(
-            'halal' => 1
+            'halal' => 1,
         );
 
         $result = $this->Store_model->get_where($where);
@@ -213,7 +214,7 @@ class API extends Base_Controller
     public function storeVegetarian()
     {
         $where = array(
-            'vegetarian' => 1
+            'vegetarian' => 1,
         );
 
         $result = $this->Store_model->get_where($where);
@@ -240,7 +241,7 @@ class API extends Base_Controller
     {
 
         $where = array(
-            'favourite' => 1
+            'favourite' => 1,
         );
 
         $result = $this->Store_model->get_where($where);
@@ -265,7 +266,7 @@ class API extends Base_Controller
             $input = $this->input->post();
 
             $where = array(
-                'gourmet_type_id' => $input['gourmet_type_id']
+                'gourmet_type_id' => $input['gourmet_type_id'],
             );
 
             $result = $this->Store_model->search_location($where);
@@ -300,18 +301,17 @@ class API extends Base_Controller
         )));
     }
 
-
     public function notificationWhere()
     {
-        if($_POST){
+        if ($_POST) {
             $input = $this->input->post();
 
             $where = array(
                 'notification_id' => $input['notification_id'],
             );
-    
+
             $result = $this->Notification_model->get_where($where);
-    
+
             die(json_encode(array(
                 "result" => $result[0],
             )));
@@ -331,25 +331,25 @@ class API extends Base_Controller
         )));
     }
 
-
     public function orderWhere()
     {
-        if($_POST){
+        if ($_POST) {
             $input = $this->input->post();
-            
+
             $where = array(
                 'order_id' => $input['order_id'],
             );
-    
+
             $result = $this->Order_model->get_where($where);
-    
+
             die(json_encode(array(
                 "result" => $result[0],
             )));
         }
     }
 
-    public function userProfile(){
+    public function userProfile()
+    {
 
         $where = array(
             'user_id' => $this->session->userdata('user_id'),
@@ -362,15 +362,16 @@ class API extends Base_Controller
         )));
     }
 
-    public function editProfile(){
+    public function editProfile()
+    {
 
-        if($_POST){
+        if ($_POST) {
             $input = $this->input->post();
 
             $where = array(
                 'user_id' => $this->session->userdata('user_id'),
             );
-            
+
             $data = array(
                 'name' => $input['name'],
                 'gender' => $input['gender'],
@@ -379,13 +380,13 @@ class API extends Base_Controller
                 'phone' => $input['phone'],
             );
 
-            if(isset($input['password'])){
+            if (isset($input['password'])) {
 
                 $data['password'] = $input['password'];
             }
-    
+
             $result = $this->User_model->update_where($where, $data);
-    
+
             die(json_encode(array(
                 "status" => 1,
                 "message" => "update success.",
@@ -393,9 +394,10 @@ class API extends Base_Controller
         }
     }
 
-    public function addCard(){
+    public function addCard()
+    {
 
-        if($_POST){
+        if ($_POST) {
             $input = $this->input->post();
 
             $data = array(
@@ -409,10 +411,10 @@ class API extends Base_Controller
                 'phone' => $input['phone'],
                 'email' => $input['email'],
             );
-    
+
             $result = $this->Payment_model->insert($data);
 
-            if($result){
+            if ($result) {
 
                 die(json_encode(array(
                     "status" => 1,
@@ -422,14 +424,15 @@ class API extends Base_Controller
         }
     }
 
-    public function removeCard(){
+    public function removeCard()
+    {
 
-        if($_POST){
+        if ($_POST) {
             $input = $this->input->post();
-    
+
             $result = $this->Payment_model->soft_delete($input['payment_id']);
 
-            if($result){
+            if ($result) {
 
                 die(json_encode(array(
                     "status" => 1,
@@ -439,14 +442,15 @@ class API extends Base_Controller
         }
     }
 
-    public function removeBillingAddress(){
+    public function removeBillingAddress()
+    {
 
-        if($_POST){
+        if ($_POST) {
             $input = $this->input->post();
-    
+
             $result = $this->Billing_address_model->soft_delete($input['billing_address_id']);
 
-            if($result){
+            if ($result) {
 
                 die(json_encode(array(
                     "status" => 1,
@@ -456,9 +460,10 @@ class API extends Base_Controller
         }
     }
 
-    public function addBillingAddress(){
+    public function addBillingAddress()
+    {
 
-        if($_POST){
+        if ($_POST) {
             $input = $this->input->post();
 
             $data = array(
@@ -469,10 +474,10 @@ class API extends Base_Controller
                 'postcode' => $input['postcode'],
                 'country' => $input['country'],
             );
-    
+
             $result = $this->Payment_model->insert($data);
 
-            if($result){
+            if ($result) {
 
                 die(json_encode(array(
                     "status" => 1,
@@ -482,7 +487,8 @@ class API extends Base_Controller
         }
     }
 
-    public function cardAll(){
+    public function cardAll()
+    {
 
         $where = array(
             'user_id' => $this->session->userdata('user_id'),
@@ -495,7 +501,8 @@ class API extends Base_Controller
         )));
     }
 
-    public function billingAddressAll(){
+    public function billingAddressAll()
+    {
 
         $where = array(
             'user_id' => $this->session->userdata('user_id'),
@@ -508,7 +515,8 @@ class API extends Base_Controller
         )));
     }
 
-    public function couponAll(){
+    public function couponAll()
+    {
 
         $where = array(
             'user_id' => $this->session->userdata('user_id'),
@@ -521,65 +529,69 @@ class API extends Base_Controller
         )));
     }
 
-    public function storeWhere(){
+    public function storeWhere()
+    {
 
-        if($_POST){
+        if ($_POST) {
             $input = $this->input->post();
 
             $where = array(
                 'store_id' => $input['store_id'],
             );
-    
+
             $result = $this->Store_model->get_where($where);
-    
+
             die(json_encode(array(
                 "result" => $result[0],
             )));
         }
     }
 
-    public function menuWhere(){
+    public function menuWhere()
+    {
 
-        if($_POST){
+        if ($_POST) {
             $input = $this->input->post();
 
             $where = array(
                 'food_id' => $input['food_id'],
             );
-    
+
             $result = $this->Food_model->get_where($where);
-    
+
             die(json_encode(array(
                 "result" => $result[0],
             )));
         }
     }
 
-    public function storeMenu(){
+    public function storeMenu()
+    {
 
-        if($_POST){
+        if ($_POST) {
             $input = $this->input->post();
 
             $where = array(
                 'store_id' => $input['store_id'],
             );
-    
+
             $result = $this->Food_model->get_where($where);
-    
+
             die(json_encode(array(
                 "result" => $result,
             )));
         }
     }
 
-    public function removeCart(){
+    public function removeCart()
+    {
 
-        if($_POST){
+        if ($_POST) {
             $input = $this->input->post();
 
             $result = $this->Order_model->soft_delete($input['user_order_id']);
 
-            if($result){
+            if ($result) {
 
                 die(json_encode(array(
                     "status" => 1,
@@ -589,12 +601,13 @@ class API extends Base_Controller
         }
     }
 
-    public function addCart(){
+    public function addCart()
+    {
 
-        if($_POST){
+        if ($_POST) {
             $input = $this->input->post();
 
-            if(isset($input['user_order_id'])){
+            if (isset($input['user_order_id'])) {
 
                 $user_order_id = $input['user_order_id'];
             } else {
@@ -603,7 +616,7 @@ class API extends Base_Controller
                     'user_id' => $this->session->userdata('user_id'),
                     'store_id' => $input['store_id'],
                 );
-    
+
                 $user_order_id = $this->Order_model->insert($data);
             }
 
@@ -611,10 +624,10 @@ class API extends Base_Controller
                 'user_order_id' => $user_order_id,
                 'food_id' => $input['food_id'],
             );
-    
+
             $result = $this->Order_food_model->insert($data);
 
-            if($result){
+            if ($result) {
 
                 die(json_encode(array(
                     "status" => 1,

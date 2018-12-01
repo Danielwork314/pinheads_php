@@ -30,8 +30,14 @@
 					</div>
 					<?php 
 				}
-                ?>
-                
+				?>
+				
+                <!-- <?= $input_field['address1'] ?>
+				<?= $input_field['address2'] ?>
+				<?= $input_field['state'] ?>
+				<?= $input_field['postcode'] ?>
+				<?= $input_field['country'] ?> -->
+				
 				<div class="form-group">
 					<label>Address 1</label>
 					<input type="text" class="form-control" name="address1" required value="<?= $billing_address['address1'] ?>">

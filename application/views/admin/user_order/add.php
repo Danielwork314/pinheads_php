@@ -32,7 +32,7 @@
                         <?php 
                     }
                     ?>
-
+                    
                     <div class="form-group">
                         <label>Take Away</label>
                         <select class="form-control" required name="take_away">
@@ -40,7 +40,11 @@
                             <option value="1">Yes</option>
                         </select>
                     </div>
-                    <div class="form-group">
+                    <?= $input_field['sub_total'] ?>
+                    <?= $input_field['service_change'] ?>
+                    <?= $input_field['total'] ?>
+                    <?= $input_field['status'] ?>
+                    <!-- <div class="form-group">
                         <label>Sub Total</label>
                         <input type="text" class="form-control" name="sub_total" required placeholder="Sub Total">
                     </div>
@@ -55,7 +59,7 @@
                     <div class="form-group">
                         <label>Status</label>
                         <input type="text" class="form-control" name="status" required placeholder="Status">
-                    </div>
+                    </div> -->
                     
                     
                 </div>

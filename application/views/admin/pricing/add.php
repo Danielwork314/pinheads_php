@@ -31,10 +31,11 @@
 					<?php 
 				}
 				?>
-				<div class="form-group">
+				<?= $input_field['pricing'] ?>
+				<!-- <div class="form-group">
 					<label>Pricing Title</label>
 					<input type="text" class="form-control" name="pricing" required placeholder="Pricing title">
-				</div>
+				</div> -->
 			<!-- /.box-body -->
 
 			<div class="box-footer">

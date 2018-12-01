@@ -27,14 +27,22 @@ class Billing_address extends Base_Controller
 
     function add($user_id)
     {
+
         $this->page_data['user_id'] = $user_id;
 
+        $this->page_data['billing_address'] = $this->Billing_address_model->get_all();
+
+        $this->page_data['input_field'] = $this->Billing_address_model->generate_input();
+
         if ($_POST) {
+
             $input = $this->input->post();
 
             $error = false;
 
-            $data = array(
+            if(!$error){
+
+                $data = array(
                 'address1' => $input['address1'],
                 'address2' => $input['address2'],
                 'state' => $input['state'],
@@ -47,9 +55,13 @@ class Billing_address extends Base_Controller
             $this->Billing_address_model->insert($data);
 
             redirect("user/details/" . $user_id, "redirect");
-        }
 
-        $this->page_data['billing_address'] = $this->Billing_address_model->get_all();
+
+            }else{
+
+                $this->page_data["input"] = $input;
+            }
+        }
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/billing_address/add");

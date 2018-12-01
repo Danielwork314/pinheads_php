@@ -17,7 +17,7 @@ class Food extends Base_Controller
         $this->load->model("Access_model");
         $this->load->model("Food_category_model");
         $this->load->model("Food_model_model");
-        // $this->load->model("Vendor_model");
+        $this->load->model("Vendor_model");
     }
 
     public function index()

@@ -12,12 +12,27 @@ class Pricing extends Base_Controller
         $this->page_data = array();
 
         $this->load->model("Pricing_model");
-       
+
     }
 
     public function index()
     {
-        $this->page_data["pricing"] = $this->Pricing_model->get_all();
+        $type = $this->session->userdata('login_data')['type'];
+
+        if($type == "VENDOR"){
+
+            $where = array(
+                "pricing.created_by" => $this->session->userdata("login_data")["vendor_id"],
+            );
+
+            $pricing_id = $this->Pricing_model->get_where($where);
+            $this->page_data["pricing"] = $pricing_id;
+
+        }else{
+            
+            $this->page_data["pricing"] = $this->Pricing_model->get_all();
+        }
+
         // $this->debug($this->page_data["pricing"]);
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/pricing/all");
@@ -99,7 +114,7 @@ class Pricing extends Base_Controller
                 $data = array(
                     'pricing' => $input['pricing'],
                     'created_by' => $this->session->userdata('login_id'),
-                    'modified_date' => $date->format("Y-m-d h:i:s"),
+                    'modified_date' => $date->format("Y-m-d H:i:s"),
                     'modified_by' => $this->session->userdata('login_id')
                 );
 

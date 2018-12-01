@@ -183,10 +183,10 @@
 						</li>
 						<?php
 					}
-					if($this->session->userdata('role_access')['table']['read_control'] == 1){
+					if($this->session->userdata('role_access')['table_position']['read_control'] == 1){
 						?>
-						<li class=" <?php if ($this->router->fetch_class() == 'table') echo 'active'; ?> ">
-							<a href="<?=base_url();?>table">
+						<li class=" <?php if ($this->router->fetch_class() == 'table_position') echo 'active'; ?> ">
+							<a href="<?=base_url();?>table_position">
 								<i class="fa fa-clipboard-list"></i>
 								<span>Table</span>
 							</a>
