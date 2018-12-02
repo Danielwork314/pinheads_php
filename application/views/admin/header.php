@@ -158,6 +158,16 @@
 						</li>
 						<?php
 					}
+					if($this->session->userdata('role_access')['banner']['read_control'] == 1){
+						?>
+						<li class=" <?php if ($this->router->fetch_class() == 'banner') echo 'active'; ?> ">
+							<a href="<?=base_url();?>banner">
+								<i class="fa fa-image"></i>
+								<span>Banner</span>
+							</a>
+						</li>
+						<?php
+					}
 					if($this->session->userdata('role_access')['store']['read_control'] == 1){
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'store') echo 'active'; ?> ">

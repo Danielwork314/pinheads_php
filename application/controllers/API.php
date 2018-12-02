@@ -14,6 +14,7 @@ class API extends Base_Controller
         $this->load->model("Store_feature_model");
         $this->load->model("Store_image_model");
         $this->load->model("Food_model");
+        $this->load->model("Banner_model");
     }
 
     public function test()
@@ -74,8 +75,26 @@ class API extends Base_Controller
 
                 $user_id = $this->User_model->insert($data);
 
+                $data = array(
+                    "login_time" => date("Y-m-d h:i:s"),
+                    "token" => md5($user_id . date("Y-m-d h:i:s")),
+                );
+
+                $where = array(
+                    "user_id" => $user_id,
+                );
+
+                $this->User_model->update_where($where, $data);                
+
+                $user = $this->User_model->get_where($where)[0];
+
+                $this->session->set_userdata("user", $user);
+
                 die(json_encode(array(
                     'status' => true,
+                    "data" => array(
+                        "user" => $user,
+                    ),
                 )));
 
             } else {
@@ -327,6 +346,28 @@ class API extends Base_Controller
                 ),
             )));
         }
+    }
+
+    public function banners()
+    {
+        $banners = $this->Banner_model->get_all();
+
+        $banner_data = array();
+        foreach ($banners as $row) {
+            $data = array(
+                "banner_id" => $row['banner_id'],
+                "image" => base_url() . $row['image'],
+            );
+
+            array_push($banner_data, $data);
+        }
+
+        die(json_encode(array(
+            "status" => true,
+            "data" => array(
+                "banners" => $banner_data,
+            ),
+        )));
     }
 
     // public function searchStore()
