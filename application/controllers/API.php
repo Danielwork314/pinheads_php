@@ -227,7 +227,7 @@ class API extends Base_Controller
                 "longitude" => $row['longitude'],
                 "business_hour" => $row['business_hour'],
                 "favourite" => ($row['favourite'] == 1) ? "YES" : "NO",
-                "description" => $store['description'],
+                "description" => $row['description'],
             );
 
             array_push($store_data, $data);
