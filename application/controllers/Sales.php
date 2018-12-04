@@ -16,6 +16,7 @@ class Sales extends Base_Controller
         $this->load->model("Sales_model");
         $this->load->model("Food_model");
         $this->load->model("Store_model");
+        $this->load->model("Coupon_model");
 
     }
 
@@ -28,7 +29,7 @@ class Sales extends Base_Controller
             $order_array = [];
 
             $where = array(
-                'vendor_id' => $this->session->userdata('login_id')
+                'vendor.vendor_id' => $this->session->userdata('login_id')
             );
 
             $owned_store = $this->Store_model->get_where($where);
@@ -68,6 +69,7 @@ class Sales extends Base_Controller
         $this->page_data['food'] = $this->Food_model->get_all();
         $this->page_data['user'] = $this->User_model->get_all();
         $this->page_data['store'] = $this->Store_model->get_all();
+        $this->page_data['coupon'] = $this->Coupon_model->get_all();
         // $this->page_data['input_field'] = $this->Order_model->generate_input();
 
         if ($_POST) {
@@ -91,12 +93,15 @@ class Sales extends Base_Controller
                     'user_id' => $input['user_id'],
                     'store_id' => $input['store_id'],
                     'billing_address_id' => $input['billing_address_id'],
+                    'coupon_id' => $input['coupon_id'],
                     'card_id' => $input['card_id'],
                     'take_away' => $take_away,
                     'total' => $input['total_price'],
                 );
 
                 $sales_id = $this->Sales_model->insert($data);
+
+                // $this->debug($data);
 
                 if($sales_id){
 

@@ -248,6 +248,16 @@
 						</li>
 						<?php
 					}
+					if($this->session->userdata('role_access')['social_media']['read_control'] == 1){
+						?>
+						<li class=" <?php if ($this->router->fetch_class() == 'social_media') echo 'active'; ?> ">
+							<a href="<?=base_url();?>social_media">
+								<i class="fa fa-share-square"></i>
+								<span>Social Media</span>
+							</a>
+						</li>
+						<?php
+					}
 					
 					if($this->session->userdata('role_access')['role_access']['read_control'] == 1){
 						?>

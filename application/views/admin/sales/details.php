@@ -47,6 +47,12 @@
                         </td>
 					</tr>
 					<tr>
+						<th>Coupon</th>
+						<td>: 
+                            <?= $order['coupon'] ?>
+                        </td>
+					</tr>
+					<tr>
 						<th>Take Away</th>
 						<td>: 
                             <?=($order['take_away'] == 1) ? "YES" : "NO"?>

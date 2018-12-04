@@ -148,7 +148,9 @@ class Food_category extends Base_Controller
 
                 $this->Food_category_model->update_where($where, $data);
 
-                redirect("food_category/details/" . $food_category_id, "refresh");
+                $this->debug($data);
+
+                // redirect("food_category/details/" . $food_category_id, "refresh");
             } else {
 
                 $this->page_data["input"] = $input;

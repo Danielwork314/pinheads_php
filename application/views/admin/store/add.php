@@ -58,7 +58,7 @@
 					<?= $input_field['business_hour'] ?>
 					<?= $input_field['gourmet_type_id'] ?>
 					<?= $input_field['pricing_id'] ?>
-					<?= $input_field['description'] ?>
+					<!-- <?= $input_field['description'] ?> -->
 					<div class="form-group">
 						<div class="">
 							<input type="checkbox" name="favourite" value="favourite"> Favourite

@@ -316,7 +316,7 @@ class Food extends Base_Controller
     }
 
 
-    function edit_food($food_id)
+    function edit_menu($food_id)
     {
 
         $where = array(
@@ -357,7 +357,7 @@ class Food extends Base_Controller
                 $date = new DateTime(null, new DateTimeZone('Asia/Kuala_Lumpur'));
 
                 $data = array(
-                    'image'             => $image,
+                    // 'image'             => $image,
                     'food'              => $input['food'],
                     'description'       => $input['description'],
                     'price'             => $input['price'],
@@ -366,6 +366,10 @@ class Food extends Base_Controller
                     'modified_date'     => $date->format("Y-m-d h:i:s"),
                     'modified_by'       => $this->session->userdata('login_id')
                 );
+
+                if (!empty($image)) {
+                    $data['image'] = $image;
+                }
 
                 $store_id = $this->Food_model->get_where($where)[0];
 

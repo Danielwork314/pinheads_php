@@ -21,6 +21,8 @@ class Store extends Base_Controller
         $this->load->model("Feature_model");
         $this->load->model("Store_feature_model");
         $this->load->model("Store_image_model");
+        $this->load->model("Social_media_link_model");
+        
     }
 
     public function index()
@@ -30,7 +32,7 @@ class Store extends Base_Controller
         if ($type == "VENDOR") {
 
             $where = array(
-                "vendor_id" => $this->session->userdata("login_id"),
+                "vendor.vendor_id" => $this->session->userdata("login_id"),
                 // "store.created_by" => $this->session->userdata("login_data")["vendor_id"],
             );
 
@@ -98,7 +100,7 @@ class Store extends Base_Controller
                     'pricing_id' => $input['pricing_id'],
                     'created_by' => $this->session->userdata('login_id'),
                     'vendor_id' => $input['vendor_id'],
-                    'description' => $input['description'],
+                    // 'description' => $input['description'],
                 );
 
                 if ($input['favourite']) {
@@ -148,15 +150,26 @@ class Store extends Base_Controller
         $store = $this->Store_model->get_where($where);
         $store_feature = $this->Store_feature_model->get_where($where);
         $store_images = $this->Store_image_model->get_where($where);
+        
+        $this->page_data["store"] = $store[0];
+       
 
         $where = array(
             "food.store_id" => $store_id,
         );
 
         $food = $this->Food_model->get_where($where);
-
-        $this->page_data["store"] = $store[0];
         $this->page_data["food"] = $food;
+
+        $where = array(
+            "social_media_link.store_id" => $store_id,
+        );
+
+        $social_media_link = $this->Social_media_link_model->get_where($where);
+        $this->page_data["social_media_link"] = $social_media_link;
+
+        
+        
         $this->page_data["store_feature"] = $store_feature;
         $this->page_data["store_images"] = $store_images;
 
@@ -235,7 +248,7 @@ class Store extends Base_Controller
                     'gourmet_type_id' => $input['gourmet_type_id'],
                     'pricing_id' => $input['pricing_id'],
                     'modified_by' => $this->session->userdata('login_id'),
-                    'description' => $input['description'],
+                    // 'description' => $input['description'],
                 );
 
                 if (!empty($image_url)) {
