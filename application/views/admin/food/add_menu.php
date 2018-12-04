@@ -22,7 +22,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" class="input_form" method="POST" enctype="multipart/form-data" id="menu_form">
+            <form role="form" class="input_form" method="POST" action="<?= base_url()?>food/add" enctype="multipart/form-data">
                 <div class="box-body">
                     <?php 
                     if (isset($error)) { 

@@ -37,7 +37,7 @@
 				</div>
 				<div class="form-group">
 					<label>Image</label>
-					<input type="file" class="form-control" name="file" required>
+					<input type="file" class="form-control" name="file">
 				</div>
 
 				<?= $input_field['food'] ?>

@@ -31,9 +31,9 @@
                     </thead>
                     <tbody>
                         <?php
-$i = 1;
-foreach ($food_category as $row) {
-    ?>
+                            $i = 1;
+                            foreach ($food_category as $row) {
+                                ?>
                                     <tr>
                                         <td><a href="<?=base_url()?>food_category/details/<?=$row['food_category_id']?>"><?=$i?></a></td>
                                         <td><a href="<?=base_url()?>food_category/details/<?=$row['food_category_id']?>"><img src="<?=base_url() . $row['thumbnail']?>" class="xs_thumbnail"></a></td>
@@ -42,9 +42,9 @@ foreach ($food_category as $row) {
                                         <td><a href="<?=base_url()?>food_category/delete/<?=$row['food_category_id']?>" class="btn btn-danger delete-button">Delete</a></td>
                                     </tr>
                                 <?php
-$i++;
-}
-?>
+                        $i++;
+                        }
+                        ?>
                     </tbody>
                     <tfoot>
                         <tr>

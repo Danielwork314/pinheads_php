@@ -53,6 +53,17 @@
                 </div>
 
                 <div class="form-group">
+                    <label>Coupon</label>
+                    <div class="form_coupon">
+                    <select class="form-control" required name="coupon_id" id="coupon">
+                        <?php foreach($coupon as $row){ ?>
+                            <option value="<?= $row['coupon_id']?>"><?= $row['coupon'] ?></option>
+                        <?php } ?>
+                    </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label>Billing Address</label>
                     <div class="form_billing_address">
                     <select class="form-control" required name="billing_address_id" id="billing_address_sel">
@@ -195,6 +206,7 @@
         var store_id = $('#store_sel').val();
         var billing_address_id = $('#billing_address_id').val();
         var card_id = $('#card_id').val();
+        var coupon_id = $('#coupon').val();
         var take_away = $('#take_away').val();
         var total_price = $('#total_price').val();
 
@@ -209,6 +221,7 @@
             store_id: store_id,
             billing_address_id: billing_address_id,
             card_id: card_id,
+            coupon_id: coupon_id,
             take_away: take_away,
             total_price: total_price,
             food_array: food_array,

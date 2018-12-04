@@ -44,7 +44,7 @@
 						</td>
 					</tr>
 					<tr>
-						<th>Title</th>
+						<th>Food</th>
 						<td>:
 							<?= $food["food"] ?>
 						</td>

@@ -17,7 +17,7 @@
 	</section>
 	<br>
 	<section class="content">
-		<div class="col-md-8 col-xs-12">
+		<div class="col-md-6 col-xs-12">
 			<div class="box box-primary">
 				<div class="box-header with-border">
 					<h3 class="box-title">
@@ -136,14 +136,7 @@
 								<?php } ?>
 							</td>
 						</tr>
-						<tr>
-							<th>Description</th>
-							<td>
-							</td>
-						</tr>
-						<tr>
-							<td colspan="2"><?= $store['description'] ?></td>
-						</tr>
+						
 						<tr>
 							<th>Features</th>
 							<td>
@@ -165,6 +158,90 @@
 				<!-- /.box-body -->
 			</div>
 		</div>
+
+		<div class="col-md-6">
+		<div class="box box-primary">
+		<div class='box-header'>
+			<h4 class="whiteTitle" style='display: inline-block;'>Social media link</h4>
+
+			<a href='<?php echo site_url("social_media_link/add"). '/' . $store['store_id'] ?>' class='btn btn-info pull-right'>
+				<i class='fa fa-plus'></i> Add</a>
+
+		</div>
+		<div class='box-body no-padding'>
+
+			<div id="refreshBox">
+				<table id="data-table" class="table table-bordered table-hover data-table">
+					<thead>
+						<tr>
+							<th>No.</th>
+							<th>Social Media</th>
+                            <th>Social Media Link</th>
+                            <th>Created Date</th>
+                            <!-- <th>Created By</th> -->
+                            <th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+                            $i = 1;
+                            foreach($social_media_link as $row){
+                                ?>
+						<tr>
+							<td>
+                                <a href="<?= base_url() ?>social_media_link/details/<?= $row['social_media_link_id']?>">
+									<?= $i ?>
+                                </a>
+                            </td>
+							<td>
+                                <a href="<?= base_url() ?>social_media_link/details/<?= $row['social_media_link_id']?>">
+									<?= $row['social_media'] ?>
+                                </a>
+                            </td>
+							<td>
+                                <a href="<?= base_url() ?>social_media_link/details/<?= $row['social_media_link_id']?>">
+									<?= $row['social_media_link'] ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="<?= base_url() ?>social_media_link/details/<?= $row['social_media_link_id']?>">
+									<?= $row['created_date'] ?>
+                                </a>
+                            </td>
+                            <!-- <td>
+                                <a href="<?= base_url() ?>social_media_link/details/<?= $row['social_media_link_id']?>">
+									<?= $row['created_by'] ?>
+                                </a>
+                            </td> -->
+							<td>
+                                <a href="<?= base_url() ?>social_media_link/delete/<?= $row['social_media_link_id']?>" class="btn btn-danger delete-button">Delete</a>
+                            </td>
+						</tr>
+						<?php
+                                $i++;
+                            }
+                        ?>
+					</tbody>
+					<tfoot>
+						<tr>
+                            <th>No.</th>
+                            <th>Social Media</th>
+                            <th>Social Media Link</th>
+                           
+                            <th>Created Date</th>
+                            <!-- <th>Created By</th> -->
+                            <th></th>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>			
+		</div>
+		
+
+
+
 		<form method="POST" action="<?= base_url() ?>store_images/delete/<?= $store['store_id'] ?>">
 			<div class="col-xs-12">
 				<div class="box box-primary">
@@ -248,11 +325,11 @@
 										<?= $row['food'] ?>
 									</a>
 								</td>
-								<td>
+								<!-- <td>
 									<a href="<?= base_url() ?>food/details_menu/<?= $row['food_id']?>">
 										<?= $row['description'] ?>
 									</a>
-								</td>
+								</td> -->
 								<td>
 									<a href="<?= base_url() ?>food/details_menu/<?= $row['food_id']?>">
 										<?= $row['price'] ?>
