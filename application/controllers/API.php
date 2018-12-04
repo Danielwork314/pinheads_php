@@ -15,6 +15,8 @@ class API extends Base_Controller
         $this->load->model("Store_image_model");
         $this->load->model("Food_model");
         $this->load->model("Banner_model");
+        $this->load->model("Sales_model");
+        $this->load->model("Order_food_model");
     }
 
     public function test()
@@ -84,7 +86,7 @@ class API extends Base_Controller
                     "user_id" => $user_id,
                 );
 
-                $this->User_model->update_where($where, $data);                
+                $this->User_model->update_where($where, $data);
 
                 $user = $this->User_model->get_where($where)[0];
 
@@ -100,7 +102,7 @@ class API extends Base_Controller
             } else {
                 die(json_encode(array(
                     'status' => false,
-                    "error_message" => $error_message,
+                    "message" => $error_message,
                 )));
             }
         }
@@ -144,7 +146,53 @@ class API extends Base_Controller
             } else {
                 die(json_encode(array(
                     "status" => false,
-                    "error_message" => "invalid ID or Password",
+                    "message" => "invalid ID or Password",
+                )));
+            }
+        }
+    }
+
+    public function login_with_token()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $where = array(
+                "token" => $input['user_token']
+            );
+
+            $user = $this->User_model->get_where($where);
+
+            if (!empty($user)) {
+                $user = $user[0];
+
+                $data = array(
+                    "login_time" => date("Y-m-d h:i:s"),
+                    "token" => md5($user['user_id'] . date("Y-m-d h:i:s")),
+                );
+
+                $where = array(
+                    "user_id" => $user['user_id'],
+                );
+
+                $this->User_model->update_where($where, $data);
+
+                $user["login_time"] = $data['login_time'];
+                $user["token"] = $data['token'];
+
+                $this->session->set_userdata("user", $user);
+
+                die(json_encode(array(
+                    "status" => true,
+                    "data" => array(
+                        "user" => $user,
+                    ),
+                )));
+
+            } else {
+                die(json_encode(array(
+                    "status" => false,
+                    "message" => "invalid ID or Password",
                 )));
             }
         }
@@ -368,6 +416,69 @@ class API extends Base_Controller
                 "banners" => $banner_data,
             ),
         )));
+    }
+
+    public function add_to_cart()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $error = false;
+
+            $where = array(
+                "token" => $input['user_token'],
+            );
+
+            $user = $this->User_model->get_where($where);
+
+            if (empty($user)) {
+                $error = true;
+                $error_message = "Please login to proceed.";
+            }
+
+            if (!$error) {
+                $user = $user[0];
+
+                $sub_total = 0;
+                $store_ids = array();
+                foreach ($input['order'] as $row) {
+                    $sub_total += $row['price'] * $row['quantity'];
+                    array_push($store_ids, $row['store_id']);
+                }
+
+                $data = array(
+                    "user_id" => $user['user_id'],
+                    "status_id" => 1,
+                    'store_id' => $$store_ids[0],
+                    "sub_total" => $sub_total,
+                    "service_charge" => $sub_total * 0.1,
+                    "total" => $sub_total * 1.1,
+                );
+
+                $sales_id = $this->Order_model->insert($data);
+
+                foreach ($input['order'] as $row) {
+                    $data = array(
+                        "sales_id" => $sales_id,
+                        "food_id" => $row["food_id"],
+                        "quantity" => $row["quantity"],
+                    );
+
+                    $this->Order_food_model->insert($data);
+                }
+
+                die(json_encode(array(
+                    "status" => true,
+                )));
+
+            } else {
+                die(json_encode(array(
+                    "status" => false,
+                    "message" => $error_message,
+                )));
+            }
+
+        }
     }
 
     // public function searchStore()
