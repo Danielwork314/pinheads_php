@@ -158,7 +158,7 @@ class API extends Base_Controller
             $input = $this->input->post();
 
             $where = array(
-                "token" => $input['user_token']
+                "token" => $input['user_token'],
             );
 
             $user = $this->User_model->get_where($where);
@@ -425,6 +425,8 @@ class API extends Base_Controller
 
             $error = false;
 
+            $input['order'] = json_decode($input['order'], true);
+
             $where = array(
                 "token" => $input['user_token'],
             );
@@ -448,14 +450,14 @@ class API extends Base_Controller
 
                 $data = array(
                     "user_id" => $user['user_id'],
-                    "status_id" => 1,
-                    'store_id' => $$store_ids[0],
+                    "status" => 1,
+                    'store_id' => $store_ids[0],
                     "sub_total" => $sub_total,
-                    "service_charge" => $sub_total * 0.1,
+                    "service_change" => $sub_total * 0.1,
                     "total" => $sub_total * 1.1,
                 );
 
-                $sales_id = $this->Order_model->insert($data);
+                $sales_id = $this->Sales_model->insert($data);
 
                 foreach ($input['order'] as $row) {
                     $data = array(
@@ -478,6 +480,55 @@ class API extends Base_Controller
                 )));
             }
 
+        }
+    }
+
+    public function order_history()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $error = false;
+
+            $where = array(
+                "token" => $input['user_token'],
+            );
+
+            $user = $this->User_model->get_where($where);
+
+            if (empty($user)) {
+                $error = true;
+                $error_message = "Please login to proceed.";
+            }
+
+            if (!$error) {
+                $user = $user[0];
+
+                $where = array(
+                    "user_id" => $user['user_id'],
+                );
+
+                $sales = $this->Sales_model->get_order_history($where);
+
+                $sales_data = array();
+                foreach ($sales as $row) {
+                    $where = array(
+                        "sales_id" => $row['sales_id'],
+                    );
+
+                    $order_food = $this->Order_food_model->get_where($where);
+
+                    $i = 0;
+                    foreach ($order_food as $food_row) {
+                        $order_food[$i]['image'] = base_url() . $food_row['image'];
+                        $i++;
+                    }
+
+                    $data = array(
+                        
+                    );
+                }
+            }
         }
     }
 
