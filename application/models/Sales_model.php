@@ -47,9 +47,10 @@ class Sales_model extends Base_model
 
     public function get_order_history($where)
     {
-        $this->db->select("sales.*, store.store, store.thumbnail");
+        $this->db->select("sales.*, store.store, store.thumbnail, order_status");
         $this->db->from("sales");
         $this->db->join("store", "sales.store_id = store.store_id", "left");
+        $this->db->join("order_status", "sales.order_status_id = order_status.order_status_id", "left");
         $this->db->where('sales.deleted', 0);
         $this->db->where($where);
         $this->db->order_by("sales.created_date  DESC");

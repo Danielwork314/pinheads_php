@@ -451,6 +451,7 @@ class API extends Base_Controller
                 $data = array(
                     "user_id" => $user['user_id'],
                     "status" => 1,
+                    "order_status_id" => 1,
                     'store_id' => $store_ids[0],
                     "sub_total" => $sub_total,
                     "service_change" => $sub_total * 0.1,
@@ -512,6 +513,8 @@ class API extends Base_Controller
 
                 $sales_data = array();
                 foreach ($sales as $row) {
+                    // $this->debug($row);
+
                     $where = array(
                         "sales_id" => $row['sales_id'],
                     );
@@ -525,9 +528,38 @@ class API extends Base_Controller
                     }
 
                     $data = array(
-                        
+                        "sales_id" => $row['sales_id'],
+                        "user_id" => $row['user_id'],
+                        "store_id" => $row['store_id'],
+                        "order_status_id" => $row['order_status_id'],
+                        "take_away" => ($row['take_away'] == 1) ? "YES" : "NO",
+                        "subtotal" => $row['sub_total'],
+                        "service_charge" => $row['service_change'],
+                        "total" => $row['total'],
+                        "status" => ($row['status'] == 1) ? "PAID" : "NOT PAID",
+                        "order_status" => $row['order_status'],
+                        "created_date" => $row['created_date'],
+                        "display_date" => date("d.m.Y g:i A"),
+                        "store" => "store",
+                        "image" => base_url() . $row['thumbnail'],
+                        "food" => $order_food,
                     );
+
+                    array_push($sales_data, $data);
                 }
+
+                die(json_encode(array(
+                    "status" => true,
+                    "data" => array(
+                        "order_history" => $sales_data,
+                    ),
+                )));
+
+            } else {
+                die(json_encode(array(
+                    "status" => false,
+                    "message" => $error_message,
+                )));
             }
         }
     }
