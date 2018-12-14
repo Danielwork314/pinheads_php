@@ -83,6 +83,8 @@
 				}
 			}
 		});
+
+    	$('.select2').select2();
 	});
 
 	$('input').change(function(){

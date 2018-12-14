@@ -18,6 +18,8 @@ class Food extends Base_Controller
         $this->load->model("Food_category_model");
         $this->load->model("Food_model_model");
         $this->load->model("Vendor_model");
+        $this->load->model("Customize_model");
+        $this->load->model("Food_customize_model");
     }
 
     public function index()
@@ -49,6 +51,7 @@ class Food extends Base_Controller
     {
 
         $this->page_data['store'] = $this->Store_model->get_all();
+        $this->page_data['customize'] = $this->Customize_model->get_all();
         $this->page_data['food_category'] = $this->Food_category_model->get_all();
         $this->page_data['input_field'] = $this->Food_model->generate_input();
 
@@ -111,6 +114,16 @@ class Food extends Base_Controller
                     }
                 }
 
+                foreach($input['customize'] as $row){
+
+                    $data = array(
+                        'food_id' => $food_id,
+                        'customize_id' => $row
+                    );
+
+                    $this->Food_customize_model->insert($data);
+                }
+
                 redirect("food", "refresh");
 
             }else{
@@ -152,6 +165,8 @@ class Food extends Base_Controller
 
         $this->page_data["food"] = $food[0];
 
+        $this->page_data['customize'] = $this->Food_customize_model->get_where($where);
+
         // $this->page_data["food"] = $this->Food_model->get_where($where)[0];
 
         $this->page_data["food_model"] = $this->Food_model_model->get_where($where);
@@ -177,6 +192,9 @@ class Food extends Base_Controller
         $this->page_data['store'] = $this->Store_model->get_all();
         $this->page_data['food_category'] = $this->Food_category_model->get_all();
         $this->page_data['input_field'] = $this->Food_model->generate_edit_input($food_id);
+        $this->page_data['customize'] = $this->Customize_model->get_all();
+        $this->page_data['customize_list'] = $this->Food_customize_model->get_where($where);
+        // die(var_dump($this->page_data['customize_list']));
         
         
         if ($_POST) {
@@ -199,6 +217,7 @@ class Food extends Base_Controller
 
                    $error_message = $this->upload->display_errors();
                 }
+
             }
 
             if(!$error){
@@ -206,7 +225,6 @@ class Food extends Base_Controller
                 $date = new DateTime(null, new DateTimeZone('Asia/Kuala_Lumpur'));
 
                 $data = array(
-                    'image'             => $image,
                     'food'              => $input['food'],
                     'description'       => $input['description'],
                     'price'             => $input['price'],
@@ -218,7 +236,24 @@ class Food extends Base_Controller
                     'modified_by'       => $this->session->userdata('login_id')
                 );
 
+                if($image){
+                    $data['image'] = $image;
+                }
+
                 $this->Food_model->update_where($where, $data);
+
+                $this->Food_customize_model->hard_delete_where($where);
+
+                foreach($input['customize'] as $row){
+
+                    $data = array(
+                        'food_id' => $food_id,
+                        'customize_id' => $row
+                    );
+
+                    $this->Food_customize_model->insert($data);
+                }
+
                 redirect("food", "refresh");
 
             }else{

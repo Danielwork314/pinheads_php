@@ -45,6 +45,15 @@
 						</td>
 					</tr>
 					<tr>
+						<th>Customize Set</th>
+						<td>:
+							<?php $i = 1; foreach($customize as $row){ ?>
+								<?= $row["customize"] ?>
+								<?php if(count($customize) != $i){ ?>, <?php } ?>
+							<?php $i++; } ?>
+						</td>
+					</tr>
+					<tr>
 						<td></td>
 					</tr>
 					<tr>

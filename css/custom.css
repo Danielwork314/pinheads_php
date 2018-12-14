@@ -82,3 +82,38 @@ input[type="checkbox"][id^="image_checkbox_"] {
     font-size: 1.5em;
     padding: 0.70em;	
 }
+
+.dressing_menu {
+
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+.dressing_tr {
+
+	padding-left: 0px !important;
+	padding-top: 20px !important;
+}
+
+.customize_menu {
+
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+.customize_tr {
+
+	padding-left: 0px !important;
+	padding-top: 20px !important;
+}
+
+.select2-container--default .select2-selection--single{
+	padding:6px !important;
+	height: 35px !important;
+	position: relative !important;
+	border-color: #d2d6de !important;
+}
+
+.select2-container--default .select2-selection--single {
+	border-radius: 0 !important;
+}

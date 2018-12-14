@@ -208,6 +208,26 @@
 						</li>
 						<?php
 					}
+					if($this->session->userdata('role_access')['customize']['read_control'] == 1){
+						?>
+						<li class=" <?php if ($this->router->fetch_class() == 'customize') echo 'active'; ?> ">
+							<a href="<?=base_url();?>customize">
+								<i class="fa fa-filter"></i>
+								<span>Customize</span>
+							</a>
+						</li>
+						<?php
+					}
+					if($this->session->userdata('role_access')['dressing']['read_control'] == 1){
+						?>
+						<li class=" <?php if ($this->router->fetch_class() == 'dressing') echo 'active'; ?> ">
+							<a href="<?=base_url();?>dressing">
+								<i class="fa fa-birthday-cake"></i>
+								<span>Dressing</span>
+							</a>
+						</li>
+						<?php
+					}
 					if($this->session->userdata('role_access')['pricing']['read_control'] == 1){
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'pricing') echo 'active'; ?> ">

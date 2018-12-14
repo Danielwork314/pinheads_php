@@ -16,6 +16,8 @@ class Ajax extends Base_Controller
         $this->load->model("Food_model");
         $this->load->model("Billing_address_model");
         $this->load->model("Card_model");
+        $this->load->model("Dressing_model");
+        $this->load->model("Customize_model");
         // $this->load->model("Project_report_model");
         // $this->load->model("Project_report_item_model");
         // $this->load->model("Project_report_image_model");
@@ -167,6 +169,46 @@ class Ajax extends Base_Controller
                 "status"  => true,
                 "message" => "Submit Successful",
                 "data" => $food,               
+            )));
+        }
+    }
+
+    function addDressing(){
+        
+        if ($_POST) {
+
+            $input = $this->input->post();
+
+            $where = array(
+                'dressing_id' => $input['dressing_id']
+            );
+            
+            $dressing = $this->Dressing_model->get_where($where)[0];
+
+            die(json_encode(array(
+                "status"  => true,
+                "message" => "Submit Successful",
+                "data" => $dressing,               
+            )));
+        }
+    }
+
+    function addCustomize(){
+        
+        if ($_POST) {
+
+            $input = $this->input->post();
+
+            $where = array(
+                'customize_id' => $input['customize_id']
+            );
+            
+            $customize = $this->Customize_model->get_where($where)[0];
+
+            die(json_encode(array(
+                "status"  => true,
+                "message" => "Submit Successful",
+                "data" => $customize,               
             )));
         }
     }
