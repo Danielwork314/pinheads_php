@@ -13,10 +13,14 @@ class API extends Base_Controller
         $this->load->model("Store_model");
         $this->load->model("Store_feature_model");
         $this->load->model("Store_image_model");
+        $this->load->model("Sales_model");
         $this->load->model("Food_model");
+        $this->load->model("Card_model");
         $this->load->model("Banner_model");
         $this->load->model("Sales_model");
         $this->load->model("Order_food_model");
+        $this->load->model("Food_customize_model");
+        $this->load->model("Customize_dressing_model");
     }
 
     public function test()
@@ -198,6 +202,39 @@ class API extends Base_Controller
         }
     }
 
+    public function validate_token()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $where = array(
+                "token" => $input['token'],
+            );
+
+            $user = $this->User_model->get_where($where);
+
+            $user = $user[0];
+            $user["login_time"] = date("Y-m-d h:i:s");
+            $user["token"] = $input['token'];
+
+            if (!empty($user)) {
+
+                die(json_encode(array(
+                    "status" => true,
+                    "data" => array(
+                        "user" => $user,
+                    ),
+                )));
+
+            } else {
+                die(json_encode(array(
+                    "status" => false,
+                    "message" => "invalid ID or Password",
+                )));
+            }
+        }
+    }
+
     public function logout()
     {
         if ($_POST) {
@@ -235,6 +272,46 @@ class API extends Base_Controller
         )));
     }
 
+    public function customize()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $where = array(
+                'food_id' => $input['food_id']
+            );
+
+            $customize = $this->Food_customize_model->get_where($where);
+
+            die(json_encode(array(
+                "status" => true,
+                "data" => array(
+                    "customize" => $customize,
+                ),
+            )));
+        }
+    }
+
+    public function dressing()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $where = array(
+                'customize_id' => $input['customize_id']
+            );
+
+            $dressing = $this->Customize_dressing_model->get_where($where);
+
+            die(json_encode(array(
+                "status" => true,
+                "data" => array(
+                    "dressing" => $dressing,
+                ),
+            )));
+        }
+    }
+
     public function stores()
     {
         if ($_POST) {
@@ -244,14 +321,71 @@ class API extends Base_Controller
                 $where = array(
                     "store.gourmet_type_id" => $input['gourmet_type_id'],
                 );
+                $stores = $this->Store_model->get_where($where);
+
             } else if (!empty($input['recommended'])) {
                 $where = array(
                     "favourite" => 1,
                 );
+                $stores = $this->Store_model->get_where($where);
+
+            } else if (!empty($input['filter'])) {
+
+                $stores_array = [];
+                // die(var_dump($where));
+                if($input['filter'] == 'distance'){
+
+                    $stores = $this->Store_model->get_all();
+
+                } else if($input['filter'] == 'pricing'){
+
+                    $stores = $this->Store_model->get_pricing_all();
+
+                } else {
+
+                    if($input['filter'] == 'halal'){
+
+                        $where = array(
+                            "store_feature.feature_id" => 1,
+                        );
+                    } else if($input['filter'] == 'vegetarian'){
+    
+                        $where = array(
+                            "store_feature.feature_id" => 2,
+                        );
+                    } else if($input['filter'] == 'takeaway'){
+    
+                        $where = array(
+                            "store_feature.feature_id" => 3,
+                        );
+                    } else if($input['filter'] == 'delivery'){
+    
+                        $where = array(
+                            "store_feature.feature_id" => 4,
+                        );
+                    }
+    
+                    $store_feature = $this->Store_feature_model->get_where($where);
+    
+                    foreach($store_feature as $row){
+    
+                        $where = array(
+                            'store_id' => $row['store_id']
+                        );
+    
+                        $store = $this->Store_model->get_where($where);
+    
+                        if($store){
+                            array_push($stores_array, $store[0]);
+                        }
+                    }
+    
+                    $stores = $stores_array;
+                }
             }
 
-            $stores = $this->Store_model->get_where($where);
         } else {
+
             $stores = $this->Store_model->get_all();
         }
 
@@ -285,6 +419,31 @@ class API extends Base_Controller
             "status" => true,
             "data" => array(
                 "stores" => $store_data,
+            ),
+        )));
+    }
+
+    public function orders()
+    {
+        $order_lists = $this->Sales_model->get_queue_list();
+
+        $i = 0;
+        foreach($order_lists as $row){
+
+            $where = array(
+                'sales_id' => $row['sales_id']
+            );
+
+            $order_foods = $this->Order_food_model->get_where($where);
+            $order_lists[$i]['order_foods'] = $order_foods;
+
+            $i++;
+        }
+
+        die(json_encode(array(
+            "status" => true,
+            "data" => array(
+                "order_list" => $order_lists,
             ),
         )));
     }
@@ -418,6 +577,56 @@ class API extends Base_Controller
         )));
     }
 
+    public function addCard()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $error = false;
+
+            $input['card'] = json_decode($input['card'], true);
+
+            // die(var_dump($input['order']));
+
+            $where = array(
+                "token" => $input['user_token'],
+            );
+
+            $user = $this->User_model->get_where($where);
+
+            if (empty($user)) {
+                $error = true;
+                $error_message = "Please login to proceed.";
+            }
+
+            if (!$error) {
+                $user = $user[0];
+
+                $data = array(
+                    "user_id" => $user['user_id'],
+                    "card_type_id" => $input['card']['card_type_id'],
+                    "card" => $input['card']['card'],
+                    "firstname" => $input['card']['firstname'],
+                    "lastname" => $input['card']['lastname'],
+                    'cvv' => $input['card']['cvv'],
+                    "month" => $input['card']['month'],
+                    "year" => $input['card']['year'],
+                );
+
+                die(json_encode(array(
+                    "status" => true,
+                )));
+
+            } else {
+                die(json_encode(array(
+                    "status" => false,
+                    "message" => $error_message,
+                )));
+            }
+
+        }
+    }
+
     public function add_to_cart()
     {
         if ($_POST) {
@@ -426,6 +635,9 @@ class API extends Base_Controller
             $error = false;
 
             $input['order'] = json_decode($input['order'], true);
+            // $input['card'] = json_decode($input['card'], true);
+
+            // die(var_dump($input['order']));
 
             $where = array(
                 "token" => $input['user_token'],
@@ -461,17 +673,27 @@ class API extends Base_Controller
                 $sales_id = $this->Sales_model->insert($data);
 
                 foreach ($input['order'] as $row) {
+
                     $data = array(
                         "sales_id" => $sales_id,
                         "food_id" => $row["food_id"],
                         "quantity" => $row["quantity"],
+                        "customize_id" => $row["customize_id"],
+                        "dressing_id" => $row['dressing_id']
                     );
 
                     $this->Order_food_model->insert($data);
                 }
 
+                $where = array(
+                    'sales_id' => $sales_id
+                );
+
+                $food = $this->Order_food_model->get_where($where);
+
                 die(json_encode(array(
                     "status" => true,
+                    "food" => $food
                 )));
 
             } else {
@@ -553,6 +775,8 @@ class API extends Base_Controller
                     "data" => array(
                         "order_history" => $sales_data,
                     ),
+
+                    
                 )));
 
             } else {
@@ -562,6 +786,78 @@ class API extends Base_Controller
                 )));
             }
         }
+    }
+
+    public function change_food_status(){
+
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $where = array(
+                "order_food_id" => $input['order_food_id'],
+            );
+
+            $order_food = $this->Order_food_model->get_where($where)[0];
+
+            if($order_food['order_status_id'] == '1'){
+
+                $data = array(
+                    'order_status_id' => '2'
+                );
+            } else if($order_food['order_status_id'] == '2'){
+
+                $data = array(
+                    'order_status_id' => '3'
+                );
+            } else {
+                $data = array(
+                    'order_status_id' => '1'
+                );
+            }
+
+            $this->Order_food_model->update_where($where, $data);
+            
+            die(json_encode(array(
+                "status" => true,
+            )));
+        }
+
+    }
+
+    public function change_order_status(){
+
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $where = array(
+                "sales_id" => $input['sales_id'],
+            );
+
+            $sales = $this->Sales_model->get_where($where)[0];
+
+            if($sales['order_status_id'] == '1'){
+
+                $data = array(
+                    'order_status_id' => '2'
+                );
+            } else if($sales['order_status_id'] == '2'){
+
+                $data = array(
+                    'order_status_id' => '3'
+                );
+            } else {
+                $data = array(
+                    'order_status_id' => '1'
+                );
+            }
+
+            $this->Sales_model->update_where($where, $data);
+            
+            die(json_encode(array(
+                "status" => true,
+            )));
+        }
+
     }
 
     // public function searchStore()

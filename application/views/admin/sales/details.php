@@ -167,6 +167,7 @@
 							<tr>
 								<th>No.</th>
 								<th>Food</th>
+								<th>Quantity</th>
 								<th>Price</th>
 							</tr>
 						</thead>
@@ -174,7 +175,8 @@
 							<tr>
 								<td><?= $i++; ?></td>
 								<td><?= $row['food'] ?></td>
-								<td><?= $row['price'] ?></td>
+								<td><?= $row['quantity'] ?></td>
+								<td><?= number_format($row['price'] * $row['quantity'], 2) ?></td>
 							</tr>
 						<?php } ?>
 					</table>

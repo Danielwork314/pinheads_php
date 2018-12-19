@@ -60,4 +60,16 @@ class Sales_model extends Base_model
         return $query->result_array();
     }
 
+    public function get_queue_list(){
+
+        $this->db->select('*');
+        $this->db->from('sales');
+        $this->db->join("order_status", "sales.order_status_id = order_status.order_status_id", "left");
+        $this->db->where('sales.order_status_id !=', 2);
+        $this->db->where('sales.order_status_id !=', 3);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
 }

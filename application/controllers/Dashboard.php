@@ -13,10 +13,19 @@ class Dashboard extends Base_Controller
 
         $this->load->model("Store_model");
         $this->load->model("Performance_model");
+        $this->load->model("Order_food_model");
+        $this->load->model("Sales_model");
+
     }
 
     public function index()
     {
+        $where = array(
+            "feature_id" => 1,
+        );
+
+        // $stores = $this->Store_model->get_where($where);
+        // die(var_dump($stores));
         //get total sales
         // if($this->session->userdata('login_data')['role_id'] < 3){
 
