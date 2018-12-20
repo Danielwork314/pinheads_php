@@ -21,6 +21,7 @@ class API extends Base_Controller
         $this->load->model("Order_food_model");
         $this->load->model("Food_customize_model");
         $this->load->model("Customize_dressing_model");
+        $this->load->model("User_coupon_model");
     }
 
     public function test()
@@ -859,6 +860,59 @@ class API extends Base_Controller
         }
 
     }
+
+    public function coupons()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $where = array(
+                "token" => $input['user_token'],
+            );
+
+            $user = $this->User_model->get_where($where);
+
+            if ($user) {
+
+                $user = $user[0];
+
+                $where = array(
+                    'user_coupon.user_id' => $user['user_id']
+                );
+
+                $coupons = $this->User_coupon_model->get_where($where);
+
+                $i = 0;
+                foreach($coupons as $row){
+
+                    $today = date("Y-m-d");
+                    $date = $row['valid_date'];
+
+                    if($date < $today){
+
+                        $coupons[$i]['valid'] = 0;
+                    } else {
+
+                        $coupons[$i]['valid'] = 1;
+                    }
+                    
+                    $i++;
+                }
+
+                die(json_encode(array(
+                    "status" => true,
+                    "data" => $coupons
+                )));
+
+            } else {
+                die(json_encode(array(
+                    "status" => false,
+                    "message" => "invalid ID or Password",
+                )));
+            }
+        }
+    }
+
 
     // public function searchStore()
     // {

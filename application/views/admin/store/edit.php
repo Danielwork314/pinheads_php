@@ -45,7 +45,11 @@
 						<img class="img-thumbnail" src="<?= base_url() . $store['banner'] ?>" style="width:30%; height:20%;">
 					</div>
 					<div class="form-group">
+<<<<<<< HEAD
 						<label>Store Banner</label>
+=======
+						<label>Banner</label>
+>>>>>>> 2c65d5fdde3a2680e86fb2ef0a9e3c727d00173a
 						<input type="file" class="form-control" name="banner">
 					</div>
 					<?= $input_field['store'] ?>

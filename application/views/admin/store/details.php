@@ -43,6 +43,14 @@
 							</td>
 						</tr>
 						<tr>
+							<th>Banner</th>
+							<td>
+								<a href="<?= base_url() ?>food/details/<?= $store['store_id']?>">
+									<img src="<?= base_url() . $store['banner'] ?>" class="xs_thumbnail">
+								</a>
+							</td>
+						</tr>
+						<tr>
 							<th>Store</th>
 							<td>:
 								<?= $store["store"] ?>
