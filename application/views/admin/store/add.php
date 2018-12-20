@@ -42,11 +42,7 @@
 				<div class="step_content" id="step_1">
 					<?= $input_field['thumbnail'] ?>
 					<div class="form-group">
-<<<<<<< HEAD
 						<label>Store Banner</label>
-=======
-						<label>Banner</label>
->>>>>>> 2c65d5fdde3a2680e86fb2ef0a9e3c727d00173a
 						<input type="file" class="form-control" name="banner" id="file" required>
 					</div>
 					<?php
