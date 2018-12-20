@@ -41,6 +41,10 @@
 				?>
 				<div class="step_content" id="step_1">
 					<?= $input_field['thumbnail'] ?>
+					<div class="form-group">
+						<label>Store Banner</label>
+						<input type="file" class="form-control" name="banner" id="file" required>
+					</div>
 					<?php
 					if($this->session->userdata("login_data")['type'] == "ADMIN"){
 					echo $input_field['vendor_id'];

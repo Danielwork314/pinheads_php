@@ -33,9 +33,13 @@
 						<tr>
 							<!-- <th>Store Image</th> -->
 							<td>
-								<a href="<?= base_url() ?>food/details/<?= $store['store_id']?>">
 									<img src="<?= base_url() . $store['thumbnail'] ?>" class="xs_thumbnail">
-								</a>
+							</td>
+						</tr>
+						<tr>
+							<th>Store Banner</th>
+							<td>
+								<img src="<?= base_url() . $store['banner'] ?>" class="xs_thumbnail">
 							</td>
 						</tr>
 						<tr>
@@ -295,11 +299,12 @@
 									<th>No.</th>
 									<th>Image</th>
 									<th>Title</th>
-									<th>Description</th>
+									<!-- <th>Description</th> -->
 									<th>Price</th>
 									<th>Discount Price</th>
 									<th>Discount (%)</th>
 									<th>Created Date</th>
+									<th></th>
 									<!-- <th>Created By</th> -->
 									<!-- <th></th> -->
 								</tr>
@@ -355,9 +360,9 @@
 											<?= $row['created_by'] ?>
 										</a>
 									</td> -->
-								<!-- <td>
+								<td>
                                 		<a href="<?= base_url() ?>food/delete_menu/<?= $row['food_id']?>" class="btn btn-danger delete-button">Delete</a>
-                            		</td> -->
+                            		</td>
 							</tr>
 							<?php
 								$i++;
