@@ -247,16 +247,6 @@
 						</li>
 						<?php
 					}
-					if($this->session->userdata('role_access')['coupon']['read_control'] == 1){
-						?>
-						<li class=" <?php if ($this->router->fetch_class() == 'coupon') echo 'active'; ?> ">
-							<a href="<?=base_url();?>coupon">
-								<i class="fa fa-money-bill-wave"></i>
-								<span><?php echo '&nbsp;' ?> Coupon</span>
-							</a>
-						</li>
-						<?php
-					}
 					if($this->session->userdata('role_access')['feature']['read_control'] == 1){
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'feature') echo 'active'; ?> ">
