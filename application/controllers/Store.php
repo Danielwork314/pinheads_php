@@ -85,11 +85,32 @@ class Store extends Base_Controller
                 }
             }
 
+            if (!empty($_FILES['banner']['name'])) {
+
+                $config = array(
+                    "allowed_types" => "gif|png|jpg|jpeg",
+                    "upload_path"   => "./images/store_banner/",
+                    "path"          => "/images/store_banner/"
+                );
+
+                $this->load->library("upload", $config);
+
+                if ($this->upload->do_upload("banner")) {
+
+                    $banner = $config['path'] . $this->upload->data()['file_name'];
+
+                } else {
+
+                    $error_message = $this->upload->display_errors();
+                }
+            }
+
             if (!$error) {
 
                 $data = array(
 
                     'thumbnail' => $image_url,
+                    'banner' => $banner,
                     'store' => $input['store'],
                     'address' => $input['address'],
                     'phone' => $input['phone'],
@@ -232,6 +253,26 @@ class Store extends Base_Controller
                 }
             }
 
+            if (!empty($_FILES['banner']['name'])) {
+
+                $config = array(
+                    "allowed_types" => "gif|png|jpg|jpeg",
+                    "upload_path"   => "./images/store_banner/",
+                    "path"          => "/images/store_banner/"
+                );
+
+                $this->load->library("upload", $config);
+
+                if ($this->upload->do_upload("banner")) {
+
+                    $banner = $config['path'] . $this->upload->data()['file_name'];
+
+                } else {
+
+                    $error_message = $this->upload->display_errors();
+                }
+            }
+
             if (!$error) {
 
                 $where = array(
@@ -253,6 +294,9 @@ class Store extends Base_Controller
 
                 if (!empty($image_url)) {
                     $data['thumbnail'] = $image_url;
+                }
+                if (!empty($banner)) {
+                    $data['banner'] = $banner;
                 }
                 if (!empty($input['favourite'])) {
                     $data['favourite'] = 1;
