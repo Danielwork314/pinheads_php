@@ -27,6 +27,7 @@ class Food_model extends Base_model{
         $this->db->from($this->table_name);
         $this->db->join('store', 'store.store_id = food.store_id', 'left');
         $this->db->join('food_category', 'food.food_category_id = food_category.food_category_id', 'left');
+        $this->db->where('food.deleted', 0);
         $this->db->where($where);
         $query = $this->db->get();
         return $query->result_array();

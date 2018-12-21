@@ -33,9 +33,13 @@
 						<tr>
 							<!-- <th>Store Image</th> -->
 							<td>
-								<a href="<?= base_url() ?>food/details/<?= $store['store_id']?>">
 									<img src="<?= base_url() . $store['thumbnail'] ?>" class="xs_thumbnail">
-								</a>
+							</td>
+						</tr>
+						<tr>
+							<th>Store Banner</th>
+							<td>
+								<img src="<?= base_url() . $store['banner'] ?>" class="xs_thumbnail">
 							</td>
 						</tr>
 						<tr>
@@ -160,83 +164,83 @@
 		</div>
 
 		<div class="col-md-6">
-		<div class="box box-primary">
-		<div class='box-header'>
-			<h4 class="whiteTitle" style='display: inline-block;'>Social media link</h4>
+			<div class="box box-primary">
+				<div class='box-header'>
+					<h4 class="whiteTitle" style='display: inline-block;'>Social media link</h4>
 
-			<a href='<?php echo site_url("social_media_link/add"). '/' . $store['store_id'] ?>' class='btn btn-info pull-right'>
-				<i class='fa fa-plus'></i> Add</a>
+					<a href='<?php echo site_url("social_media_link/add"). '/' . $store['store_id'] ?>' class='btn btn-info pull-right'>
+						<i class='fa fa-plus'></i> Add</a>
 
-		</div>
-		<div class='box-body no-padding'>
+				</div>
+				<div class='box-body no-padding'>
 
-			<div id="refreshBox">
-				<table id="data-table" class="table table-bordered table-hover data-table">
-					<thead>
-						<tr>
-							<th>No.</th>
-							<th>Social Media</th>
-                            <th>Social Media Link</th>
-                            <th>Created Date</th>
-                            <!-- <th>Created By</th> -->
-                            <th></th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-                            $i = 1;
-                            foreach($social_media_link as $row){
-                                ?>
-						<tr>
-							<td>
-                                <a href="<?= base_url() ?>social_media_link/details/<?= $row['social_media_link_id']?>">
-									<?= $i ?>
-                                </a>
-                            </td>
-							<td>
-                                <a href="<?= base_url() ?>social_media_link/details/<?= $row['social_media_link_id']?>">
-									<?= $row['social_media'] ?>
-                                </a>
-                            </td>
-							<td>
-                                <a href="<?= base_url() ?>social_media_link/details/<?= $row['social_media_link_id']?>">
-									<?= $row['social_media_link'] ?>
-                                </a>
-                            </td>
-                            <td>
-                                <a href="<?= base_url() ?>social_media_link/details/<?= $row['social_media_link_id']?>">
-									<?= $row['created_date'] ?>
-                                </a>
-                            </td>
-                            <!-- <td>
-                                <a href="<?= base_url() ?>social_media_link/details/<?= $row['social_media_link_id']?>">
-									<?= $row['created_by'] ?>
-                                </a>
-                            </td> -->
-							<td>
-                                <a href="<?= base_url() ?>social_media_link/delete/<?= $row['social_media_link_id']?>" class="btn btn-danger delete-button">Delete</a>
-                            </td>
-						</tr>
-						<?php
-                                $i++;
-                            }
-                        ?>
-					</tbody>
-					<tfoot>
-						<tr>
-                            <th>No.</th>
-                            <th>Social Media</th>
-                            <th>Social Media Link</th>
-                           
-                            <th>Created Date</th>
-                            <!-- <th>Created By</th> -->
-                            <th></th>
-						</tr>
-					</tfoot>
-				</table>
-			</div>
-		</div>
-	</div>			
+					<div id="refreshBox">
+						<table id="data-table" class="table table-bordered table-hover data-table">
+							<thead>
+								<tr>
+									<th>No.</th>
+									<th>Social Media</th>
+									<th>Social Media Link</th>
+									<th>Created Date</th>
+									<!-- <th>Created By</th> -->
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+									$i = 1;
+									foreach($social_media_link as $row){
+										?>
+								<tr>
+									<td>
+										<a href="<?= base_url() ?>social_media_link/details/<?= $row['social_media_link_id']?>">
+											<?= $i ?>
+										</a>
+									</td>
+									<td>
+										<a href="<?= base_url() ?>social_media_link/details/<?= $row['social_media_link_id']?>">
+											<?= $row['social_media'] ?>
+										</a>
+									</td>
+									<td>
+										<a href="<?= base_url() ?>social_media_link/details/<?= $row['social_media_link_id']?>">
+											<?= $row['social_media_link'] ?>
+										</a>
+									</td>
+									<td>
+										<a href="<?= base_url() ?>social_media_link/details/<?= $row['social_media_link_id']?>">
+											<?= $row['created_date'] ?>
+										</a>
+									</td>
+									<!-- <td>
+										<a href="<?= base_url() ?>social_media_link/details/<?= $row['social_media_link_id']?>">
+											<?= $row['created_by'] ?>
+										</a>
+									</td> -->
+									<td>
+										<a href="<?= base_url() ?>social_media_link/delete/<?= $row['social_media_link_id']?>" class="btn btn-danger delete-button">Delete</a>
+									</td>
+								</tr>
+								<?php
+										$i++;
+									}
+								?>
+							</tbody>
+							<tfoot>
+								<tr>
+									<th>No.</th>
+									<th>Social Media</th>
+									<th>Social Media Link</th>
+								
+									<th>Created Date</th>
+									<!-- <th>Created By</th> -->
+									<th></th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>			
 		</div>
 		
 
@@ -295,11 +299,12 @@
 									<th>No.</th>
 									<th>Image</th>
 									<th>Title</th>
-									<th>Description</th>
+									<!-- <th>Description</th> -->
 									<th>Price</th>
 									<th>Discount Price</th>
 									<th>Discount (%)</th>
 									<th>Created Date</th>
+									<th></th>
 									<!-- <th>Created By</th> -->
 									<!-- <th></th> -->
 								</tr>
@@ -355,9 +360,9 @@
 											<?= $row['created_by'] ?>
 										</a>
 									</td> -->
-								<!-- <td>
+								<td>
                                 		<a href="<?= base_url() ?>food/delete_menu/<?= $row['food_id']?>" class="btn btn-danger delete-button">Delete</a>
-                            		</td> -->
+                            		</td>
 							</tr>
 							<?php
 								$i++;

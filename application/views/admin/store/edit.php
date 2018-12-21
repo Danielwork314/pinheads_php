@@ -41,6 +41,13 @@
 				?>
 				<div class="step_content" id="step_1">
 					<?= $input_field['thumbnail'] ?>
+					<div class="form-group">
+						<img class="img-thumbnail" src="<?= base_url() . $store['banner'] ?>" style="width:30%; height:20%;">
+					</div>
+					<div class="form-group">
+						<label>Store Banner</label>
+						<input type="file" class="form-control" name="banner">
+					</div>
 					<?= $input_field['store'] ?>
 					<?= $input_field['address'] ?>
 					<?= $input_field['phone'] ?>

@@ -99,6 +99,7 @@
 							<th>No.</th>
 							<th>Bank </th>
 							<th>Card Type</th>
+							<th>Created Date</th>
 							<th></th>
 						</tr>
 						</thead>
