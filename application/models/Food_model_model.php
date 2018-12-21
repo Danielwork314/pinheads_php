@@ -5,7 +5,7 @@ class Food_model_model extends Base_model{
     function __construct(){
         parent::__construct();
         
-        $this->table_name = "Food_model";
+        $this->table_name = "food_model";
     }
 
     public function get_where($where)

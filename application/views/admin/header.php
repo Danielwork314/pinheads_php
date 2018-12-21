@@ -237,7 +237,8 @@
 							</a>
 						</li>
 						<?php
-					}if($this->session->userdata('role_access')['coupon']['read_control'] == 1){
+					}
+					if($this->session->userdata('role_access')['coupon']['read_control'] == 1){
 						?>
 						<li class=" <?php if ($this->router->fetch_class() == 'coupon') echo 'active'; ?> ">
 							<a href="<?=base_url();?>coupon">
