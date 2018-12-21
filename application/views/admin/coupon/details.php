@@ -46,15 +46,9 @@
 						<td></td>
 					</tr>
 					<tr>
-						<th>Coupon Description</th>
-						<td></td>
+						<th>Discount Rate</th>
+						<td>: <?= $coupon["discount_rate"] ?>%</td>
                     </tr>
-					<tr>
-						<td colspan="4" class="pre_wrap"><?= $coupon["description"] ?></td>
-					</tr>
-					<tr>
-						<td></td>
-					</tr>
 					<tr>
 						<td></td>
 					</tr>
@@ -73,7 +67,7 @@
 					<tr>
 						<th>Number Assigned</th>
                         <td>: 
-                            <?= $coupon['number'] ?>
+                            <?= $number ?>
                         </td>
                     </tr>
                     <tr>
@@ -87,5 +81,65 @@
 			<!-- /.box-body -->
 		</div>
 	</div>
+
+	<div class="col-md-6">
+		<div class="box box-primary">
+			<div class='box-header'>
+				<h4 class="whiteTitle" style='display: inline-block;'>Assigned User</h4>
+
+				<a href='<?php echo site_url("coupon/add_user_coupon"). '/' . $coupon['coupon_id'] ?>' class='btn btn-info pull-right'>
+					<i class='fa fa-plus'></i> Add</a>
+
+			</div>
+			<div class='box-body no-padding'>
+
+				<div id="refreshBox">
+					<table id="data-table" class="table table-bordered table-hover data-table">
+						<thead>
+							<tr>
+								<th>No.</th>
+								<th>User</th>
+								<th>Assigned Date</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+								$i = 1;
+								foreach($user_coupon as $row){
+									?>
+							<tr>
+								<td>
+									<?= $i ?>
+								</td>
+								<td>
+									<?= $row['username'] ?>
+								</td>
+								<td>
+									<?= $row['created_date'] ?>
+								</td>
+								<td>
+									<a href="<?= base_url() ?>coupon/delete_user_coupon/<?= $row['user_coupon_id']?>" class="btn btn-danger delete-button">Delete</a>
+								</td>
+							</tr>
+							<?php
+									$i++;
+								}
+							?>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th>No.</th>
+								<th>User</th>
+								<th>Assigned Date</th>
+								<th></th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+		</div>			
+	</div>
+
 </section>
 </div>

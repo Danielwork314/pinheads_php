@@ -16,6 +16,7 @@ class Ajax extends Base_Controller
         $this->load->model("Food_model");
         $this->load->model("Billing_address_model");
         $this->load->model("Card_model");
+        $this->load->model("User_model");
         $this->load->model("Dressing_model");
         $this->load->model("Customize_model");
         // $this->load->model("Project_report_model");
@@ -209,6 +210,26 @@ class Ajax extends Base_Controller
                 "status"  => true,
                 "message" => "Submit Successful",
                 "data" => $customize,               
+            )));
+        }
+    }
+
+    function addUser(){
+        
+        if ($_POST) {
+
+            $input = $this->input->post();
+
+            $where = array(
+                'user_id' => $input['user_id']
+            );
+            
+            $user = $this->User_model->get_where($where)[0];
+
+            die(json_encode(array(
+                "status"  => true,
+                "message" => "Submit Successful",
+                "data" => $user,               
             )));
         }
     }

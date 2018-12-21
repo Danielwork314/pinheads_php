@@ -27,7 +27,7 @@
 							<th>Coupon Code</th>
 							<th>Discount Rate</th>
                             <th>Valid Date</th>
-                            <th>Number Assigned</th>
+                            <!-- <th>Number Assigned</th> -->
 							<th>Partner Coupon</th>
                             <th>Created Date</th>
                             <!-- <th>Created By</th> -->
@@ -65,11 +65,11 @@
 									<?= $row['valid_date'] ?>
                                 </a>
                             </td>   
-                            <td>
+                            <!-- <td>
                                 <a href="<?= base_url() ?>coupon/details/<?= $row['coupon_id']?>">
 									<?= $row['number'] ?>
                                 </a>
-                            </td>                         
+                            </td>                          -->
                             <td>
                                 <?php if($row['partner_coupon'] == 0){ ?>
                                     <a class="btn btn-danger" data-id="<?=$row["coupon_id"]?>" href="<?= base_url()?>coupon/partner_valid_no/<?= $row['coupon_id']?>"><i class="fa fa-times"></i> </a>  
@@ -114,7 +114,7 @@
 							<th>Coupon Code</th>
 							<th>Discount Rate</th>
                             <th>Valid Date</th>
-                            <th>Number Assigned</th>
+                            <!-- <th>Number Assigned</th> -->
 							<th>Partner Coupon</th>
                             <!-- <th>Used</th> -->
                             <th>Created Date</th>

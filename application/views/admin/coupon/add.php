@@ -33,8 +33,7 @@
 				?>
 
 				<?= $input_field['coupon'] ?>
-				<?= $input_field['description'] ?>
-				<?= $input_field['coupon_type_id'] ?>
+				<?= $input_field['discount_rate'] ?>
 				<?= $input_field['valid_date'] ?>
 				<?= $input_field['store_id'] ?>
 			</div>
