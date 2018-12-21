@@ -43,7 +43,7 @@
 					<?= $input_field['thumbnail'] ?>
 					<div class="form-group">
 						<label>Store Banner</label>
-						<input type="file" class="form-control" name="banner" id="file" required>
+						<input type="file" class="form-control" name="banner" required>
 					</div>
 					<?php
 					if($this->session->userdata("login_data")['type'] == "ADMIN"){

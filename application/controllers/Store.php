@@ -74,23 +74,12 @@ class Store extends Base_Controller
                 $error_message = "Please upload a thumbnail";
             }
 
-            if (!empty($_FILES['store_images']['name'] and $_FILES['store_images']['name'][0] != "")) {
-                $images = $this->multi_image_upload($_FILES, "store_images", "store_images");
-
-                if (!$images["error"]) {
-                    $store_images_urls = $images['urls'];
-                } else {
-                    $error = true;
-                    $error_message = $images["error_message"];
-                }
-            }
-
             if (!empty($_FILES['banner']['name'])) {
 
                 $config = array(
                     "allowed_types" => "gif|png|jpg|jpeg",
-                    "upload_path"   => "./images/store_banner/",
-                    "path"          => "/images/store_banner/"
+                    "upload_path"   => "./images/store/",
+                    "path"          => "/images/store/"
                 );
 
                 $this->load->library("upload", $config);
@@ -102,6 +91,17 @@ class Store extends Base_Controller
                 } else {
 
                     $error_message = $this->upload->display_errors();
+                }
+            }
+
+            if (!empty($_FILES['store_images']['name'] and $_FILES['store_images']['name'][0] != "")) {
+                $images = $this->multi_image_upload($_FILES, "store_images", "store_images");
+
+                if (!$images["error"]) {
+                    $store_images_urls = $images['urls'];
+                } else {
+                    $error = true;
+                    $error_message = $images["error_message"];
                 }
             }
 
@@ -257,8 +257,8 @@ class Store extends Base_Controller
 
                 $config = array(
                     "allowed_types" => "gif|png|jpg|jpeg",
-                    "upload_path"   => "./images/store_banner/",
-                    "path"          => "/images/store_banner/"
+                    "upload_path"   => "./images/store/",
+                    "path"          => "/images/store/"
                 );
 
                 $this->load->library("upload", $config);

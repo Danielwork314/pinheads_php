@@ -24,8 +24,8 @@
 						<tr>
 							<th>No.</th>
                             <th>Store Title</th>
-							<th>Coupon Title</th>
-							<th>Coupon Description</th>
+							<th>Coupon Code</th>
+							<th>Discount Rate</th>
                             <th>Valid Date</th>
                             <th>Number Assigned</th>
 							<th>Partner Coupon</th>
@@ -57,7 +57,7 @@
                             </td>
                             <td>
                                 <a href="<?= base_url() ?>coupon/details/<?= $row['coupon_id']?>">
-									<?= $row['description'] ?>
+									<?= $row['discount_rate'] ?>%
                                 </a>
                             </td>
                             <td>
@@ -109,10 +109,10 @@
 					<tfoot>
 						<tr>
                             <th>No.</th>
-                            <th>Store ID</th>
+                            <th>Store Title</th>
                             <!-- <th>User ID</th> -->
-							<th>Coupon Title</th>
-							<th>Coupon Description</th>
+							<th>Coupon Code</th>
+							<th>Discount Rate</th>
                             <th>Valid Date</th>
                             <th>Number Assigned</th>
 							<th>Partner Coupon</th>
