@@ -49,6 +49,15 @@
 							</td>
 						</tr>
 						<tr>
+							<th>Description</th>
+							
+						</tr>
+						
+						<td colspan="2" class="pre_wrap">
+							<?= $store["description"] ?>
+						</td>
+						
+						<tr>
 							<th>Type</th>
 							<td>:
 								<?= $store["gourmet_type"] ?>
@@ -299,7 +308,7 @@
 									<th>No.</th>
 									<th>Image</th>
 									<th>Title</th>
-									<!-- <th>Description</th> -->
+									<th>Description</th>
 									<th>Price</th>
 									<th>Discount Price</th>
 									<th>Discount (%)</th>
@@ -330,11 +339,11 @@
 										<?= $row['food'] ?>
 									</a>
 								</td>
-								<!-- <td>
+								<td>
 									<a href="<?= base_url() ?>food/details_menu/<?= $row['food_id']?>">
 										<?= $row['description'] ?>
 									</a>
-								</td> -->
+								</td>
 								<td>
 									<a href="<?= base_url() ?>food/details_menu/<?= $row['food_id']?>">
 										<?= $row['price'] ?>

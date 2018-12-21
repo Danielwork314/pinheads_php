@@ -49,14 +49,14 @@
 						<input type="file" class="form-control" name="banner">
 					</div>
 					<?= $input_field['store'] ?>
+					<?= $input_field['description'] ?>
 					<?= $input_field['address'] ?>
 					<?= $input_field['phone'] ?>
 					<?= $input_field['latitude'] ?>
 					<?= $input_field['longitude'] ?>
 					<?= $input_field['business_hour'] ?>
 					<?= $input_field['gourmet_type_id'] ?>
-					<?= $input_field['pricing_id'] ?>
-					<!-- <?= $input_field['description'] ?> -->
+					<?= $input_field['pricing_id'] ?>	
 					<div class="form-group">
 						<div class="">
 							<input type="checkbox" name="favourite" value="favourite"> Favourite

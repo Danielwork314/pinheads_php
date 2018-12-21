@@ -121,7 +121,7 @@ class Store extends Base_Controller
                     'pricing_id' => $input['pricing_id'],
                     'created_by' => $this->session->userdata('login_id'),
                     'vendor_id' => $input['vendor_id'],
-                    // 'description' => $input['description'],
+                    'description' => $input['description'],
                 );
 
                 if ($input['favourite']) {
@@ -148,7 +148,7 @@ class Store extends Base_Controller
                     $this->Store_image_model->insert($data);
                 }
 
-                redirect("store", "refresh");
+                // redirect("store", "refresh");
 
             } else {
 
@@ -289,7 +289,7 @@ class Store extends Base_Controller
                     'gourmet_type_id' => $input['gourmet_type_id'],
                     'pricing_id' => $input['pricing_id'],
                     'modified_by' => $this->session->userdata('login_id'),
-                    // 'description' => $input['description'],
+                    'description' => $input['description'],
                 );
 
                 if (!empty($image_url)) {
