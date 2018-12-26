@@ -1,6 +1,6 @@
 <section class="content-header">
 	<h1>
-		Socail media
+		Social media
 	</h1>
 	<ol class="breadcrumb">
 		<li><a href="<?= base_url() ?>social_media"><i class="fa fa-share-square"></i> Social media</a></li>
