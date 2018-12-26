@@ -6,12 +6,14 @@ class Base_Controller extends CI_Controller
     public function __construct()
     {
         header('Access-Control-Allow-Origin: *');
-    header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
         parent::__construct();
 
         $this->load->model("Admin_model");
         $this->load->model("User_model");
         $this->load->model("Role_access_model");
+
+        $this->load->library("Form");
 
         if (!$this->session->has_userdata("login_data") and (strtolower($this->uri->segment(1)) != "access" and strtolower($this->uri->segment(1)) != "api")) {
             redirect("access/login", "refresh");
