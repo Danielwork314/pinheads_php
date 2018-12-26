@@ -111,6 +111,9 @@ class Store_images extends Base_Controller
                     'store_category_id' => $input['store_category_id'],
                     'price' => $input['price'],
                     'description' => $input['description'],
+
+
+                    
                 );
 
                 if (!empty($thumbnail)) {
