@@ -305,7 +305,7 @@
 	function food_form_submit(form) {
 
 		var data = new FormData(form);
-		var url = '<?= base_url() ?>food/add';
+		var url = '<?= base_url() ?>food_combo/add';
 
 		for(var i = 0; i < customize_array.length; i++){
 
@@ -326,7 +326,7 @@
 			success: function(response) {
 
 				console.log(response);
-				window.location.href = "<?= base_url()?>Food";
+				window.location.href = "<?= base_url()?>Food_combo";
 			}, 
 			error: function () {
 				console.log("error");

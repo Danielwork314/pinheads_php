@@ -58,7 +58,7 @@
                             </td>
 							<td>
                                 <a href="<?= base_url() ?>food_combo/details/<?= $row['food_combo_id']?>">
-									<?= $row['food'] ?>
+									<?= $row['food_combo'] ?>
                                 </a>
                             </td>
                             <td>
