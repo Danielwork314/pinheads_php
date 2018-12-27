@@ -52,7 +52,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.0.0-7/collection/icon/icon.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 
@@ -81,10 +81,13 @@
 				contact: {
 					number: "Only numbers from 0-9 are allowed."
 				}
+			},
+			errorPlacement: function (error, element) {
+				element.parents(".form-group").find(".help-block").append(error);
 			}
 		});
 
-    	$('.select2').select2();
+		select2Init();
 	});
 
 	$('input').change(function(){
@@ -183,6 +186,15 @@
 			$('.sidebar-mini').removeClass("sidebar-collapse");
 		}
 	});
+
+	function select2Init() {
+		$('select').select2();
+
+		$('select.br_margin').select2({
+			dropdownCssClass: 'br_margin',
+			containerCssClass: 'br_margin'
+		})
+	}
 
 </script>
 </body>
