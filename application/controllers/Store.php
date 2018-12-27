@@ -12,6 +12,7 @@ class Store extends Base_Controller
         $this->page_data = array();
 
         $this->load->model("Store_model");
+        $this->load->model("Table_no_model");
         $this->load->model("Gourmet_type_model");
         $this->load->model("Pricing_model");
         $this->load->model("Food_model");
@@ -122,6 +123,7 @@ class Store extends Base_Controller
                     'created_by' => $this->session->userdata('login_id'),
                     'vendor_id' => $input['vendor_id'],
                     'description' => $input['description'],
+                    'service_charge' => $input['service_charge'],
                 );
 
                 if ($input['favourite']) {
@@ -173,6 +175,7 @@ class Store extends Base_Controller
         $store_images = $this->Store_image_model->get_where($where);
         
         $this->page_data["store"] = $store[0];
+        $this->page_data["table"] = $this->Table_no_model->get_where($where);;
        
 
         $where = array(
@@ -189,7 +192,6 @@ class Store extends Base_Controller
         $social_media_link = $this->Social_media_link_model->get_where($where);
         $this->page_data["social_media_link"] = $social_media_link;
 
-        
         
         $this->page_data["store_feature"] = $store_feature;
         $this->page_data["store_images"] = $store_images;
@@ -290,6 +292,7 @@ class Store extends Base_Controller
                     'pricing_id' => $input['pricing_id'],
                     'modified_by' => $this->session->userdata('login_id'),
                     'description' => $input['description'],
+                    'service_charge' => $input['service_charge'],
                 );
 
                 if (!empty($image_url)) {

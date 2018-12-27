@@ -4,11 +4,11 @@
 	</h1>
 	<ol class="breadcrumb">
 		<li>
-			<a href="<?= base_url() ?>table_position">
+			<a href="<?= base_url() ?>table_no">
             <i class="fas fa-clipboard-list"></i> Table</a>
 		</li>
 		<li>
-			<a href="<?= base_url() ?>table_position/add"> Add Table</a>
+			<a href="<?= base_url() ?>table_no/add/<?= $store_id ?>"> Add Table</a>
 		</li>
 	</ol>
 </section>
@@ -20,7 +20,7 @@
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
-		<form role="form" class="input_form" method="POST" action="<?= base_url()?>table_position/add" enctype="multipart/form-data">
+		<form role="form" class="input_form" method="POST" action="<?= base_url()?>table_no/add/<?= $store_id ?>" enctype="multipart/form-data">
 			<div class="box-body">
 				<?php 
 				if (isset($error)) { 
@@ -31,7 +31,7 @@
 					<?php 
 				}
                 ?>
-                <?= $input_field['table_position'] ?>
+                <?= $input_field['table_no'] ?>
 				<!-- <div class="form-group">
 					<label>Table No.</label>
 					<input type="text" class="form-control" name="table_position" required placeholder="Table No.">

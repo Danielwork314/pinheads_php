@@ -48,7 +48,7 @@
 					<?= $input_field['discounted_price'] ?>
 					<?= $input_field['discount'] ?>
 					<?= $input_field['store_id'] ?>
-
+					<!-- <?= $input_field['inventory'] ?> -->
 					<!-- <div class="form-group">
 						<label>Food Category</label>
 						<select class="form-control" required name="food_category_id" id="form_food_category_id">
