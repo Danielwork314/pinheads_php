@@ -13,6 +13,7 @@ class Sales extends Base_Controller
 
         $this->load->model("Sales_model");
         $this->load->model("Order_food_model");
+        $this->load->model("Order_food_dressing_model");
         $this->load->model("Sales_model");
         $this->load->model("Food_model");
         $this->load->model("Store_model");
@@ -135,9 +136,24 @@ class Sales extends Base_Controller
         );
 
         $order = $this->Sales_model->get_where($where);
+        $food = $this->Order_food_model->get_where($where);
+
+        $i = 0;
+        foreach($food as $row){
+
+            $where = array(
+                'order_food_id' => $row['order_food_id']
+            );
+
+            $dressing = $this->Order_food_dressing_model->get_where($where);
+
+            $food[$i]['dressing'] = $dressing;
+
+            $i++;
+        }
 
         $this->page_data["order"] = $order[0];
-        $this->page_data['food'] = $this->Order_food_model->get_where($where);
+        $this->page_data['food'] = $food;
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/sales/details");

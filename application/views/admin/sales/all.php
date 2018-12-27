@@ -12,8 +12,8 @@
         <div class='box-header'>
             <h4 class="whiteTitle" style='display: inline-block;'>Sales</h4>
 
-            <a href='<?php echo site_url('sales/add'); ?>' class='btn btn-info pull-right'>
-                <i class='fa fa-plus' ></i> Add</a>
+            <!-- <a href='<?php echo site_url('sales/add'); ?>' class='btn btn-info pull-right'>
+                <i class='fa fa-plus' ></i> Add</a> -->
 
         </div>
         <div class='box-body no-padding'>

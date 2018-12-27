@@ -70,6 +70,12 @@
 							</td>
 						</tr>
 						<tr>
+							<th>Service Charge</th>
+							<td>:
+								<?= $store["service_charge"] ?>%
+							</td>
+						</tr>
+						<tr>
 							<th>Address</th>
 							<td>:
 								<?= $store["address"] ?>
@@ -371,6 +377,58 @@
 									</td> -->
 								<td>
                                 		<a href="<?= base_url() ?>food/delete_menu/<?= $row['food_id']?>" class="btn btn-danger delete-button">Delete</a>
+                            		</td>
+							</tr>
+							<?php
+								$i++;
+							}
+							?>
+						</table>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="col-md-12 col-xs-12">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title">
+						<?=$store['store']?>'s Table Lists
+					</h3>
+					<a href="<?php echo site_url('Table_no/add') . '/' . $store['store_id'] ?>" class='btn btn-default pull-right'>
+						<i class='fa fa-plus'></i> Add</a>
+				</div>
+
+				<br>
+				<div class='box-body no-padding'>
+					<div id="refreshBox">
+						<table id="data-table" class="table table-bordered table-hover data-table">
+							<thead>
+								<tr>
+									<th>No.</th>
+									<th>Table Number</th>
+									<th>Created Date</th>
+									<th></th>
+									<!-- <th>Created By</th> -->
+									<!-- <th></th> -->
+								</tr>
+							</thead>
+							<?php
+								$i = 1;
+								foreach($table as $row){
+							?>
+							<tr>
+								<td>
+									<?= $i ?>
+								</td>
+								<td>
+									<?= $row['table_no'] ?>
+								</td>
+								<td>
+									<?= $row['created_date'] ?>
+								</td>
+								<td>
+                                		<a href="<?= base_url() ?>table_no/delete/<?= $row['table_no_id']?>" class="btn btn-danger delete-button">Delete</a>
                             		</td>
 							</tr>
 							<?php

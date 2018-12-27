@@ -46,7 +46,7 @@
 					<?= $input_field['discounted_price'] ?>
 					<?= $input_field['discount'] ?>
 					<?= $input_field['store_id'] ?>
-
+					<!-- <?= $input_field['inventory'] ?> -->
 					<!-- <div class="form-group">
 						<label>Food</label>
 						<input type="text" class="form-control" name="food" id="form_food" required placeholder="Food title">

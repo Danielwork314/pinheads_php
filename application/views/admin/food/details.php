@@ -93,6 +93,12 @@
 							<?= $food["store"] ?>
 						</td>
                     </tr>
+					<tr>
+						<th>Inventory</th>
+						<td>:
+							<?= $food["inventory"] ?>
+						</td>
+                    </tr>
 				</table>
 			</div>
 			<!-- /.box-body -->

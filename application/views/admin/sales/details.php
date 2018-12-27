@@ -167,6 +167,7 @@
 							<tr>
 								<th>No.</th>
 								<th>Food</th>
+								<th>Customize</th>
 								<th>Quantity</th>
 								<th>Price</th>
 							</tr>
@@ -175,6 +176,12 @@
 							<tr>
 								<td><?= $i++; ?></td>
 								<td><?= $row['food'] ?></td>
+								<td>
+									<?php $i = 1; foreach($row['dressing'] as $dressing){ ?>
+										<?= $dressing['dressing'] ?>
+										<?php if(count($row['dressing']) != $i){ ?>, <?php } ?>
+									<?php $i++; } ?>
+								</td>
 								<td><?= $row['quantity'] ?></td>
 								<td><?= number_format($row['price'] * $row['quantity'], 2) ?></td>
 							</tr>
