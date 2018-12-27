@@ -53,6 +53,11 @@ class Form
         </div>
         </div>
 
+        26/12/2018 - emmwee
+
+        $options['small'] = "*leave blank to keep old password"; <--- Sets small tag next to label
+        $options['image_only'] = true; <--- Only allow images for input type file
+
         ---------------------------------------------------*/
 
         // echo "<pre>";
@@ -63,6 +68,10 @@ class Form
         $form_label = (!empty($options['label'])) ? $options['label'] : ucwords(str_replace("_", " ", $options['name']));
         $form_class = (!empty($options['class'])) ? " " . $options['class'] : "";
         $form_id = (!empty($options['id'])) ? " " . $options['id'] : "";
+        $form_small = "";
+        if (!empty($options['small'])) {
+            $form_small = " <small>" . $options['small'] . "</small>";
+        }
         $form_type = "text";
         $form_type_options = array(
             "text",
@@ -82,7 +91,7 @@ class Form
         $form_header_html = "<div class='form-group'>";
         $form_error_html = "<div class='help-block with-errors'></div>";
         $form_footer_html = "</div>";
-        $form_label_html = "<label for='form_" . $options['name'] . "'>" . $form_label . "</label>";
+        $form_label_html = "<label for='form_" . $options['name'] . "'>" . $form_label . $form_small . "</label>";
         $form_before_label_html = "";
         $form_after_error_html = "";
 
@@ -118,6 +127,9 @@ class Form
 
         if (!empty($options['required']) and $options['required']) {
             $form_input_html .= " required";
+        }
+        if (!empty($options['image_only']) and $options['image_only']) {
+            $form_input_html .= " accept='image/x-png,image/gif,image/jpeg'";
         }
         if (!empty($options['multiple']) and $options['multiple']) {
             $form_input_html .= " multiple";
@@ -187,6 +199,10 @@ class Form
 
         return samples:
 
+        26/12/2018 - emmwee
+
+        $options['small'] = "*leave blank to keep old password"; <--- Sets small tag next to label
+
         ---------------------------------------------------*/
 
         // echo "<pre>";
@@ -197,12 +213,16 @@ class Form
         $form_label = (!empty($options['label'])) ? $options['label'] : ucwords(str_replace("_", " ", $options['name']));
         $form_class = (!empty($options['class'])) ? " " . $options['class'] : "";
         $form_id = (!empty($options['id'])) ? " " . $options['id'] : "";
+        $form_small = "";
+        if (!empty($options['small'])) {
+            $form_small = " <small>" . $options['small'] . "</small>";
+        }
 
         $form_html = "";
         $form_header_html = "<div class='form-group'>";
         $form_error_html = "<div class='help-block with-errors'></div>";
         $form_footer_html = "</div>";
-        $form_label_html = "<label for='form_" . $options['name'] . "'>" . $form_label . "</label>";
+        $form_label_html = "<label for='form_" . $options['name'] . "'>" . $form_label . $form_small . "</label>";
 
         $form_input_html = "<select class='form-control" . $form_class . "' id='form_" . $options['name'] . "" . $form_id . "' name='" . $options['name'] . "' required>";
         $form_input_html .= "<option disabled value selected>Select " . preg_replace('/(^| )a ([aeiouAEIOU])/', '$1an $2', "a " . $form_label) . "</option>";
@@ -211,7 +231,11 @@ class Form
         }
         if (!empty($data)) {
             foreach ($data['options'] as $row) {
-                $form_input_html .= "<option value='" . $row[$data['value']] . "'>" . $row[$data['text']] . "</option>";
+                if (!empty($options['selected']) and $options['selected'] == $row[$data['value']]) {
+                    $form_input_html .= "<option value='" . $row[$data['value']] . "' selected>" . $row[$data['text']] . "</option>";
+                } else {
+                    $form_input_html .= "<option value='" . $row[$data['value']] . "'>" . $row[$data['text']] . "</option>";
+                }
             }
         }
 

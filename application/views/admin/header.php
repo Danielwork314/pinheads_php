@@ -160,14 +160,14 @@
 					}
 					if(!empty($this->session->userdata('role_access')['store']) AND $this->session->userdata('role_access')['store']['read_control'] == 1){
 					?>
-					<li class="treeview <?php if (strpos($this->router->fetch_class(), 'store') !== false OR strpos($this->router->fetch_class(), 'social_media') !== false) echo 'active menu-open'; ?>">
+					<li class="treeview <?php if (strpos($this->router->fetch_class(), 'store') !== false OR strpos($this->router->fetch_class(), 'social_media') !== false OR strpos($this->router->fetch_class(), 'staff') !== false) echo 'active menu-open'; ?>">
 						<a href="#">
 							<i class="fa fa-store-alt"></i> <span>Store</span>
 							<span class="pull-right-container">
 								<i class="fa fa-angle-left pull-right"></i>
 							</span>
 						</a>
-						<ul class="treeview-menu" style="<?php if (strpos($this->router->fetch_class(), 'store') !== false AND strpos($this->router->fetch_class(), 'social_media') !== false) echo 'display: none;'; ?>">
+						<ul class="treeview-menu" style="<?php if (strpos($this->router->fetch_class(), 'store') !== false AND strpos($this->router->fetch_class(), 'social_media') !== false AND strpos($this->router->fetch_class(), 'staff') !== false) echo 'display: none;'; ?>">
 							<?php
 							if(!empty($this->session->userdata('role_access')['store']) AND $this->session->userdata('role_access')['store']['read_control'] == 1){
 							?>
@@ -290,8 +290,8 @@
 					</li>
 					<?php
 					}
-					if($this->session->userdata('role_access')['banner']['read_control'] == 1){
-						?>
+					if(!empty($this->session->userdata('role_access')['banner']) AND $this->session->userdata('role_access')['banner']['read_control'] == 1){
+					?>
 					<li class=" <?php if ($this->router->fetch_class() == 'banner') echo 'active'; ?> ">
 						<a href="<?=base_url();?>banner">
 							<i class="fa fa-image"></i>
@@ -300,8 +300,8 @@
 					</li>
 					<?php
 					}
-					if($this->session->userdata('role_access')['pricing']['read_control'] == 1){
-						?>
+					if(!empty($this->session->userdata('role_access')['pricing']) AND $this->session->userdata('role_access')['pricing']['read_control'] == 1){
+					?>
 					<li class=" <?php if ($this->router->fetch_class() == 'pricing') echo 'active'; ?> ">
 						<a href="<?=base_url();?>pricing">
 							<i class="fa fa-money-bill-alt"></i>
@@ -311,7 +311,7 @@
 					</li>
 					<?php
 					}
-					if($this->session->userdata('role_access')['coupon']['read_control'] == 1){
+					if(!empty($this->session->userdata('role_access')['coupon']) AND $this->session->userdata('role_access')['coupon']['read_control'] == 1){
 						?>
 					<li class=" <?php if ($this->router->fetch_class() == 'coupon') echo 'active'; ?> ">
 						<a href="<?=base_url();?>coupon">
@@ -322,7 +322,7 @@
 					</li>
 					<?php
 					}
-					if($this->session->userdata('role_access')['feature']['read_control'] == 1){
+					if(!empty($this->session->userdata('role_access')['feature']) AND $this->session->userdata('role_access')['feature']['read_control'] == 1){
 						?>
 					<li class=" <?php if ($this->router->fetch_class() == 'feature') echo 'active'; ?> ">
 						<a href="<?=base_url();?>feature">
@@ -333,7 +333,7 @@
 					</li>
 					<?php
 					}
-					if($this->session->userdata('role_access')['feedback']['read_control'] == 1){
+					if(!empty($this->session->userdata('role_access')['feedback']) AND $this->session->userdata('role_access')['feedback']['read_control'] == 1){
 						?>
 					<li class=" <?php if ($this->router->fetch_class() == 'feedback') echo 'active'; ?> ">
 						<a href="<?=base_url();?>feedback">
@@ -344,7 +344,7 @@
 					</li>
 					<?php
 					}
-					if($this->session->userdata('role_access')['role_access']['read_control'] == 1){
+					if(!empty($this->session->userdata('role_access')['role_access']) AND $this->session->userdata('role_access')['role_access']['read_control'] == 1){
 						?>
 					<li class=" <?php if ($this->router->fetch_class() == 'role_access') echo 'active'; ?> ">
 						<a href="<?=base_url();?>role_access">

@@ -178,7 +178,7 @@ class Dashboard extends Base_Controller
 
         // $this->load->view("admin/header", $this->page_data);
         // $this->load->view("admin/dashboard/dashboard");
-        // $this->load->view("admin/footer");
+        $this->load->view("admin/footer");
     }
 
     // public function temp() {
