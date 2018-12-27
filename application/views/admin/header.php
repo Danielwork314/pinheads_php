@@ -225,6 +225,16 @@
 							</li>
 							<?php
 							}
+							if(!empty($this->session->userdata('role_access')['food_combo']) AND $this->session->userdata('role_access')['food_combo']['read_control'] == 1){
+							?>
+							<li class="<?php if ($this->router->fetch_class() == 'food_combo') echo 'active'; ?> ">
+								<a href="<?=base_url()?>food_combo">
+									<i class="fa fa-genderless"></i>
+									<span>Food Combo</span>
+								</a>
+							</li>
+							<?php
+							}
 							if(!empty($this->session->userdata('role_access')['food_category']) AND $this->session->userdata('role_access')['food_category']['read_control'] == 1){
 							?>
 							<li class="<?php if ($this->router->fetch_class() == 'food_category') echo 'active'; ?> ">

@@ -214,6 +214,26 @@ class Ajax extends Base_Controller
         }
     }
 
+    function addFood(){
+        
+        if ($_POST) {
+
+            $input = $this->input->post();
+
+            $where = array(
+                'food_id' => $input['food_id']
+            );
+            
+            $food = $this->Food_model->get_where($where)[0];
+
+            die(json_encode(array(
+                "status"  => true,
+                "message" => "Submit Successful",
+                "data" => $food,               
+            )));
+        }
+    }
+
     function addUser(){
         
         if ($_POST) {
