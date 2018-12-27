@@ -20,10 +20,10 @@
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
-		<form role="form" class="input_form" method="POST" action="<?= base_url()?>store/add" enctype="multipart/form-data">
+		<form role="form" class="input_form" id="store_form" method="POST" action="<?= base_url()?>store/add" enctype="multipart/form-data">
 			<div class="container-fluid">
 				<br /><br />
-				<ul class="list-unstyled multi-steps">
+				<ul class="list-unstyled multi-steps" id="store_tabs">
 					<li class="step_url is-active" id="step_link_1" onclick="changeStep(1)">Add Details</li>
 					<li class="step_url" id="step_link_2" onclick="changeStep(2)">Add Image</li>
 					<li class="step_url" id="step_link_2" onclick="changeStep(3)">Add Features</li>
@@ -68,6 +68,16 @@
 							<input type="checkbox" name="favourite" value="favourite"> Favourite
 						</div>
 					</div>
+					<div class="form-group">
+						<div class="">
+							<input type="checkbox" name="recommended" value="recommended"> Recommended
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="">
+							<input type="checkbox" name="new" value="new"> New
+						</div>
+					</div>
 					<button type="button" class="btn btn-primary pull-right" onclick="changeStep(2)">Next</button>
 				</div>
 				<div class="step_content hidden_step" id="step_2">
@@ -98,7 +108,7 @@
 					}
 					?>
 					<button type="button" class="btn btn-primary" onclick="changeStep(2)">Previous</button>
-					<button type="submit" class="btn btn-primary pull-right">Submit</button>
+					<button type="submit" class="btn btn-primary pull-right" id="submit_btn">Submit</button>
 				</div>
 			</div>
 			<!-- /.box-body -->
@@ -108,3 +118,87 @@
 		</form>
 	</div>
 </section>
+
+<script>
+
+	var current_step = 1;
+	var step = 1;
+
+	$(document).ready(function () {
+
+		// var store_form = document.getElementById("store_form");
+
+		// store_form.addEventListener("submit", function (e) {
+		// 	e.preventDefault();
+		// 	form_submit(store_form);
+		// });
+
+	});
+
+	// function form_submit(form) {
+
+    //     var data = new FormData(form);
+	// 	var url = $(form).attr("action");
+
+    //     $.ajax({
+    //         url: url,
+    //         data: data,
+    //         processData: false,
+    //         contentType: false,
+    //         type: "POST",
+    //         dataType: "JSON",
+    //         success: function (data) {
+    //             // console.log(data);
+    //             if (data.status) {
+
+    //                 setTimeout(function () {
+    //                     window.location = "";
+	// 				}, 1500);
+					
+    //             } else {
+
+	// 				$(".alert").html(data.message);
+	// 				$(".step_url").removeClass("is-active");
+	// 				$("#step_link_1").addClass("is-active");
+
+	// 				$("#step_1").addClass("is-active");
+	// 				$("#step_1").removeAttr("style");
+	// 				$("#step_3").removeAttr("style");
+
+	// 				current_step = 1;
+	// 				step = 1;
+					
+    //             }
+    //         }, error: function (error) {
+    //             // console.log("error");
+    //             // console.log(error);
+    //         }
+    //     });
+	// }
+
+	function changeStep(step){
+		$(".step_url").removeClass("is-active");
+		$("#step_link_" + step).addClass("is-active");
+
+		if (step > current_step) {
+			$("#step_" + current_step).toggle('slide', {
+				direction: 'left'
+			}, 600);
+			setTimeout(function () {
+				$("#step_" + step).toggle('slide', {
+					direction: 'right'
+				}, 600);
+			}, 600);
+		} else if (step < current_step) {
+			$("#step_" + current_step).toggle('slide', {
+				direction: 'right'
+			}, 600);
+			setTimeout(function () {
+				$("#step_" + step).toggle('slide', {
+					direction: 'left'
+				}, 600);
+			}, 600);
+		}
+		current_step = step;
+	};
+</script>

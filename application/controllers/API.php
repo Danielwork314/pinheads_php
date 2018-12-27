@@ -324,9 +324,23 @@ class API extends Base_Controller
                 );
                 $stores = $this->Store_model->get_where($where);
 
-            } else if (!empty($input['recommended'])) {
+            } else if (!empty($input['favourite'])) {
                 $where = array(
                     "favourite" => 1,
+                );
+                $stores = $this->Store_model->get_where($where);
+
+            } else if (!empty($input['new'])) {
+
+                $where = array(
+                    "new" => 1
+                );
+
+                $stores = $this->Store_model->get_where($where);
+
+            } else if (!empty($input['recommended'])) {
+                $where = array(
+                    "recommended" => 1,
                 );
                 $stores = $this->Store_model->get_where($where);
 
@@ -487,6 +501,7 @@ class API extends Base_Controller
 
             $data = array(
                 "store_id" => $store['store_id'],
+                "banner" => base_url() . $store['banner'],
                 "gourmet_type_id" => $store['gourmet_type_id'],
                 "gourmet_type" => $store['gourmet_type'],
                 "pricing_id" => $store['pricing_id'],

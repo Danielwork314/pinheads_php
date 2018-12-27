@@ -62,6 +62,16 @@
 							<input type="checkbox" name="favourite" value="favourite"> Favourite
 						</div>
 					</div>
+					<div class="form-group">
+						<div class="">
+							<input type="checkbox" name="recommended" value="recommended"> Recommended
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="">
+							<input type="checkbox" name="new" value="new"> New
+						</div>
+					</div>
 					<button type="button" class="btn btn-primary pull-right" onclick="changeStep(2)">Next</button>
 				</div>
 
