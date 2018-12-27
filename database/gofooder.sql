@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 27, 2018 at 10:53 AM
+-- Generation Time: Dec 27, 2018 at 11:34 AM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -710,7 +710,8 @@ INSERT INTO `module` (`module_id`, `module`, `url`, `deleted`, `created_date`, `
 (41, 'Social_media_link', 'social_media_link', 0, '2018-12-04 07:05:27', 0, '0000-00-00 00:00:00', 0),
 (42, 'Customize', 'customize', 0, '2018-12-14 03:16:12', 0, '0000-00-00 00:00:00', 0),
 (43, 'Dressing', 'dressing', 0, '2018-12-14 03:16:12', 0, '0000-00-00 00:00:00', 0),
-(44, 'Food_combo', 'food_combo', 0, '2018-12-27 09:29:14', 0, '0000-00-00 00:00:00', 0);
+(44, 'Food_combo', 'food_combo', 0, '2018-12-27 09:29:14', 0, '0000-00-00 00:00:00', 0),
+(45, 'Staff', 'staff', 0, '2018-12-27 10:31:06', 0, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -1073,7 +1074,13 @@ INSERT INTO `role_access` (`role_access_id`, `role_id`, `module_id`, `create_con
 (139, 4, 43, 1, 1, 0, 0, 0, '2018-12-14 03:18:29', 0, '0000-00-00 00:00:00', 0),
 (140, 1, 41, 1, 1, 1, 1, 0, '2018-12-20 13:49:21', 0, '0000-00-00 00:00:00', 0),
 (141, 1, 44, 1, 1, 1, 1, 0, '2018-12-27 09:30:43', 0, '0000-00-00 00:00:00', 0),
-(142, 2, 44, 1, 1, 1, 0, 0, '2018-12-27 09:30:43', 0, '0000-00-00 00:00:00', 0);
+(142, 2, 44, 1, 1, 1, 0, 0, '2018-12-27 09:30:43', 0, '0000-00-00 00:00:00', 0),
+(143, 1, 45, 1, 1, 1, 1, 0, '2018-12-27 10:31:06', 0, '0000-00-00 00:00:00', 0),
+(144, 2, 45, 0, 1, 0, 0, 0, '2018-12-27 10:31:06', 0, '0000-00-00 00:00:00', 0),
+(145, 3, 45, 0, 1, 0, 0, 0, '2018-12-27 10:31:06', 0, '0000-00-00 00:00:00', 0),
+(146, 4, 45, 0, 1, 0, 0, 0, '2018-12-27 10:31:06', 0, '0000-00-00 00:00:00', 0),
+(147, 5, 45, 0, 1, 0, 0, 0, '2018-12-27 10:31:06', 0, '0000-00-00 00:00:00', 0),
+(148, 6, 45, 0, 1, 0, 0, 0, '2018-12-27 10:31:06', 0, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -1196,6 +1203,34 @@ INSERT INTO `social_media_link` (`social_media_link_id`, `social_media_id`, `sto
 (5, 1, 15, 'https://www.facebook.com/sushizentomountaustinjb/', 0, '2018-12-21 09:52:41', 3, '0000-00-00 00:00:00', 0),
 (6, 1, 17, 'https://www.facebook.com/teagardenmsia/', 0, '2018-12-21 10:29:47', 3, '0000-00-00 00:00:00', 0),
 (7, 1, 18, 'https://www.facebook.com/thankumomaustin/', 0, '2018-12-21 11:32:35', 3, '0000-00-00 00:00:00', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `staff`
+--
+
+CREATE TABLE `staff` (
+  `staff_id` int(11) NOT NULL,
+  `username` varchar(256) COLLATE utf8_bin NOT NULL,
+  `password` varchar(256) COLLATE utf8_bin NOT NULL,
+  `salt` int(8) NOT NULL,
+  `name` varchar(256) COLLATE utf8_bin NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `store_id` int(11) NOT NULL,
+  `deleted` tinyint(1) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) NOT NULL DEFAULT '0',
+  `modified_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `modified_by` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `staff`
+--
+
+INSERT INTO `staff` (`staff_id`, `username`, `password`, `salt`, `name`, `role_id`, `store_id`, `deleted`, `created_date`, `created_by`, `modified_date`, `modified_by`) VALUES
+(2, 'management', '0f4d3c6d63da71f5e3b596f173a2ed72826d818b28d33db75d8cfa805378ff39c43062140be46f4bd3b620a222600180194a8d78d1c26c03b5f9026bcabad346', 796823, 'Emmanual', 5, 14, 0, '2018-12-27 00:57:52', 0, '0000-00-00 00:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -1744,6 +1779,14 @@ ALTER TABLE `social_media_link`
   ADD KEY `store_id` (`store_id`);
 
 --
+-- Indexes for table `staff`
+--
+ALTER TABLE `staff`
+  ADD PRIMARY KEY (`staff_id`),
+  ADD KEY `role_id` (`role_id`),
+  ADD KEY `store_id` (`store_id`);
+
+--
 -- Indexes for table `store`
 --
 ALTER TABLE `store`
@@ -1923,7 +1966,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `module`
 --
 ALTER TABLE `module`
-  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
 -- AUTO_INCREMENT for table `notification`
 --
@@ -1958,7 +2001,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `role_access`
 --
 ALTER TABLE `role_access`
-  MODIFY `role_access_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+  MODIFY `role_access_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
 --
 -- AUTO_INCREMENT for table `sales`
 --
@@ -1974,6 +2017,11 @@ ALTER TABLE `social_media`
 --
 ALTER TABLE `social_media_link`
   MODIFY `social_media_link_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+--
+-- AUTO_INCREMENT for table `staff`
+--
+ALTER TABLE `staff`
+  MODIFY `staff_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `store`
 --
