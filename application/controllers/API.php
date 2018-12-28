@@ -325,24 +325,27 @@ class API extends Base_Controller
                 );
                 $stores = $this->Store_model->get_where($where);
 
-            } else if (!empty($input['favourite'])) {
-                $where = array(
-                    "favourite" => 1,
-                );
-                $stores = $this->Store_model->get_where($where);
+            } else if (!empty($input['remarks'])) {
 
-            } else if (!empty($input['new'])) {
+                if($input['remarks'] == 'favourite'){
 
-                $where = array(
-                    "new" => 1
-                );
+                    $where = array(
+                        "favourite" => 1,
+                    );
 
-                $stores = $this->Store_model->get_where($where);
+                } else if($input['remarks'] == 'new'){
 
-            } else if (!empty($input['recommended'])) {
-                $where = array(
-                    "recommended" => 1,
-                );
+                    $where = array(
+                        "new" => 1
+                    );
+                
+                } else if($input['remarks'] == 'recommended'){
+                
+                    $where = array(
+                        "recommended" => 1,
+                    );
+                }
+
                 $stores = $this->Store_model->get_where($where);
 
             } else if (!empty($input['filter'])) {
@@ -827,6 +830,57 @@ class API extends Base_Controller
                 )));
             }
         }
+    }
+
+    public function search(){
+
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $store_array;
+
+            $store = $this->Store_model->search_store($input['keyword']);
+            $address = $this->Store_model->search_location($input['keyword']);
+
+            array_push($store_array, $store);
+            array_push($store_array, $address);
+
+            die(json_encode(array(
+                "status" => true,
+                "data" => $store_array
+            )));
+        }
+    }
+
+    public function favourite(){
+
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $where = array(
+                "store_id" => $input['store_id'],
+            );
+
+            $store = $this->Store_model->get_where($where)[0];
+
+            if($store['favourite'] == '1'){
+
+                $data = array(
+                    'favourite' => '0'
+                );
+            } else {
+                $data = array(
+                    'favourite' => '1'
+                );
+            }
+
+            $this->Store_model->update_where($where, $data);
+            
+            die(json_encode(array(
+                "status" => true,
+            )));
+        }
+
     }
 
     public function change_food_status(){
