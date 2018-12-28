@@ -837,13 +837,19 @@ class API extends Base_Controller
         if ($_POST) {
             $input = $this->input->post();
 
-            $store_array;
+            $store_array = [];
 
             $store = $this->Store_model->search_store($input['keyword']);
+
+            if($store){
+                array_push($store_array, $store);
+            }
+
             $address = $this->Store_model->search_location($input['keyword']);
 
-            array_push($store_array, $store);
-            array_push($store_array, $address);
+            if($address){
+                array_push($store_array, $address);
+            }
 
             die(json_encode(array(
                 "status" => true,
