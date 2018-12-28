@@ -92,7 +92,7 @@
                                 </a>
                             </td> -->
 							<td>
-                                <a href="<?= base_url() ?>food/delete/<?= $row['food_combo_id']?>" class="btn btn-danger delete-button">Delete</a>
+                                <a href="<?= base_url() ?>food_combo/delete/<?= $row['food_combo_id']?>" class="btn btn-danger delete-button">Delete</a>
                             </td>
 						</tr>
 						<?php
