@@ -270,6 +270,32 @@
 					</li>
 					<?php
 					}
+					if(!empty($this->session->userdata('role_access')['performance']) AND $this->session->userdata('role_access')['performance']['read_control'] == 1){
+					?>
+					<li class="treeview <?php if (strpos($this->router->fetch_class(), 'performance') !== false) echo 'active menu-open'; ?>">
+						<a href="#">
+							<i class="fa fa-chart-area"></i> <span>Performance</span>
+							<span class="pull-right-container">
+								<i class="fa fa-angle-left pull-right"></i>
+							</span>
+						</a>
+						<ul class="treeview-menu" style="<?php if (strpos($this->router->fetch_class(), 'performance') !== false) echo 'display: none;'; ?>">
+							<?php
+							if(!empty($this->session->userdata('role_access')['performance']) AND $this->session->userdata('role_access')['performance']['read_control'] == 1){
+							?>
+							<li class="<?php if ($this->uri->segment(2) == "store_sales") echo 'active'; ?> ">
+								<a href="<?=base_url()?>performance/store_sales">
+									<i class="fa fa-genderless"></i>
+									<span>Store Sales</span>
+								</a>
+							</li>
+							<?php
+							}
+							?>
+						</ul>
+					</li>
+					<?php
+					}
 					if(!empty($this->session->userdata('role_access')['sales']) AND $this->session->userdata('role_access')['sales']['read_control'] == 1){
 						?>
 					<li class=" <?php if ($this->router->fetch_class() == 'sales') echo 'active'; ?> ">
