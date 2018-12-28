@@ -19,6 +19,7 @@ class API extends Base_Controller
         $this->load->model("Banner_model");
         $this->load->model("Sales_model");
         $this->load->model("Order_food_model");
+        $this->load->model("Order_food_dressing_model");
         $this->load->model("Food_customize_model");
         $this->load->model("Customize_dressing_model");
         $this->load->model("User_coupon_model");
@@ -517,7 +518,7 @@ class API extends Base_Controller
                 "latitude" => $store['latitude'],
                 "longitude" => $store['longitude'],
                 "business_hour" => $store['business_hour'],
-                "favourite" => ($store['favourite'] == 1) ? "YES" : "NO",
+                "favourite" => ($store['favourite'] == 1) ? true : false,
                 "description" => $store['description'],
                 "features" => $store_feature_data,
                 "images" => $store_image_data,
@@ -653,7 +654,7 @@ class API extends Base_Controller
             $input['order'] = json_decode($input['order'], true);
             // $input['card'] = json_decode($input['card'], true);
 
-            // die(var_dump($input['order']));
+            // die(var_dump($input['order']['coupon']));
 
             $where = array(
                 "token" => $input['user_token'],
@@ -688,17 +689,41 @@ class API extends Base_Controller
 
                 $sales_id = $this->Sales_model->insert($data);
 
+                //insert order
                 foreach ($input['order'] as $row) {
 
                     $data = array(
                         "sales_id" => $sales_id,
                         "food_id" => $row["food_id"],
                         "quantity" => $row["quantity"],
-                        "customize_id" => $row["customize_id"],
-                        "dressing_id" => $row['dressing_id']
                     );
 
-                    $this->Order_food_model->insert($data);
+                    $order_food_id = $this->Order_food_model->insert($data);
+
+                    //insert dressing
+                    foreach($row['dressing'] as $dressing){
+
+                        $data = array(
+                            'order_food_id' => $order_food_id,
+                            'dressing_id' => $dressing['dressing_id']
+                        );
+
+                        $this->Order_food_dressing_model->insert($data);
+                    }
+
+                    //insert coupon
+                    if($row['coupon']){
+
+                        $where = array(
+                            'user_coupon_id' => $row['coupon']['user_coupon_id']
+                        );
+        
+                        $data = array(
+                            'used' => 1
+                        );
+        
+                        $this->User_coupon_model->update_where($where, $data);
+                    }
                 }
 
                 $where = array(

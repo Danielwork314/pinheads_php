@@ -31,7 +31,8 @@
 					<tr>
 						<th>Status</th>
 						<td>:
-							<?=($order['status'] == 1) ? "Paid" : "Havn't Pay"?>
+							<!-- <?=($order['status'] == 1) ? "Paid" : "Havn't Pay"?> -->
+							<?= $order['order_status'] ?>
 						</td>
                     </tr>
 					<tr>
