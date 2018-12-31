@@ -273,4 +273,11 @@ class Food_combo extends Base_Controller
         $this->load->view("admin/food_combo/edit");
         $this->load->view("admin/footer");
     }
+
+    function delete($food_combo_id){
+
+        $this->Food_combo_model->soft_delete($food_combo_id);
+
+        redirect("food_combo", "refresh");
+    }
 }

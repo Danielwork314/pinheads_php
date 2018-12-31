@@ -58,7 +58,7 @@ class Store_model extends Base_model
 
         $this->db->select("*");
         $this->db->from("store");
-        $this->db->like("store", $keyword);
+        $this->db->like("LOWER(store)", strtolower($keyword));
         $this->db->where("store.deleted", 0);
 
         $query = $this->db->get();
@@ -70,7 +70,7 @@ class Store_model extends Base_model
 
         $this->db->select("*");
         $this->db->from("store");
-        $this->db->like("address", $keyword);
+        $this->db->like("LOWER(address)", strtolower($keyword));
         $this->db->where("store.deleted", 0);
 
         $query = $this->db->get();
