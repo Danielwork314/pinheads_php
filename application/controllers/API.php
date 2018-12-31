@@ -508,6 +508,61 @@ class API extends Base_Controller
         }
     }
 
+    public function addOrder() {
+
+        if($_POST){
+
+            $data = array(
+                'sales_id' => $_POST['sales_id'],
+                'food_id' => $_POST['food_id'],
+                'quantity' => 1
+            );
+
+            $this->Order_food_model->insert($data);
+
+            die(json_encode(array(
+                "status" => true,
+            )));
+        }
+    }
+
+    public function editOrder() {
+
+        if($_POST){
+
+            // die(var_dump($_POST));
+
+            $where = array(
+                'order_food_id' => $_POST['order_food_id']
+            );
+
+            $data = array(
+                'quantity' => $_POST['quantity'],
+            );
+
+            $this->Order_food_model->update_where($where, $data);
+
+            $this->Order_food_dressing_model->hard_delete_where($where);
+
+            $dressing = json_decode($_POST['dressing'], true);
+
+            foreach($dressing as $row){
+
+                $data = array(
+                    'order_food_id' => $_POST['order_food_id'],
+                    'dressing_id' => $row['dressing_id']
+                );
+
+                $this->Order_food_dressing_model->insert($data);
+            }
+
+            die(json_encode(array(
+                "status" => true,
+            )));
+
+        }
+    }
+
     public function store()
     {
         if ($_POST) {
