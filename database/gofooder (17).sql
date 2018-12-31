@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
--- http://www.phpmyadmin.net
+-- version 4.8.0.1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 27, 2018 at 11:34 AM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- Host: 127.0.0.1
+-- Generation Time: Dec 27, 2018 at 11:35 AM
+-- Server version: 10.1.32-MariaDB
+-- PHP Version: 7.2.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -394,10 +396,10 @@ INSERT INTO `food` (`food_id`, `food_category_id`, `store_id`, `food`, `descript
 (23, 7, 15, 'Tuna Poke ​Salad', 'Diced Tuna, Shishimi 7 Spices, Soy Sesame oil Dressing, Mixed Salad, Avocado, Wasabi Cream Sauce', '/images/store/o-8_orig.jpg', '37.90', '37.00', 2, 0, '2018-12-21 10:08:47', 3, '2018-12-21 06:13:39', 3, 0),
 (24, 4, 15, 'Gyu Don', 'Simmered  beef and onion in mildly sweet Dashi sauce, pickled ginger, scallions', '/images/store/img-0021gyu-don_orig.jpg', '18.90', '18.00', 5, 0, '2018-12-21 10:13:24', 3, '0000-00-00 00:00:00', 0, 0),
 (25, 5, 15, 'Chashu Pork Ramen', 'Japanese Ramen Noodles w in Soy- Miso broth, seaweed,  spinach,  bamboo shoot, corn, egg scallion, Sesame seed', '/images/store/img-0032chashu-pork-ramen1.jpg', '17.90', '16.90', 6, 0, '2018-12-21 10:19:48', 3, '0000-00-00 00:00:00', 0, 0),
-(26, 5, 17, 'Mee Rebus', 'Mi rebus, mie rebus or mee rebus literally "boiled noodles" in English is a noodle soup dish popular in Malaysia.', '/images/store/Screenshot_2018-12-21_at_6_39_42_PM.png', '6.90', '6.00', 13, 0, '2018-12-21 10:37:28', 3, '2018-12-21 06:39:53', 3, 0),
+(26, 5, 17, 'Mee Rebus', 'Mi rebus, mie rebus or mee rebus literally \"boiled noodles\" in English is a noodle soup dish popular in Malaysia.', '/images/store/Screenshot_2018-12-21_at_6_39_42_PM.png', '6.90', '6.00', 13, 0, '2018-12-21 10:37:28', 3, '2018-12-21 06:39:53', 3, 0),
 (27, 4, 17, 'Nasi Lemak', 'Nasi lemak is a Malay fragrant rice dish cooked in coconut milk and pandan leaf. It is commonly found in Malaysia, where it is considered the national dish.', '/images/store/Screenshot_2018-12-21_at_6_43_48_PM.png', '5.90', '5.00', 15, 0, '2018-12-21 10:41:18', 3, '0000-00-00 00:00:00', 0, 0),
 (28, 4, 17, 'Black Pepper Chicken Chop', 'Chicken Chop with Black Pepper Sauce. Delicious grilled or pan-fried marinated chicken covered in a rich, bold black pepper sauce.', '/images/store/Screenshot_2018-12-21_at_6_45_40_PM.png', '18.90', '18.00', 5, 0, '2018-12-21 10:44:13', 3, '0000-00-00 00:00:00', 0, 0),
-(29, 4, 18, 'Korean traditional pancake', 'Korean traditional pancake with spring onion, various seafood''s with soy sauce dipping', '/images/store/pancake.jpg', '20.00', '18.00', 10, 0, '2018-12-21 11:34:27', 3, '0000-00-00 00:00:00', 0, 0),
+(29, 4, 18, 'Korean traditional pancake', 'Korean traditional pancake with spring onion, various seafood\'s with soy sauce dipping', '/images/store/pancake.jpg', '20.00', '18.00', 10, 0, '2018-12-21 11:34:27', 3, '0000-00-00 00:00:00', 0, 0),
 (30, 4, 18, 'Burger', 'Flavorful and kid-friendly, our pork, hamburger steak made of fresh ground pork and spices', '/images/store/burger.jpg', '18.00', '15.00', 17, 0, '2018-12-21 11:36:04', 3, '0000-00-00 00:00:00', 0, 0),
 (31, 6, 18, 'Bingsu', 'BINGSU is a popular Korean dessert made of shaved ice with sweet toppings that include chopped fresh fruit, condensed milk, fresh milk, fresh syrup and with your choice of flavor.', '/images/store/bingsu.jpg', '12.00', '10.00', 17, 0, '2018-12-21 11:37:51', 3, '0000-00-00 00:00:00', 0, 0);
 
@@ -456,6 +458,39 @@ CREATE TABLE `food_combo` (
   `deleted` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Dumping data for table `food_combo`
+--
+
+INSERT INTO `food_combo` (`food_combo_id`, `food_category_id`, `store_id`, `food_combo`, `description`, `image`, `price`, `discounted_price`, `discount`, `inventory`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
+(1, 5, 13, 'asd', 'asd', '/images/store/collection_carousel_mood31.jpg', '111.00', '11.00', 90, 0, '2018-12-27 10:06:33', 3, '0000-00-00 00:00:00', 0, 0),
+(2, 5, 13, 'asd', 'asd', '/images/food/collection_disneypooh_mood23.jpg', '111.00', '11.00', 90, 0, '2018-12-27 10:27:47', 3, '2018-12-27 06:34:47', 3, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `food_combo_customize`
+--
+
+CREATE TABLE `food_combo_customize` (
+  `food_combo_customize_id` int(11) NOT NULL,
+  `food_combo_id` int(11) NOT NULL,
+  `customize_id` int(11) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_by` int(11) NOT NULL,
+  `modified_by` int(11) NOT NULL,
+  `modified_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `deleted` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `food_combo_customize`
+--
+
+INSERT INTO `food_combo_customize` (`food_combo_customize_id`, `food_combo_id`, `customize_id`, `created_date`, `created_by`, `modified_by`, `modified_date`, `deleted`) VALUES
+(1, 1, 6, '2018-12-27 10:06:33', 0, 0, '0000-00-00 00:00:00', 0),
+(5, 2, 6, '2018-12-27 10:34:48', 0, 0, '0000-00-00 00:00:00', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -467,6 +502,17 @@ CREATE TABLE `food_combo_food` (
   `food_combo_id` int(11) NOT NULL,
   `food_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `food_combo_food`
+--
+
+INSERT INTO `food_combo_food` (`food_combo_food_id`, `food_combo_id`, `food_id`) VALUES
+(1, 1, 16),
+(2, 1, 17),
+(9, 2, 16),
+(10, 2, 18),
+(11, 2, 17);
 
 -- --------------------------------------------------------
 
@@ -1269,11 +1315,11 @@ CREATE TABLE `store` (
 --
 
 INSERT INTO `store` (`store_id`, `gourmet_type_id`, `pricing_id`, `vendor_id`, `thumbnail`, `banner`, `service_charge`, `store`, `address`, `social_media_link`, `phone`, `latitude`, `longitude`, `business_hour`, `favourite`, `recommended`, `new`, `description`, `created_date`, `created_by`, `modified_date`, `modified_by`, `deleted`) VALUES
-(1, 1, 1, 0, '/images/store/15101639_340838102960574_2760845376331186176_n.jpg', '', '0.00', 'Noodles''s Stall', 'HOUGANG STREET 21 Blk 202 Hougang Street 21, #01-00, Singapore 530202', 'www.instagram.com', '01111450665', '13.465343', '14.346363', '10.00 am', 1, 0, 0, '', '2018-11-09 10:36:32', 1, '0000-00-00 00:00:00', 0, 1),
-(2, 2, 1, 0, '/images/store/15101639_340838102960574_2760845376331186176_n1.jpg', '', '0.00', 'Noodles''s Stall', 'HOUGANG STREET 21 Blk 202 Hougang Street 21, #01-00, Singapore 530202', 'www.instagram.com', '01111450665', '13.465343', '14.346363', '10.00 am', 1, 0, 0, '', '2018-11-09 10:36:47', 1, '0000-00-00 00:00:00', 0, 1),
-(3, 3, 1, 0, '/images/store/15101639_340838102960574_2760845376331186176_n2.jpg', '', '0.00', 'Noodles''s Stall', 'HOUGANG STREET 21 Blk 202 Hougang Street 21, #01-00, Singapore 530202', 'www.instagram.com', '01111450665', '13.465343', '14.346363', '10.00 am', 1, 0, 0, '', '2018-11-09 10:37:14', 1, '0000-00-00 00:00:00', 0, 1),
-(4, 4, 1, 0, '/images/store/15101639_340838102960574_2760845376331186176_n3.jpg', '', '0.00', 'Noodles''s Stall', 'HOUGANG STREET 21 Blk 202 Hougang Street 21, #01-00, Singapore 530202', 'www.instagram.com', '01111450665', '13.465343', '14.346363', '10.00 am', 1, 0, 0, '', '2018-11-09 10:39:56', 1, '0000-00-00 00:00:00', 0, 1),
-(5, 5, 1, 0, '/images/store/15101639_340838102960574_2760845376331186176_n4.jpg', '', '0.00', 'Noodles''s Stall', 'HOUGANG STREET 21 Blk 202 Hougang Street 21, #01-00, Singapore 530202', 'www.instagram.com', '01111450665', '13.465343', '14.346363', '10.00 am', 1, 0, 0, '', '2018-11-09 10:42:28', 1, '0000-00-00 00:00:00', 0, 1),
+(1, 1, 1, 0, '/images/store/15101639_340838102960574_2760845376331186176_n.jpg', '', '0.00', 'Noodles\'s Stall', 'HOUGANG STREET 21 Blk 202 Hougang Street 21, #01-00, Singapore 530202', 'www.instagram.com', '01111450665', '13.465343', '14.346363', '10.00 am', 1, 0, 0, '', '2018-11-09 10:36:32', 1, '0000-00-00 00:00:00', 0, 1),
+(2, 2, 1, 0, '/images/store/15101639_340838102960574_2760845376331186176_n1.jpg', '', '0.00', 'Noodles\'s Stall', 'HOUGANG STREET 21 Blk 202 Hougang Street 21, #01-00, Singapore 530202', 'www.instagram.com', '01111450665', '13.465343', '14.346363', '10.00 am', 1, 0, 0, '', '2018-11-09 10:36:47', 1, '0000-00-00 00:00:00', 0, 1),
+(3, 3, 1, 0, '/images/store/15101639_340838102960574_2760845376331186176_n2.jpg', '', '0.00', 'Noodles\'s Stall', 'HOUGANG STREET 21 Blk 202 Hougang Street 21, #01-00, Singapore 530202', 'www.instagram.com', '01111450665', '13.465343', '14.346363', '10.00 am', 1, 0, 0, '', '2018-11-09 10:37:14', 1, '0000-00-00 00:00:00', 0, 1),
+(4, 4, 1, 0, '/images/store/15101639_340838102960574_2760845376331186176_n3.jpg', '', '0.00', 'Noodles\'s Stall', 'HOUGANG STREET 21 Blk 202 Hougang Street 21, #01-00, Singapore 530202', 'www.instagram.com', '01111450665', '13.465343', '14.346363', '10.00 am', 1, 0, 0, '', '2018-11-09 10:39:56', 1, '0000-00-00 00:00:00', 0, 1),
+(5, 5, 1, 0, '/images/store/15101639_340838102960574_2760845376331186176_n4.jpg', '', '0.00', 'Noodles\'s Stall', 'HOUGANG STREET 21 Blk 202 Hougang Street 21, #01-00, Singapore 530202', 'www.instagram.com', '01111450665', '13.465343', '14.346363', '10.00 am', 1, 0, 0, '', '2018-11-09 10:42:28', 1, '0000-00-00 00:00:00', 0, 1),
 (6, 6, 1, 1, '/images/store/3f729a04dadea20cd875852fef2c276e4.jpg', '', '0.00', 'Western Stall', 'xxx', 'xxx', '01111450665', '13.34424', '1.657544', '10.00 am', 1, 0, 0, '', '2018-11-09 10:51:24', 1, '0000-00-00 00:00:00', 0, 1),
 (7, 1, 1, 3, '/images/store/27332477_409165236176720_1264135450474402744_n.jpg', '/images/store/27332477_409165236176720_1264135450474402744_n.jpg', '0.00', 'ROI Spoon Restaurant', '01-20, Menara Hartamas, Block B, Jalan Austin Heights 8/4, Taman Mount Austin', 'https://www.facebook.com/pages/category/Restaurant/Roi-Spoon-Restaurant-Mount-Austin-408431062916804/', '07-351 6783', '1.563548', '103.77780800000005', '11.30 am - 11.00pm', 1, 0, 0, '', '2018-11-23 03:19:37', 3, '0000-00-00 00:00:00', 3, 1),
 (8, 3, 5, 2, '/images/store/home1.jpg', '', '0.00', 'teststore', 'teststore', '', '123142', '000', '22', '10.00 - 12.00', 1, 0, 0, '', '2018-11-28 09:07:54', 2, '0000-00-00 00:00:00', 3, 1),
@@ -1643,6 +1689,14 @@ ALTER TABLE `food_combo`
   ADD KEY `food_category_id` (`food_category_id`);
 
 --
+-- Indexes for table `food_combo_customize`
+--
+ALTER TABLE `food_combo_customize`
+  ADD PRIMARY KEY (`food_combo_customize_id`),
+  ADD KEY `food_id` (`food_combo_id`),
+  ADD KEY `customize_id` (`customize_id`);
+
+--
 -- Indexes for table `food_combo_food`
 --
 ALTER TABLE `food_combo_food`
@@ -1857,166 +1911,205 @@ ALTER TABLE `vendor`
 --
 ALTER TABLE `admin`
   MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `banner`
 --
 ALTER TABLE `banner`
   MODIFY `banner_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `billing_address`
 --
 ALTER TABLE `billing_address`
   MODIFY `billing_address_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `card`
 --
 ALTER TABLE `card`
   MODIFY `card_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `card_type`
 --
 ALTER TABLE `card_type`
   MODIFY `card_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `coupon`
 --
 ALTER TABLE `coupon`
   MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `customize`
 --
 ALTER TABLE `customize`
   MODIFY `customize_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `customize_dressing`
 --
 ALTER TABLE `customize_dressing`
   MODIFY `customize_dressing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
 --
 -- AUTO_INCREMENT for table `dressing`
 --
 ALTER TABLE `dressing`
   MODIFY `dressing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
 -- AUTO_INCREMENT for table `feature`
 --
 ALTER TABLE `feature`
   MODIFY `feature_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
   MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `food`
 --
 ALTER TABLE `food`
   MODIFY `food_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
 --
 -- AUTO_INCREMENT for table `food_category`
 --
 ALTER TABLE `food_category`
   MODIFY `food_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `food_combo`
 --
 ALTER TABLE `food_combo`
-  MODIFY `food_combo_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `food_combo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `food_combo_customize`
+--
+ALTER TABLE `food_combo_customize`
+  MODIFY `food_combo_customize_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `food_combo_food`
 --
 ALTER TABLE `food_combo_food`
-  MODIFY `food_combo_food_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `food_combo_food_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `food_customize`
 --
 ALTER TABLE `food_customize`
   MODIFY `food_customize_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+
 --
 -- AUTO_INCREMENT for table `food_ingredient`
 --
 ALTER TABLE `food_ingredient`
   MODIFY `food_ingredient_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `food_model`
 --
 ALTER TABLE `food_model`
   MODIFY `food_model_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `gender`
 --
 ALTER TABLE `gender`
   MODIFY `gender_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT for table `gourmet_type`
 --
 ALTER TABLE `gourmet_type`
   MODIFY `gourmet_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
 --
 -- AUTO_INCREMENT for table `ingredient`
 --
 ALTER TABLE `ingredient`
   MODIFY `ingredient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
   MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `module`
 --
 ALTER TABLE `module`
-  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `module_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+
 --
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
   MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `order_food`
 --
 ALTER TABLE `order_food`
   MODIFY `order_food_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
 --
 -- AUTO_INCREMENT for table `order_food_dressing`
 --
 ALTER TABLE `order_food_dressing`
   MODIFY `order_food_dressing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `order_status`
 --
 ALTER TABLE `order_status`
   MODIFY `order_status_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `pricing`
 --
 ALTER TABLE `pricing`
   MODIFY `pricing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
   MODIFY `role_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT for table `role_access`
 --
 ALTER TABLE `role_access`
-  MODIFY `role_access_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
+  MODIFY `role_access_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
+
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
   MODIFY `sales_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
 --
 -- AUTO_INCREMENT for table `social_media`
 --
 ALTER TABLE `social_media`
   MODIFY `social_media_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `social_media_link`
 --
 ALTER TABLE `social_media_link`
   MODIFY `social_media_link_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `staff`
 --
@@ -2027,46 +2120,55 @@ ALTER TABLE `staff`
 --
 ALTER TABLE `store`
   MODIFY `store_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
 --
 -- AUTO_INCREMENT for table `store_category`
 --
 ALTER TABLE `store_category`
   MODIFY `store_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `store_feature`
 --
 ALTER TABLE `store_feature`
   MODIFY `store_feature_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+
 --
 -- AUTO_INCREMENT for table `store_gourmet_type`
 --
 ALTER TABLE `store_gourmet_type`
   MODIFY `store_gourmet_type_id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `store_image`
 --
 ALTER TABLE `store_image`
   MODIFY `store_image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
 --
 -- AUTO_INCREMENT for table `table_no`
 --
 ALTER TABLE `table_no`
   MODIFY `table_no_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
 --
 -- AUTO_INCREMENT for table `user_coupon`
 --
 ALTER TABLE `user_coupon`
   MODIFY `user_coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
 --
 -- AUTO_INCREMENT for table `vendor`
 --
 ALTER TABLE `vendor`
   MODIFY `vendor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- Constraints for dumped tables
 --
@@ -2112,6 +2214,7 @@ ALTER TABLE `order_food_dressing`
 ALTER TABLE `role_access`
   ADD CONSTRAINT `role_access_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`),
   ADD CONSTRAINT `role_access_ibfk_2` FOREIGN KEY (`module_id`) REFERENCES `module` (`module_id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

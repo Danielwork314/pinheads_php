@@ -58,6 +58,10 @@ class Form
         $options['small'] = "*leave blank to keep old password"; <--- Sets small tag next to label
         $options['image_only'] = true; <--- Only allow images for input type file
 
+        28/12/2018 - emmwee
+
+        $options['hide_label'] = true; <--- hides form label, default: false
+
         ---------------------------------------------------*/
 
         // echo "<pre>";
@@ -146,6 +150,9 @@ class Form
         if (!empty($options['value'])) {
             $form_input_html .= " value='" . $options['value'] . "'";
         }
+        if (!empty($options['hide_label']) and $options['hide_label']) {
+            $form_label_html = "";
+        }
 
         switch ($form_type) {
             case "text":
@@ -203,6 +210,13 @@ class Form
 
         $options['small'] = "*leave blank to keep old password"; <--- Sets small tag next to label
 
+        28/12/2018 - emmwee
+
+        $options['hide_label'] = true; <--- hides form label, default: false
+
+        bug fix:
+        selected value will now select none value
+
         ---------------------------------------------------*/
 
         // echo "<pre>";
@@ -224,10 +238,19 @@ class Form
         $form_footer_html = "</div>";
         $form_label_html = "<label for='form_" . $options['name'] . "'>" . $form_label . $form_small . "</label>";
 
+        if (!empty($options['hide_label']) and $options['hide_label']) {
+            $form_label_html = "";
+        }
+
         $form_input_html = "<select class='form-control" . $form_class . "' id='form_" . $options['name'] . "" . $form_id . "' name='" . $options['name'] . "' required>";
         $form_input_html .= "<option disabled value selected>Select " . preg_replace('/(^| )a ([aeiouAEIOU])/', '$1an $2', "a " . $form_label) . "</option>";
         if (empty($options['required']) or !$options['required']) {
-            $form_input_html .= "<option value='0'>None</option>";
+
+            if (!empty($options['selected']) AND $options['selected'] == "0") {
+                $form_input_html .= "<option value='0' selected>None</option>";
+            } else {
+                $form_input_html .= "<option value='0'>None</option>";
+            }
         }
         if (!empty($data)) {
             foreach ($data['options'] as $row) {

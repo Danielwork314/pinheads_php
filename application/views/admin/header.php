@@ -225,6 +225,16 @@
 							</li>
 							<?php
 							}
+							if(!empty($this->session->userdata('role_access')['food_combo']) AND $this->session->userdata('role_access')['food_combo']['read_control'] == 1){
+							?>
+							<li class="<?php if ($this->router->fetch_class() == 'food_combo') echo 'active'; ?> ">
+								<a href="<?=base_url()?>food_combo">
+									<i class="fa fa-genderless"></i>
+									<span>Food Combo</span>
+								</a>
+							</li>
+							<?php
+							}
 							if(!empty($this->session->userdata('role_access')['food_category']) AND $this->session->userdata('role_access')['food_category']['read_control'] == 1){
 							?>
 							<li class="<?php if ($this->router->fetch_class() == 'food_category') echo 'active'; ?> ">
@@ -279,14 +289,20 @@
 								<i class="fa fa-angle-left pull-right"></i>
 							</span>
 						</a>
-						<ul class="treeview-menu" style="<?php if (strpos($this->router->fetch_class(), 'performance') !== false) echo 'display: none;'; ?>">
+						<ul class="treeview-menu" style="<?php if (strpos($this->router->fetch_class(), 'performance') == true) echo 'display: none;'; ?>">
 							<?php
 							if(!empty($this->session->userdata('role_access')['performance']) AND $this->session->userdata('role_access')['performance']['read_control'] == 1){
 							?>
-							<li class="<?php if ($this->uri->segment(2) == "store_sales") echo 'active'; ?> ">
+							<li class="<?php if (strpos($this->uri->segment(2), "store_sales") !== FALSE) echo "active"; ?>">
 								<a href="<?=base_url()?>performance/store_sales">
 									<i class="fa fa-genderless"></i>
 									<span>Store Sales</span>
+								</a>
+							</li>
+							<li class="<?php if (strpos($this->uri->segment(2), "food_sales") !== FALSE) echo "active"; ?>">
+								<a href="<?=base_url()?>performance/food_sales">
+									<i class="fa fa-genderless"></i>
+									<span>Food Sales</span>
 								</a>
 							</li>
 							<?php

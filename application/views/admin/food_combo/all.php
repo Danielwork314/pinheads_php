@@ -1,18 +1,18 @@
 <section class="content-header">
 	<h1>
-		Food
+		Food Combo
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="<?= base_url() ?>food"><i class="fa fa-utensils"></i> Food</a></li>
+		<li><a href="<?= base_url() ?>food_combo"><i class="fa fa-utensils"></i> Food_combo</a></li>
 	</ol>
 </section>
 <br>
 <section class="content">
 	<div class="box">
 		<div class='box-header'>
-			<h4 class="whiteTitle" style='display: inline-block;'>Food</h4>
+			<h4 class="whiteTitle" style='display: inline-block;'>Food_combo</h4>
 
-			<a href='<?php echo site_url("food/add"); ?>' class='btn btn-info pull-right'>
+			<a href='<?php echo site_url("food_combo/add"); ?>' class='btn btn-info pull-right'>
 				<i class='fa fa-plus'></i> Add</a>
 
 		</div>
@@ -38,61 +38,61 @@
 					<tbody>
 						<?php
                             $i = 1;
-                            foreach($food as $row){
+                            foreach($food_combo as $row){
                                 ?>
 						<tr>
 							<td>
-                                <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
+                                <a href="<?= base_url() ?>food_combo/details/<?= $row['food_combo_id']?>">
 									<?= $i ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
+                                <a href="<?= base_url() ?>food_combo/details/<?= $row['food_combo_id']?>">
 									<?= $row['store'] ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
+                                <a href="<?= base_url() ?>food_combo/details/<?= $row['food_combo_id']?>">
 									<img src="<?= base_url() . $row['image'] ?>" class="xs_thumbnail">
                                 </a>
                             </td>
 							<td>
-                                <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
-									<?= $row['food'] ?>
+                                <a href="<?= base_url() ?>food_combo/details/<?= $row['food_combo_id']?>">
+									<?= $row['food_combo'] ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
+                                <a href="<?= base_url() ?>food_combo/details/<?= $row['food_combo_id']?>">
 									<?= $row['description'] ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
+                                <a href="<?= base_url() ?>food_combo/details/<?= $row['food_combo_id']?>">
 									<?= $row['price'] ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
+                                <a href="<?= base_url() ?>food_combo/details/<?= $row['food_combo_id']?>">
 									<?= $row['discounted_price'] ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
+                                <a href="<?= base_url() ?>food_combo/details/<?= $row['food_combo_id']?>">
 									<?= $row['discount'] ?>
                                 </a>
                             </td>
                             <td>
-                                <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
+                                <a href="<?= base_url() ?>food_combo/details/<?= $row['food_combo_id']?>">
 									<?= $row['created_date'] ?>
                                 </a>
                             </td>
                             <!-- <td>
-                                <a href="<?= base_url() ?>food/details/<?= $row['food_id']?>">
+                                <a href="<?= base_url() ?>food/details/<?= $row['food_combo_id']?>">
 									<?= $row['created_by'] ?>
                                 </a>
                             </td> -->
 							<td>
-                                <a href="<?= base_url() ?>food/delete/<?= $row['food_id']?>" class="btn btn-danger delete-button">Delete</a>
+                                <a href="<?= base_url() ?>food/delete/<?= $row['food_combo_id']?>" class="btn btn-danger delete-button">Delete</a>
                             </td>
 						</tr>
 						<?php

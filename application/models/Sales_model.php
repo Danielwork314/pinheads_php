@@ -60,7 +60,8 @@ class Sales_model extends Base_model
         return $query->result_array();
     }
 
-    public function get_queue_list(){
+    public function get_queue_list()
+    {
 
         $this->db->select('*');
         $this->db->from('sales');
@@ -72,4 +73,14 @@ class Sales_model extends Base_model
         return $query->result_array();
     }
 
+    public function get_years()
+    {
+        $this->db->select("YEAR(MAX(created_date)) AS max_year, YEAR(MIN(created_date)) AS min_year");
+        $this->db->from("sales");
+        $this->db->where("sales.deleted = 0");
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
 }
