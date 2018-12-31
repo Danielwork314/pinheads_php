@@ -29,7 +29,7 @@ class Sales_model extends Base_model
     public function get_where($where)
     {
 
-        $this->db->select('user.name, order_status.order_status, store.store, sales.*, billing_address.address1, billing_address.address2, billing_address.state, billing_address.postcode, billing_address.country, card.card, card.bank, card_type.card_type, coupon.coupon');
+        $this->db->select('user.name, order_status.order_status, store.store, sales.*, billing_address.address1, billing_address.address2, billing_address.state, billing_address.postcode, billing_address.country, card.card, card.bank, card_type.card_type, coupon.*');
         $this->db->from('sales');
         $this->db->join('user', 'user.user_id = sales.user_id', 'left');
         $this->db->join('store', 'store.store_id = sales.store_id', 'left');
@@ -63,9 +63,10 @@ class Sales_model extends Base_model
 
     public function get_queue_list(){
 
-        $this->db->select('*');
+        $this->db->select('sales.*, order_status.order_status, user.username, user.email, user.name');
         $this->db->from('sales');
         $this->db->join("order_status", "sales.order_status_id = order_status.order_status_id", "left");
+        $this->db->join("user", "sales.user_id = user.user_id", "left");
         $this->db->where('sales.order_status_id !=', 2);
         $this->db->where('sales.order_status_id !=', 3);
         $query = $this->db->get();

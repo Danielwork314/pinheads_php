@@ -467,6 +467,46 @@ class API extends Base_Controller
         )));
     }
 
+    public function order()
+    {
+
+        if($_POST){
+
+            $where = array(
+                'sales_id' => $_POST['sales_id']
+            );
+        
+            $order = $this->Sales_model->get_where($where)[0];
+
+            $where = array(
+                'sales_id' => $order['sales_id']
+            );
+
+            $order_foods = $this->Order_food_model->get_where($where);
+            $order['order_foods'] = $order_foods;
+
+            $i = 0;
+            foreach($order_foods as $row){
+
+                $where = array(
+                    'order_food_id' => $row['order_food_id']
+                );
+
+                $order_food_dressing = $this->Order_food_dressing_model->get_where($where);
+
+                $order['order_foods'][$i]['dressing'] = $order_food_dressing;
+                $i++;
+            }
+
+            die(json_encode(array(
+                "status" => true,
+                "data" => array(
+                    "order" => $order,
+                ),
+            )));
+        }
+    }
+
     public function store()
     {
         if ($_POST) {
@@ -842,13 +882,21 @@ class API extends Base_Controller
             $store = $this->Store_model->search_store($input['keyword']);
 
             if($store){
-                array_push($store_array, $store);
+
+                foreach($store as $row){
+                    $row['thumbnail'] = base_url() . $row['thumbnail'];
+                    array_push($store_array, $row);
+                }
             }
 
             $address = $this->Store_model->search_location($input['keyword']);
 
             if($address){
-                array_push($store_array, $address);
+
+                foreach($address as $row){
+                    $row['thumbnail'] = base_url() . $row['thumbnail'];
+                    array_push($store_array, $row);
+                }
             }
 
             die(json_encode(array(
