@@ -73,7 +73,11 @@
                     <tr>
 						<th>Store</th>
 						<td>:
-							<?= $coupon["store"] ?>
+							<?php if($coupon['store_id'] != 0 ){ ?>
+								<?= $coupon['store'] ?>
+							<?php } else { ?>
+								All Store
+							<?php } ?>
 						</td>
                     </tr>
 				</table>

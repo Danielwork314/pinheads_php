@@ -35,7 +35,17 @@
 				<?= $input_field['coupon'] ?>
 				<?= $input_field['discount_rate'] ?>
 				<?= $input_field['valid_date'] ?>
-				<?= $input_field['store_id'] ?>
+				<!-- <?= $input_field['store_id'] ?> -->
+				<div class="form-group">
+					<label for="form_store_id">Store</label>
+					<select class="form-control select2" name="store_id">
+						<option value='0'>All Store</option>
+						<?php foreach($store as $row){ ?>
+							<option value="<?= $row['store_id'] ?>"><?= $row['store'] ?></option>
+						<?php } ?>
+					</select>
+					<div class="help-block with-errors"></div>
+				</div>
 			</div>
 			<!-- /.box-body -->
 

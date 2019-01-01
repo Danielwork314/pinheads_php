@@ -47,7 +47,11 @@
                             </td>
                             <td>
                                 <a href="<?= base_url() ?>coupon/details/<?= $row['coupon_id']?>">
-									<?= $row['store'] ?>
+                                    <?php if($row['store_id'] != 0 ){ ?>
+									    <?= $row['store'] ?>
+                                    <?php } else { ?>
+                                        All Store
+                                    <?php } ?>
                                 </a>
                             </td>
 							<td>
