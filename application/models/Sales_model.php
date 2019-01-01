@@ -75,6 +75,21 @@ class Sales_model extends Base_model
         return $query->result_array();
     }
 
+    public function get_queue_list_where($where)
+    {
+
+        $this->db->select('sales.*, order_status.order_status, user.username, user.email, user.name');
+        $this->db->from('sales');
+        $this->db->join("order_status", "sales.order_status_id = order_status.order_status_id", "left");
+        $this->db->join("user", "sales.user_id = user.user_id", "left");
+        $this->db->where($where);
+        $this->db->where('sales.order_status_id !=', 2);
+        $this->db->where('sales.order_status_id !=', 3);
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
     public function get_years()
     {
         $this->db->select("YEAR(MAX(created_date)) AS max_year, YEAR(MIN(created_date)) AS min_year");

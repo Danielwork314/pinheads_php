@@ -238,6 +238,39 @@ class API extends Base_Controller
         }
     }
 
+    public function validate_staff_token()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $where = array(
+                "token" => $input['token'],
+            );
+
+            $staff = $this->Staff_model->get_where($where);
+
+            if (!empty($staff)) {
+
+                $staff = $staff[0];
+                $staff["login_time"] = date("Y-m-d h:i:s");
+                $staff["token"] = $input['token'];
+
+                die(json_encode(array(
+                    "status" => true,
+                    "data" => array(
+                        "staff" => $staff,
+                    ),
+                )));
+
+            } else {
+                die(json_encode(array(
+                    "status" => false,
+                    "message" => "invalid ID or Password",
+                )));
+            }
+        }
+    }
+
     public function logout()
     {
         if ($_POST) {
@@ -466,6 +499,45 @@ class API extends Base_Controller
                 "order_list" => $order_lists,
             ),
         )));
+    }
+
+    public function storeOrders()
+    {
+        if ($_POST) {
+
+            $where = array(
+                'token' => $_POST['user_token']
+            );
+
+            $staff = $this->Staff_model->get_where($where)[0];
+
+            // die(var_dump($staff));
+            $where = array(
+                'sales.store_id' => $staff['store_id']
+            );
+
+            $order_lists = $this->Sales_model->get_queue_list_where($where);
+
+            $i = 0;
+            foreach ($order_lists as $row) {
+
+                $where = array(
+                    'sales_id' => $row['sales_id'],
+                );
+
+                $order_foods = $this->Order_food_model->get_where($where);
+                $order_lists[$i]['order_foods'] = $order_foods;
+
+                $i++;
+            }
+
+            die(json_encode(array(
+                "status" => true,
+                "data" => array(
+                    "order_list" => $order_lists,
+                ),
+            )));
+        }
     }
 
     public function order()
