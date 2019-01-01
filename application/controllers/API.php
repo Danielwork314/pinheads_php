@@ -24,6 +24,7 @@ class API extends Base_Controller
         $this->load->model("Food_customize_model");
         $this->load->model("Customize_dressing_model");
         $this->load->model("User_coupon_model");
+        $this->load->model("Table_no_model");
     }
 
     public function test()
@@ -540,6 +541,31 @@ class API extends Base_Controller
         }
     }
 
+    public function storeTables()
+    {
+        if ($_POST) {
+
+            $where = array(
+                'token' => $_POST['user_token']
+            );
+
+            $staff = $this->Staff_model->get_where($where)[0];
+
+            $where = array(
+                'store_id' => $staff['store_id']
+            );
+
+            $tables = $this->Table_no_model->get_where($where);
+
+            die(json_encode(array(
+                "status" => true,
+                "data" => array(
+                    "tables" => $tables,
+                ),
+            )));
+        }
+    }
+
     public function order()
     {
 
@@ -848,6 +874,20 @@ class API extends Base_Controller
                     array_push($store_ids, $row['store_id']);
                 }
 
+                $where = array(
+                    'DATE(sales.created_date)' => date("Y-m-d")
+                );
+
+                $sales = $this->Sales_model->get_where($where);
+
+                if($sales){
+
+                    $sales_code = count($sales) + 1;
+                } else {
+
+                    $sales_code = 1;
+                }
+
                 $data = array(
                     "user_id" => $user['user_id'],
                     "status" => 1,
@@ -856,6 +896,7 @@ class API extends Base_Controller
                     "sub_total" => $sub_total,
                     "service_change" => $sub_total * 0.1,
                     "total" => $sub_total * 1.1,
+                    "sales_code" => $sales_code
                 );
 
                 $sales_id = $this->Sales_model->insert($data);
