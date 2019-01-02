@@ -712,6 +712,34 @@ class API extends Base_Controller
 
             $this->Order_food_model->insert($data);
 
+            //update sales 
+            $where = array(
+                'food_id' => $_POST['food_id'],
+            );
+            
+            $food = $this->Food_model->get_where($where)[0];
+
+            $where = array(
+                'sales.sales_id' => $_POST['sales_id'],
+            );
+
+            $sales = $this->Sales_model->get_where($where)[0];
+
+            $sub_total = 0;
+            $sub_total = $food['price'] + $sales['sub_total'];
+
+            $where = array(
+                'sales_id' => $_POST['sales_id'],
+            );
+
+            $data = array(
+                "sub_total" => $sub_total,
+                "service_change" => $sub_total * 0.1,
+                "total" => $sub_total * 1.1,
+            );
+                    
+            $this->Sales_model->update_where($where, $data);
+
             die(json_encode(array(
                 "status" => true,
             )));
@@ -759,6 +787,28 @@ class API extends Base_Controller
 
             $this->Order_food_model->insert($data);
 
+            //update sales 
+            $where = array(
+                'food_id' => $_POST['food_id'],
+            );
+            
+            $food = $this->Food_model->get_where($where)[0];
+
+            $sub_total = 0;
+            $sub_total = $food['price'];
+
+            $where = array(
+                'sales_id' => $sales_id
+            );
+
+            $data = array(
+                "sub_total" => $sub_total,
+                "service_change" => $sub_total * 0.1,
+                "total" => $sub_total * 1.1,
+            );
+                    
+            $this->Sales_model->update_where($where, $data);
+
             die(json_encode(array(
                 "status" => true,
                 "sales_id" => $sales_id
@@ -795,6 +845,41 @@ class API extends Base_Controller
 
                 $this->Order_food_dressing_model->insert($data);
             }
+
+            //update price
+            $order_food = $this->Order_food_model->get_where($where)[0];
+
+            $where = array(
+                'sales_id' => $order_food['sales_id'],
+                'order_food.order_status_id !=' => '3'
+            );
+
+            $sales_food = $this->Order_food_model->get_where($where);
+
+            $sub_total = 0;
+
+            foreach($sales_food as $row){
+
+                $where = array(
+                    'food_id' => $row['food_id']
+                );
+
+                $food = $this->Food_model->get_where($where)[0];
+
+                $sub_total += $food['price'] * $row['quantity'];
+            }
+
+            $where = array(
+                'sales_id' => $order_food['sales_id']
+            );
+
+            $data = array(
+                "sub_total" => $sub_total,
+                "service_change" => $sub_total * 0.1,
+                "total" => $sub_total * 1.1,
+            );
+                    
+            $this->Sales_model->update_where($where, $data);
 
             die(json_encode(array(
                 "status" => true,
