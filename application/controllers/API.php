@@ -541,6 +541,100 @@ class API extends Base_Controller
         }
     }
 
+    public function tableOrders()
+    {
+        if ($_POST) {
+
+            $where = array(
+                'token' => $_POST['user_token']
+            );
+
+            $staff = $this->Staff_model->get_where($where)[0];
+
+            // die(var_dump($staff));
+            $where = array(
+                'table_no.store_id' => $staff['store_id']
+            );
+
+            $table_list = $this->Table_no_model->get_where($where);
+
+            $where = array(
+                'sales.store_id' => $staff['store_id']
+            );
+
+            $order_lists = $this->Sales_model->get_queue_list_where($where);
+
+            $i = 0;
+            foreach($table_list as $row){
+
+                $j = 0;
+                foreach($order_lists as $row2){
+ 
+                    if($row['table_no_id'] == $row2['table_no_id']){
+
+                        $table_list[$i] = $row2;
+                        $table_list[$i]['table_no'] = $row['table_no'];
+                    }
+
+                    $j++;
+                }
+
+                $i++;
+            }
+
+            die(json_encode(array(
+                "status" => true,
+                "data" => array(
+                    "order_list" => $table_list,
+                ),
+            )));
+        }
+    }
+
+    public function takeAwayOrders()
+    {
+        if ($_POST) {
+
+            $where = array(
+                'token' => $_POST['user_token']
+            );
+
+            $staff = $this->Staff_model->get_where($where)[0];
+
+            // die(var_dump($staff));
+            $where = array(
+                'sales.store_id' => $staff['store_id']
+            );
+
+            $take_away_list = [];
+            $order_lists = $this->Sales_model->get_queue_list_where($where);
+
+            $i = 0;
+            foreach ($order_lists as $row) {
+
+                if($row['take_away'] != 0){
+
+                    $where = array(
+                        'sales_id' => $row['sales_id'],
+                    );
+
+                    $order_foods = $this->Order_food_model->get_where($where);
+                    $order_lists[$i]['order_foods'] = $order_foods;
+                    array_push($take_away_list, $order_lists[$i]);
+                }
+
+                $i++;
+            }
+
+            die(json_encode(array(
+                "status" => true,
+                "data" => array(
+                    "order_list" => $take_away_list,
+                ),
+            )));
+        }
+    }
+
     public function storeTables()
     {
         if ($_POST) {
@@ -620,6 +714,54 @@ class API extends Base_Controller
 
             die(json_encode(array(
                 "status" => true,
+            )));
+        }
+    }
+
+    public function newOrder() {
+
+        if($_POST){
+
+            $where = array(
+                'table_no_id' => $_POST['table_no_id'],
+            );
+
+            $table_no = $this->Table_no_model->get_where($where)[0];
+
+            $where = array(
+                'DATE(sales.created_date)' => date("Y-m-d")
+            );
+
+            $sales = $this->Sales_model->get_where($where);
+
+            if($sales){
+
+                $sales_code = count($sales) + 1;
+            } else {
+
+                $sales_code = 1;
+            }
+
+            $data = array(
+                'table_no_id' => $_POST['table_no_id'],
+                'store_id' => $table_no['store_id'],
+                "status" => 1,
+                "order_status_id" => 1,
+            );
+
+            $sales_id = $this->Sales_model->insert($data);
+
+            $data = array(
+                'sales_id' => $sales_id,
+                'food_id' => $_POST['food_id'],
+                'quantity' => 1
+            );
+
+            $this->Order_food_model->insert($data);
+
+            die(json_encode(array(
+                "status" => true,
+                "sales_id" => $sales_id
             )));
         }
     }
