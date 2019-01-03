@@ -15,7 +15,7 @@ class Base_Controller extends CI_Controller
 
         $this->load->library("Form");
 
-        if (!$this->session->has_userdata("login_data") and (strtolower($this->uri->segment(1)) != "access" and strtolower($this->uri->segment(1)) != "api")) {
+        if (!$this->session->has_userdata("login_data") and (strtolower($this->uri->segment(1)) != "access" and strtolower($this->uri->segment(1)) != "api" and strtolower($this->uri->segment(1)) != "cron")) {
             redirect("access/login", "refresh");
         }
 

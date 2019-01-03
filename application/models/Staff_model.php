@@ -36,7 +36,8 @@ class Staff_model extends Base_model
         return $query->result_array();
     }
 
-    public function get_last_active_staff($where) {
+    public function get_last_active_staff($where)
+    {
 
         $this->db->select("staff.*");
         $this->db->from("staff");

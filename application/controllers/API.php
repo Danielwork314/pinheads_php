@@ -507,14 +507,14 @@ class API extends Base_Controller
         if ($_POST) {
 
             $where = array(
-                'token' => $_POST['user_token']
+                'token' => $_POST['user_token'],
             );
 
             $staff = $this->Staff_model->get_where($where)[0];
 
             // die(var_dump($staff));
             $where = array(
-                'sales.store_id' => $staff['store_id']
+                'sales.store_id' => $staff['store_id'],
             );
 
             $order_lists = $this->Sales_model->get_queue_list_where($where);
@@ -546,31 +546,31 @@ class API extends Base_Controller
         if ($_POST) {
 
             $where = array(
-                'token' => $_POST['user_token']
+                'token' => $_POST['user_token'],
             );
 
             $staff = $this->Staff_model->get_where($where)[0];
 
             // die(var_dump($staff));
             $where = array(
-                'table_no.store_id' => $staff['store_id']
+                'table_no.store_id' => $staff['store_id'],
             );
 
             $table_list = $this->Table_no_model->get_where($where);
 
             $where = array(
-                'sales.store_id' => $staff['store_id']
+                'sales.store_id' => $staff['store_id'],
             );
 
             $order_lists = $this->Sales_model->get_queue_list_where($where);
 
             $i = 0;
-            foreach($table_list as $row){
+            foreach ($table_list as $row) {
 
                 $j = 0;
-                foreach($order_lists as $row2){
- 
-                    if($row['table_no_id'] == $row2['table_no_id']){
+                foreach ($order_lists as $row2) {
+
+                    if ($row['table_no_id'] == $row2['table_no_id']) {
 
                         $table_list[$i] = $row2;
                         $table_list[$i]['table_no'] = $row['table_no'];
@@ -596,14 +596,14 @@ class API extends Base_Controller
         if ($_POST) {
 
             $where = array(
-                'token' => $_POST['user_token']
+                'token' => $_POST['user_token'],
             );
 
             $staff = $this->Staff_model->get_where($where)[0];
 
             // die(var_dump($staff));
             $where = array(
-                'sales.store_id' => $staff['store_id']
+                'sales.store_id' => $staff['store_id'],
             );
 
             $take_away_list = [];
@@ -612,7 +612,7 @@ class API extends Base_Controller
             $i = 0;
             foreach ($order_lists as $row) {
 
-                if($row['take_away'] != 0){
+                if ($row['take_away'] != 0) {
 
                     $where = array(
                         'sales_id' => $row['sales_id'],
@@ -640,13 +640,13 @@ class API extends Base_Controller
         if ($_POST) {
 
             $where = array(
-                'token' => $_POST['user_token']
+                'token' => $_POST['user_token'],
             );
 
             $staff = $this->Staff_model->get_where($where)[0];
 
             $where = array(
-                'store_id' => $staff['store_id']
+                'store_id' => $staff['store_id'],
             );
 
             $tables = $this->Table_no_model->get_where($where);
@@ -700,23 +700,24 @@ class API extends Base_Controller
         }
     }
 
-    public function addOrder() {
+    public function addOrder()
+    {
 
-        if($_POST){
+        if ($_POST) {
 
             $data = array(
                 'sales_id' => $_POST['sales_id'],
                 'food_id' => $_POST['food_id'],
-                'quantity' => 1
+                'quantity' => 1,
             );
 
             $this->Order_food_model->insert($data);
 
-            //update sales 
+            //update sales
             $where = array(
                 'food_id' => $_POST['food_id'],
             );
-            
+
             $food = $this->Food_model->get_where($where)[0];
 
             $where = array(
@@ -737,7 +738,7 @@ class API extends Base_Controller
                 "service_change" => $sub_total * 0.1,
                 "total" => $sub_total * 1.1,
             );
-                    
+
             $this->Sales_model->update_where($where, $data);
 
             die(json_encode(array(
@@ -746,9 +747,10 @@ class API extends Base_Controller
         }
     }
 
-    public function newOrder() {
+    public function newOrder()
+    {
 
-        if($_POST){
+        if ($_POST) {
 
             $where = array(
                 'table_no_id' => $_POST['table_no_id'],
@@ -757,12 +759,12 @@ class API extends Base_Controller
             $table_no = $this->Table_no_model->get_where($where)[0];
 
             $where = array(
-                'DATE(sales.created_date)' => date("Y-m-d")
+                'DATE(sales.created_date)' => date("Y-m-d"),
             );
 
             $sales = $this->Sales_model->get_where($where);
 
-            if($sales){
+            if ($sales) {
 
                 $sales_code = count($sales) + 1;
             } else {
@@ -782,23 +784,23 @@ class API extends Base_Controller
             $data = array(
                 'sales_id' => $sales_id,
                 'food_id' => $_POST['food_id'],
-                'quantity' => 1
+                'quantity' => 1,
             );
 
             $this->Order_food_model->insert($data);
 
-            //update sales 
+            //update sales
             $where = array(
                 'food_id' => $_POST['food_id'],
             );
-            
+
             $food = $this->Food_model->get_where($where)[0];
 
             $sub_total = 0;
             $sub_total = $food['price'];
 
             $where = array(
-                'sales_id' => $sales_id
+                'sales_id' => $sales_id,
             );
 
             $data = array(
@@ -806,24 +808,25 @@ class API extends Base_Controller
                 "service_change" => $sub_total * 0.1,
                 "total" => $sub_total * 1.1,
             );
-                    
+
             $this->Sales_model->update_where($where, $data);
 
             die(json_encode(array(
                 "status" => true,
-                "sales_id" => $sales_id
+                "sales_id" => $sales_id,
             )));
         }
     }
 
-    public function editOrder() {
+    public function editOrder()
+    {
 
-        if($_POST){
+        if ($_POST) {
 
             // die(var_dump($_POST));
 
             $where = array(
-                'order_food_id' => $_POST['order_food_id']
+                'order_food_id' => $_POST['order_food_id'],
             );
 
             $data = array(
@@ -836,11 +839,11 @@ class API extends Base_Controller
 
             $dressing = json_decode($_POST['dressing'], true);
 
-            foreach($dressing as $row){
+            foreach ($dressing as $row) {
 
                 $data = array(
                     'order_food_id' => $_POST['order_food_id'],
-                    'dressing_id' => $row['dressing_id']
+                    'dressing_id' => $row['dressing_id'],
                 );
 
                 $this->Order_food_dressing_model->insert($data);
@@ -851,17 +854,17 @@ class API extends Base_Controller
 
             $where = array(
                 'sales_id' => $order_food['sales_id'],
-                'order_food.order_status_id !=' => '3'
+                'order_food.order_status_id !=' => '3',
             );
 
             $sales_food = $this->Order_food_model->get_where($where);
 
             $sub_total = 0;
 
-            foreach($sales_food as $row){
+            foreach ($sales_food as $row) {
 
                 $where = array(
-                    'food_id' => $row['food_id']
+                    'food_id' => $row['food_id'],
                 );
 
                 $food = $this->Food_model->get_where($where)[0];
@@ -870,7 +873,7 @@ class API extends Base_Controller
             }
 
             $where = array(
-                'sales_id' => $order_food['sales_id']
+                'sales_id' => $order_food['sales_id'],
             );
 
             $data = array(
@@ -878,7 +881,7 @@ class API extends Base_Controller
                 "service_change" => $sub_total * 0.1,
                 "total" => $sub_total * 1.1,
             );
-                    
+
             $this->Sales_model->update_where($where, $data);
 
             die(json_encode(array(
@@ -1102,12 +1105,12 @@ class API extends Base_Controller
                 }
 
                 $where = array(
-                    'DATE(sales.created_date)' => date("Y-m-d")
+                    'DATE(sales.created_date)' => date("Y-m-d"),
                 );
 
                 $sales = $this->Sales_model->get_where($where);
 
-                if($sales){
+                if ($sales) {
 
                     $sales_code = count($sales) + 1;
                 } else {
@@ -1116,11 +1119,11 @@ class API extends Base_Controller
                 }
 
                 $where = array(
-                    'staff.store_id' => $input['order'][0]['store_id']
+                    'staff.store_id' => $input['order'][0]['store_id'],
                 );
-        
+
                 $staff = $this->Staff_model->get_last_active_staff($where)[0];
-        
+
                 $data = array(
                     "user_id" => $user['user_id'],
                     "status" => 1,
@@ -1131,7 +1134,7 @@ class API extends Base_Controller
                     "total" => $sub_total * 1.1,
                     "sales_code" => $sales_code,
                     "take_away" => $input['order'][0]['take_away'],
-                    "staff_id" => $staff['staff_id']
+                    "staff_id" => $staff['staff_id'],
                 );
 
                 $sales_id = $this->Sales_model->insert($data);
@@ -1510,6 +1513,20 @@ class API extends Base_Controller
                 )));
             }
         }
+    }
+
+    public function update_last_login($staff_id)
+    {
+        $where = array(
+            "staff_id" => $staff_id,
+        );
+
+        $data = array(
+            "login_time" => date("Y-m-d h:i:s"),
+        );
+
+        $this->Staff_model->uodate_where($data, $where);
+
     }
 
     // public function searchStore()
