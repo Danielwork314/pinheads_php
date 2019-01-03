@@ -1078,7 +1078,7 @@ class API extends Base_Controller
             $input['order'] = json_decode($input['order'], true);
             // $input['card'] = json_decode($input['card'], true);
 
-            // die(var_dump($input['order']['coupon']));
+            // die(var_dump($input['order'][0]['take_away']));
 
             $where = array(
                 "token" => $input['user_token'],
@@ -1115,6 +1115,12 @@ class API extends Base_Controller
                     $sales_code = 1;
                 }
 
+                $where = array(
+                    'staff.store_id' => $input['order'][0]['store_id']
+                );
+        
+                $staff = $this->Staff_model->get_last_active_staff($where)[0];
+        
                 $data = array(
                     "user_id" => $user['user_id'],
                     "status" => 1,
@@ -1123,7 +1129,9 @@ class API extends Base_Controller
                     "sub_total" => $sub_total,
                     "service_change" => $sub_total * 0.1,
                     "total" => $sub_total * 1.1,
-                    "sales_code" => $sales_code
+                    "sales_code" => $sales_code,
+                    "take_away" => $input['order'][0]['take_away'],
+                    "staff_id" => $staff['staff_id']
                 );
 
                 $sales_id = $this->Sales_model->insert($data);

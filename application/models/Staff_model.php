@@ -35,4 +35,17 @@ class Staff_model extends Base_model
 
         return $query->result_array();
     }
+
+    public function get_last_active_staff($where) {
+
+        $this->db->select("staff.*");
+        $this->db->from("staff");
+        $this->db->where($where);
+        $this->db->where('role_id', 6);
+        $this->db->order_by("login_time", "DESC");
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
 }
