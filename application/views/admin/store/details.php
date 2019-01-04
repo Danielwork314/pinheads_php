@@ -428,8 +428,9 @@
 									<?= $row['created_date'] ?>
 								</td>
 								<td>
-                                		<a href="<?= base_url() ?>table_no/delete/<?= $row['table_no_id']?>" class="btn btn-danger delete-button">Delete</a>
-                            		</td>
+									<a href="<?= base_url() ?>table_no/delete/<?= $row['table_no_id']?>" class="btn btn-danger delete-button">Delete</a>
+									<a href="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=[<?= $row['table_no_id']?>]&choe=UTF-8" download target="_blank"><button class="btn btn-info">Download</button></a>
+								</td>
 							</tr>
 							<?php
 								$i++;

@@ -464,6 +464,7 @@ class API extends Base_Controller
                 "business_hour" => $row['business_hour'],
                 "favourite" => ($row['favourite'] == 1) ? "YES" : "NO",
                 "description" => $row['description'],
+                "active" => $row['active'],
             );
 
             array_push($store_data, $data);
@@ -705,6 +706,13 @@ class API extends Base_Controller
 
         if ($_POST) {
 
+            // die(var_dump($_POST));
+            $where = array(
+                'token' => $_POST['user_token'],
+            );
+
+            $staff = $this->Staff_model->get_where($where)[0];
+
             $data = array(
                 'sales_id' => $_POST['sales_id'],
                 'food_id' => $_POST['food_id'],
@@ -741,7 +749,7 @@ class API extends Base_Controller
 
             $this->Sales_model->update_where($where, $data);
 
-            // $this->Staff_model->update_last_login();
+            $this->update_last_login($staff['staff_id']);
 
             die(json_encode(array(
                 "status" => true,
@@ -753,6 +761,12 @@ class API extends Base_Controller
     {
 
         if ($_POST) {
+
+            $where = array(
+                'token' => $_POST['user_token'],
+            );
+
+            $staff = $this->Staff_model->get_where($where)[0];
 
             $where = array(
                 'table_no_id' => $_POST['table_no_id'],
@@ -813,7 +827,7 @@ class API extends Base_Controller
 
             $this->Sales_model->update_where($where, $data);
 
-            // $this->Staff_model->update_last_login();
+            $this->update_last_login($staff['staff_id']);
 
             die(json_encode(array(
                 "status" => true,
@@ -828,6 +842,11 @@ class API extends Base_Controller
         if ($_POST) {
 
             // die(var_dump($_POST));
+            $where = array(
+                'token' => $_POST['user_token'],
+            );
+
+            $staff = $this->Staff_model->get_where($where)[0];
 
             $where = array(
                 'order_food_id' => $_POST['order_food_id'],
@@ -888,7 +907,7 @@ class API extends Base_Controller
 
             $this->Sales_model->update_where($where, $data);
 
-            $this->Staff_model->update_last_login();
+            $this->update_last_login($staff['staff_id']);
 
             die(json_encode(array(
                 "status" => true,
@@ -955,6 +974,7 @@ class API extends Base_Controller
                 "description" => $store['description'],
                 "features" => $store_feature_data,
                 "images" => $store_image_data,
+                "active" => $store['active']
             );
 
             die(json_encode(array(
@@ -1085,9 +1105,9 @@ class API extends Base_Controller
             $error = false;
 
             $input['order'] = json_decode($input['order'], true);
-            // $input['card'] = json_decode($input['card'], true);
+            // $input['table_no_id'] = json_decode($input['table_no_id'], true);
 
-            // die(var_dump($input['order'][0]['take_away']));
+            // die(var_dump($input['table_no_id']));
 
             $where = array(
                 "token" => $input['user_token'],
@@ -1141,6 +1161,7 @@ class API extends Base_Controller
                     "sales_code" => $sales_code,
                     "take_away" => $input['order'][0]['take_away'],
                     "staff_id" => $staff['staff_id'],
+                    "table_no_id" => $input['table_no_id'],
                 );
 
                 $sales_id = $this->Sales_model->insert($data);
@@ -1358,6 +1379,12 @@ class API extends Base_Controller
             $input = $this->input->post();
 
             $where = array(
+                'token' => $input['user_token'],
+            );
+
+            $staff = $this->Staff_model->get_where($where)[0];
+
+            $where = array(
                 "order_food_id" => $input['order_food_id'],
             );
 
@@ -1381,7 +1408,9 @@ class API extends Base_Controller
 
             $this->Order_food_model->update_where($where, $data);
 
-            // $this->Staff_model->update_last_login();
+            $login_time = $this->update_last_login($staff['staff_id']);
+
+            // die(var_dump($login_time));
 
             die(json_encode(array(
                 "status" => true,
@@ -1395,6 +1424,12 @@ class API extends Base_Controller
 
         if ($_POST) {
             $input = $this->input->post();
+
+            $where = array(
+                'token' => $input['user_token'],
+            );
+
+            $staff = $this->Staff_model->get_where($where)[0];
 
             $where = array(
                 "sales_id" => $input['sales_id'],
@@ -1420,7 +1455,7 @@ class API extends Base_Controller
 
             $this->Sales_model->update_where($where, $data);
 
-            // $this->Staff_model->update_last_login();
+            $this->update_last_login($staff['staff_id']);
 
             die(json_encode(array(
                 "status" => true,
@@ -1536,6 +1571,8 @@ class API extends Base_Controller
         );
 
         $this->Staff_model->update_where($data, $where);
+
+        return $staff_id;
 
     }
 
