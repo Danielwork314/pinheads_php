@@ -741,6 +741,8 @@ class API extends Base_Controller
 
             $this->Sales_model->update_where($where, $data);
 
+            // $this->Staff_model->update_last_login();
+
             die(json_encode(array(
                 "status" => true,
             )));
@@ -810,6 +812,8 @@ class API extends Base_Controller
             );
 
             $this->Sales_model->update_where($where, $data);
+
+            // $this->Staff_model->update_last_login();
 
             die(json_encode(array(
                 "status" => true,
@@ -883,6 +887,8 @@ class API extends Base_Controller
             );
 
             $this->Sales_model->update_where($where, $data);
+
+            $this->Staff_model->update_last_login();
 
             die(json_encode(array(
                 "status" => true,
@@ -1375,6 +1381,8 @@ class API extends Base_Controller
 
             $this->Order_food_model->update_where($where, $data);
 
+            // $this->Staff_model->update_last_login();
+
             die(json_encode(array(
                 "status" => true,
             )));
@@ -1411,6 +1419,8 @@ class API extends Base_Controller
             }
 
             $this->Sales_model->update_where($where, $data);
+
+            // $this->Staff_model->update_last_login();
 
             die(json_encode(array(
                 "status" => true,
@@ -1525,7 +1535,7 @@ class API extends Base_Controller
             "login_time" => date("Y-m-d h:i:s"),
         );
 
-        $this->Staff_model->uodate_where($data, $where);
+        $this->Staff_model->update_where($data, $where);
 
     }
 
