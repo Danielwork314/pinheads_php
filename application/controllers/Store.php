@@ -176,6 +176,8 @@ class Store extends Base_Controller
         
         $this->page_data["store"] = $store[0];
         $this->page_data["table"] = $this->Table_no_model->get_where($where);;
+
+        // $this->debug($this->page_data['table']);
        
 
         $where = array(
