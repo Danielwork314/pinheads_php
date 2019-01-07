@@ -324,12 +324,12 @@
 					}
 					if(!empty($this->session->userdata('role_access')['banner']) AND $this->session->userdata('role_access')['banner']['read_control'] == 1){
 					?>
-					<li class=" <?php if ($this->router->fetch_class() == 'banner') echo 'active'; ?> ">
+					<!-- <li class=" <?php if ($this->router->fetch_class() == 'banner') echo 'active'; ?> ">
 						<a href="<?=base_url();?>banner">
 							<i class="fa fa-image"></i>
 							<span>Banner</span>
 						</a>
-					</li>
+					</li> -->
 					<?php
 					}
 					if(!empty($this->session->userdata('role_access')['pricing']) AND $this->session->userdata('role_access')['pricing']['read_control'] == 1){

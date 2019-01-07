@@ -17,21 +17,21 @@ class Food_category extends Base_Controller
 
     public function index()
     {
-        $type = $this->session->userdata('login_data')['type'];
+        // $type = $this->session->userdata('login_data')['type'];
 
-        if ($type == "VENDOR") {
+        // if ($type == "VENDOR") {
 
-            $where = array(
-                "food_category.created_by" => $this->session->userdata("login_data")["vendor_id"],
-            );
+        //     $where = array(
+        //         "food_category.created_by" => $this->session->userdata("login_data")["vendor_id"],
+        //     );
 
-            $food_category_id = $this->Food_category_model->get_where($where);
-            $this->page_data["food_category"] = $food_category_id;
+        //     $food_category_id = $this->Food_category_model->get_where($where);
+        //     $this->page_data["food_category"] = $food_category_id;
 
-        } else {
+        // } else {
 
             $this->page_data["food_category"] = $this->Food_category_model->get_all();
-        }
+        // }
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/food_category/all");
