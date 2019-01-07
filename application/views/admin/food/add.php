@@ -45,7 +45,16 @@
 					<?= $input_field['price'] ?>
 					<?= $input_field['discounted_price'] ?>
 					<?= $input_field['discount'] ?>
-					<?= $input_field['store_id'] ?>
+					<div class="form-group">
+						<label for="form_store_id">Store</label>
+						<select class="form-control select2" id="form_store_id" name="store_id">
+							<?php foreach($store as $row){ ?>
+							<option value="<?= $row['store_id'] ?>"><?= $row['store'] ?></option>
+							<?php } ?>
+						</select>
+						<div class="help-block with-errors"></div>
+					</div>
+					<!-- <?= $input_field['store_id'] ?> -->
 					<!-- <?= $input_field['inventory'] ?> -->
 					<!-- <div class="form-group">
 						<label>Food</label>

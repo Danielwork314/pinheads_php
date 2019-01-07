@@ -15,7 +15,36 @@ class Staff extends Base_Controller
 
     public function index()
     {
-        $this->page_data["staff"] = $this->Staff_model->get_all_with_role();
+        $type = $this->session->userdata('login_data')['type'];
+        $staff_array = [];
+
+        if($type == "VENDOR") {
+
+            $where = array(
+                "store.vendor_id" => $this->session->userdata("login_data")["vendor_id"],
+            );
+
+            $vendor = $this->Store_model->get_where($where);
+
+            foreach($vendor as $row){
+
+                $where = array(
+                    'staff.store_id' => $row['store_id']
+                );
+
+                $staffs = $this->Staff_model->get_where_with_role($where);
+
+                foreach($staffs as $staff){
+                    array_push($staff_array, $staff);
+                }
+            }
+
+            $this->page_data["staff"] = $staff_array;
+
+        }else{
+
+            $this->page_data["staff"] = $this->Staff_model->get_all_with_role();
+        }
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/staff/all");

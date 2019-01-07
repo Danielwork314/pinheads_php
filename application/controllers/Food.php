@@ -49,8 +49,14 @@ class Food extends Base_Controller
 
     function add()
     {
+        $vendor_id = $this->session->userdata('login_data')['vendor_id'];
 
-        $this->page_data['store'] = $this->Store_model->get_all();
+        $where = array(
+            'store.vendor_id' => $vendor_id
+        );
+
+        $this->page_data['store'] = $this->Store_model->get_where($where);
+
         $this->page_data['customize'] = $this->Customize_model->get_all();
         $this->page_data['food_category'] = $this->Food_category_model->get_all();
         $this->page_data['input_field'] = $this->Food_model->generate_input();
@@ -114,14 +120,17 @@ class Food extends Base_Controller
                     }
                 }
 
-                foreach($input['customize'] as $row){
+                if(isset($input['customize'])){
 
-                    $data = array(
-                        'food_id' => $food_id,
-                        'customize_id' => $row
-                    );
+                    foreach($input['customize'] as $row){
 
-                    $this->Food_customize_model->insert($data);
+                        $data = array(
+                            'food_id' => $food_id,
+                            'customize_id' => $row
+                        );
+
+                        $this->Food_customize_model->insert($data);
+                    }
                 }
 
                 redirect("food", "refresh");

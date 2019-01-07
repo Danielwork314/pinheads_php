@@ -18,8 +18,24 @@ class Customize extends Base_Controller
 
     public function index()
     {
-        $this->page_data["customize"] = $this->Customize_model->get_all();
 
+        $type = $this->session->userdata('login_data')['type'];
+
+        if($type == "VENDOR") {
+
+            $where = array(
+                "created_by" => $this->session->userdata("login_data")["vendor_id"],
+            );
+
+            $customize = $this->Customize_model->get_where($where);
+
+            $this->page_data["customize"] = $customize;
+
+        }else{
+
+            $this->page_data["customize"] = $this->Customize_model->get_all();
+        }
+        
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/customize/all");
         $this->load->view("admin/footer");

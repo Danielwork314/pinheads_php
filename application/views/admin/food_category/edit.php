@@ -20,7 +20,7 @@
 		</div>
 		<!-- /.box-header -->
 		<!-- form start -->
-		<form role="form" class="input_form" method="POST" action="<?= base_url() ?>food_category/edit/<?= $food_category['food_category_id']?>">
+		<form role="form" class="input_form" enctype="multipart/form-data" method="POST" action="<?= base_url() ?>food_category/edit/<?= $food_category['food_category_id']?>">
 			<div class="box-body">
 				<?php 
 				if (isset($error)) { 

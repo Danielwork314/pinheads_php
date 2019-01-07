@@ -17,21 +17,21 @@ class Food_category extends Base_Controller
 
     public function index()
     {
-        // $type = $this->session->userdata('login_data')['type'];
+        $type = $this->session->userdata('login_data')['type'];
 
-        // if ($type == "VENDOR") {
+        if ($type == "VENDOR") {
 
-        //     $where = array(
-        //         "food_category.created_by" => $this->session->userdata("login_data")["vendor_id"],
-        //     );
+            $where = array(
+                "created_by" => $this->session->userdata("login_data")["vendor_id"],
+            );
 
-        //     $food_category_id = $this->Food_category_model->get_where($where);
-        //     $this->page_data["food_category"] = $food_category_id;
+            $food_category_id = $this->Food_category_model->get_where($where);
+            $this->page_data["food_category"] = $food_category_id;
 
-        // } else {
+        } else {
 
             $this->page_data["food_category"] = $this->Food_category_model->get_all();
-        // }
+        }
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/food_category/all");
@@ -66,6 +66,7 @@ class Food_category extends Base_Controller
                     'food_category' => $input['food_category'],
                     'thumbnail' => $image_url,
                     // 'parent_id' => $input['parent_id'],
+                    "created_by" => $this->session->userdata("login_data")["vendor_id"],
                 );
 
                 $this->Food_category_model->insert($data);
@@ -148,9 +149,9 @@ class Food_category extends Base_Controller
 
                 $this->Food_category_model->update_where($where, $data);
 
-                $this->debug($data);
+                // $this->debug($data);
 
-                // redirect("food_category/details/" . $food_category_id, "refresh");
+                redirect("food_category", "refresh");
             } else {
 
                 $this->page_data["input"] = $input;

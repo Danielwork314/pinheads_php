@@ -126,7 +126,7 @@ class Store extends Base_Controller
                     'service_charge' => $input['service_charge'],
                 );
 
-                if ($input['favourite']) {
+                if (isset($input['favourite'])) {
                     $data['favourite'] = 1;
                 }
 
@@ -150,7 +150,7 @@ class Store extends Base_Controller
                     $this->Store_image_model->insert($data);
                 }
 
-                // redirect("store", "refresh");
+                redirect("store", "refresh");
 
             } else {
 
