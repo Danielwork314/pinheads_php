@@ -1001,6 +1001,7 @@ class API extends Base_Controller
 
             $food_data = array();
             foreach ($foods as $row) {
+
                 $data = array(
                     "food_id" => $row['food_id'],
                     "food" => $row['food'],
@@ -1014,6 +1015,18 @@ class API extends Base_Controller
                     "discount" => $row['discount'],
                     "image" => base_url() . $row['image'],
                 );
+
+                $where = array(
+                    'food_customize.food_id' => $row['food_id']
+                );
+
+                $customizable = $this->Food_customize_model->get_where($where);
+
+                if($customizable){
+                    $data['customizable'] = 1;
+                } else {
+                    $data['customizable'] = 0;
+                }
 
                 array_push($food_data, $data);
             }
@@ -1474,6 +1487,31 @@ class API extends Base_Controller
             $this->Sales_model->update_where($where, $data);
 
             $this->update_last_login($staff['staff_id']);
+
+            die(json_encode(array(
+                "status" => true,
+            )));
+        }
+
+    }
+
+    public function notificationRead()
+    {
+
+        if ($_POST) {
+            $input = $this->input->post();
+
+            // die(var_dump($input));
+
+            $where = array(
+                'notification_id' => $input['notification_id'],
+            );
+
+            $data = array(
+                'read' => 1
+            );
+
+            $this->Notification_model->update_where($where, $data);
 
             die(json_encode(array(
                 "status" => true,
