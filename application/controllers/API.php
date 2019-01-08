@@ -1214,10 +1214,12 @@ class API extends Base_Controller
                 $store = $this->Store_model->get_where($where)[0];
 
                 $data = array(
-                    'user_id' => $user['username'],
-                    'notification' => 'You had made an order from' . $store['store'],
+                    'user_id' => $user['user_id'],
+                    'notification' => 'You had made an order from ' . $store['store'],
                     'description' => "Thank you for using GoFooder's Application! You can now check your order's details in your order history",
                 );
+
+                $this->Notification_model->insert($data);
 
                 $where = array(
                     'sales_id' => $sales_id,
