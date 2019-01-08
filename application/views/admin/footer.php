@@ -34,6 +34,8 @@
 <script src="<?= base_url() ?>js/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
 <script src="<?= base_url() ?>js/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<!-- timepicker -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="<?= base_url() ?>js/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- Slimscroll -->
@@ -60,9 +62,12 @@
 
 <script>
 	$(document).ready(function () {
+
 		$(".datepicker").datepicker({
 			format: 'dd-mm-yyyy'
 		});
+
+		$('input.timepicker').timepicker({});
 
 		$(".data-table").DataTable({});
 

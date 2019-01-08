@@ -39,32 +39,28 @@ class Notification extends Base_Controller
 
             if(!$error){
 
+                $data = array(
+                    'notification' => $input['notification'],
+                    'description' => $input['description'],
+                    'end_date' => date('Y-m-d', strtotime($input['end_date'])),
+                    'end_time' => date('H:m:s', strtotime($input['end_time'])),
+                    'created_by' => $this->session->userdata('login_id'),
+                );
+
                 if($input['user_id'] == 0){
 
                     $user = $this->User_model->get_all();
 
                     foreach($user as $row){
 
-                        $data = array(
-                            'notification' => $input['notification'],
-                            'description' => $input['description'],
-                            // 'end_date' => $input['end_date'],
-                            'created_by' => $this->session->userdata('login_id'),
-                            'user_id' => $row['user_id'],
-                        );
+                        $data['user_id'] = $row['user_id'];
 
                         $this->Notification_model->insert($data);
                     }
 
                 } else {
 
-                    $data = array(
-                        'notification' => $input['notification'],
-                        'description' => $input['description'],
-                        // 'end_date' => $input['end_date'],
-                        'created_by' => $this->session->userdata('login_id'),
-                        'user_id' => $input['user_id'],
-                    );
+                    $data['user_id'] = $input['user_id'];
 
                     $this->Notification_model->insert($data);
                 }
@@ -119,6 +115,8 @@ class Notification extends Base_Controller
 
             $input = $this->input->post();
 
+            // die(var_dump($input));
+
             $error = false;
 
             if(!$error){
@@ -129,7 +127,8 @@ class Notification extends Base_Controller
 
                     'notification' => $input['notification'],
                     'description' => $input['description'],
-                    // 'end_date' => $input['end_date'],
+                    'end_date' => date('Y-m-d', strtotime($input['end_date'])),
+                    'end_time' => date('H:m:s', strtotime($input['end_time'])),
                     'modified_date' => $date->format("Y-m-d H:i:s"),
                     'modified_by' => $this->session->userdata('login_id'),
                     'user_id' => $input['user_id'],

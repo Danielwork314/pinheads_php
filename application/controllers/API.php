@@ -1534,6 +1534,57 @@ class API extends Base_Controller
         }
     }
 
+    public function notifications()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $where = array(
+                "token" => $input['user_token'],
+            );
+
+            $user = $this->User_model->get_where($where);
+
+            if ($user) {
+
+                $user = $user[0];
+
+                $where = array(
+                    'notification.user_id' => $user['user_id'],
+                );
+
+                $notifications = $this->Notification_model->get_where($where);
+
+                $i = 0;
+                foreach($notifications as $row){
+
+                    $datetime = new DateTime($row['created_date']);
+                    $notifications[$i]['date'] = $datetime->format('d-m-Y');
+                    $notifications[$i]['time'] = $datetime->format('H:i:s');
+
+                    $end_date = new DateTime($row['end_date']);
+                    $notifications[$i]['end_date'] = $end_date->format('d-m-Y');
+
+                    $end_time = new DateTime($row['end_time']);
+                    $notifications[$i]['end_time'] = $end_time->format('d-m-Y');
+
+                    $i++;
+                }
+
+                die(json_encode(array(
+                    "status" => true,
+                    "data" => $notifications,
+                )));
+
+            } else {
+                die(json_encode(array(
+                    "status" => false,
+                    "message" => "invalid ID or Password",
+                )));
+            }
+        }
+    }
+
     public function staff_login()
     {
         if ($_POST) {

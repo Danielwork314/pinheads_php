@@ -51,12 +51,18 @@
 							<?= $notification["description"] ?>
 						</td>
 					</tr>
-                    <!-- <tr>
+                    <tr>
 						<th>End Date</th>
 						<td>:
 							<?= $notification["end_date"] ?>
 						</td>
-					</tr> -->
+					</tr>
+					<tr>
+						<th>End Time</th>
+						<td>:
+							<?= $notification["end_time"] ?>
+						</td>
+					</tr>
 				</table>
 			</div>
 			<!-- /.box-body -->

@@ -53,10 +53,15 @@
 					<label>Notification Description</label>
 					<input type="text" class="form-control" name="description" required placeholder="Notification description">
 				</div> -->
-				<!-- <div class="form-group">
+				<div class="form-group">
 					<label>End Date</label>
-					<input type="date" class="form-control" name="end_date" required placeholder="End date">
-				</div> -->
+					<input type="text" class="form-control datepicker" name="end_date" required placeholder="End Date">
+				</div>
+				<div class="form-group">
+					<label>End Time</label>
+					<input type="text" class="form-control timepicker" name="end_time" required placeholder="End Time">
+				</div>
+				 
 			</div>
 			<!-- /.box-body -->
 
