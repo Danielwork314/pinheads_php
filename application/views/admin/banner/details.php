@@ -31,6 +31,12 @@
 				<img src="<?= base_url() . $banner['image'] ?>" class="xs_thumbnail">
 				<table class="formTable">
 					<tr>
+						<th>Store</th>
+						<td>:
+							<?= $banner["store"] ?>
+						</td>
+					</tr>
+					<tr>
 						<th>Created Date</th>
 						<td>:
 							<?= $banner["created_date"] ?>

@@ -447,6 +447,7 @@ class API extends Base_Controller
         foreach ($stores as $row) {
             $data = array(
                 "store_id" => $row['store_id'],
+                "banner" => base_url() . $row['banner'],
                 "gourmet_type_id" => $row['gourmet_type_id'],
                 "gourmet_type" => $row['gourmet_type'],
                 "pricing_id" => $row['pricing_id'],
@@ -1034,6 +1035,7 @@ class API extends Base_Controller
             $data = array(
                 "banner_id" => $row['banner_id'],
                 "image" => base_url() . $row['image'],
+                "store_id" => $row['store_id']
             );
 
             array_push($banner_data, $data);

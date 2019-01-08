@@ -12,7 +12,7 @@ class Notification_model extends Base_model
 
     public function get_all(){
 
-        $this->db->select('*');
+        $this->db->select('notification.*, user.username');
         $this->db->from($this->table_name);
         $this->db->join('user', 'user.user_id = notification.user_id', 'left');
         $this->db->where('notification.deleted', 0);

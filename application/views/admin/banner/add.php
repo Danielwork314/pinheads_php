@@ -32,6 +32,7 @@
 				}
 				?>
 				<?= $input_field['image'] ?>
+				<?= $input_field['store_id'] ?>
 				<input type="hidden" name="dummy" value="why are you looking at this?">
 				<!-- <div class="form-group">
 					<label>Banner Title</label>

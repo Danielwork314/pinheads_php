@@ -12,6 +12,7 @@ class Banner extends Base_Controller
         $this->page_data = array();
 
         $this->load->model("Banner_model");
+        $this->load->model("Store_model");
 
     }
 
@@ -28,6 +29,7 @@ class Banner extends Base_Controller
 
     public function add()
     {
+        $this->page_data['store'] = $this->Store_model->get_all();
         $this->page_data['input_field'] = $this->Banner_model->generate_input();
 
         if ($_POST) {
@@ -53,6 +55,7 @@ class Banner extends Base_Controller
 
                 $data = array(
                     'image' => $image_url,
+                    'store_id' => $_POST['store_id'],
                     'created_by' => $this->session->userdata('login_id'),
                 );
 

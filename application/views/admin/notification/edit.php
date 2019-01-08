@@ -32,6 +32,16 @@
 				}
 				?>
 				
+				<div class="form-group">
+					<label for="form_user_id">User</label>
+					<select class="form-control select2" id="form_user_id" name="user_id">
+						<option value="0">All Users</option>
+						<?php foreach($user as $row){ ?>
+						<option value="<?= $row['user_id'] ?>" <?php if($row['user_id'] == $notification['user_id']){ ?> selected <?php } ?>><?= $row['username'] ?></option>
+						<?php } ?>
+					</select>
+					<div class="help-block with-errors"></div>
+				</div>
                 <?= $input_field['notification'] ?>
 				<?= $input_field['description'] ?>
 				<!-- <?= $input_field['end_date'] ?> -->
@@ -44,10 +54,10 @@
 					<label>Notification Description</label>
 					<input type="text" class="form-control" name="description" required value="<?= $notification['description'] ?>">
 				</div> -->
-                <div class="form-group">
+                <!-- <div class="form-group">
 					<label>End Date</label>
 					<input type="text" class="form-control" name="end_date" required value="<?= $notification['end_date'] ?>">
-				</div>
+				</div> -->
 			</div>
 			<!-- /.box-body -->
 

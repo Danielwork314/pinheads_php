@@ -49,13 +49,20 @@ class Food extends Base_Controller
 
     function add()
     {
-        $vendor_id = $this->session->userdata('login_data')['vendor_id'];
+        $type = $this->session->userdata('login_data')['type'];
 
-        $where = array(
-            'store.vendor_id' => $vendor_id
-        );
+        if($type == "VENDOR") {
 
-        $this->page_data['store'] = $this->Store_model->get_where($where);
+            $where = array(
+                'store.vendor_id' => $this->session->userdata("login_data")["vendor_id"],
+            );
+
+            $this->page_data['store'] = $this->Store_model->get_where($where);
+
+        }else{
+
+            $this->page_data["store"] = $this->Store_model->get_all();
+        }
 
         $this->page_data['customize'] = $this->Customize_model->get_all();
         $this->page_data['food_category'] = $this->Food_category_model->get_all();

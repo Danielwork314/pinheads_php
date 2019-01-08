@@ -12,6 +12,7 @@ class Notification extends Base_Controller
         $this->page_data = array();
 
         $this->load->model("Notification_model");
+        $this->load->model("User_notification_model");
         $this->load->model("User_model");
     }
 
@@ -26,12 +27,14 @@ class Notification extends Base_Controller
 
     function add()
     {
-
+        $this->page_data['user'] = $this->User_model->get_all();
         $this->page_data['notification'] = $this->Notification_model->get_all();
         $this->page_data['input_field'] = $this->Notification_model->generate_input();
 
         if ($_POST) {
             $input = $this->input->post();
+
+            // die(var_dump($input));
 
             $error = false;
 
@@ -40,12 +43,36 @@ class Notification extends Base_Controller
                 $data = array(
                     'notification' => $input['notification'],
                     'description' => $input['description'],
-                    'end_date' => $input['end_date'],
+                    // 'end_date' => $input['end_date'],
                     'created_by' => $this->session->userdata('login_id'),
-                    'user_id' => $this->session->userdata('login_id'),
+                    'user_id' => $input['user_id']
                 );
 
-                $this->Notification_model->insert($data);
+                $notification_id = $this->Notification_model->insert($data);
+
+                if($input['user_id'] == 0){
+
+                    $user = $this->User_model->get_all();
+
+                    foreach($user as $row){
+
+                        $data = array(
+                            'user_id' => $row['user_id'],
+                            'notification_id' => $notification_id,
+                        );
+
+                        $this->User_notification_model->insert($data);
+                    }
+
+                } else {
+
+                    $data = array(
+                        'user_id' => $input['user_id'],
+                        'notification_id' => $notification_id,
+                    );
+
+                    $this->User_notification_model->insert($data);
+                }
 
                 redirect("notification", "refresh");
 

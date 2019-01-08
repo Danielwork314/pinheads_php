@@ -26,7 +26,7 @@
                             <th>User</th>
 							<th>Notification Title</th>
 							<th>Notification Description</th>
-							<th>End Date</th>
+							<!-- <th>End Date</th> -->
                             <th>Created Date</th>
                             <!-- <th>Created By</th> -->
                             <th></th>
@@ -45,7 +45,11 @@
                             </td>
                             <td>
                                 <a href="<?= base_url() ?>notification/details/<?= $row['notification_id']?>">
-									<?= $row['user'] ?>
+									<?php if($row['user_id'] == 0){ ?>
+										All Users
+									<?php } else { ?>
+										<?= $row['username'] ?>
+									<?php } ?>
                                 </a>
                             </td>
 							<td>
@@ -58,11 +62,11 @@
 									<?= $row['description'] ?>
                                 </a>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <a href="<?= base_url() ?>notification/details/<?= $row['notification_id']?>">
 									<?= $row['end_date'] ?>
                                 </a>
-                            </td>
+                            </td> -->
                             <td>
                                 <a href="<?= base_url() ?>notification/details/<?= $row['notification_id']?>">
 									<?= $row['created_date'] ?>
@@ -88,7 +92,7 @@
                             <th>User ID</th>
 							<th>Notification Title</th>
 							<th>Notification Description</th>
-							<th>End Date</th>
+							<!-- <th>End Date</th> -->
                             <th>Created Date</th>
                             <!-- <th>Created By</th> -->
                             <th></th>
