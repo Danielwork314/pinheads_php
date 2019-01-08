@@ -12,7 +12,6 @@ class Notification extends Base_Controller
         $this->page_data = array();
 
         $this->load->model("Notification_model");
-        $this->load->model("User_notification_model");
         $this->load->model("User_model");
     }
 
@@ -40,16 +39,6 @@ class Notification extends Base_Controller
 
             if(!$error){
 
-                $data = array(
-                    'notification' => $input['notification'],
-                    'description' => $input['description'],
-                    // 'end_date' => $input['end_date'],
-                    'created_by' => $this->session->userdata('login_id'),
-                    'user_id' => $input['user_id']
-                );
-
-                $notification_id = $this->Notification_model->insert($data);
-
                 if($input['user_id'] == 0){
 
                     $user = $this->User_model->get_all();
@@ -57,21 +46,27 @@ class Notification extends Base_Controller
                     foreach($user as $row){
 
                         $data = array(
+                            'notification' => $input['notification'],
+                            'description' => $input['description'],
+                            // 'end_date' => $input['end_date'],
+                            'created_by' => $this->session->userdata('login_id'),
                             'user_id' => $row['user_id'],
-                            'notification_id' => $notification_id,
                         );
 
-                        $this->User_notification_model->insert($data);
+                        $this->Notification_model->insert($data);
                     }
 
                 } else {
 
                     $data = array(
+                        'notification' => $input['notification'],
+                        'description' => $input['description'],
+                        // 'end_date' => $input['end_date'],
+                        'created_by' => $this->session->userdata('login_id'),
                         'user_id' => $input['user_id'],
-                        'notification_id' => $notification_id,
                     );
 
-                    $this->User_notification_model->insert($data);
+                    $this->Notification_model->insert($data);
                 }
 
                 redirect("notification", "refresh");
@@ -134,7 +129,7 @@ class Notification extends Base_Controller
 
                     'notification' => $input['notification'],
                     'description' => $input['description'],
-                    'end_date' => $input['end_date'],
+                    // 'end_date' => $input['end_date'],
                     'modified_date' => $date->format("Y-m-d H:i:s"),
                     'modified_by' => $this->session->userdata('login_id'),
                     'user_id' => $input['user_id'],

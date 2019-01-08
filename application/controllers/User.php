@@ -16,6 +16,7 @@ class User extends Base_Controller
         $this->load->model("Card_model");
         $this->load->model("Billing_address_model");
         $this->load->model("Sales_model");
+        $this->load->model("Notification_model");
 
     }
 
@@ -126,6 +127,13 @@ class User extends Base_Controller
 
         $sales = $this->Sales_model->get_where($where);
         $this->page_data["sales"] = $sales;
+
+        $where = array(
+            "notification.user_id" => $user_id,
+        );
+
+        $notification = $this->Notification_model->get_where($where);
+        $this->page_data["notification"] = $notification;
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/user/details");

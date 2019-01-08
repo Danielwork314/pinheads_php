@@ -32,7 +32,11 @@
                     <tr>
 						<th>User</th>
 						<td>:
-							<?= $notification["user"] ?>
+							<?php if($notification['user_id'] != 0){ ?>
+								<?= $notification["username"] ?>
+							<?php } else { ?>
+								All Users
+							<?php } ?>
 						</td>
 					</tr>
 					<tr>
@@ -47,12 +51,12 @@
 							<?= $notification["description"] ?>
 						</td>
 					</tr>
-                    <tr>
+                    <!-- <tr>
 						<th>End Date</th>
 						<td>:
 							<?= $notification["end_date"] ?>
 						</td>
-					</tr>
+					</tr> -->
 				</table>
 			</div>
 			<!-- /.box-body -->

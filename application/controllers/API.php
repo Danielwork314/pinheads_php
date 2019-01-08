@@ -25,6 +25,7 @@ class API extends Base_Controller
         $this->load->model("Customize_dressing_model");
         $this->load->model("User_coupon_model");
         $this->load->model("Table_no_model");
+        $this->load->model("Notification_model");
     }
 
     public function test()
@@ -1204,6 +1205,19 @@ class API extends Base_Controller
                         $this->User_coupon_model->update_where($where, $data);
                     }
                 }
+
+                //insert notification
+                $where = array(
+                    'store.store_id' => $store_ids[0],
+                );
+
+                $store = $this->Store_model->get_where($where)[0];
+
+                $data = array(
+                    'user_id' => $user['username'],
+                    'notification' => 'You had made an order from' . $store['store'],
+                    'description' => "Thank you for using GoFooder's Application! You can now check your order's details in your order history",
+                );
 
                 $where = array(
                     'sales_id' => $sales_id,

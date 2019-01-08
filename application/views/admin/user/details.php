@@ -323,6 +323,58 @@
 		</div>
 	</div>
 </section>
+
+<section class="content">
+	<div class="col-md-12 col-xs-12">
+		<div class="box box-primary">
+			<div class="box-header with-border">
+					<h3 class="box-title">
+						<?=$user['username']?>'s Notification Lists
+					</h3>
+			</div>
+				
+			<br>
+
+			<div class='box-body no-padding'>
+				<div id="refreshBox">
+					<table id="data-table" class="table table-bordered table-hover data-table">
+						<thead>
+						<tr>
+							<th>No.</th>
+							<th>Notification</th>
+							<th>Description</th>
+							<th>Read</th>
+						</tr>
+						</thead>
+						<?php
+							$i = 1;
+							foreach($notification as $row){
+								?>
+								<tr>
+									<td>
+										<?= $i ?>
+									</td>
+									
+									<td>
+										<?= $row['notification'] ?>
+									</td>
+									<td>
+										<?= $row['description'] ?>
+									</td>
+									<td>
+										<?=($row['read'] == 1) ? "YES" : "NO"?>
+									</td>
+								</tr>
+								<?php
+								$i++;
+							}
+							?>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 </div>
 
 <script>
