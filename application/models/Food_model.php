@@ -33,6 +33,21 @@ class Food_model extends Base_model{
         return $query->result_array();
     }
 
+    
+    public function search_food($keyword){
+
+        $this->db->select("*");
+        $this->db->from($this->table_name);
+        $this->db->join('store', 'store.store_id = food.store_id', 'left');
+        $this->db->like("LOWER(food)", strtolower($keyword));
+        $this->db->where("food.deleted", 0);
+        $this->db->group_by("food.store_id");
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
     // public function get_where($where)
     // {
     //     $this->db->select("*");

@@ -9,6 +9,8 @@ class API extends Base_Controller
 
         $this->load->model("User_model");
         $this->load->model("Staff_model");
+        $this->load->model("Card_model");
+        $this->load->model("Billing_address_model");
         $this->load->model("Food_category_model");
         $this->load->model("Gourmet_type_model");
         $this->load->model("Store_model");
@@ -350,16 +352,22 @@ class API extends Base_Controller
         }
     }
 
+
+
     public function stores()
     {
         if ($_POST) {
             $input = $this->input->post();
 
-            if (!empty($input['gourmet_type_id'])) {
-                $where = array(
-                    "store.gourmet_type_id" => $input['gourmet_type_id'],
-                );
-                $stores = $this->Store_model->get_where($where);
+            if (!empty($input['gourmet_type'])) {
+
+                if($input['gourmet_type'] != 'more'){
+
+                    $stores = $this->Store_model->search_type($input['gourmet_type']);
+                } else {
+
+                    $stores = $this->Store_model->search_more();
+                }
 
             } else if (!empty($input['remarks'])) {
 
@@ -570,6 +578,8 @@ class API extends Base_Controller
             $i = 0;
             foreach ($table_list as $row) {
 
+                $table_list[$i]['used'] = 0;
+
                 $j = 0;
                 foreach ($order_lists as $row2) {
 
@@ -577,6 +587,7 @@ class API extends Base_Controller
 
                         $table_list[$i] = $row2;
                         $table_list[$i]['table_no'] = $row['table_no'];
+                        $table_list[$i]['used'] = 1;
                     }
 
                     $j++;
@@ -1364,6 +1375,16 @@ class API extends Base_Controller
                 }
             }
 
+            $food = $this->Food_model->search_food($input['keyword']);
+
+            if ($food) {
+
+                foreach ($food as $row) {
+                    $row['thumbnail'] = base_url() . $row['thumbnail'];
+                    array_push($store_array, $row);
+                }
+            }
+
             die(json_encode(array(
                 "status" => true,
                 "data" => $store_array,
@@ -1563,11 +1584,179 @@ class API extends Base_Controller
                     "data" => $coupons,
                 )));
 
-            } else {
+            }
+        }
+    }
+
+    public function cards()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $where = array(
+                "token" => $input['user_token'],
+            );
+
+            $user = $this->User_model->get_where($where);
+
+            if ($user) {
+
+                $user = $user[0];
+
+                $where = array(
+                    'card.user_id' => $user['user_id'],
+                );
+
+                $cards = $this->Card_model->get_where($where);
+
                 die(json_encode(array(
-                    "status" => false,
-                    "message" => "invalid ID or Password",
+                    "status" => true,
+                    "data" => $cards,
                 )));
+
+            } 
+        }
+    }
+
+    public function billingAddress()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $where = array(
+                "token" => $input['user_token'],
+            );
+
+            $user = $this->User_model->get_where($where);
+
+            if ($user) {
+
+                $user = $user[0];
+
+                $where = array(
+                    'billing_address.user_id' => $user['user_id'],
+                );
+
+                $billing_address = $this->Billing_address_model->get_where($where);
+
+                die(json_encode(array(
+                    "status" => true,
+                    "data" => $billing_address,
+                )));
+
+            }
+        }
+    }
+
+    public function addBillingAddress(){
+
+        if ($_POST) {
+            $input = $this->input->post();
+            // die(var_dump($input));
+            
+            // $input['billingAddress'] = json_decode($input['billingAddress'], true);
+
+            // die(var_dump($input['billingAddress']));
+            $where = array(
+                "token" => $input['user_token'],
+            );
+
+            $user = $this->User_model->get_where($where);
+
+            if ($user) {
+
+                $user = $user[0];
+
+                $data = array(
+                    'user_id' => $user['user_id'],
+                    'address1' => $input['address1'],
+                    'address2' => $input['address2'],
+                    'state' => $input['state'],
+                    'postcode' => $input['postcode'],
+                    'country' => $input['country'],
+                );
+
+                $this->Billing_address_model->insert($data);
+
+                die(json_encode(array(
+                    "status" => true,
+                )));
+
+            } 
+        }
+    }
+
+    public function user()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $where = array(
+                "token" => $input['user_token'],
+            );
+
+            $user = $this->User_model->get_where_with_role($where);
+
+            if ($user) {
+
+                $user[0]['image'] = base_url() . $user[0]['image'];
+
+                die(json_encode(array(
+                    "status" => true,
+                    "data" => $user,
+                )));
+
+            }
+        }
+    }
+
+    public function editImage()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+            die(var_dump($input));
+
+            $where = array(
+                "token" => $input['user_token'],
+            );
+
+            $user = $this->User_model->get_where_with_role($where);
+
+            if ($user) {
+
+                if (!empty($_FILES['image']['name'])) {
+                    $config = array(
+                        "allowed_types" => "gif|png|jpg|jpeg",
+                        "upload_path"   => "./images/food/",
+                        "path"          => "/images/food/"
+                    );
+    
+                    $this->load->library("upload", $config);
+    
+                    if ($this->upload->do_upload("file")) {
+                        $image = $config['path'] . $this->upload->data()['file_name'];
+                    } else {
+    
+                       $error_message = $this->upload->display_errors();
+                    }
+    
+                }
+
+                $where = array(
+                    'user_id' => $user[0]['user_id'],
+                );
+
+                $data = array(
+                    'image' => $image,
+                );
+
+                $this->User_model->update_where($where, $data);
+
+                die(json_encode(array(
+                    "status" => true,
+                    "data" => $user,
+                )));
+
             }
         }
     }

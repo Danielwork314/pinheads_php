@@ -87,4 +87,34 @@ class Store_model extends Base_model
 
         return $query->result_array();
     }
+
+    public function search_type($keyword){
+
+        $this->db->select("store.*, gourmet_type, pricing, vendor.name AS vendor");
+        $this->db->from("store");
+        $this->db->join("gourmet_type", "gourmet_type.gourmet_type_id = store.gourmet_type_id", "left");
+        $this->db->join("pricing", "pricing.pricing_id = store.pricing_id", "left");
+        $this->db->join("vendor", "vendor.vendor_id = store.vendor_id", "left");
+        $this->db->like("LOWER(gourmet_type)", strtolower($keyword));
+        $this->db->where("store.deleted", 0);
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
+
+    public function search_more(){
+
+        $this->db->select("store.*, gourmet_type, pricing, vendor.name AS vendor");
+        $this->db->from("store");
+        $this->db->join("gourmet_type", "gourmet_type.gourmet_type_id = store.gourmet_type_id", "left");
+        $this->db->join("pricing", "pricing.pricing_id = store.pricing_id", "left");
+        $this->db->join("vendor", "vendor.vendor_id = store.vendor_id", "left");
+        $this->db->where("gourmet_type.gourmet_type_id > 8");
+        $this->db->where("store.deleted", 0);
+
+        $query = $this->db->get();
+
+        return $query->result_array();
+    }
 }
