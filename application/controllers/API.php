@@ -690,6 +690,25 @@ class API extends Base_Controller
             );
 
             $order_foods = $this->Order_food_model->get_where($where);
+
+            $j = 0;
+            foreach($order_foods as $food){
+
+                $where = array(
+                    'food_customize.food_id' => $food['food_id']
+                );
+    
+                $customizable = $this->Food_customize_model->get_where($where);
+    
+                if($customizable){
+                    $order_foods[$j]['customizable'] = 1;
+                } else {
+                    $order_foods[$j]['customizable'] = 0;
+                }
+
+                $j++;
+            }
+
             $order['order_foods'] = $order_foods;
 
             $i = 0;
@@ -704,7 +723,7 @@ class API extends Base_Controller
                 $order['order_foods'][$i]['dressing'] = $order_food_dressing;
                 $i++;
             }
-
+            
             die(json_encode(array(
                 "status" => true,
                 "data" => array(
@@ -763,6 +782,21 @@ class API extends Base_Controller
             $this->Sales_model->update_where($where, $data);
 
             $this->update_last_login($staff['staff_id']);
+
+            //insert notification
+            $where = array(
+                'store.store_id' => $staff['store_id'],
+            );
+
+            $store = $this->Store_model->get_where($where)[0];
+
+            $data = array(
+                'user_id' => $sales['user_id'],
+                'notification' => 'You had updated your order in ' . $store['store'],
+                'description' => "You can now check your order's details in your order history",
+            );
+
+            $this->Notification_model->insert($data);
 
             die(json_encode(array(
                 "status" => true,
@@ -841,6 +875,21 @@ class API extends Base_Controller
             $this->Sales_model->update_where($where, $data);
 
             $this->update_last_login($staff['staff_id']);
+
+            //insert notification
+            // $where = array(
+            //     'store.store_id' => $staff['store_id'],
+            // );
+
+            // $store = $this->Store_model->get_where($where)[0];
+
+            // $data = array(
+            //     'user_id' => $user['user_id'],
+            //     'notification' => 'You had made an order from ' . $store['store'],
+            //     'description' => "Thank you for using GoFooder's Application! You can now check your order's details in your order history",
+            // );
+
+            // $this->Notification_model->insert($data);
 
             die(json_encode(array(
                 "status" => true,
@@ -921,6 +970,23 @@ class API extends Base_Controller
             $this->Sales_model->update_where($where, $data);
 
             $this->update_last_login($staff['staff_id']);
+
+            // insert notification
+            $sales = $this->Sales_model->get_where($where)[0];
+
+            $where = array(
+                'store.store_id' => $staff['store_id'],
+            );
+
+            $store = $this->Store_model->get_where($where)[0];
+
+            $data = array(
+                'user_id' => $sales['user_id'],
+                'notification' => 'You had updated your order in ' . $store['store'],
+                'description' => "Thank you for using GoFooder's Application! You can now check your order's details in your order history",
+            );
+
+            $this->Notification_model->insert($data);
 
             die(json_encode(array(
                 "status" => true,
@@ -1706,6 +1772,35 @@ class API extends Base_Controller
                     "data" => $user,
                 )));
 
+            }
+        }
+    }
+
+    public function resetPassword()
+    {
+        if ($_POST) {
+            $input = $this->input->post();
+            // die(var_dump($input));
+
+            $where = array(
+                "email" => $input['email'],
+            );
+
+            $user = $this->User_model->get_where_with_role($where);
+
+            if ($user) {
+
+                
+
+                die(json_encode(array(
+                    "status" => true,
+                )));
+
+            } else {
+
+                die(json_encode(array(
+                    "status" => false,
+                )));
             }
         }
     }
