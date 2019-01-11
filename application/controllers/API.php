@@ -8,6 +8,7 @@ class API extends Base_Controller
         parent::__construct();
 
         $this->load->model("User_model");
+        $this->load->model("Faq_model");
         $this->load->model("Staff_model");
         $this->load->model("Card_model");
         $this->load->model("Billing_address_model");
@@ -1140,6 +1141,29 @@ class API extends Base_Controller
         )));
     }
 
+    public function faq()
+    {
+        $faq = $this->Faq_model->get_all();
+
+        $faq_data = array();
+        foreach ($faq as $row) {
+            $data = array(
+                "faq_id" => $row['faq_id'],
+                "faq" => $row['faq'],
+                "answer" => $row['answer']
+            );
+
+            array_push($faq_data, $data);
+        }
+
+        die(json_encode(array(
+            "status" => true,
+            "data" => array(
+                "faq" => $faq_data,
+            ),
+        )));
+    }
+
     public function addCard()
     {
         if ($_POST) {
@@ -1752,6 +1776,90 @@ class API extends Base_Controller
         }
     }
 
+    public function removeBillingAddress(){
+
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $this->Billing_address_model->hard_delete($input['billing_address_id']);
+
+            die(json_encode(array(
+                "status" => true,
+            )));
+        }
+    }
+
+    public function editBillingAddress(){
+
+        if ($_POST) {
+            $input = $this->input->post();
+
+            // die(var_dump($input));
+            $where = array(
+                'billing_address_id' => $input['billing_address_id']
+            );
+
+            $data = array(
+                'address1' => $input['address1'],
+                'address2' => $input['address2'],
+                'state' => $input['state'],
+                'postcode' => $input['postcode'],
+                'country' => $input['country'],
+            );
+
+            $this->Billing_address_model->update_where($where, $data);
+
+            die(json_encode(array(
+                "status" => true,
+            )));
+        }
+    }
+
+    public function editCard(){
+
+        if ($_POST) {
+            $input = $this->input->post();
+
+            // die(var_dump($input));
+            $where = array(
+                'card_id' => $input['card_id']
+            );
+
+            $data = array(
+                'card' => $input['card'],
+                'cvv' => $input['cvv'],
+                'month' => $input['month'],
+                'year' => $input['year'],
+                'firstname' => $input['firstname'],
+                'lastname' => $input['lastname'],
+                'address' => $input['address'],
+                'phone' => $input['phone'],
+                'region' => $input['region'],
+                'email' => $input['email'],
+            );
+
+            $this->Card_model->update_where($where, $data);
+
+            die(json_encode(array(
+                "status" => true,
+            )));
+        }
+    }
+
+
+    public function removeCard(){
+
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $this->Card_model->hard_delete($input['card_id']);
+
+            die(json_encode(array(
+                "status" => true,
+            )));
+        }
+    }
+
     public function user()
     {
         if ($_POST) {
@@ -1790,7 +1898,7 @@ class API extends Base_Controller
 
             if ($user) {
 
-                
+                //send email
 
                 die(json_encode(array(
                     "status" => true,
