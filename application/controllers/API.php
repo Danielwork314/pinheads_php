@@ -120,6 +120,77 @@ class API extends Base_Controller
         }
     }
 
+    public function editUser(){
+
+        if ($_POST) {
+            $input = $this->input->post();
+
+            $error = false;
+
+            // //check email
+            // $where = array(
+            //     'email' => $input['email'],
+            // );
+            // $email_exists = $this->User_model->get_where($where);
+
+            // if ($email_exists) {
+            //     $error = true;
+            //     $error_message = "Email already exists.";
+            // }
+
+            // //check phone
+            // $where = array(
+            //     'contact' => $input['contact'],
+            // );
+            // $phone_exists = $this->User_model->get_where($where);
+
+            // if ($phone_exists) {
+            //     $error = true;
+            //     $error_message = "Phone already exists.";
+            // }
+
+            if (!$error) {
+
+                if($input['gender'] == 'Male'){
+                    $input['gender_id'] = 1;
+                } else {
+
+                    $input['gender_id'] = 2;
+                }
+
+                $where = array(
+                    'user_id' => $input['user_id']
+                );
+
+                $data = array(
+                    'username' => $input['username'],
+                    'gender_id' => $input['gender_id'],
+                    'dob' => $input['dob'],
+                    'contact' => $input['contact'],
+                    'email' => $input['email'],
+                );
+
+                if($input['password'] != ''){
+
+                    $hash = $this->hash($input['password']);
+                    $data['password'] = $hash['password'];
+                    $data['salt'] = $hash['salt'];
+                }
+
+                $this->User_model->update_where($where, $data);
+
+                die(json_encode(array(
+                    "status" => true,
+                )));
+            } else {
+                die(json_encode(array(
+                    'status' => false,
+                    "message" => $error_message,
+                )));
+            }
+        }
+    }
+
     public function login()
     {
         if ($_POST) {
@@ -1169,36 +1240,35 @@ class API extends Base_Controller
         if ($_POST) {
             $input = $this->input->post();
 
-            $error = false;
-
-            $input['card'] = json_decode($input['card'], true);
-
-            // die(var_dump($input['order']));
-
             $where = array(
                 "token" => $input['user_token'],
             );
 
             $user = $this->User_model->get_where($where);
 
-            if (empty($user)) {
-                $error = true;
-                $error_message = "Please login to proceed.";
-            }
-
-            if (!$error) {
+            if ($user) {
                 $user = $user[0];
+
+                if($input['card_type'] == 'VISA'){
+                    $card_type_id = 1;
+                }
 
                 $data = array(
                     "user_id" => $user['user_id'],
-                    "card_type_id" => $input['card']['card_type_id'],
-                    "card" => $input['card']['card'],
-                    "firstname" => $input['card']['firstname'],
-                    "lastname" => $input['card']['lastname'],
-                    'cvv' => $input['card']['cvv'],
-                    "month" => $input['card']['month'],
-                    "year" => $input['card']['year'],
+                    "card_type_id" => $card_type_id,
+                    "card" => $input['card'],
+                    "firstname" => $input['firstname'],
+                    "lastname" => $input['lastname'],
+                    'cvv' => $input['cvv'],
+                    "month" => $input['month'],
+                    "year" => $input['year'],
+                    "address" => $input['address'],
+                    "phone" => $input['phone'],
+                    "region" => $input['region'],
+                    "email" => $input['email'],
                 );
+
+                $this->Card_model->insert($data);
 
                 die(json_encode(array(
                     "status" => true,
@@ -1742,11 +1812,7 @@ class API extends Base_Controller
 
         if ($_POST) {
             $input = $this->input->post();
-            // die(var_dump($input));
-            
-            // $input['billingAddress'] = json_decode($input['billingAddress'], true);
 
-            // die(var_dump($input['billingAddress']));
             $where = array(
                 "token" => $input['user_token'],
             );
