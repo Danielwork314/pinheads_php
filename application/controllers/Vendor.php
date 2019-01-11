@@ -19,7 +19,22 @@ class Vendor extends Base_Controller
 
     function index()
     {
-        $this->page_data["vendor"] = $this->Vendor_model->get_all_with_role();
+        $type = $this->session->userdata('login_data')['type'];
+
+        if($type == "VENDOR") {
+
+            $where = array(
+                "vendor.vendor_id" => $this->session->userdata("login_data")["vendor_id"],
+            );
+
+            $vendor = $this->Vendor_model->get_where_with_role($where);
+
+            $this->page_data["vendor"] = $vendor;
+
+        }else{
+
+            $this->page_data["vendor"] = $this->Vendor_model->get_all_with_role();
+        }
 
         $this->load->view("admin/header", $this->page_data);
         $this->load->view("admin/vendor/all");

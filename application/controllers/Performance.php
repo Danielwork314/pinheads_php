@@ -18,7 +18,24 @@ class Performance extends Base_Controller
 
     public function store_sales()
     {
-        $store = $this->Store_model->get_all();
+        // $store = $this->Store_model->get_all();
+
+        $type = $this->session->userdata('login_data')['type'];
+
+        if ($type == "VENDOR") {
+
+            $where = array(
+                "vendor.vendor_id" => $this->session->userdata("login_id"),
+                // "store.created_by" => $this->session->userdata("login_data")["vendor_id"],
+            );
+
+            $store = $this->Store_model->get_where($where);
+
+        } else {
+
+            $store = $this->Store_model->get_all();
+        }
+
         $month = ($_GET and $_GET['month']) ? $_GET['month'] : date("m");
         $year = ($_GET and $_GET['year']) ? $_GET['year'] : date("Y");
         $months = array();
@@ -216,7 +233,22 @@ class Performance extends Base_Controller
             array_push($years, $data);
         }
 
-        $food = $this->Food_model->get_all();
+        // $food = $this->Food_model->get_all();
+
+        $type = $this->session->userdata('login_data')['type'];
+
+        if($type == "VENDOR") {
+
+            $where = array(
+                "food.created_by" => $this->session->userdata("login_data")["vendor_id"],
+            );
+
+            $food = $this->Food_model->get_where($where);
+
+        }else{
+
+            $food = $this->Food_model->get_all();
+        }
 
         $i = 0;
         foreach ($food as $row) {
