@@ -14,10 +14,10 @@ class User_model extends Base_Model
     {
         $this->db->select("*");
         $this->db->from("user");
-        $this->db->where("email = ", $input['id']);
-        $this->db->or_where("contact = ", $input['id']);
         $this->db->join("role", $this->table_name . ".role_id = role.role_id", "left");
         $this->db->where("password = SHA2(CONCAT(salt,'" . $input['password'] . "'),512)");
+        $this->db->where("email = ", $input['id']);
+        $this->db->or_where("contact = ", $input['id']);
 
         $query = $this->db->get();
 

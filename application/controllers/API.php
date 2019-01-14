@@ -29,6 +29,7 @@ class API extends Base_Controller
         $this->load->model("User_coupon_model");
         $this->load->model("Table_no_model");
         $this->load->model("Notification_model");
+        $this->load->model("Email_model");
     }
 
     public function test()
@@ -168,6 +169,7 @@ class API extends Base_Controller
                     'dob' => $input['dob'],
                     'contact' => $input['contact'],
                     'email' => $input['email'],
+                    'social_media_account' => $input['social_media_account']
                 );
 
                 if($input['password'] != ''){
@@ -853,7 +855,7 @@ class API extends Base_Controller
 
             $this->Sales_model->update_where($where, $data);
 
-            $this->update_last_login($staff['staff_id']);
+            $asd = $this->update_last_login($staff['staff_id']);
 
             //insert notification
             $where = array(
@@ -1485,6 +1487,7 @@ class API extends Base_Controller
                         "store" => "store",
                         "image" => base_url() . $row['thumbnail'],
                         "food" => $order_food,
+                        "table_no_id" => $row['table_no_id'],
                     );
 
                     array_push($sales_data, $data);
@@ -1964,16 +1967,35 @@ class API extends Base_Controller
 
             if ($user) {
 
+                $user = $user[0];
+
+                //reset password
+                $password = hash('crc32', $user['password']);
+                $hash = $this->hash($password);
+
+                $data = array(
+                    'password' => $hash['password'],
+                    'salt' => $hash['salt']
+                );
+
+                $this->User_model->update_where($where, $data);
+
                 //send email
+                $this->Email_model->reset_password($input['email'], $password);
+
 
                 die(json_encode(array(
                     "status" => true,
+                    'title' => 'Your password reset successfully!',
+                    'description' => 'Your new password will send to your email! You can change your password in your profile.'
                 )));
 
             } else {
 
                 die(json_encode(array(
                     "status" => false,
+                    'title' => 'Your email address is not exists!',
+                    'description' => 'Please insert the correct email address!'
                 )));
             }
         }
@@ -1983,7 +2005,27 @@ class API extends Base_Controller
     {
         if ($_POST) {
             $input = $this->input->post();
-            die(var_dump($input));
+            
+
+            if (!empty($_FILES['image']['name'])) {
+                $config = array(
+                    "allowed_types" => "gif|png|jpg|jpeg",
+                    "upload_path"   => "./images/food/",
+                    "path"          => "/images/food/"
+                );
+
+                $this->load->library("upload", $config);
+
+                if ($this->upload->do_upload("file")) {
+                    $image = $config['path'] . $this->upload->data()['file_name'];
+                } else {
+
+                   $error_message = $this->upload->display_errors();
+                }
+
+            }
+
+            die(var_dump($image));
 
             $where = array(
                 "token" => $input['user_token'],
@@ -1993,23 +2035,7 @@ class API extends Base_Controller
 
             if ($user) {
 
-                if (!empty($_FILES['image']['name'])) {
-                    $config = array(
-                        "allowed_types" => "gif|png|jpg|jpeg",
-                        "upload_path"   => "./images/food/",
-                        "path"          => "/images/food/"
-                    );
-    
-                    $this->load->library("upload", $config);
-    
-                    if ($this->upload->do_upload("file")) {
-                        $image = $config['path'] . $this->upload->data()['file_name'];
-                    } else {
-    
-                       $error_message = $this->upload->display_errors();
-                    }
-    
-                }
+                
 
                 $where = array(
                     'user_id' => $user[0]['user_id'],
@@ -2135,9 +2161,7 @@ class API extends Base_Controller
             "login_time" => date("Y-m-d h:i:s"),
         );
 
-        $this->Staff_model->update_where($data, $where);
-
-        return $staff_id;
+        $this->Staff_model->update_where($where, $data);
 
     }
 
