@@ -63,7 +63,7 @@ class Performance extends Base_Controller
         $i = 0;
         foreach ($store as $row) {
             $where = array(
-                "status" => 2,
+                "sales.order_status_id" => 2,
                 "sales.store_id" => $row['store_id'],
             );
 
@@ -134,7 +134,7 @@ class Performance extends Base_Controller
 
         $where = array(
             "store.store_id" => $store_id,
-            "status" => 2,
+            "sales.order_status_id" => 2,
         );
 
         if ($month != " " and $month != 0) {
@@ -242,10 +242,10 @@ class Performance extends Base_Controller
         if($type == "VENDOR") {
 
             $where = array(
-                "vendor.vendor_id" => $this->session->userdata("login_id"),
+                "store.vendor_id" => $this->session->userdata("login_id"),
             );
 
-            $store = $this->Store_model->get_where_with_role($where)[0];
+            $store = $this->Store_model->get_where($where)[0];
 
             $where = array(
                 'food.store_id' => $store['store_id']
@@ -273,7 +273,6 @@ class Performance extends Base_Controller
             }
 
             $order_food = $this->Order_food_model->get_where($where);
-
             $total_sales = 0;
             foreach ($order_food as $order_food_row) {
                 if ($order_food_row['discounted_price'] != 0 and $order_food_row['discounted_price'] != $order_food_row['price']) {
@@ -547,16 +546,16 @@ class Performance extends Base_Controller
         if ($type == "VENDOR") {
 
             $where = array(
-                "vendor.vendor_id" => $this->session->userdata("login_id"),
+                "store.vendor_id" => $this->session->userdata("login_id"),
             );
 
-            $store = $this->Store_model->get_where_with_role($where)[0];
+            $store = $this->Store_model->get_where($where)[0];
 
             $where = array(
                 'staff.store_id' => $store['store_id']
             );
 
-            $staff = $this->Staff_model->get_where($where);
+            $staff = $this->Staff_model->get_where_with_role($where);
 
         } else {
 
