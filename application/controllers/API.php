@@ -2005,7 +2005,7 @@ class API extends Base_Controller
     {
         if ($_POST) {
             $input = $this->input->post();
-            
+            die(var_dump($input));
 
             if (!empty($_FILES['image']['name'])) {
                 $config = array(

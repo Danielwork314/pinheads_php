@@ -307,6 +307,18 @@
 									<span>Food Sales</span>
 								</a>
 							</li>
+							<li class="<?php if (strpos($this->uri->segment(2), "table_sales") !== FALSE) echo "active"; ?>">
+								<a href="<?=base_url()?>performance/table_sales">
+									<i class="fa fa-genderless"></i>
+									<span>Table Sales</span>
+								</a>
+							</li>
+							<li class="<?php if (strpos($this->uri->segment(2), "staff_sales") !== FALSE) echo "active"; ?>">
+								<a href="<?=base_url()?>performance/staff_sales">
+									<i class="fa fa-genderless"></i>
+									<span>Staff Sales</span>
+								</a>
+							</li>
 							<?php
 							}
 							?>
