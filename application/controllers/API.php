@@ -2001,58 +2001,71 @@ class API extends Base_Controller
         }
     }
 
-    public function editImage()
+    public function uploadImage()
     {
-        if ($_POST) {
-            $input = $this->input->post();
-            die(var_dump($input));
-
-            if (!empty($_FILES['image']['name'])) {
-                $config = array(
-                    "allowed_types" => "gif|png|jpg|jpeg",
-                    "upload_path"   => "./images/food/",
-                    "path"          => "/images/food/"
-                );
-
-                $this->load->library("upload", $config);
-
-                if ($this->upload->do_upload("file")) {
-                    $image = $config['path'] . $this->upload->data()['file_name'];
-                } else {
-
-                   $error_message = $this->upload->display_errors();
-                }
-
-            }
-
-            die(var_dump($image));
-
-            $where = array(
-                "token" => $input['user_token'],
+        if (!empty($_FILES['file']['name'])) {
+            $config = array(
+                "allowed_types" => "gif|png|jpg|jpeg",
+                "upload_path"   => "./images/user/",
+                "path"          => "/images/user/"
             );
 
+            $this->load->library("upload", $config);
+
+            if ($this->upload->do_upload("file")) {
+                $image = $config['path'] . $this->upload->data()['file_name'];
+
+                die(json_encode(array(
+                    "status" => true,
+                    "image" => $image,
+                )));
+
+            } else {
+
+               $error_message = $this->upload->display_errors();
+
+               die(json_encode(array(
+                "status" => false,
+                "error" => $error_message,
+                )));
+            }
+
+        }
+    }
+
+    public function editProfileImage() {
+
+        if($_POST){
+
+            $where = array(
+                "token" => $_POST['user_token'],
+            );
+    
             $user = $this->User_model->get_where_with_role($where);
-
+    
             if ($user) {
-
-                
-
+    
                 $where = array(
                     'user_id' => $user[0]['user_id'],
                 );
-
+    
                 $data = array(
-                    'image' => $image,
+                    'image' => $_POST['image'],
                 );
-
+    
                 $this->User_model->update_where($where, $data);
-
+    
                 die(json_encode(array(
                     "status" => true,
                     "data" => $user,
                 )));
-
             }
+        
+        } else {
+
+            die(json_encode(array(
+                "status" => false,
+            )));
         }
     }
 
