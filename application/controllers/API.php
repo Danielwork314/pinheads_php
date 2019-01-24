@@ -466,60 +466,7 @@ class API extends Base_Controller
 
                 $stores = $this->Store_model->get_where($where);
 
-            } else if (!empty($input['filter'])) {
-
-                $stores_array = [];
-                // die(var_dump($where));
-                if ($input['filter'] == 'distance') {
-
-                    $stores = $this->Store_model->get_all();
-
-                } else if ($input['filter'] == 'pricing') {
-
-                    $stores = $this->Store_model->get_pricing_all();
-
-                } else {
-
-                    if ($input['filter'] == 'halal') {
-
-                        $where = array(
-                            "store_feature.feature_id" => 1,
-                        );
-                    } else if ($input['filter'] == 'vegetarian') {
-
-                        $where = array(
-                            "store_feature.feature_id" => 2,
-                        );
-                    } else if ($input['filter'] == 'takeaway') {
-
-                        $where = array(
-                            "store_feature.feature_id" => 3,
-                        );
-                    } else if ($input['filter'] == 'delivery') {
-
-                        $where = array(
-                            "store_feature.feature_id" => 4,
-                        );
-                    }
-
-                    $store_feature = $this->Store_feature_model->get_where($where);
-
-                    foreach ($store_feature as $row) {
-
-                        $where = array(
-                            'store_id' => $row['store_id'],
-                        );
-
-                        $store = $this->Store_model->get_where($where);
-
-                        if ($store) {
-                            array_push($stores_array, $store[0]);
-                        }
-                    }
-
-                    $stores = $stores_array;
-                }
-            }
+            } 
 
         } else {
 
@@ -528,6 +475,13 @@ class API extends Base_Controller
 
         $store_data = array();
         foreach ($stores as $row) {
+
+            $where = array(
+                'store_feature.store_id' => $row['store_id']
+            );
+
+            $store_feature = $this->Store_feature_model->get_where($where);
+
             $data = array(
                 "store_id" => $row['store_id'],
                 "banner" => base_url() . $row['banner'],
@@ -549,6 +503,7 @@ class API extends Base_Controller
                 "favourite" => ($row['favourite'] == 1) ? "YES" : "NO",
                 "description" => $row['description'],
                 "active" => $row['active'],
+                "feature" => $store_feature,
             );
 
             array_push($store_data, $data);
@@ -560,6 +515,116 @@ class API extends Base_Controller
                 "stores" => $store_data,
             ),
         )));
+    }
+
+    public function filterStores(){
+
+        if ($_POST) {
+            $input = $this->input->post();
+
+            // $input['filter'] = 'pricing';
+            // $input['gourmet_type'] = 'western';
+
+            $stores_array = [];
+            if ($input['filter'] == 'distance') {
+
+                $stores = $this->Store_model->get_all();
+
+            } else if ($input['filter'] == 'pricing') {
+
+                if($input['gourmet_type'] != 'all'){
+                    $stores = $this->Store_model->get_pricing_all_like($input['gourmet_type']);
+                } else {
+                    $stores = $this->Store_model->get_pricing_all();
+                }
+
+            } else {
+
+                if ($input['filter'] == 'halal') {
+
+                    $where = array(
+                        "store_feature.feature_id" => 1,
+                    );
+
+                } else if ($input['filter'] == 'vegetarian') {
+
+                    $where = array(
+                        "store_feature.feature_id" => 2,
+                    );
+
+                } else if ($input['filter'] == 'takeaway') {
+
+                    $where = array(
+                        "store_feature.feature_id" => 3,
+                    );
+
+                } else if ($input['filter'] == 'delivery') {
+
+                    $where = array(
+                        "store_feature.feature_id" => 4,
+                    );
+                }
+
+                $store_feature = $this->Store_feature_model->get_where($where);
+
+                foreach ($store_feature as $row) {
+
+                    $where = array(
+                        'store_id' => $row['store_id'],
+                    );
+
+                    if($input['gourmet_type'] != 'all'){
+
+                        $store = $this->Store_model->get_where_like($where, $input['gourmet_type']);
+                    } else {
+
+                        $store = $this->Store_model->get_where($where);
+                    }
+
+                    if ($store) {
+                        array_push($stores_array, $store[0]);
+                    }
+                }
+
+                $stores = $stores_array;
+            }
+
+            $store_data = [];
+
+            foreach ($stores as $row) {
+                $data = array(
+                    "store_id" => $row['store_id'],
+                    "banner" => base_url() . $row['banner'],
+                    "gourmet_type_id" => $row['gourmet_type_id'],
+                    "gourmet_type" => $row['gourmet_type'],
+                    "pricing_id" => $row['pricing_id'],
+                    "pricing" => $row['pricing'],
+                    "pricing_id" => $row['pricing_id'],
+                    "pricing" => $row['pricing'],
+                    "vendor_id" => $row['vendor_id'],
+                    "vendor" => $row['vendor'],
+                    "thumbnail" => base_url() . $row['thumbnail'],
+                    "store" => $row['store'],
+                    "address" => $row['address'],
+                    "phone" => $row['phone'],
+                    "latitude" => $row['latitude'],
+                    "longitude" => $row['longitude'],
+                    "business_hour" => $row['business_hour'],
+                    "favourite" => ($row['favourite'] == 1) ? "YES" : "NO",
+                    "description" => $row['description'],
+                    "active" => $row['active'],
+                );
+
+                array_push($store_data, $data);
+            }
+
+            die(json_encode(array(
+                "status" => true,
+                "data" => array(
+                    "stores" => $store_data,
+                ),
+            )));
+        }
     }
 
     public function orders()
