@@ -9,13 +9,6 @@
 
 
 <!--========== LOCATION MODAL ============= -->
-<?php include('modals/locationModal.php'); ?>
-<?php include('modals/addProductsModal.php'); ?>
-
-
-
-
-
 
 
 <!-- jQuery 3 -->
@@ -61,6 +54,20 @@
 		});
 
 		$(".data-table").DataTable({});
+
+		$('#calendar2').fullCalendar({
+			height: 500,
+			header: {
+				left: '',
+				center: 'title',
+				right: ''
+			},
+			footer: {
+				left: '',
+				center: 'prev,next',
+				right: '',
+			},
+		})
 	});
 
 	$(document).on("click", ".delete-button", function (e) {

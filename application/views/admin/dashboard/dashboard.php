@@ -17,195 +17,101 @@
       </div>
     </div> -->
 
-    <section class="content-header">
-        <h1>
-            Dashboard
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="<?= base_url() ?>dashboard"><i class="fa fa-tachometer-alt"></i> Dashboard</a></li>
-        </ol>
-    </section>
+<section class="content-header">
+  <h1>
+      Dashboard
+  </h1>
+  <ol class="breadcrumb">
+      <li><a href="<?= base_url() ?>dashboard"><i class="fa fa-tachometer-alt"></i> Dashboard</a></li>
+  </ol>
+</section>
 
-	  <section class="content">
-      <div class="container-fluid">
-        
-        <div class="row">
-          <div class="col-lg-3 col-6">
-            
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>150</h3>
+<section class="content">
 
-                <p>All Orders</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
+  <div class="row row-eq-height">
+    <div class="col-12">
+      <div class="col-md-4 col-xs-12 full_height left_divider">
+        <div class="col-12">
+          <div class="col-xs-4 no_padding no_margin text_center calendar_label">
+            <button class="btn btn-info full_width">Homework</button>
           </div>
-          
-          <div class="col-lg-3 col-6">
-            
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>53<sup style="font-size: 20px">%</sup></h3>
-                <p>Ongoing Order</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
+          <div class="col-xs-4 no_padding no_margin text_center calendar_label">
+            <button class="btn btn-warning full_width">Assignment</button>
           </div>
-          
-          <div class="col-lg-3 col-6">
-           
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3>44</h3>
-                <p>User Registrations</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
+          <div class="col-xs-4 no_padding no_margin text_center calendar_label">
+            <button class="btn btn-success full_width">Events</button>
           </div>
-          
-          <div class="col-lg-3 col-6">
-           
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>65</h3>
-                <p>Outstanding Order</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          
         </div>
-
-        <div class="mediumBox">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-                    <div class='panel panel-default'>
-                    <div class='panel-heading'>
-                        <h4 class="whiteTitle" style='display: inline-block;'>Total Sales Chart</h4>
-                    </div>
-                    <div class="box box-default">
-                        <div class="box-header user-panel">
-                            <?php if($multiple != 1){ ?>
-                                <div id="mychart" style="height: 250px;"></div>
-                            <?php } else { ?>
-                                <div id="myfirstchart" style="height: 250px;"></div>
-                            <?php } ?>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
+        <div id='calendar'></div>
+        <div class="col-12">
+          <h3>27/01/2019</h3>
+          <button class="btn btn-info full_width text_left">Homework</button>
+          <p class="no_padding no_margin">Science - Paper Practice, Section B (due Monday)</p>
+          <p class="no_padding no_margin text-success">3A Homework</p>
+          <p class="no_padding no_margin text-muted text_right">3A Homework</p>
         </div>
+      </div>
+      <div class="col-md-4 col-xs-12 full_height left_divider">
+        <h3 class="no_padding no_margin display_inline">Announcement</h3>
+        <a href='<?php echo site_url('dashboard/add_announcement') ?>'><button class="btn btn-success display_inline tiny_add_button"><i class="fa fa-plus"></i></button></a>
+        <br>
+        <?php foreach($announcement as $row){ ?>
+        <br>
+        <p><?= $row['announcement'] ?></p>
+        <hr class="custom_hr dashed">
+        <p>
+          <?= nl2br($row['description']) ?>
+        </p>
+        <hr class="custom_hr">
+        <?php } ?>
+      </div>
+      <div class="col-md-4 col-xs-12 full_height left_divider">
+        <h3 class="no_padding no_margin display_inline">My Notifications</h3>
+        <a href='<?php echo site_url('dashboard/add_notification') ?>'><button class="btn btn-success display_inline tiny_add_button"><i class="fa fa-plus"></i></button></a>
+        <br>
+        <br>
+        <?php foreach($notification as $row){ ?>
+        <div class="col-xs-12 bordered_block notification_block">
+          <div class="row full_height">
+            <div class="col-xs-3 no_padding no_margin text_center full_height">
+              <img class="xs_thumbnail round_image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Husky_on_San_Francisco_sidewalk.jpg/220px-Husky_on_San_Francisco_sidewalk.jpg">
+            </div>
+            <div class="col-xs-6 no_padding no_margin full_height">
+              <p class="no_margin no_padding"><?= $row['notification'] ?></p>
+              <p class="no_margin no_padding"><?= nl2br($row['description']) ?></p>
+            </div>
+            <div class="col-xs-3 no_padding no_margin flex_center full_height">
+              <small class="no_padding no_margin text-muted"><?= date("l", strtotime($row['created_date'])) ?></small>
+            </div>
+          </div>
+        </div>
+        <?php } ?>
+        <!-- <div class="col-xs-12 bordered_block notification_block">
+          <div class="row full_height">
+            <div class="col-xs-3 no_padding no_margin text_center full_height">
+              <img class="xs_thumbnail round_image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Husky_on_San_Francisco_sidewalk.jpg/220px-Husky_on_San_Francisco_sidewalk.jpg">
+            </div>
+            <div class="col-xs-6 no_padding no_margin full_height">
+              <p class="no_margin no_padding">System Notification</p>
+              <p class="no_margin no_padding">image</p>
+            </div>
+            <div class="col-xs-3 no_padding no_margin flex_center full_height">
+              <small class="no_padding no_margin text-muted">FRIDAY</small>
+            </div>
+          </div>
+        </div> -->
+        <div class="col-xs-12 bordered_block notification_block">
+          <div class="row full_height">
+            <div class="col-xs-9 no_padding no_margin text_center full_height flex_center">
+              <input type="text" class="form-control search_form" placeholder="search...">
+            </div>
+            <div class="col-xs-3 no_padding no_margin flex_center full_height">
+              <button class="search_form_btn"><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    </section>
-            
-    <script>
-        new Morris.Line({
-            // ID of the element in which to draw the chart.
-            element: 'mychart',
-            // Chart data records -- each entry in this array corresponds to a point on
-            // the chart.
-            data: [
-                { year: '2008', value: 20 },
-                { year: '2009', value: 10 },
-                { year: '2010', value: 5 },
-                { year: '2011', value: 5 },
-                { year: '2012', value: 20 }
-            ],
-            // The name of the data record attribute that contains x-values.
-            xkey: 'year',
-            // A list of names of data record attributes that contain y-values.
-            ykeys: ['value'],
-            // Labels for the ykeys -- will be displayed when you hover over the
-            // chart.
-            labels: ['Value']
-        });
-
-
-        new Morris.Donut({
-            // ID of the element in which to draw the chart.
-            element: 'myfirstchart',
-            // Chart data records -- each entry in this array corresponds to a point on
-            // the chart.
-            data: [
-                { label: '2008', value: 20 },
-                { label: '2009', value: 10 },
-                { label: '2010', value: 5 },
-                { label: '2011', value: 5 },
-                { label: '2012', value: 20 }
-            ]
-        });
-        // var dashboard = document.getElementById("bar-chart").getContext('2d');
-        // var myChart = new Chart(dashboard, {
-        //     type: 'bar',
-        //     data: {
-        //         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        //         datasets: [{
-        //             label: 'Year <?= $total_sales_year ?> Total Sales',
-        //             data: [<?= $total_sales_report["jan"] ?>,
-        //                 <?= $total_sales_report["feb"] ?>,
-        //                 <?= $total_sales_report["mar"] ?>,
-        //                 <?= $total_sales_report["apr"] ?>, 
-        //                 <?= $total_sales_report["may"] ?>,
-        //                 <?= $total_sales_report["jun"] ?>,
-        //                 <?= $total_sales_report["jul"] ?>,
-        //                 <?= $total_sales_report["aug"] ?>,
-        //                 <?= $total_sales_report["sep"] ?>,
-        //                 <?= $total_sales_report["oct"] ?>,
-        //                 <?= $total_sales_report["nov"] ?>,
-        //                 <?= $total_sales_report["dec"] ?>
-        //             ],
-        //             backgroundColor: [
-        //                 'rgba(255, 99, 132, 0.2)',
-        //                 'rgba(54, 162, 235, 0.2)',
-        //                 'rgba(255, 206, 86, 0.2)',
-        //                 'rgba(75, 192, 192, 0.2)',
-        //                 'rgba(153, 102, 255, 0.2)',
-        //                 'rgba(255, 159, 64, 0.2)',
-        //                 'rgba(255, 99, 132, 0.2)',
-        //                 'rgba(54, 162, 235, 0.2)',
-        //                 'rgba(255, 206, 86, 0.2)',
-        //                 'rgba(75, 192, 192, 0.2)',
-        //                 'rgba(153, 102, 255, 0.2)',
-        //                 'rgba(255, 159, 64, 0.2)'
-        //             ],
-        //             borderColor: [
-        //                 'rgba(255,99,132,1)',
-        //                 'rgba(54, 162, 235, 1)',
-        //                 'rgba(255, 206, 86, 1)',
-        //                 'rgba(75, 192, 192, 1)',
-        //                 'rgba(153, 102, 255, 1)',
-        //                 'rgba(255, 159, 64, 1)',
-        //                 'rgba(54, 162, 235, 1)',
-        //                 'rgba(255, 206, 86, 1)',
-        //                 'rgba(75, 192, 192, 1)',
-        //                 'rgba(153, 102, 255, 1)',
-        //                 'rgba(255, 159, 64, 1)'
-        //             ],
-        //             borderWidth: 1
-        //         }]
-        //     },
-        //     options: {
-        //         scales: {
-        //             yAxes: [{
-        //                 ticks: {
-        //                     beginAtZero: true
-        //                 }
-        //             }]
-        //         }
-        //     }
-        // });
-    </script>
+</section>

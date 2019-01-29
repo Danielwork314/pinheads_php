@@ -11,6 +11,9 @@ class Base_Controller extends CI_Controller
 
         $this->load->model("Admin_model");
         $this->load->model("User_model");
+        $this->load->model("Teacher_model");
+        $this->load->model("Parents_model");
+        $this->load->model("Student_model");
         $this->load->model("Role_access_model");
 
         $this->load->library("Form");
@@ -85,8 +88,11 @@ class Base_Controller extends CI_Controller
 
             $admin = $this->Admin_model->get_where($where);
             $user = $this->User_model->get_where($where);
+            $teacher = $this->Teacher_model->get_where($where);
+            $parents = $this->Parents_model->get_where($where);
+            $student = $this->Student_model->get_where($where);
 
-            if (empty($admin) and empty($user)) {
+            if (empty($admin) and empty($user) and empty($teacher) and empty($parents) and empty($student)) {
                 return false;
             } else {
                 return true;
@@ -94,8 +100,11 @@ class Base_Controller extends CI_Controller
         } else if ($exclude_id != "") {
             $admin = $this->Admin_model->get_where_and_primary_is_not($where, $exclude_id);
             $user = $this->User_model->get_where_and_primary_is_not($where, $exclude_id);
+            $teacher = $this->Teacher_model->get_where_and_primary_is_not($where, $exclude_id);
+            $parents = $this->Parents_model->get_where_and_primary_is_not($where, $exclude_id);
+            $student = $this->Student_model->get_where_and_primary_is_not($where, $exclude_id);
 
-            if (empty($admin) and empty($user)) {
+            if (empty($admin) and empty($user) and empty($teacher) and empty($parents) and empty($student)) {
                 return false;
             } else {
                 return true;

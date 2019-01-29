@@ -1,18 +1,18 @@
 <section class="content-header">
     <h1>
-        Admins
+        Students
     </h1>
     <ol class="breadcrumb">
-        <li><a href="<?= base_url() ?>admin"><i class="fa fa-genderless"></i> Admin</a></li>
+        <li><a href="<?= base_url() ?>student"><i class="fa fa-genderless"></i> students</a></li>
     </ol>
 </section>
 <br>
 <section class="content">
     <div class="box">
         <div class='box-header'>
-            <h4 class="whiteTitle" style='display: inline-block;'>Admin</h4>
+            <h4 class="whiteTitle" style='display: inline-block;'>Student</h4>
 
-            <a href='<?php echo site_url('admin/add'); ?>' class='btn btn-info pull-right'>
+            <a href='<?php echo site_url('student/add'); ?>' class='btn btn-info pull-right'>
                 <i class='fa fa-plus' ></i> Add</a>
 
         </div>
@@ -32,14 +32,14 @@
                     <tbody>
                         <?php
                             $i = 1;
-                            foreach($admin as $row){
+                            foreach($student as $row){
                                 ?>
                                     <tr>
-                                        <td><a href="<?= base_url() ?>admin/details/<?= $row['admin_id']?>"><?= $i ?></a></td>
-                                        <td><a href="<?= base_url() ?>admin/details/<?= $row['admin_id']?>"><?= $row['username'] ?></a></td>
-                                        <td><a href="<?= base_url() ?>admin/details/<?= $row['admin_id']?>"><?= $row['name'] ?></a></td>
-                                        <td><a href="<?= base_url() ?>admin/details/<?= $row['admin_id']?>"><?= $row['role'] ?></a></td>
-                                        <td><a href="<?= base_url() ?>admin/delete/<?= $row['admin_id']?>" class="btn btn-danger delete-button">Delete</a></td>
+                                        <td><a href="<?= base_url() ?>student/details/<?= $row['student_id']?>"><?= $i ?></a></td>
+                                        <td><a href="<?= base_url() ?>student/details/<?= $row['student_id']?>"><?= $row['username'] ?></a></td>
+                                        <td><a href="<?= base_url() ?>student/details/<?= $row['student_id']?>"><?= $row['name'] ?></a></td>
+                                        <td><a href="<?= base_url() ?>student/details/<?= $row['student_id']?>"><?= $row['role'] ?></a></td>
+                                        <td><a href="<?= base_url() ?>student/delete/<?= $row['student_id']?>" class="btn btn-danger delete-button">Delete</a></td>
                                     </tr>
                                 <?php
                                 $i++;

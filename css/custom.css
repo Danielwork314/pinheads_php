@@ -26,13 +26,10 @@ input[type="checkbox"][id^="image_checkbox_"] {
 .image_checkbox_label {
 	border: 1px solid #fff;
 	padding: 10px;
-	/* display: block; */
+	display: block;
 	position: relative;
 	margin: 10px;
 	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	align-content: center;
 }
 
 .image_checkbox_label:before {
@@ -54,9 +51,9 @@ input[type="checkbox"][id^="image_checkbox_"] {
 }
 
 .image_checkbox_label img {
-	max-height: 100%;
-	max-width: 100%;
-	object-fit: contain;
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
 	transition-duration: 0.2s;
 	transform-origin: 50% 50%;
 }
@@ -74,61 +71,71 @@ input[type="checkbox"][id^="image_checkbox_"] {
 :checked+.image_checkbox_label img {
 	transform: scale(0.9);
 	box-shadow: 0 0 5px #333;
-	/* z-index: -1; */
+	z-index: -1;
 }
 
 #toggle-sidebar {
 	color: black;
-    font-size: 1.5em;
-    padding: 0.70em;	
+	font-size: 1.5em;
+	padding: 0.70em;
 }
 
-.dressing_menu {
-
-	padding-left: 0 !important;
-	padding-right: 0 !important;
+.fc-center>h2 {
+	font-size: 20px;
 }
 
-.dressing_tr {
-
-	padding-left: 0px !important;
-	padding-top: 20px !important;
+.fc-toolbar.fc-header-toolbar {
+	margin-bottom: 0;
 }
 
-.customize_menu {
-
-	padding-left: 0 !important;
-	padding-right: 0 !important;
+.btn {
+	padding: 0px 6px;
+	border-radius: 25px;
 }
 
-.customize_tr {
-
-	padding-left: 0px !important;
-	padding-top: 20px !important;
+.tiny_add_button {
+	padding: 1px 5px;
 }
 
-.select2-container--default .select2-selection--single{
-	padding:6px !important;
-	height: 35px !important;
-	position: relative !important;
-	border-color: #d2d6de !important;
+.notification_block {
+	height: 65px;
+	margin-bottom: 10px;
 }
 
-.select2-container--default .select2-selection--single {
-	border-radius: 0 !important;
+.search_form {
+	border: none;
+	background: none;
+	width: 90%;
 }
 
-.select2 .select2-container .select2-container--default{
-
-	width: 100% !important;
+.search_form_btn {
+	border: none;
+	background: none;
 }
 
-.select2-container--default.select2-container--focus {
-
-	width: 100% !important;
+.left_divider {
+	border-right: solid 1px black;
 }
 
-.select2-container {
+.curent_date_container {
 
-	width: 100% !important;
+	text-align: center;
+}
+
+.calendar_content {
+
+	padding-top: 20px;
+}
+
+.green_round_btn {
+
+	background-color: green;
+	border-radius: 50%;
+	width: 25px;
+	height: 25px;
+	text-align: center;
+	color: white;
+	border: 1px solid green;
+	font-size: 15px;
+	padding: 10px;
 }

@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Gofooder</title>
+	<title>Pinheads</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<!-- Bootstrap 3.3.7 -->
@@ -35,12 +35,16 @@
 
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.css">
 
 	<!-- Custom Admin CSS -->
 	<link rel="stylesheet" href="<?=base_url();?>css/admin/admin.css">
 	<link rel="stylesheet" href="<?=base_url();?>css/step_bar.css">
 	<link rel="stylesheet" href="<?=base_url();?>css/util.css">
 	<link rel="stylesheet" href="<?=base_url();?>css/custom.css">
+
+	<!-- include summernote css/js -->
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.css" rel="stylesheet">
 
 	<!-- Select2 -->
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
@@ -78,11 +82,11 @@
 			<a class="logo">
 				<!-- mini logo for sidebar mini 50x50 pixels -->
 				<span class="logo-mini">
-					<b>G</b>f
+					<b>P</b>H
 				</span>
 				<!-- logo for regular state and mobile devices -->
 				<span class="logo-lg">
-					<b>Go</b>fooder</span>
+					<b>Pin</b>Heads</span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">
@@ -120,272 +124,88 @@
 						</a>
 					</li>
 					<?php
-					if(!empty($this->session->userdata('role_access')['notification']) AND $this->session->userdata('role_access')['notification']['read_control'] == 1){
-						?>
-					<li class=" <?php if ($this->router->fetch_class() == 'notification') echo 'active'; ?> ">
-						<a href="<?=base_url();?>notification">
-							<i class="fa fa-bell"></i>
-							<span>Notification</span>
-						</a>
-					</li>
-					<?php
-					}
 					if(!empty($this->session->userdata('role_access')['admin']) AND $this->session->userdata('role_access')['admin']['read_control'] == 1){
 						?>
-					<li class=" <?php if ($this->router->fetch_class() == 'admin') echo 'active'; ?> ">
-						<a href="<?=base_url();?>admin">
-							<i class="fa fa-user-secret"></i>
-							<span>Admin</span>
-						</a>
-					</li>
+						<li class="treeview <?php if (strpos($this->router->fetch_class(), 'admin') !== false OR strpos($this->router->fetch_class(), 'teacher') !== false OR strpos($this->router->fetch_class(), 'parent') !== false OR strpos($this->router->fetch_class(), 'student') !== false) echo 'active menu-open'; ?>">
+							<a href="#">
+								<i class="fa fa-users"></i> <span>Users</span>
+								<span class="pull-right-container">
+									<i class="fa fa-angle-left pull-right"></i>
+								</span>
+							</a>
+							<ul class="treeview-menu" style="<?php if (strpos($this->router->fetch_class(), 'admin') !== false OR strpos($this->router->fetch_class(), 'teacher') !== false OR strpos($this->router->fetch_class(), 'parent') !== false OR strpos($this->router->fetch_class(), 'student') !== false) echo 'display: none;'; ?>">
+								<?php
+								if(!empty($this->session->userdata('role_access')['admin']) AND $this->session->userdata('role_access')['admin']['read_control'] == 1){
+								?>
+								<li class="<?php if ($this->router->fetch_class() == 'admin') echo 'active'; ?> ">
+									<a href="<?=base_url()?>admin">
+										<i class="fa fa-genderless"></i>
+										<span>Admin</span>
+									</a>
+								</li>
+								<?php
+								}
+								if(!empty($this->session->userdata('role_access')['teacher']) AND $this->session->userdata('role_access')['teacher']['read_control'] == 1){
+								?>
+								<li class="<?php if ($this->router->fetch_class() == 'teacher') echo 'active'; ?> ">
+									<a href="<?=base_url()?>teacher">
+										<i class="fa fa-genderless"></i>
+										<span>Teacher</span>
+									</a>
+								</li>
+								<?php
+								}
+								if(!empty($this->session->userdata('role_access')['parents']) AND $this->session->userdata('role_access')['parents']['read_control'] == 1){
+								?>
+								<li class="<?php if ($this->router->fetch_class() == 'parents') echo 'active'; ?> ">
+									<a href="<?=base_url()?>parents">
+										<i class="fa fa-genderless"></i>
+										<span>Parent</span>
+									</a>
+								</li>
+								<?php
+								}
+								if(!empty($this->session->userdata('role_access')['student']) AND $this->session->userdata('role_access')['student']['read_control'] == 1){
+								?>
+								<li class="<?php if ($this->router->fetch_class() == 'student') echo 'active'; ?> ">
+									<a href="<?=base_url()?>student">
+										<i class="fa fa-genderless"></i>
+										<span>Student</span>
+									</a>
+								</li>
+								<?php
+								}
+								?>
+							</ul>
+						</li>
 					<?php
 					}
-					if(!empty($this->session->userdata('role_access')['vendor']) AND $this->session->userdata('role_access')['vendor']['read_control'] == 1){
+					if(!empty($this->session->userdata('role_access')['grade']) AND $this->session->userdata('role_access')['grade']['read_control'] == 1){
 						?>
-					<li class=" <?php if ($this->router->fetch_class() == 'vendor') echo 'active'; ?> ">
-						<a href="<?=base_url();?>vendor">
-							<i class="fa fa-user"></i>
-							<span>Vendor</span>
+					<li class=" <?php if ($this->router->fetch_class() == 'grade') echo 'active'; ?> ">
+						<a href="<?=base_url();?>grade">
+							<i class="fa fa-graduation-cap"></i>
+							<span>Grade</span>
 						</a>
 					</li>
 					<?php
 					}
-					if(!empty($this->session->userdata('role_access')['user']) AND $this->session->userdata('role_access')['user']['read_control'] == 1){
+					if(!empty($this->session->userdata('role_access')['classroom']) AND $this->session->userdata('role_access')['classroom']['read_control'] == 1){
 						?>
-					<li class=" <?php if ($this->router->fetch_class() == 'user') echo 'active'; ?> ">
-						<a href="<?=base_url();?>user">
-							<i class="fa fa-users"></i>
-							<span>User</span>
+					<li class=" <?php if ($this->router->fetch_class() == 'classroom') echo 'active'; ?> ">
+						<a href="<?=base_url();?>classroom">
+							<i class="fa fa-laptop"></i>
+							<span>Classroom</span>
 						</a>
 					</li>
 					<?php
 					}
-					if(!empty($this->session->userdata('role_access')['store']) AND $this->session->userdata('role_access')['store']['read_control'] == 1){
-					?>
-					<li class="treeview <?php if (strpos($this->router->fetch_class(), 'store') !== false OR strpos($this->router->fetch_class(), 'social_media') !== false OR strpos($this->router->fetch_class(), 'staff') !== false) echo 'active menu-open'; ?>">
-						<a href="#">
-							<i class="fa fa-store-alt"></i> <span>Store</span>
-							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu" style="<?php if (strpos($this->router->fetch_class(), 'store') !== false AND strpos($this->router->fetch_class(), 'social_media') !== false AND strpos($this->router->fetch_class(), 'staff') !== false) echo 'display: none;'; ?>">
-							<?php
-							if(!empty($this->session->userdata('role_access')['store']) AND $this->session->userdata('role_access')['store']['read_control'] == 1){
-							?>
-							<li class="<?php if ($this->router->fetch_class() == 'store') echo 'active'; ?> ">
-								<a href="<?=base_url()?>store">
-									<i class="fa fa-genderless"></i>
-									<span>Store</span>
-								</a>
-							</li>
-							<?php
-							}
-							if(!empty($this->session->userdata('role_access')['staff']) AND $this->session->userdata('role_access')['staff']['read_control'] == 1){
-							?>
-							<li class="<?php if ($this->router->fetch_class() == 'staff') echo 'active'; ?> ">
-								<a href="<?=base_url()?>staff">
-									<i class="fa fa-genderless"></i>
-									<span>Staff</span>
-								</a>
-							</li>
-							<?php
-							}
-							if(!empty($this->session->userdata('role_access')['social_media']) AND $this->session->userdata('role_access')['social_media']['read_control'] == 1){
-							?>
-							<li class="<?php if ($this->router->fetch_class() == 'social_media') echo 'active'; ?> ">
-								<a href="<?=base_url()?>social_media">
-									<i class="fa fa-genderless"></i>
-									<span>Social Media</span>
-								</a>
-							</li>
-							<?php
-							}
-							?>
-						</ul>
-					</li>
-					<?php
-					}
-					if(!empty($this->session->userdata('role_access')['food']) AND $this->session->userdata('role_access')['food']['read_control'] == 1){
-					?>
-					<li class="treeview <?php if (strpos($this->router->fetch_class(), 'food') !== false OR strpos($this->router->fetch_class(), 'gourmet_type') !== false OR strpos($this->router->fetch_class(), 'customize') !== false OR strpos($this->router->fetch_class(), 'dressing') !== false) echo 'active menu-open'; ?>">
-						<a href="#">
-							<i class="fa fa-utensils"></i> <span>Food</span>
-							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu" style="<?php if (strpos($this->router->fetch_class(), 'food') == true AND strpos($this->router->fetch_class(), 'gourmet_type') == true AND strpos($this->router->fetch_class(), 'customize') == true AND strpos($this->router->fetch_class(), 'dressing') == true) echo 'display: none;'; ?>">
-							<?php
-							if(!empty($this->session->userdata('role_access')['food']) AND $this->session->userdata('role_access')['food']['read_control'] == 1){
-							?>
-							<li class="<?php if ($this->router->fetch_class() == 'food') echo 'active'; ?> ">
-								<a href="<?=base_url()?>food">
-									<i class="fa fa-genderless"></i>
-									<span>Food</span>
-								</a>
-							</li>
-							<?php
-							}
-							if(!empty($this->session->userdata('role_access')['food_combo']) AND $this->session->userdata('role_access')['food_combo']['read_control'] == 1){
-							?>
-							<li class="<?php if ($this->router->fetch_class() == 'food_combo') echo 'active'; ?> ">
-								<a href="<?=base_url()?>food_combo">
-									<i class="fa fa-genderless"></i>
-									<span>Food Combo</span>
-								</a>
-							</li>
-							<?php
-							}
-							if(!empty($this->session->userdata('role_access')['food_category']) AND $this->session->userdata('role_access')['food_category']['read_control'] == 1){
-							?>
-							<li class="<?php if ($this->router->fetch_class() == 'food_category') echo 'active'; ?> ">
-								<a href="<?=base_url()?>food_category">
-									<i class="fa fa-genderless"></i>
-									<span>Food Category</span>
-								</a>
-							</li>
-							<?php
-							}
-							if(!empty($this->session->userdata('role_access')['gourmet_type']) AND $this->session->userdata('role_access')['gourmet_type']['read_control'] == 1){
-							?>
-							<li class="<?php if ($this->router->fetch_class() == 'gourmet_type') echo 'active'; ?> ">
-								<a href="<?=base_url()?>gourmet_type">
-									<i class="fa fa-genderless"></i>
-									<span>Gourmet Type</span>
-								</a>
-							</li>
-							<?php
-							}
-							if(!empty($this->session->userdata('role_access')['customize']) AND $this->session->userdata('role_access')['customize']['read_control'] == 1){
-							?>
-							<li class="<?php if ($this->router->fetch_class() == 'customize') echo 'active'; ?> ">
-								<a href="<?=base_url()?>customize">
-									<i class="fa fa-genderless"></i>
-									<span>Customize</span>
-								</a>
-							</li>
-							<?php
-							}
-							if(!empty($this->session->userdata('role_access')['dressing']) AND $this->session->userdata('role_access')['dressing']['read_control'] == 1){
-							?>
-							<li class="<?php if ($this->router->fetch_class() == 'dressing') echo 'active'; ?> ">
-								<a href="<?=base_url()?>dressing">
-									<i class="fa fa-genderless"></i>
-									<span>Dressing</span>
-								</a>
-							</li>
-							<?php
-							}
-							?>
-						</ul>
-					</li>
-					<?php
-					}
-					if(!empty($this->session->userdata('role_access')['performance']) AND $this->session->userdata('role_access')['performance']['read_control'] == 1){
-					?>
-					<li class="treeview <?php if (strpos($this->router->fetch_class(), 'performance') !== false) echo 'active menu-open'; ?>">
-						<a href="#">
-							<i class="fa fa-chart-area"></i> <span>Performance</span>
-							<span class="pull-right-container">
-								<i class="fa fa-angle-left pull-right"></i>
-							</span>
-						</a>
-						<ul class="treeview-menu" style="<?php if (strpos($this->router->fetch_class(), 'performance') == true) echo 'display: none;'; ?>">
-							<?php
-							if(!empty($this->session->userdata('role_access')['performance']) AND $this->session->userdata('role_access')['performance']['read_control'] == 1){
-							?>
-							<li class="<?php if (strpos($this->uri->segment(2), "store_sales") !== FALSE) echo "active"; ?>">
-								<a href="<?=base_url()?>performance/store_sales">
-									<i class="fa fa-genderless"></i>
-									<span>Store Sales</span>
-								</a>
-							</li>
-							<li class="<?php if (strpos($this->uri->segment(2), "food_sales") !== FALSE) echo "active"; ?>">
-								<a href="<?=base_url()?>performance/food_sales">
-									<i class="fa fa-genderless"></i>
-									<span>Food Sales</span>
-								</a>
-							</li>
-							<li class="<?php if (strpos($this->uri->segment(2), "table_sales") !== FALSE) echo "active"; ?>">
-								<a href="<?=base_url()?>performance/table_sales">
-									<i class="fa fa-genderless"></i>
-									<span>Table Sales</span>
-								</a>
-							</li>
-							<li class="<?php if (strpos($this->uri->segment(2), "staff_sales") !== FALSE) echo "active"; ?>">
-								<a href="<?=base_url()?>performance/staff_sales">
-									<i class="fa fa-genderless"></i>
-									<span>Staff Sales</span>
-								</a>
-							</li>
-							<?php
-							}
-							?>
-						</ul>
-					</li>
-					<?php
-					}
-					if(!empty($this->session->userdata('role_access')['sales']) AND $this->session->userdata('role_access')['sales']['read_control'] == 1){
+					if(!empty($this->session->userdata('role_access')['subject']) AND $this->session->userdata('role_access')['subject']['read_control'] == 1){
 						?>
-					<li class=" <?php if ($this->router->fetch_class() == 'sales') echo 'active'; ?> ">
-						<a href="<?=base_url();?>sales">
-							<i class="fa fa-tasks"></i>
-							<span>Sales</span>
-						</a>
-					</li>
-					<?php
-					}
-					if(!empty($this->session->userdata('role_access')['banner']) AND $this->session->userdata('role_access')['banner']['read_control'] == 1){
-					?>
-					<li class=" <?php if ($this->router->fetch_class() == 'banner') echo 'active'; ?> ">
-						<a href="<?=base_url();?>banner">
-							<i class="fa fa-image"></i>
-							<span>Banner</span>
-						</a>
-					</li>
-					<?php
-					}
-					if(!empty($this->session->userdata('role_access')['pricing']) AND $this->session->userdata('role_access')['pricing']['read_control'] == 1){
-					?>
-					<li class=" <?php if ($this->router->fetch_class() == 'pricing') echo 'active'; ?> ">
-						<a href="<?=base_url();?>pricing">
-							<i class="fa fa-money-bill-alt"></i>
-							<span>
-								<?php echo '&nbsp;' ?> Pricing</span>
-						</a>
-					</li>
-					<?php
-					}
-					if(!empty($this->session->userdata('role_access')['coupon']) AND $this->session->userdata('role_access')['coupon']['read_control'] == 1){
-						?>
-					<li class=" <?php if ($this->router->fetch_class() == 'coupon') echo 'active'; ?> ">
-						<a href="<?=base_url();?>coupon">
-							<i class="fa fa-money-bill-wave"></i>
-							<span>
-								<?php echo '&nbsp;' ?> Coupon</span>
-						</a>
-					</li>
-					<?php
-					}
-					if(!empty($this->session->userdata('role_access')['feature']) AND $this->session->userdata('role_access')['feature']['read_control'] == 1){
-						?>
-					<li class=" <?php if ($this->router->fetch_class() == 'feature') echo 'active'; ?> ">
-						<a href="<?=base_url();?>feature">
-							<i class="fa fa-tag"></i>
-							<span>
-								<?php echo '&nbsp;' ?> Feature</span>
-						</a>
-					</li>
-					<?php
-					}
-					if(!empty($this->session->userdata('role_access')['feedback']) AND $this->session->userdata('role_access')['feedback']['read_control'] == 1){
-						?>
-					<li class=" <?php if ($this->router->fetch_class() == 'feedback') echo 'active'; ?> ">
-						<a href="<?=base_url();?>feedback">
-							<i class="fas fa-comments"></i>
-							<span>
-								<?php echo '&nbsp;' ?> Feedback</span>
+					<li class=" <?php if ($this->router->fetch_class() == 'subject') echo 'active'; ?> ">
+						<a href="<?=base_url();?>subject">
+							<i class="fa fa-book"></i>
+							<span>Subject</span>
 						</a>
 					</li>
 					<?php

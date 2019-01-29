@@ -13,7 +13,6 @@ class Access extends Base_Controller
 
         $this->load->model("Admin_model");
         $this->load->model("User_model");
-        $this->load->model("Vendor_model");
     }
 
     function login()
@@ -30,7 +29,6 @@ class Access extends Base_Controller
 
             $admin = $this->Admin_model->get_where($where);
             $user = $this->User_model->get_where($where);
-            $vendor = $this->Vendor_model->get_where($where);
 
             if (!empty($admin)) {
                 $login = $this->Admin_model->login($input["username"], $input["password"]);
@@ -42,10 +40,6 @@ class Access extends Base_Controller
                 $login = $this->User_model->login($input["username"], $input["password"]);
                 $login_data = $login[0];
                 $login_id = $login[0]["user_id"];
-            } else if (!empty($vendor)) {
-                $login = $this->Vendor_model->login($input["username"], $input["password"]);
-                $login_data = $login[0];
-                $login_id = $login[0]["vendor_id"];
             } else {
                 $error = true;
                 $this->page_data["error"] = "invalid username and password";
